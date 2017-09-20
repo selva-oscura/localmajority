@@ -7,16 +7,16 @@ class Arc extends Component {
     super();
     this.arc = d3.arc();
   }
-  // componentWillMount(){
-  // 	this.updateD3(this.props)
-  // }
-  // componentWillReceiveProps(newProps) {
-  // 	this.updateD3(newProps);
-  // }
-  // updateD3(newProps){
-  // 	this.arc.innerRadius(newProps.innerRadius);
-  // 	this.arc.outerRadius(newProps.outerRadius);
-  // }
+  componentWillMount(){
+    this.updateD3(this.props)
+  }
+  componentWillReceiveProps(newProps) {
+    this.updateD3(newProps);
+  }
+  updateD3(newProps){
+    this.arc.innerRadius(newProps.innerRadius);
+    this.arc.outerRadius(newProps.outerRadius);
+  }
   render(){
   	return (
   		<path 
