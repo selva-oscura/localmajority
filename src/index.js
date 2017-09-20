@@ -10,6 +10,7 @@ import DistrictHolder from './components/Districts/DistrictHolder';
 import Districts from './components/Districts/Districts';
 import Issue from './components/Issues/Issue';
 import Issues from './components/Issues/Issues';
+import ArticleHolder from './components/Articles/ArticleHolder';
 import FourZeroFour from './components/FourZeroFour';
 import articles from './data/list-home.json';
 import candidates from './data/candidates.json';
@@ -34,7 +35,7 @@ ReactDOM.render(
 					}}
 				/>
 				<Route path="/districts" 
-					component={props => <Districts {...props} districts={districts}/>} 
+					component={(props) => <Districts {...props} districts={districts}/>}
 				/>
 				<Route path="/candidates/:id"
 					component={(props) => {
@@ -43,7 +44,7 @@ ReactDOM.render(
 					}}
 				/>
 				<Route path="/candidates"
-					component={props => <Candidates {...props} candidates={candidates} />} 
+					component={(props) => <Candidates {...props} candidates={candidates} />}
 				/>
 				<Route path="/issues/:id" 
 					component={(props) => {
@@ -52,7 +53,10 @@ ReactDOM.render(
 					}}
 				/>
 				<Route path="/issues" 
-					component={props => <Issues {...props} issues={issues} />} 
+					component={(props) => <Issues {...props} issues={issues} />}
+				/>
+				<Route path="/article/:id"
+					component={(props) => <ArticleHolder {...props} />}
 				/>
 				<Route component={FourZeroFour}/>
 			</Switch>
