@@ -1,0 +1,22 @@
+.Home .map-and-text{
+  position: relative;
+}
+
+.Home .map-and-text .caption {
+  position: absolute;
+  top: 0;
+  pointer-events: none
+}
+
+.Home .map-and-text svg {
+  position: absolute;
+  bottom: 0;
+}
+
+.Home h2{
+  font-size: 3.6vw;
+}
+
+.Home h3{
+  font-size: 2.7vw;
+}

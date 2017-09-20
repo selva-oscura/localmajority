@@ -1,0 +1,236 @@
+[{
+  "title": "Jennifer Carroll Foy",
+  "district": "District 2",
+  "time": "Mon, 31 Oct 2016 04:00:00 +0000",
+  "author": "Momo ",
+  "category": "Virginia Delegate race",
+  "id": "jennifer-foy",
+  "link": "www.jennifercarrollfoy.org",
+  "imgSrc": "images/foy.jpg",
+  "placeholdera": "",
+  "percentForHil": "20.4",
+  "opponentName": "Laquan Austion",
+  "summary": "Jennifer is a public defender, and has represented some of the Commonwealth’s most vulnerable citizens. She is also an adjunct professor at Northern Virginia Community College.",
+   "contentLength": 2333,
+   "background": "who is Jennifer",
+   "positions" : [
+     {
+       "issue": "education",
+       "position": "rich text what i believe",
+       "opponentPosition" :"Something awful"
+     },
+     {
+       "issue": "women's rights",
+       "position": "I like women's rights",
+       "opponentPosition" :"Barefoot and in the kitchen is how I like it"
+     },
+     {
+       "issue": "Transportation",
+       "position": "Extend the metro into Prince William County; fight for greater Virginia Department of Transportation funds to extend HOV lanes and improve secondary roads in our area.",
+       "opponentPosition" :"Collaboration, better planning, technological solutions (such as traffic management software from the company he works for)."
+     }
+   ],
+   "race": [
+    {
+      "name": "2016 Presidential Race",
+      "candidates": [
+      {
+        "candidate_name": "Hillary Clinton",
+        "party": "Democratic",
+        "votes": "16054"
+      },
+      {
+        "candidate_name": "Donald Trump",
+        "party": "Republican",
+        "votes": "15054"
+      },
+      {
+        "candidate_name": "Registered, didn't vote",
+        "party": "NONE",
+        "votes": "12403"
+      }
+      ]
+    }
+  ]
+ },
+{
+  "title": "Wendy Gooditis",
+  "district": "District 10",
+  "time": "Mon, 31 Oct 2016 04:00:00 +0000",
+  "author": "Momo ",
+  "category": "Virginia Delegate race",
+  "id": "wendy-goditis",
+  "link": "www.jennifercarrollfoy.org",
+  "imgSrc": "images/wendy10.jpg",
+  "placeholdera": "",
+  "percentForHil": "6.4",
+  "summary": "I don't have any information about Wendy but she looks like a very nice person. And I really like the name Wendy",
+  "contentLength": 2333
+},{
+  "title": "Chris Hurst",
+  "district": "District 12",
+  "time": "Wed, 14 Sep 2016 09:00:00 +0000",
+  "author": "Ryan Germick",
+  "category": "Virginia Delegate race",
+  "id": "chris-hurst-12",
+  "link": "https://blog.google/topics/doodles/start-sketching-what-you-see-for-future/",
+  "imgSrc": "images/chrisHurst.jpg",
+  "percentForHil": "2.9",
+  "summary": "Chris will advocate for our education system, expand access to healthcare, increase economic opportunity, and protect our natural resources",
+    "contentLength": 4406
+}, {
+  "title": "Danica Roem for District 13",
+  "district": "District 13",
+  "time": "Mon, 12 Sep 2016 03:00:00 +0000",
+  "author": "Miki Matsushita",
+  "category": "Virginia Delegate race",
+  "id": "danica-roem",
+  "link": "http://www.danicafordelegate.com/",
+  "imgSrc": "images/danica2.jpg",
+  "percentForHil": "14.8",
+  "summary": "Using the skills she honed on the job as a journalist for nine years, Danica's approach will build on four pillars: 'Research. Question. Listen. Report.'",
+  "contentLength": 2928
+}, {
+  "title": "Elizabeth Guzman",
+  "district": "District 31",
+  "time": "Fri, 05 Aug 2016 03:01:00 +0000",
+  "author": "Matt  Cruickshank",
+  "category": "Virginia Delegate race",
+  "id": "elizabeth-guzman",
+  "link": "https://blog.google/topics/doodles/go-bananas-for-2016-doodle-fruit-games/",
+  "imgSrc": "images/guzman31.jpg",
+  "percentForHil": "10.3",
+  "summary": "Elizabeth immigrated from Peru and put herself through school, working 3 jobs and earning 2 Master’s degrees. She will continue to work hard for District 31!",
+  "contentLength": 2797
+},
+{
+  "title": "David Reid",
+  "district": "District 32",
+  "time": "Mon, 31 Oct 2016 04:00:00 +0000",
+  "author": "Momo ",
+  "category": "Virginia Delegate race",
+  "id": "david-reid",
+  "link": "http://www.carterforvirginia.com/",
+  "imgSrc": "images/D32-Reid.jpg",
+  "placeholdera": "",
+  "percentForHil": "20.9",
+  "summary": "David served for 23 years as a Naval Intelligence office",
+   "whyMatters": "It’s time to move forward with positive change: improve transportation for Northern Virginia, strengthen education, grow the economy with green energy jobs, expand Medicaid to bring federal dollars to Virginia, and support women’s reproductive rights. With a strong majority Democratic electorate, this race has a great chance of electing Democrat David Reid, as long as Democrats show up to the polls. ",
+   "contentLength": 2333
+}, {
+  "title": "Donte Tanner",
+  "district": "District 40",
+  "time": "Fri, 06 May 2016 08:11:00 +0000",
+  "author": "Lauren Nemroff",
+  "category": "Virginia Delegate race",
+  "id": "donte-tanner",
+  "link": "https://blog.google/topics/google-europe/look-beyond-surface-celebrating-freuds/",
+  "imgSrc": "images/donte2.jpg",
+  "percentForHil": "11.1",
+  "summary": "Joshua Cole a native Virginian and Fredericksburg resident is contending for the VA House of Delegates 28th District Seat.",
+  "contentLength": 5193
+}, {
+  "title": "Kathy Tran",
+   "district": "District 41",
+  "time": "Mon, 07 Mar 2016 11:23:00 +0000",
+  "author": "Lydia  Nichols",
+  "category": "Virginia Delegate race",
+  "id": "kathy-tran",
+  "link": "https://blog.google/topics/doodles/onedayiwill-on-international-womens-day/",
+  "imgSrc": "images/kathytran.jpg",
+  "percentForHil": "23.1",
+  "summary": "Dr. Veronica Coleman entered this campaign to fight for the values that matter in Virginia’s 84th District: Strengthening the healthcare system, protecting the vote and making sure that everyone benefits from a vibrant and equitable economy.",
+  "contentLength": 7145
+}, {
+  "title": "Lee Carter",
+    "district": "District 50",
+  "time": "Mon, 04 May 2015 11:24:00 +0000",
+  "author": "Liat Ben-Rafael",
+  "category": "Virginia Delegate race",
+  "id": "lee-carter-50",
+  "link": "https://blog.google/topics/doodles/what-girls-are-good-for-happy-birthday/",
+  "imgSrc": "images/Lee_Carterheadshot.jpg",
+  "percentForHil": "14",
+  "summary": "Lee is an IT specialist who repairs oncology equipment. He is a worker’s candidate. ",
+  "contentLength": 6233
+},
+{
+  "title": "Hala Ayala",
+  "district": "District 51",
+  "time": "Mon, 04 May 2015 11:24:00 +0000",
+  "author": "Liat Ben-Rafael",
+  "category": "Virginia Delegate race",
+  "id": "hala-ayala",
+  "link": "https://blog.google/topics/doodles/what-girls-are-good-for-happy-birthday/",
+  "imgSrc": "images/hd51-Hala.jpg",
+  "percentForHil": "8.9",
+  "summary": "Dr. Dawn Adams is ready to take the lessons she’s learned as a nurse practitioner, administrator, educator, and community leader to represent her community as Delegate of Virginia’s 68th District.",
+  "contentLength": 6233
+},
+{
+  "title": "Karrie Delaney",
+  "district": "District 67",
+  "time": "Mon, 04 May 2015 11:24:00 +0000",
+  "author": "Liat Ben-Rafael",
+  "category": "Virginia Delegate race",
+  "id": "karrie-delaney",
+  "link": "https://blog.google/topics/doodles/what-girls-are-good-for-happy-birthday/",
+  "imgSrc": "images/delaney2.jpg",
+  "percentForHil": "26.7",
+  "summary": "Dr. Dawn Adams is ready to take the lessons she’s learned as a nurse practitioner, administrator, educator, and community leader to represent her community as Delegate of Virginia’s 68th District.",
+  "contentLength": 6233
+},
+{
+  "title": "Schuyler VonValkenberg",
+  "district": "District 72",
+  "time": "Mon, 04 May 2015 11:24:00 +0000",
+  "author": "Liat Ben-Rafael",
+  "category": "Virginia Delegate race",
+  "id": "schuyler-vonvalkenberg",
+  "link": "https://blog.google/topics/doodles/what-girls-are-good-for-happy-birthday/",
+  "imgSrc": "images/van-sch.jpg",
+  "percentForHil": "5.4",
+  "summary": "Dr. Dawn Adams is ready to take the lessons she’s learned as a nurse practitioner, administrator, educator, and community leader to represent her community as Delegate of Virginia’s 68th District.",
+
+  "contentLength": 6233
+},
+{
+  "title": "Debra Rodman",
+  "district": "District 73",
+  "time": "Mon, 04 May 2015 11:24:00 +0000",
+  "author": "Liat Ben-Rafael",
+  "category": "Virginia Delegate race",
+  "id": "debra-rodman",
+  "link": "https://blog.google/topics/doodles/what-girls-are-good-for-happy-birthday/",
+  "imgSrc": "images/Debra2.jpg",
+  "percentForHil": "7.8",
+  "summary": "Dr. Dawn Adams is ready to take the lessons she’s learned as a nurse practitioner, administrator, educator, and community leader to represent her community as Delegate of Virginia’s 68th District.",
+  "contentLength": 6233
+},
+{
+  "title": "John Bell",
+  "district": "District 67",
+  "time": "Mon, 04 May 2015 11:24:00 +0000",
+  "author": "Liat Ben-Rafael",
+  "category": "Virginia Delegate race",
+  "id": "karrie-delaney",
+  "link": "https://blog.google/topics/doodles/what-girls-are-good-for-happy-birthday/",
+  "imgSrc": "images/john-bells.jpg",
+  "percentForHil": "26.7",
+  "summary": "Air Force for 26 years, first as an enlisted man and later as an officer, retiring in 2007 with a major’s rank. ",
+  "contentLength": 6233
+},
+{
+  "title": "Shelly Simonds",
+  "district": "District 94",
+  "time": "Mon, 04 May 2015 11:24:00 +0000",
+  "author": "Liat Ben-Rafael",
+  "category": "Virginia Delegate race",
+  "id": "zack-wittkamp",
+  "link": "https://blog.google/topics/doodles/what-girls-are-good-for-happy-birthday/",
+  "imgSrc": "images/shellySimonds.png",
+  "percentForHil": "5.1",
+  "summary": "Zack’s core skill is the ability to assemble a team to do a task successfully, critical for finding solutions to Virginia’s issues.",
+  "contentLength": 6233
+}
+]

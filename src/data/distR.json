@@ -1,0 +1,27 @@
+[{
+   "race": [
+    {
+      "name": "2016 Presidential Race",
+      "candidates": [
+      {
+        "candidate_name": "Hillary Clinton",
+        "party": "Democratic",
+        "votes": "16054",
+        "color" : "#ff0000"
+      },
+      {
+        "candidate_name": "Donald Trump",
+        "party": "Republican",
+        "votes": "15054",
+        "color":"#000000"
+      },
+      {
+        "candidate_name": "Registered, didn't vote",
+        "party": "NONE",
+        "color":"#00ffff",
+        "votes": "12403"
+      }
+      ]
+    }
+  ]
+ }

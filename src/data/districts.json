@@ -1,0 +1,166 @@
+[{                                                                                                                          
+  "title": "District 1",
+  "time": "Tue, 26 Jan 2016 17:21:00 +0000",
+  "author": "Lexi Cotcamp",
+  "category": "Google for Nonprofits",
+  "id": "district-1",
+  "link": "https://blog.google/topics/nonprofits/introducing-new-donation-tool-on/",
+  "imgSrc": "images/District_1_map.png",
+    "contentLength": 3599,
+  "placeholder": "",
+  "percentForHil": "93",
+  "summary": "This is a description of this district, a demographic summary ",
+  "race": [
+    {
+  "name": "2016 Presidential Race",
+  "candidates": [
+    {
+      "candidate_name": "Hillary Clinton",
+      "party": "Democratic",
+      "votes": "16054"
+    },
+    {
+      "candidate_name": "Donald Trump",
+      "party": "Republican",
+      "votes": "15054"
+    },
+    {
+      "candidate_name": "Registered, didn't vote",
+      "party": "NONE",
+      "votes": "12403"
+    }
+    ]
+    }, 
+    {
+    "name": "2015 House of Delegates",
+    "candidates": [
+    {
+      "candidate_name": "Buchwald",
+      "party": "Democratic",
+      "votes": "6587"
+    },
+    {
+      "candidate_name": "Yost",
+      "party": "Republican",
+      "votes": "9245"
+    },
+    {
+      "candidate_name": "Registered, didn't vote",
+      "party": "NONE",
+      "votes": "24737"
+    }
+    ]
+    },
+    {
+    "name": "2014 US Senate Results",
+    "candidates": [
+    {
+      "candidate_name": "Warner",
+      "party": "Democratic",
+      "votes": "8851"
+    },
+    {
+      "candidate_name": "Gillispe",
+      "party": "Republican",
+      "votes": "7421"
+    },
+    {
+      "candidate_name": "Sarvs",
+      "party": "Libertarian",
+      "votes": "651"
+    },
+    {
+      "candidate_name": "Registered, didn't vote",
+      "party": "NONE",
+      "votes": "24555"
+    }
+    ]
+    },
+    {
+    "name": "2013 House of Delegates",
+    "candidates": [
+    {
+      "candidate_name": "Harder",
+      "party": "Democratic",
+      "votes": "8650"
+    },
+    {
+      "candidate_name": "Yost",
+      "party": "Republican",
+      "votes": "9541"
+    },
+    {
+      "candidate_name": "Registered, didn't vote",
+      "party": "NONE",
+      "votes": "23286"
+    } 
+    ]    
+    } ]}, 
+  {
+  "title": "District 2",
+  "time": "Fri, 09 Sep 2016 11:06:00 +0000",
+  "author": "Lexi Cotcamp",
+  "category": "Google for Nonprofits",
+  "id": "district-2",
+  "link": "https://blog.google/topics/nonprofits/a-nonprofits-guide-to-online-security/",
+  "imgSrc": "images/District_2_map.jpg",
+  "percentForHil": "75",
+  "summary": "This is the coal mining place",
+  "contentLength": 6000
+}, {
+  "title": "District 3",
+  "time": "Wed, 06 Jul 2016 21:32:00 +0000",
+  "author": "Lexi Cotcamp",
+  "category": "Google for Nonprofits",
+  "id": "district-3",
+  "link": "https://blog.google/topics/nonprofits/4-ways-to-keep-your-nonprofit-safe/",
+  "imgSrc": "images/mapOFV.jpg",
+  "percentForHil": "73",
+  "summary": "Describing something for Virginai district 3",
+  "contentLength": 8288
+}, {
+  "title": "District 4",
+  "time": "Fri, 17 Jun 2016 20:02:00 +0000",
+  "author": "Lexi Cotcamp",
+  "category": "Google for Nonprofits",
+  "id": "unlocking-your-nonprofits-data-insights",
+  "link": "https://blog.google/topics/nonprofits/unlocking-your-nonprofits-data-insights/",
+  "imgSrc": "images/unlocking-your-nonprofits-data-insights.jpg",
+  "percentForHil": "83",
+  "summary": "This is the district that Katniss comes from. Psyche! Everyone knows Katnis is from District 12",
+  "contentLength": 5169
+}, {
+  "title": "District 5",
+  "time": "Fri, 01 Apr 2016 18:19:00 +0000",
+  "author": "Lexi Cotcamp",
+  "category": "Google for Nonprofits",
+  "id": "happy-13th-birthday-google-ad-grants",
+  "link": "https://blog.google/topics/nonprofits/happy-13th-birthday-google-ad-grants/",
+  "imgSrc": "images/mapOFV.jpg",
+  "percentForHil": "73",
+  "summary": "We launched Ad Grants 13 years ago to offer nonprofits a free online advertising solution to share their causes with the world. ",
+  "contentLength": 3557
+}, {
+  "title": "District 6",
+  "time": "Wed, 30 Mar 2016 16:44:00 +0000",
+  "author": "Lexi Cotcamp",
+  "category": "Google for Nonprofits",
+  "id": "from-la-to-tokyo-youtube-spaces-opens",
+  "link": "https://blog.google/topics/nonprofits/from-la-to-tokyo-youtube-spaces-opens/",
+  "imgSrc": "images/mapOFV.jpg",
+  "percentForHil": "53",
+  "summary": "All enrolled nonprofits with 1,000 or more subscribers are now eligible to apply for production access at YouTube Spaces. ",
+  "contentLength": 4338
+}, {
+  "title": "District 7",
+  "time": "Thu, 24 Mar 2016 17:04:00 +0000",
+  "author": "Paige  Birnbaum",
+  "category": "Google for Nonprofits",
+  "id": "competing-for-better-more-inclusive",
+  "link": "https://blog.google/topics/nonprofits/competing-for-better-more-inclusive/",
+  "imgSrc": "images/mapOFV.jpg",
+  "percentForHil": "57",
+  "summary": "This district comprises of an educated base from the location of the University ",
+  "contentLength": 2847
+}
+]

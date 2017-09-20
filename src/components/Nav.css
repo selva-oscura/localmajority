@@ -1,0 +1,17 @@
+.Nav {
+  display: block;
+  text-align: center;
+  border-top: 1px solid #01369B;
+  border-bottom: 1px solid #01369B;
+  padding: 8px 0;
+  margin: 32px 0;
+}
+
+.Nav a {
+	color: #01369B;
+	margin: 0 10px;
+}
+
+.Nav a.selected {
+	font-weight: bold;
+}

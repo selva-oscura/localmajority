@@ -1,0 +1,81 @@
+.Card {
+	width: 100%;
+	max-width: 100%;
+	margin: 2.5vw 0;
+	box-shadow: 0px 2px 8px transparent;
+	transition: box-shadow 0.5s ease-out;
+	padding: 1%;
+}
+
+.Card:hover{
+	box-shadow: 0px 2px 8px rgba(1, 54, 155, 0.5);
+}
+
+.Card h3, .Card h4, .Card p{
+	margin:2px;
+}
+
+.Card .image-holder {
+  overflow: hidden;
+  position: relative;
+}
+
+.Card .image-holder .placeholder-image, .Card .image-holder .actual-image {
+  /*width: 100%;*/
+  position: absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  transition: opacity 0.1s;
+  opacity: 1;
+}
+
+.Card .placeholder-image {
+  z-index: 1;
+}
+
+.Card .actual-image {
+  z-index: 2;
+  width: 100%;
+}
+
+
+.Card.square .image-holder {
+  height: 300px;
+}
+.Card.square .actual-image {
+  width: 100%;
+}
+
+
+.Card.landscape .image-holder, .Card.landscape .actual-image  {
+  height: 150px;
+}
+.Card.landscape .placeholder-image {
+  width: 150% !important;
+  margin-left: -25%;
+  margin-top: -70%;
+}
+
+
+@media(min-width: 640px){
+  .Card {
+    width: 48%;
+  }
+}
+
+@media(min-width: 960px){
+  .Card {
+    width: 30%;
+  }
+}
+
+@media(min-width: 1280px){
+  .Card {
+    width: 22%;
+  }
+}
+
+
+

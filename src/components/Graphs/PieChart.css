@@ -1,0 +1,10 @@
+.PieChart svg {
+	min-width: 360px;
+	min-height: 240px;
+	padding: 36px 72px;
+}
+
+.PieChart svg text{
+	font-weight: bold;
+	color: #01369B;
+}
