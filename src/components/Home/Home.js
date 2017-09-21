@@ -1,13 +1,14 @@
 import React from 'react';
 import './Home.css';
+import Aside from '../common/Aside'
 import VADistrictMap from '../Maps/VADistrictMap';
 
 const Home = (props) => {
   return (
     <div className="Home">
-    	<div className="map-and-text">
+      <div className="map-and-text">
         <div id="image">
-    			<VADistrictMap />
+          <VADistrictMap />
         </div>
         <div className="caption">
           <h2>
@@ -19,9 +20,18 @@ const Home = (props) => {
             22 Days 12 Hours 18 Minutes 5 Seconds
           </h3>
           </div>
-    	</div>
+      </div>
+      <div className="flex">
+        <article className="Main">
+          <h2>WHAT CONTENT GOES HERE?</h2>
+        </article>
+        <Aside
+          twitterHandles={['local_majority', 'flippable_org']}
+        />
+      </div>
     </div>
   );
 };
 
 export default Home;
+
