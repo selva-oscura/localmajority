@@ -10,7 +10,7 @@ const TwitterTimeline = (props) => {
 		    screenName: twitterHandle
 		  }}
 		  options={{
-		    height: '400'
+		    height: '500',
 		  }}
 		/>
 	)
