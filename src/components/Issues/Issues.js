@@ -4,12 +4,6 @@ import Card from '../common/Card';
 const Issues = (props) => {
   console.log('props for Issues', props);
   const issues = props.issues;
-  issues.forEach(issue => {
-    if(!issue.imgSrc){
-      console.log("MISSING", issue.title, issue.imgSrc)
-    }
-
-  })
 
   return (
     <div className="Issues flex">
