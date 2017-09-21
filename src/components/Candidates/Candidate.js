@@ -1,8 +1,22 @@
 import React from 'react';
-import Aside from '../common/Aside';
+import CandidateAside from './CandidateAside';
 
-const Candidate = ({candidateId, candidate}) => {
-	console.log('props from Candidate', candidateId, candidate);
+const Candidate = (props) => {
+	console.log('props from Candidate',props);
+	let candidate = props.candidate;
+	candidate = Object.assign({}, candidate, {
+		address: {
+			street: "PO Box 5113",
+ 			city: "Woodbridge",
+			state: "VA",
+			zip: "22194",
+		},
+		phone: "571-989-1713",
+		fax: null,
+		email: "jennifercarrollfoy@gmail.com",
+		twitter: "JCarrollFoy",
+		facebook: "JenniferCarrollFoy",
+	});
   return (
     <div className="Candidate flex">
     	<article className="Main">
@@ -14,8 +28,8 @@ const Candidate = ({candidateId, candidate}) => {
 	    	/>
 	    	<p>{candidate.summary}</p>
     	</article>
-    	<Aside 
-    		twitterHandles={['JCarrollFoy']}
+    	<CandidateAside 
+    		candidate={candidate}
     	/>
     </div>
   );
