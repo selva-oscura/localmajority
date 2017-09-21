@@ -19,8 +19,6 @@ import issues from './data/issues.json';
 
 import registerServiceWorker from './registerServiceWorker';
 
-console.log('candidates', candidates);
-
 ReactDOM.render(
 	<Router>
 		<App>
@@ -30,7 +28,7 @@ ReactDOM.render(
 				/>
 				<Route path="/districts/:id"
 					component={(props) => {
-						const district = districts.find(district => props.match.params.id === district.id);
+						const district = districts.find(district => props.match.params.id === district.id.slice('district-'.length));
 						return <DistrictHolder {...props} district={district} />;
 					}}
 				/>
