@@ -10,9 +10,6 @@ const Issue = (props) => {
     	<h3>by {issue.author}</h3>
       <h6>{issue.time.slice(0, issue.time.length - 15)} -- {Math.floor(issue.contentLength / 400)} minute read</h6>
       <p>Summary: {issue.summary}</p>
-      <a href={`${issue.link}`}>
-        <button className="link-button">Read the Full Article</button>
-      </a>
     </div>
   );
 };
