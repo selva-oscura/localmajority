@@ -11,6 +11,7 @@ import Districts from './components/Districts/Districts';
 import Issue from './components/Issues/Issue';
 import Issues from './components/Issues/Issues';
 import ArticleHolder from './components/Articles/ArticleHolder';
+import Elements from './components/common/Elements';
 import FourZeroFour from './components/FourZeroFour';
 import articles from './data/list-home.json';
 import candidates from './data/candidates.json';
@@ -55,6 +56,9 @@ ReactDOM.render(
 				/>
 				<Route path="/article/:id"
 					component={(props) => <ArticleHolder {...props} />}
+				/>
+				<Route path="/elements"
+					component={Elements}
 				/>
 				<Route component={FourZeroFour}/>
 			</Switch>
