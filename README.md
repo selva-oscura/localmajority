@@ -11,6 +11,8 @@ To run locally (directions assume that you have already installed node (v.6+), n
 * view in browser at localhost:3000
 
 
+ReactSocialIcons -- details can be found on [github.io](http://jaketrent.github.io/react-social-icons/)
+
 
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
