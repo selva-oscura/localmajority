@@ -18,7 +18,7 @@ const CandidateAside = (props) => {
 					candidate.twitter ? (
 						<SocialIcon 
 							url={`https://twitter.com/${candidate.twitter}`}
-						/>						
+						/>
 					) : (
 						null
 					)						
@@ -27,7 +27,7 @@ const CandidateAside = (props) => {
 					candidate.facebook ? (
 						<SocialIcon 
 							url={`https://www.facebook.com/${candidate.facebook}`}
-						/>						
+						/>
 					) : (
 						null
 					)
@@ -49,16 +49,3 @@ const CandidateAside = (props) => {
 }
 
 export default CandidateAside;
-
-
-		// address: {
-		// 	street: "PO Box 5113"
- 	// 		city: "Woodbridge",
-		// 	state: "VA",
-		// 	zip: "22194",
-		// },
-		// phone: "571-989-1713",
-		// fax: null,
-		// email: "jennifercarrollfoy@gmail.com",
-		// twitter: "JCarrollFoy",
-		// facebook: "JenniferCarrollFoy",
