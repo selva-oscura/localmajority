@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from './Button';
 import TwitterTimeline from './TwitterTimeline';
 import { SocialIcon, SocialIcons } from 'react-social-icons';
+import axios from 'axios';
 let urls = [
   'http://jaketrent.com',
   'http://twitter.com/jaketrent',
@@ -9,15 +10,100 @@ let urls = [
   'http://www.pinterest.com/jaketrent/artsy-fartsy/'
 ];
 
+
 class Elements extends Component {
   constructor(props, context) {
 	  super(props, context);
 	  this.state = {
 	  	count: 0,
+	  	parties: {},
+	  	errors: {}
 	  }
 	  this.decrementCounter=this.decrementCounter.bind(this);
 	  this.incrementCounter=this.incrementCounter.bind(this);
   }
+
+  fetchParties(){
+  	var apiOptions = {
+  		url: 'https://cmsdev.localmajority.net/nuxeo/api/v1/search/lang/NXQL/execute?query=select%20*%20from%20Party',
+  		headers: {
+				"Authorization": "Basic anNvbjpjc3d4V2xSdk5XTnBHN0FKTzhIeg==",
+				"Nuxeo-Transaction-Timeout": 3,
+				"X-NXproperties": "*",
+				"X-NXRepository": "default",  			
+		    'content-type': 'application/json'
+  		},
+  	}
+
+  	axios(apiOptions)
+   		.then(res => {
+   			console.log('parties response', res);
+   			if(res.data && res.data.entries){
+   			// 	let parties = res.data.entries.map(entry => (
+   			// 			entry['title'],
+   			// 			entry.properties['party:abbrev'],
+   			// 			entry.properties['party:color'],
+   			// 			entry.properties['party:order'],
+   			// 			entry.properties['party:homepageUrl'],
+   			// 			entry.properties['party:iconUrl'],
+   			// 			entry.title
+   			// 		)
+   			// 	);
+   			// 	this.setState({parties: parties});
+   				console.log('parties are res.data.entries')
+   			}
+   		})
+   		.catch(err => {
+   			console.log('aaaaccckkkk from axios',err);
+   			this.setState({errors: err});
+   		})
+
+  		// json: true
+				// "content-type": "application/json"
+   // 	fetch('https://cmsdev.localmajority.net/nuxeo/api/v1/search/lang/NXQL/execute?query=select%20*%20from%20Party', {
+   //    header: {
+			// 	"Authorization": "Basic anNvbjpjc3d4V2xSdk5XTnBHN0FKTzhIeg==",
+			// 	"Nuxeo-Transaction-Timeout": 3,
+			// 	"X-NXproperties": "*",
+			// 	"X-NXRepository": "default",
+   // 		}, 
+   // 		json: true
+   // 	})
+   // 	.then(res => {
+   // 		if(res.status===200){ 			
+	  //  		console.log('res.body', res.body);
+	  //  		return res.json()
+   // 		} else {
+   // 			console.log('other res', res.status)
+   // 		}
+   // 	}).then(res => {
+ 		// 	console.log('res', res)
+ 		// 	// this.setState({parties: res})
+ 		// })
+ 		// .catch(err => {
+ 		// 	console.log('aaaaccckkkk from fetch',err)
+ 		// })
+
+		// var request = require('request');
+		// var headers = {
+		//     'Authorization': 'Basic anNvbjpjc3d4V2xSdk5XTnBHN0FKTzhIeg==',
+		//     'Nuxeo-Transaction-Timeout': '3',
+		//     'X-NXproperties': '*',
+		//     'X-NXRepository': 'default',
+		// };
+		// var options = {
+		//     url: 'https://cmsdev.localmajority.net/nuxeo/api/v1/search/lang/NXQL/execute?query=select * from Party',
+		//     headers: headers
+		// };
+		// function callback(error, response, body) {
+		//     if (!error && response.statusCode == 200) {
+		//         console.log(body);
+		//     }
+		// }
+		// request(options, callback);
+
+	}
+
   decrementCounter(){
   	let count = this.state.count;
   	this.setState({ count: count-1 });
@@ -25,6 +111,9 @@ class Elements extends Component {
   incrementCounter(){
   	let count = this.state.count;
   	this.setState({ count: count+1 });
+  }
+  componentWillMount(){
+  	this.fetchParties();
   }
 	render(){
 		return (
@@ -41,37 +130,29 @@ class Elements extends Component {
 						link="https://blah.com"
 						kind="primary"
 						label="Primary Button offsite"
-						offsite={true}
-					/>
-					<Button
-						link="https://google.com"
-						kind="secondary"
-						label="Secondary Button offsite no offsite param"
 					/>
 					<Button
 						link="/issues"
 						kind="secondary"
 						label="Secondary Button onsite"
-						offsite={false}
 					/>
 					<Button
 						link="/districts/2"
 						kind="tertiary"
 						label="Tertiary Button onsite"
-						offsite={false}
 					/>
 				</div>
 				<div>			
 				<h3>can be used to submit form, update state, or similar non-link purposes when paired with a handleClick function</h3>
 					<Button
 						kind="tertiary"
-						label="click me to decrement the counter"
+						label="decrement counter"
 						handleClick={this.decrementCounter}
 					/>
 					<span style={{width: '100px', display: 'inline-block'}}><b>Counter:</b> {this.state.count} </span>
 					<Button
 						kind="secondary"
-						label="click me to increment the counter"
+						label="increment counter"
 						handleClick={this.incrementCounter}
 					/>
 				</div>
@@ -108,9 +189,6 @@ class Elements extends Component {
 
 				<h2>TwitterTimeline: file at ./src/components/common/TwitterTimeline</h2>
 				<div className="row">
-					<TwitterTimeline
-						twitterHandle="1_selva_oscura"
-					/>
 				</div>
 				<hr />
 
@@ -120,3 +198,6 @@ class Elements extends Component {
 };
 
 export default Elements;
+					// <TwitterTimeline
+					// 	twitterHandle="1_selva_oscura"
+					// />
