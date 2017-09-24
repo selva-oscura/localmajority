@@ -1,0 +1,17 @@
+.TwitterTimeline {
+	position: relative;
+	height: 500px;
+}
+
+.TwitterTimeline > div{
+	position: absolute;
+}
+
+.TwitterTimeline .mask{
+	bottom: 0;
+	left: 0;
+	height: 40px;
+	width: 50%;
+	z-index: 5;
+	background-color: white;
+}
