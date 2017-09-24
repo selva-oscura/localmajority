@@ -12,7 +12,7 @@ const Aside = (props) => {
 				twitterHandles.map((twitterHandle, i) => (
 					<TwitterTimeline 
 						key={i}
-						twitterHandle={twitterHandle} 
+						twitterHandle={twitterHandle}
 					/>
 				))
 			}
