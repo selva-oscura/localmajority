@@ -3,6 +3,13 @@ import Button from './Button';
 import TwitterTimeline from './TwitterTimeline';
 import { SocialIcon, SocialIcons } from 'react-social-icons';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
+import markdownExample from '../../data/sampleFilesForImport/sample.md';
+// import htmlExample from '../public/articles/4-ways-to-keep-your-nonprofit-safe.html'
+
+console.log('markdownExample', markdownExample)
+
+var input = '# This is a header\n\nAnd this is a paragraph';
 let urls = [
   'http://jaketrent.com',
   'http://twitter.com/jaketrent',
@@ -15,93 +22,59 @@ class Elements extends Component {
   constructor(props, context) {
 	  super(props, context);
 	  this.state = {
-	  	count: 0,
-	  	parties: {},
-	  	errors: {}
-	  }
+			count: 0,
+			errors: {},
+			articles: {},
+			candidates: {},
+			districts: {},
+			issues: {},
+			parties: {},
+			races: {},
+		}
 	  this.decrementCounter=this.decrementCounter.bind(this);
 	  this.incrementCounter=this.incrementCounter.bind(this);
   }
 
-  fetchParties(){
-  	var apiOptions = {
-  		url: 'https://cmsdev.localmajority.net/nuxeo/api/v1/search/lang/NXQL/execute?query=select%20*%20from%20Party',
-  		headers: {
-				"Authorization": "Basic anNvbjpjc3d4V2xSdk5XTnBHN0FKTzhIeg==",
-				"Nuxeo-Transaction-Timeout": 3,
-				"X-NXproperties": "*",
-				"X-NXRepository": "default",  			
-		    'content-type': 'application/json'
-  		},
-  	}
-
-  	axios(apiOptions)
-   		.then(res => {
-   			console.log('parties response', res);
-   			if(res.data && res.data.entries){
-   			// 	let parties = res.data.entries.map(entry => (
-   			// 			entry['title'],
-   			// 			entry.properties['party:abbrev'],
-   			// 			entry.properties['party:color'],
-   			// 			entry.properties['party:order'],
-   			// 			entry.properties['party:homepageUrl'],
-   			// 			entry.properties['party:iconUrl'],
-   			// 			entry.title
-   			// 		)
-   			// 	);
-   			// 	this.setState({parties: parties});
-   				console.log('parties are res.data.entries')
-   			}
-   		})
-   		.catch(err => {
-   			console.log('aaaaccckkkk from axios',err);
-   			this.setState({errors: err});
-   		})
-
-  		// json: true
-				// "content-type": "application/json"
-   // 	fetch('https://cmsdev.localmajority.net/nuxeo/api/v1/search/lang/NXQL/execute?query=select%20*%20from%20Party', {
-   //    header: {
-			// 	"Authorization": "Basic anNvbjpjc3d4V2xSdk5XTnBHN0FKTzhIeg==",
-			// 	"Nuxeo-Transaction-Timeout": 3,
-			// 	"X-NXproperties": "*",
-			// 	"X-NXRepository": "default",
-   // 		}, 
-   // 		json: true
-   // 	})
-   // 	.then(res => {
-   // 		if(res.status===200){ 			
-	  //  		console.log('res.body', res.body);
-	  //  		return res.json()
-   // 		} else {
-   // 			console.log('other res', res.status)
-   // 		}
-   // 	}).then(res => {
- 		// 	console.log('res', res)
- 		// 	// this.setState({parties: res})
- 		// })
- 		// .catch(err => {
- 		// 	console.log('aaaaccckkkk from fetch',err)
- 		// })
-
-		// var request = require('request');
-		// var headers = {
-		//     'Authorization': 'Basic anNvbjpjc3d4V2xSdk5XTnBHN0FKTzhIeg==',
-		//     'Nuxeo-Transaction-Timeout': '3',
-		//     'X-NXproperties': '*',
-		//     'X-NXRepository': 'default',
-		// };
-		// var options = {
-		//     url: 'https://cmsdev.localmajority.net/nuxeo/api/v1/search/lang/NXQL/execute?query=select * from Party',
-		//     headers: headers
-		// };
-		// function callback(error, response, body) {
-		//     if (!error && response.statusCode == 200) {
-		//         console.log(body);
-		//     }
-		// }
-		// request(options, callback);
-
+  fetchData(){
+  	var fields = ["parties", "issues", "candidates", "articles", "districts", "races"];
+  	var queries = ["Party", "Issue", "Candidate", "Article", "District", "Race"];
+  	queries.forEach((query, i) => {
+	  	var apiOptions = {
+	  		url: `https://cmsdev.localmajority.net/nuxeo/api/v1/search/lang/NXQL/execute?query=select%20*%20from%20${query}`,
+	  		headers: {
+					"Authorization": "Basic anNvbjpjc3d4V2xSdk5XTnBHN0FKTzhIeg==",
+			    'accept': 'application/json'
+	  		},
+	  	}
+	  	axios(apiOptions)
+	   		.then(res => {
+	   			console.log(`${query} response`, res);
+	   			if(res.data && res.data.entries){
+	   				// console.log('data entries', res.data.entries);
+	   				res.data.entries.forEach((entry) => {
+	   					console.log('entry', entry);
+	   				})
+	   			// 	let parties = res.data.entries.map(entry => (
+	   			// 			entry['title'],
+	   			// 			entry.properties['party:abbrev'],
+	   			// 			entry.properties['party:color'],
+	   			// 			entry.properties['party:order'],
+	   			// 			entry.properties['party:homepageUrl'],
+	   			// 			entry.properties['party:iconUrl'],
+	   			// 			entry.title
+	   			// 		)
+	   			// 	);
+	   				let state = Object.assign({},this.state);
+	   				state[fields[i]] = res.data.entries;
+	   				this.setState(state);
+	   				// console.log('parties are res.data.entries')
+	   			}
+	   		})
+	   		.catch(err => {
+	   			console.log('aaaaccckkkk from axios',err);
+	   			this.setState({errors: err});
+	   		})  		
+  	})
 	}
 
   decrementCounter(){
@@ -113,7 +86,7 @@ class Elements extends Component {
   	this.setState({ count: count+1 });
   }
   componentWillMount(){
-  	this.fetchParties();
+  	this.fetchData();
   }
 	render(){
 		return (
@@ -189,8 +162,12 @@ class Elements extends Component {
 
 				<h2>TwitterTimeline: file at ./src/components/common/TwitterTimeline</h2>
 				<div className="row">
+					<TwitterTimeline
+						twitterHandle="1_selva_oscura"
+					/>
 				</div>
 				<hr />
+				<h2>Markdown: </h2>
 
 			</article>	
 		)
@@ -198,6 +175,7 @@ class Elements extends Component {
 };
 
 export default Elements;
-					// <TwitterTimeline
-					// 	twitterHandle="1_selva_oscura"
-					// />
+				// <div className="row">
+				// 	<ReactMarkdown source={input} />
+				// 	<iframe src="../../../public/articles/4-ways-to-keep-your-nonprofit-safe.html"></iframe>
+				// </div>
