@@ -1,0 +1,125 @@
+{
+  "entity-type": "documents",
+  "isPaginable": true,
+  "resultsCount": 2,
+  "pageSize": 0,
+  "maxPageSize": 0,
+  "currentPageSize": 2,
+  "currentPageIndex": 0,
+  "numberOfPages": 1,
+  "isPreviousPageAvailable": false,
+  "isNextPageAvailable": false,
+  "isLastPageAvailable": false,
+  "isSortable": true,
+  "hasError": false,
+  "errorMessage": null,
+  "totalSize": 2,
+  "pageIndex": 0,
+  "pageCount": 1,
+  "entries": [
+    {
+      "entity-type": "document",
+      "repository": "default",
+      "uid": "d3c235ba-4877-46f6-ac89-e0bc9ab4af54",
+      "path": "\/default-domain\/workspaces\/Local Majority\/Parties\/Democratic",
+      "type": "Party",
+      "state": "project",
+      "parentRef": "2eaefb75-35f5-4af1-b84b-3b5e560cf09c",
+      "isCheckedOut": true,
+      "isVersion": false,
+      "isProxy": false,
+      "changeToken": "1-0",
+      "title": "Democratic",
+      "lastModified": "2017-09-22T17:15:26.085Z",
+      "properties": {
+        "uid:uid": null,
+        "uid:major_version": 0,
+        "uid:minor_version": 0,
+        "common:icon-expanded": null,
+        "common:icon": null,
+        "dc:description": null,
+        "dc:language": null,
+        "dc:coverage": null,
+        "dc:valid": null,
+        "dc:creator": "Administrator",
+        "dc:modified": "2017-09-22T17:15:26.085Z",
+        "dc:lastContributor": "Administrator",
+        "dc:rights": null,
+        "dc:expired": null,
+        "dc:format": null,
+        "dc:created": "2017-09-22T17:15:26.085Z",
+        "dc:title": "Democratic",
+        "dc:issued": null,
+        "dc:nature": null,
+        "dc:subjects": [
+          
+        ],
+        "dc:contributors": [
+          "Administrator"
+        ],
+        "dc:source": null,
+        "dc:publisher": null,
+        "party:homepageUrl": "https:\/\/www.democrats.org\/",
+        "party:abbrev": "dem",
+        "party:color": "#3333FF",
+        "party:iconUrl": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/4\/45\/U.S._Democratic_Party_logo_%28transparent%29.svg\/300px-U.S._Democratic_Party_logo_%28transparent%29.svg.png",
+        "party:order": "1"
+      },
+      "facets": [
+        
+      ]
+    },
+    {
+      "entity-type": "document",
+      "repository": "default",
+      "uid": "5e78d86e-b6a3-4789-bf4b-9f7dbd0722d0",
+      "path": "\/default-domain\/workspaces\/Local Majority\/Parties\/Republican",
+      "type": "Party",
+      "state": "project",
+      "parentRef": "2eaefb75-35f5-4af1-b84b-3b5e560cf09c",
+      "isCheckedOut": true,
+      "isVersion": false,
+      "isProxy": false,
+      "changeToken": "1-0",
+      "title": "Republican",
+      "lastModified": "2017-09-22T17:17:48.724Z",
+      "properties": {
+        "uid:uid": null,
+        "uid:major_version": 0,
+        "uid:minor_version": 0,
+        "common:icon-expanded": null,
+        "common:icon": null,
+        "dc:description": null,
+        "dc:language": null,
+        "dc:coverage": null,
+        "dc:valid": null,
+        "dc:creator": "Administrator",
+        "dc:modified": "2017-09-22T17:17:48.724Z",
+        "dc:lastContributor": "Administrator",
+        "dc:rights": null,
+        "dc:expired": null,
+        "dc:format": null,
+        "dc:created": "2017-09-22T17:17:48.724Z",
+        "dc:title": "Republican",
+        "dc:issued": null,
+        "dc:nature": null,
+        "dc:subjects": [
+          
+        ],
+        "dc:contributors": [
+          "Administrator"
+        ],
+        "dc:source": null,
+        "dc:publisher": null,
+        "party:homepageUrl": "https:\/\/www.gop.com\/",
+        "party:abbrev": "gop",
+        "party:color": "#FF3333",
+        "party:iconUrl": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/thumb\/9\/93\/Republican_Disc.svg\/300px-Republican_Disc.svg.png",
+        "party:order": "2"
+      },
+      "facets": [
+        
+      ]
+    }
+  ]
+}
