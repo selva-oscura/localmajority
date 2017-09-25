@@ -4,6 +4,11 @@ import NoSuchDistrict from './NoSuchDistrict';
 
 const DistrictHolder = (props) => {
 	const district = props.district;
+  if (district && district.title) {
+  	document.title = `Local Majority | ${district.title}`;
+  } else {
+  	document.title = "Local Majority | Unrecognized District";
+  }
   return (
     <div className="DistrictHolder">
 			{ district ? (

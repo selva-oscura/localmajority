@@ -5,6 +5,7 @@ import Card from '../common/Card';
 const Districts = (props) => {
   const districts = props.districts;
 	console.log("props for Districts", props);
+  document.title = "Local Majority | Districts";
  //  console.log('districts', districts);
   return (
     <div className="Districts flex">

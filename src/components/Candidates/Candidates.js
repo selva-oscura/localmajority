@@ -4,6 +4,7 @@ import Card from '../common/Card';
 const Candidates = (props) => {
 	console.log('props for Candidates', props);
   const candidates = props.candidates;
+  document.title = "Local Majority | Candidates";
   return (
     <div className="Candidates flex">
     	{candidates.map((candidate, i) => (
