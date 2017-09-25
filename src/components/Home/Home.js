@@ -4,6 +4,7 @@ import Aside from '../common/Aside'
 import VADistrictMap from '../Maps/VADistrictMap';
 
 const Home = (props) => {
+  document.title="Local Majority";
   return (
     <div className="Home">
       <div className="map-and-text">
