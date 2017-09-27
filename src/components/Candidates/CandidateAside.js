@@ -32,6 +32,17 @@ const CandidateAside = (props) => {
 						null
 					)
 				}
+				{
+					candidate.email ? (
+						<SocialIcon
+							url={`mailto:${candidate.email}`}
+							network="email"
+						/>
+					) : (
+						null
+					)
+				}
+
 			</div>
 			<h4>
 				{candidate.address.street}<br />
