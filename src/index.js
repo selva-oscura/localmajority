@@ -30,7 +30,8 @@ ReactDOM.render(
 				<Route path="/districts/:id"
 					component={(props) => {
 						const district = districts.find(district => props.match.params.id === district.id.slice('district-'.length));
-						return <DistrictHolder {...props} district={district} />;
+						const candidate = candidates.find(candidate => candidate.district.slice("District ".length) === props.match.params.id);
+						return <DistrictHolder {...props} district={district} candidate={candidate} />;
 					}}
 				/>
 				<Route path="/districts" 
