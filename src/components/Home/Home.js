@@ -22,12 +22,12 @@ const Home = (props) => {
           </h3>
           </div>
       </div>
-      <div className="flex">
+      <div className="main-and-aside">
         <article className="Main">
           <h2>WHAT CONTENT GOES HERE?</h2>
         </article>
         <Aside
-          twitterHandles={['local_majority', 'flippable_org']}
+          twitterHandles={['local_majority']}
         />
       </div>
     </div>
