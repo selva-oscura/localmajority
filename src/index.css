@@ -6,6 +6,7 @@ body {
   font-size: 1em;
   background-color: #ffffff;
   min-height: 100vh;
+  color: #01369B;
 }
 
 h1, h2, h3, h4, h5, h6, p, li, svg text {
