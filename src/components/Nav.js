@@ -3,33 +3,23 @@ import { NavLink } from 'react-router-dom';
 import './Nav.css';
 
 const Nav = () => {
+	const navLinks = [
+		{path: '/', name: 'Home', exact: true},
+		{path: '/candidates', name: 'Our Candidates', exact: false},
+		{path: '/districts', name: 'Our Districts', exact: false},
+		{path: '/issues', name: 'Issues', exact: false},
+	];
 	return (
 		<nav className="Nav">
-			<NavLink
-			  to="/"
-			  exact
-   			activeClassName="selected">Home
-   		</NavLink>
-
-			<NavLink
-			  to="/candidates"
-			  exact
-   			activeClassName="selected">Our Candidates
-   		</NavLink>
-
-			<NavLink
-			  to="/districts"
-			  exact
-   			activeClassName="selected">Our Districts
-   		</NavLink>
-
-			<NavLink
-			  to="/issues"
-			  exact
-   			activeClassName="selected">Issues
-   		</NavLink>
-
-
+			{
+				navLinks.map((link, i) => (
+					<NavLink
+						to={link.path}
+						exact={link.exact}
+						activeClassName="selected">{link.name}
+					</NavLink>
+				))
+			}
 		</nav>
 	);
 };
