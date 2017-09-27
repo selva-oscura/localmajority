@@ -3,10 +3,7 @@ import candidates from '../../data/candidates.json';
 import PieChart from '../Graphs/PieChart';
 import './District.css';
 
-const District = ({districtId, district}) => {
-	const districtCandidate = (candidate) => (candidate.district === district.title);
-	let candidate = candidates.filter(districtCandidate);
-	candidate = candidate[0];
+const District = ({districtId, district, candidate}) => {
   console.log('candidate is', candidate)
   const demographicData = [
     {
@@ -31,7 +28,7 @@ const District = ({districtId, district}) => {
       topic: "Education Level",
       data: [
         {label: "<high school", value: 48.5, color:"#90CAF9"},
-        {label: "High School / GED", value: 44.3, color:"448AFF"},
+        {label: "High School/GED", value: 44.3, color:"#448AFF"},
         {label: "AA", value: 3.0, color:"#2962FF"},
         {label: "BA/BS", value: 2.5, color:"#0D47A1"},
         {label: "Advanced Degree", value: 1.7, color:"#1A237E"},
@@ -98,14 +95,11 @@ const District = ({districtId, district}) => {
         ): null}
     	</div>
       <div className="row">
-        <h2>Key Stats</h2>
-        <div className="row">
+        <h2>Key District Demographic Data</h2>
+        <div className="row flex">
           {
             demographicData.map((data, i) => (
-              <div 
-                className="quarter"
-                key={i}
-              >
+              <div key={i}>
                 <PieChart
                   key={i}
                   x={100}
@@ -119,13 +113,11 @@ const District = ({districtId, district}) => {
             ))
           }
         </div>
-        <div className="row">
+        <h2>Key District Political Data</h2>
+        <div className="row flex">
           {
             politicalData.map((data, i) => (
-              <div 
-                className="quarter"
-                key={i}
-              >
+              <div key={i}>
                 <PieChart
                   key={i}
                   x={100}
@@ -152,9 +144,11 @@ const District = ({districtId, district}) => {
           <h2>Comparing Candidates</h2>
           <div className="row">
             <div className="half">
+              {candidate ? (<h3>{candidate.title}</h3>) : (<h3>Our Candidate</h3>)}
               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
             </div>
             <div className="half">
+              {candidate ? (<h3>{candidate.title}&apos;s Opponent</h3>) : (<h3>Our Candidate&apos;s Opponent</h3>)}
               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
             </div>
           </div>
