@@ -5,7 +5,7 @@ import NoSuchCandidate from './NoSuchCandidate';
 const CandidateHolder = (props) => {
 	const candidate = props.candidate;
   if (candidate) {
-  	document.title = `Local Majority | ${candidate.title}`;
+    document.title = `Local Majority | ${candidate.title}`;
   } else {
     document.title = "Local Majority | Unrecognized Candidate";
   }
