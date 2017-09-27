@@ -3,20 +3,13 @@ import Button from './Button';
 import TwitterTimeline from './TwitterTimeline';
 import { SocialIcon, SocialIcons } from 'react-social-icons';
 import axios from 'axios';
-import ReactMarkdown from 'react-markdown';
-import markdownExample from '../../data/sampleFilesForImport/sample.md';
-// import htmlExample from '../public/articles/4-ways-to-keep-your-nonprofit-safe.html'
 
-console.log('markdownExample', markdownExample)
-
-var input = '# This is a header\n\nAnd this is a paragraph';
 let urls = [
   'http://jaketrent.com',
   'http://twitter.com/jaketrent',
   'http://linkedin.com/in/jaketrent',
   'http://www.pinterest.com/jaketrent/artsy-fartsy/'
 ];
-
 
 class Elements extends Component {
   constructor(props, context) {
@@ -36,45 +29,43 @@ class Elements extends Component {
   }
 
   fetchData(){
-  	var fields = ["parties", "issues", "candidates", "articles", "districts", "races"];
-  	var queries = ["Party", "Issue", "Candidate", "Article", "District", "Race"];
-  	queries.forEach((query, i) => {
-	  	var apiOptions = {
-	  		url: `https://cmsdev.localmajority.net/nuxeo/api/v1/search/lang/NXQL/execute?query=select%20*%20from%20${query}`,
-	  		headers: {
+		// var fields = ["parties", "issues", "candidates", "articles", "districts", "races"];
+		// var queries = ["Party", "Issue", "Candidate", "Article", "District", "Race"];
+		// const fields = ["parties", "issues"];
+		const queries = [
+			{tableName:"Article", propsName:"articles"},
+			{tableName:"Candidate", propsName:"candidates"},
+			{tableName:"District", propsName:"districts"},
+			{tableName:"Issue", propsName:"issues"},
+			{tableName:"Party", propsName:"parties"},
+			{tableName:"Race", propsName:"races"},
+		];
+		queries.forEach((query) => {
+			const apiOptions = {
+				url: `https://cmsdev.localmajority.net/nuxeo/api/v1/search/lang/NXQL/execute?query=select%20*%20from%20${query.tableName}`,
+				headers: {
 					"Authorization": "Basic anNvbjpjc3d4V2xSdk5XTnBHN0FKTzhIeg==",
-			    'accept': 'application/json'
-	  		},
-	  	}
-	  	axios(apiOptions)
-	   		.then(res => {
-	   			console.log(`${query} response`, res);
-	   			if(res.data && res.data.entries){
-	   				// console.log('data entries', res.data.entries);
-	   				res.data.entries.forEach((entry) => {
-	   					console.log('entry', entry);
-	   				})
-	   			// 	let parties = res.data.entries.map(entry => (
-	   			// 			entry['title'],
-	   			// 			entry.properties['party:abbrev'],
-	   			// 			entry.properties['party:color'],
-	   			// 			entry.properties['party:order'],
-	   			// 			entry.properties['party:homepageUrl'],
-	   			// 			entry.properties['party:iconUrl'],
-	   			// 			entry.title
-	   			// 		)
-	   			// 	);
-	   				let state = Object.assign({},this.state);
-	   				state[fields[i]] = res.data.entries;
-	   				this.setState(state);
-	   				// console.log('parties are res.data.entries')
-	   			}
-	   		})
-	   		.catch(err => {
-	   			console.log('aaaaccckkkk from axios',err);
-	   			this.setState({errors: err});
-	   		})  		
-  	})
+					"content-type": "application/json; charset=utf-8",
+				},
+			}
+				// 'X-NXproperties': '*',
+				// 'X-NXRepository': 'default',
+				// 'Accept': 'application/json'
+			axios(apiOptions)
+			.then(res => {
+			if(res.status === 200 && res.data && res.data.entries){
+				// console.log('data entries', res.data.entries);
+				let state = Object.assign({}, this.state);
+				state[query['propsName']] = res.data.entries;
+				this.setState(state);
+				}
+			})
+			.catch(err => {
+				console.log(`error acessing data for ${query.tableName} table`, JSON.stringify(err));
+				this.setState({errors: err});
+			})
+
+		});
 	}
 
   decrementCounter(){
@@ -167,15 +158,9 @@ class Elements extends Component {
 					/>
 				</div>
 				<hr />
-				<h2>Markdown: </h2>
-
 			</article>	
 		)
 	}
 };
 
 export default Elements;
-				// <div className="row">
-				// 	<ReactMarkdown source={input} />
-				// 	<iframe src="../../../public/articles/4-ways-to-keep-your-nonprofit-safe.html"></iframe>
-				// </div>
