@@ -8,10 +8,15 @@
 }
 
 .Nav a {
-	color: #01369B;
 	margin: 0 10px;
+	font-weight: bold;
+	color: #006EED;
 }
 
-.Nav a.selected {
-	font-weight: bold;
+.Nav a:hover, .Nav a.selected{
+	color: #003698;
+}
+
+.Nav a.selected:hover{
+	color: #0052C3;
 }
