@@ -15,39 +15,3 @@
     width: 40%;
   }
 }
-
-
-.District .half{
-  width: 47%;
-  margin-right: 2%;
-  display: inline-block;
-}
-
-@media(max-width: 640px){
-  .District .half{
-    width: 100%;
-    margin: 0px;
-    display: block;
-  }
-}
-
-
-.two-thirds{
-  width: 66%;
-  display: inline-block;
-  vertical-align: top;
-}
-
-.one-third{
-  width: 33%;
-  display: inline-block;
-  vertical-align: top;
-}
-
-.District .row: {
-  width: 100%;
-}
-
-.District img{
-  width: 100%;
-}
