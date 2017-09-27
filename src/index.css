@@ -52,6 +52,17 @@ a:hover {
 }
 
 
+.main-and-aside{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: wrap;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
+
 .Main {
   width: calc(100% - 350px);
 }
@@ -64,14 +75,21 @@ aside {
 
 /* mobile */
 @media (max-width: 767px) {
+  h1, h2, h3, h4, h5, h6, p, li, svg text {
+    padding: 8px;
+  }
+
+  .main-and-aside{
+    display: block;
+  }
+
   .Main {
     width: 100%;
   }
 
   aside {
-    margin-left: auto;
-    width: auto;
-    padding: 0 24px;
+    margin: 0px;
+    width: 100%;
+    padding: 12px 0px;
   }
-
 }
