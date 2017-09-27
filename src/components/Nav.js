@@ -14,6 +14,7 @@ const Nav = () => {
 			{
 				navLinks.map((link, i) => (
 					<NavLink
+						key={i}
 						to={link.path}
 						exact={link.exact}
 						activeClassName="selected">{link.name}
