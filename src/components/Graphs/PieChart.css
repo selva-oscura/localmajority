@@ -1,10 +1,54 @@
+.PieChart{
+	display: inline-block;
+	width: 472px;
+}
+
+.PieChart .chart, .PieChart .legend{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.PieChart .chart {
+	width: 220px;
+}
+
 .PieChart svg {
-	min-width: 360px;
-	min-height: 240px;
-	padding: 36px 72px;
+	width: 200px;
+	height: 200px;
+	margin: 0px 0px 24px 12px;
 }
 
 .PieChart svg text{
 	font-weight: bold;
 	color: #01369B;
+}
+
+.PieChart .legend{
+	width: 240px;
+	margin: 12px 0px 0px 12px;
+}
+
+.PieChart .legend .label h4{
+	font-size: 19px;
+	padding: 0px 0px 0px 8px;
+	margin: 0px;
+	-webkit-margin-before: 0px;
+	-webkit-margin-after:  0px;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+}
+
+.PieChart .legend .swatch{
+	height: 18px;
+	width: 18px;
+	margin-top: 2px;
+}
+
+.PieChart .legend .label{
+	max-width: 192px;
+}
+
+.PieChart .legend .swatch, .PieChart .legend .label{
+	display: inline-block;
+	vertical-align: top;
 }

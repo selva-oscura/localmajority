@@ -27,25 +27,6 @@ class Arc extends Component {
   }
 }
 
-class LabeledArc extends Arc {
-	render() {
-		let [labelX, labelY] = this.arc.centroid(this.props.data),
-    		labelTranslate = `translate(${labelX * 2.5}, ${labelY * 2.5})`;
-    console.log(this.props.data, labelX, labelY);
-		return (
-			<g>
-				{super.render()}
-				<text 
-					transform={labelTranslate}
-					textAnchor="middle"
-				>
-					{this.props.data.data.label}
-				</text>
-			</g>
-		);
-	}
-}
-
 
 class PieChart extends Component {
 	constructor(){
@@ -57,7 +38,7 @@ class PieChart extends Component {
 	arcGenerator(d, i){
 		let { color } = d.data;
 		return (
-			<LabeledArc
+			<Arc
 				key={`arc-${i}`}
 				data={d}
 				innerRadius={this.props.innerRadius}
@@ -69,14 +50,27 @@ class PieChart extends Component {
 	render(){	
 		let pieChart = this.pie(this.props.data),
 				translate=`translate(${this.props.x}, ${this.props.y})`;
+				console.log(pieChart);
 		return (
       <div className="PieChart">
-      	<h3>{this.props.title}</h3>
-				<svg>
-	        <g transform={translate}>
-	        	{ pieChart.map((d, i) => this.arcGenerator(d, i)) }
-	        </g>
-				</svg>
+				<h3>{this.props.title}</h3>
+				<div className="chart">
+					<svg>
+						<g transform={translate}>
+							{ pieChart.map((d, i) => this.arcGenerator(d, i)) }
+						</g>
+					</svg>
+				</div>
+				<div className="legend">
+					{
+						pieChart.map((d, i) => (
+							<div className="row" key={`legend-row-${i}`}>
+								<div className="swatch" style={{backgroundColor: d.data.color}}></div>
+								<div className="label"><h4>{d.data.label}</h4></div>
+							</div>
+						))
+					}
+				</div>
       </div>
 		);
 	}
