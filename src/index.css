@@ -23,18 +23,6 @@ a:hover {
 	color: #43B3E0;
 }
 
-.social-icon {
-  margin-right: 8px;
-}
-
-.text-left {
-	text-align: left;
-}
-
-.text-right {
-	text-align: right;
-}
-
 .flex {
   display: -webkit-box;
   display: -moz-box;
@@ -44,6 +32,52 @@ a:hover {
   -webkit-flex-flow: wrap;
   flex-flow: wrap;
   justify-content: space-between;
+}
+
+.row: {
+  width: 100%;
+}
+
+img{
+  width: 100%;
+}
+
+.half{
+  width: 47%;
+  margin-right: 2%;
+  display: inline-block;
+}
+
+@media(max-width: 640px){
+  .half{
+    width: 100%;
+    margin: 0px;
+    display: block;
+  }
+}
+
+.two-thirds{
+  width: 66%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.one-third{
+  width: 33%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.social-icon {
+  margin-right: 8px;
 }
 
 @media(min-width: 768px){
@@ -73,9 +107,16 @@ aside {
   width: 300px;
 }
 
+.hide-on-small {
+  display: inherit;
+}
+.show-on-small {
+  display: none;
+}
+
 
 /* mobile */
-@media (max-width: 767px) {
+@media only screen  and (max-width: 640px){
   h1, h2, h3, h4, h5, h6, p, li, svg text {
     padding: 8px;
   }
@@ -92,5 +133,13 @@ aside {
     margin: 0px;
     width: 100%;
     padding: 12px 0px;
+  }
+
+  .hide-on-small {
+    display: none;
+  }
+
+  .show-on-small {
+    display: inherit;
   }
 }
