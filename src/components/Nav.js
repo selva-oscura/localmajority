@@ -4,23 +4,37 @@ import './Nav.css';
 
 const Nav = () => {
 	const navLinks = [
-		{path: '/', name: 'Home', exact: true},
-		{path: '/candidates', name: 'Our Candidates', exact: false},
-		{path: '/districts', name: 'Our Districts', exact: false},
-		{path: '/issues', name: 'Issues', exact: false},
+		{path: '/', name: 'Home', shortName: 'Home', exact: true},
+		{path: '/candidates', name: 'Our Candidates', shortName: 'Candidates', exact: false},
+		{path: '/districts', name: 'Our Districts', shortName: 'Districts', exact: false},
+		{path: '/issues', name: 'Issues', shortName: 'Issues', exact: false},
 	];
 	return (
 		<nav className="Nav">
-			{
-				navLinks.map((link, i) => (
-					<NavLink
-						key={i}
-						to={link.path}
-						exact={link.exact}
-						activeClassName="selected">{link.name}
-					</NavLink>
-				))
-			}
+			<div className="show-on-small">
+				{
+					navLinks.map((link, i) => (
+						<NavLink
+							key={i}
+							to={link.path}
+							exact={link.exact}
+							activeClassName="selected">{link.shortName}
+						</NavLink>
+					))
+				}
+			</div>
+			<div className="hide-on-small">
+				{
+						navLinks.map((link, i) => (
+							<NavLink
+								key={i}
+								to={link.path}
+								exact={link.exact}
+								activeClassName="selected">{link.name}
+							</NavLink>
+						))
+					}
+			</div>
 		</nav>
 	);
 };

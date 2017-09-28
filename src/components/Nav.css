@@ -8,7 +8,6 @@
 }
 
 .Nav a {
-	margin: 0 10px;
 	font-weight: bold;
 	color: #006EED;
 }
@@ -19,4 +18,21 @@
 
 .Nav a.selected:hover{
 	color: #0052C3;
+}
+
+@media(min-width: 641px){
+  .Nav a {
+    margin: 0 10px;
+  }
+}
+
+@media(max-width: 640px){
+  .Nav{
+    margin: 32px 0 8px 0;
+  }
+  .Nav a {
+    max-width: 25%;
+    /*display: ;*/
+    margin: 0 8px;
+  }
 }
