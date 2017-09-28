@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../common/Card';
+import CandidateCard from './CandidateCard';
 
 const Candidates = (props) => {
 	console.log('props for Candidates', props);
@@ -8,7 +8,7 @@ const Candidates = (props) => {
   return (
     <div className="Candidates flex">
     	{candidates.map((candidate, i) => (
-	    	<Card
+				<CandidateCard
 	    		key={i}
 	    		title={candidate.title}
 	    		subtitle={candidate.district}
