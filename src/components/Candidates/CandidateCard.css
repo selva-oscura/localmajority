@@ -1,0 +1,108 @@
+.CandidateCard {
+	width: 100%;
+	max-width: 100%;
+	margin: 2.5vw 0;
+	box-shadow: 0px 2px 8px transparent;
+	transition: box-shadow 0.5s ease-out;
+	padding: 1%;
+}
+
+.CandidateCard:hover{
+	box-shadow: 0px 2px 8px rgba(1, 54, 155, 0.5);
+}
+
+.CandidateCard h3, .CandidateCard h4, .CandidateCard p{
+	margin:2px;
+}
+
+.CandidateCard .image-holder {
+  overflow: hidden;
+  position: relative;
+}
+
+.CandidateCard .image-holder .placeholder-image, .CandidateCard .image-holder .actual-image {
+  /*width: 100%;*/
+  position: absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  transition: opacity 0.1s;
+  opacity: 1;
+}
+
+.CandidateCard .placeholder-image {
+  z-index: 1;
+}
+
+.CandidateCard .actual-image {
+  z-index: 2;
+  width: 100%;
+}
+
+
+.CandidateCard.square .image-holder {
+  height: 300px;
+}
+.CandidateCard.square .actual-image {
+  width: 100%;
+}
+
+
+.CandidateCard.landscape .image-holder, .CandidateCard.landscape .actual-image  {
+  height: 150px;
+}
+.CandidateCard.landscape .placeholder-image {
+  width: 150% !important;
+  margin-left: -25%;
+  margin-top: -70%;
+}
+
+
+@media(min-width: 640px){
+  .CandidateCard {
+    width: 48%;
+  }
+}
+
+@media(min-width: 960px){
+  .CandidateCard {
+    width: 30%;
+  }
+}
+
+@media(min-width: 1280px){
+  .CandidateCard {
+    width: 22%;
+  }
+}
+
+
+@media(max-width: 640px){
+  .CandidateCard.square{
+    min-height: 150px;
+    margin: 0;
+/*    margin: 2.5vw 0;*/
+    padding: 4px;
+    /*border-top: 2px solid rgba(1, 54, 155, 1);*/
+    border-bottom: 1px solid rgba(1, 54, 155, 1);
+  }
+
+  .CandidateCard h3, .CandidateCard h4, .CandidateCard p{
+    padding: 2px 8px 2px 8px;
+  }
+
+  .CandidateCard.square .show-on-small .brief-info{
+    display: inline-block;
+    vertical-align: top;
+    width: calc(100% - 134px);
+  }
+  .CandidateCard.square .show-on-small .image-holder{
+    display: inline-block;
+    width: 125px;
+    height: 125px;
+    margin: 8px 8px 0px 0px;
+    border-radius: 12px;
+  }
+}
+
