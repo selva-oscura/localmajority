@@ -4,8 +4,8 @@ import TwitterTimeline from '../common/TwitterTimeline';
 import { SocialIcon } from 'react-social-icons';
 
 const CandidateAside = (props) => {
+	// console.log('props', props);
 	const candidate=props.candidate;
-	console.log('props', props)
 	const twitterHandles = props.twitterHandles;
 	return (
 		<aside id="Aside">
