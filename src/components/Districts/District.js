@@ -1,5 +1,4 @@
 import React from 'react';
-import candidates from '../../data/candidates.json';
 import PieChart from '../Graphs/PieChart';
 import './District.css';
 
