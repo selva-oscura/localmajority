@@ -13,11 +13,13 @@
     "react-twitter-widgets": "^1.6.1"
   },
   "devDependencies": {
+    "prettier": "^1.7.2",
     "react-scripts": "1.0.13"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "yarn run lint && react-scripts start",
     "build": "react-scripts build",
+    "lint": "prettier --single-quote --trailing-comma es5 --write './src/*.js'",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
