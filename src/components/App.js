@@ -23,18 +23,31 @@ console.log('cmsQueries', cmsQueries);
 class App extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      articles: [],
-      candidates: [],
-      contests: [],
-      districts: [],
-      issues: [],
-      issuePrimers: [],
-      parties: [],
-      seats: [],
-      states: [],
-      talkingPoints: [],
-      errors: [],
+
+    // check if there is local storage capability and stored data from last time
+    let localMajorityData = localStorage && localStorage.localMajorityData ? localStorage.localMajorityData : null;
+    if(localMajorityData){
+      // if there is stored data from last time, use that to bootstrap state (this will be fallback data in case of no internet access)
+      this.state = JSON.parse(localMajorityData);
+    } else {
+      // default state if no localStorage or no stored data in localStorage
+      this.state = {
+        articles: [],
+        candidates: [],
+        contests: [],
+        districts: [],
+        issues: [],
+        issuePrimers: [],
+        parties: [],
+        seats: [],
+        states: [],
+        talkingPoints: [],
+        errors: [],
+      }
+      if (localStorage) {
+        // store data to localStorage if available
+        localStorage.localMajorityData = JSON.stringify(this.state);
+      }
     }
   }
 
