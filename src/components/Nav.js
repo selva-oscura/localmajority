@@ -8,6 +8,7 @@ const Nav = () => {
 		{path: '/candidates', name: 'Our Candidates', shortName: 'Candidates', exact: false},
 		{path: '/districts', name: 'Our Districts', shortName: 'Districts', exact: false},
 		{path: '/issues', name: 'Issues', shortName: 'Issues', exact: false},
+		{path: '/about-us', name: 'About Us', shortName: 'About Us', exact: true},
 	];
 	return (
 		<nav className="Nav">
