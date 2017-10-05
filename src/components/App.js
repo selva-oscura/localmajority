@@ -28,7 +28,9 @@ class App extends Component {
     let localMajorityData = localStorage && localStorage.localMajorityData ? localStorage.localMajorityData : null;
     if(localMajorityData){
       // if there is stored data from last time, use that to bootstrap state (this will be fallback data in case of no internet access)
-      this.state = JSON.parse(localMajorityData);
+      let state = JSON.parse(localMajorityData);
+      state.errors = [];
+      this.state = state;
     } else {
       // default state if no localStorage or no stored data in localStorage
       this.state = {
@@ -51,26 +53,33 @@ class App extends Component {
     }
   }
 
+  setStateAndLocalStorage(state){
+    state = Object.assign({}, state);
+    this.setState(state);
+    if (localStorage) {
+      localStorage.localMajorityData = JSON.stringify(state);
+    }
+  }
+
   fetchData(){
     queryFields.forEach((queryField) => {
       let query = cmsQueries.getAll(queryField.all);
-
+      let state = Object.assign({}, this.state);
       axios(query)
       .then(res => {
         if(res.status === 200 && res.data){
           console.log('data for', queryField.all, res.data, res.data.length)
-          let state = Object.assign({}, this.state);
           state[queryField.stateName] = res.data;
-          this.setState(state);
+          this.setStateAndLocalStorage(state);
         } else {
-          throw Error(res);
+          throw Error('error on', queryField.stateName,res);
         }
       })
       .catch(err => {
         console.log(`error acessing data for ${queryField.tableName} table`, JSON.stringify(err));
-        this.setState({errors: err});
-      })
-
+        state.errors = err;
+        this.setStateAndLocalStorage(state);
+      });
     });
   }
 
