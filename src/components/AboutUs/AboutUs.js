@@ -5,6 +5,8 @@ const AboutUs = () => {
   return (
     <article className="AboutUs">
       <iframe
+        key="vimeo-220517251"
+        title="Local Majority"
         src="https://player.vimeo.com/video/220517251"
         width="640"
         height="360"
