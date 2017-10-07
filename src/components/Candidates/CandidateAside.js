@@ -4,7 +4,7 @@ import TwitterTimeline from '../common/TwitterTimeline';
 import { SocialIcon } from 'react-social-icons';
 
 const CandidateAside = (props) => {
-	// console.log('props', props);
+	console.log('props from Aside', props);
 	const candidate=props.candidate;
 	const twitterHandles = props.twitterHandles;
 	return (
@@ -44,18 +44,7 @@ const CandidateAside = (props) => {
 				}
 
 			</div>
-			<h4>
-				{candidate.address.street}<br />
-				{candidate.address.city}, {candidate.address.state} {candidate.address.zip}
-			</h4>
-			{ 
-				candidate.phone ? (
-					<h4>{candidate.phone}</h4>
-				) : (
-					null
-				)
-			}
-		</aside>
+			</aside>
 	)
 }
 
