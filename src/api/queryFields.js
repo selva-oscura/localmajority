@@ -29,13 +29,13 @@ const queryFields = [
     tableName: 'Party',
     stateName: 'parties',
     all: 'parties',
-    one: 'party'
+    one: 'party',
   },
   {
     tableName: 'Seat',
     stateName: 'seats',
     all: 'seats',
-    one: 'seat'
+    one: 'seat',
   },
   // {tableName:"State", stateName:"states", all: "states", one: "state"},
   {
