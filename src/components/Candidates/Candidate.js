@@ -3,37 +3,38 @@ import CandidateAside from './CandidateAside';
 import './Candidate.css';
 
 const Candidate = (props) => {
-	// console.log('props from Candidate',props);
+  // return <p>candidate</p>;
+	console.log('props from Candidate',props);
 	let candidate = props.candidate;
-	candidate = Object.assign({}, candidate, {
-		address: {
-			street: "PO Box 5113",
- 			city: "Woodbridge",
-			state: "VA",
-			zip: "22194",
-		},
-		phone: "571-989-1713",
-		fax: null,
-		email: "jennifercarrollfoy@gmail.com",
-		twitter: "JCarrollFoy",
-		facebook: "JenniferCarrollFoy",
-	});
+	// candidate = Object.assign({}, candidate, {
+	// 	address: {
+	// 		street: "PO Box 5113",
+ // 			city: "Woodbridge",
+	// 		state: "VA",
+	// 		zip: "22194",
+	// 	},
+	// 	phone: "571-989-1713",
+	// 	fax: null,
+	// 	email: "jennifercarrollfoy@gmail.com",
+	// 	twitter: "JCarrollFoy",
+	// 	facebook: "JenniferCarrollFoy",
+	// });
   return (
     <div className="Candidate">
       <article>
         <div className="row">
           <div className="brief-info">
             <h2>{candidate.title}</h2>
-            <h3>{candidate.district}</h3>
-            <p className="hide-on-small">{candidate.summary}</p>
+            <h3>{candidate.district ? candidate.district : "no district data"}</h3>
+            <p className="hide-on-small">{candidate.descriptionText ? candidate.descriptionText : "no descriptionText"}</p>
           </div>
           <div className="headshot">
             <img
-              src={`../${candidate.imgSrc}`}
+              src={`../${candidate.headshotSm.url}`}
               alt={candidate.title}
             />
           </div>
-          <p className="show-on-small">{candidate.summary}</p>
+          <p className="show-on-small">{candidate.descriptionText ? candidate.descriptionText : "no descriptionText"}</p>
         </div>
         <div className="main-and-aside">
           <div className="Main">
