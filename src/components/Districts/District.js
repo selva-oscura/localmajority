@@ -3,8 +3,8 @@ import PieChart from '../Graphs/PieChart';
 import './District.css';
 
 const District = ({ districtId, district, candidate }) => {
-  return <p>districts</p>;
-  console.log('candidate is', candidate);
+  // return <p>districts</p>;
+  // console.log('candidate is', candidate);
   const demographicData = [
     {
       topic: 'Median Income',
