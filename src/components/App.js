@@ -64,11 +64,17 @@ class App extends Component {
   fetchData(){
     queryFields.forEach((queryField) => {
       let query = cmsQueries.getAll(queryField.all);
-      let state = Object.assign({}, this.state);
       axios(query)
       .then(res => {
         if(res.status === 200 && res.data){
-          console.log('data for', queryField.all, res.data, res.data.length)
+          if (queryField.all === "candidates") {
+            res.data.map((candidate) => {
+              candidate = candidate;
+              candidate.friendlyId = candidate.urlPath.slice("/candidate/".length);
+              return candidate;
+            });
+          }
+          let state = this.state;
           state[queryField.stateName] = res.data;
           this.setStateAndLocalStorage(state);
         } else {
@@ -77,6 +83,7 @@ class App extends Component {
       })
       .catch(err => {
         console.log(`error acessing data for ${queryField.tableName} table`, JSON.stringify(err));
+        let state = this.state;
         state.errors = err;
         this.setStateAndLocalStorage(state);
       });
@@ -140,7 +147,7 @@ class App extends Component {
             path="/candidates/:id"
             component={props => {
               const candidate = candidates.find(
-                candidate => props.match.params.id === candidate.id
+                candidate => props.match.params.id === candidate.friendlyId
               );
               return <CandidateHolder candidate={candidate} {...props} />;
             }}
