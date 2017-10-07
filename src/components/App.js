@@ -25,8 +25,11 @@ class App extends Component {
     super(props, context);
 
     // check if there is local storage capability and stored data from last time
-    let localMajorityData = localStorage && localStorage.localMajorityData ? localStorage.localMajorityData : null;
-    if(localMajorityData){
+    let localMajorityData =
+      localStorage && localStorage.localMajorityData
+        ? localStorage.localMajorityData
+        : null;
+    if (localMajorityData) {
       // if there is stored data from last time, use that to bootstrap state (this will be fallback data in case of no internet access)
       let state = JSON.parse(localMajorityData);
       state.errors = [];
@@ -45,7 +48,7 @@ class App extends Component {
         states: [],
         talkingPoints: [],
         errors: [],
-      }
+      };
       if (localStorage) {
         // store data to localStorage if available
         localStorage.localMajorityData = JSON.stringify(this.state);
@@ -53,7 +56,7 @@ class App extends Component {
     }
   }
 
-  setStateAndLocalStorage(state){
+  setStateAndLocalStorage(state) {
     state = Object.assign({}, state);
     this.setState(state);
     if (localStorage) {
@@ -61,53 +64,66 @@ class App extends Component {
     }
   }
 
-  fetchData(){
-    queryFields.forEach((queryField) => {
+  fetchData() {
+    queryFields.forEach(queryField => {
       let query = cmsQueries.getAll(queryField.all);
       axios(query)
-      .then(res => {
-        if(res.status === 200 && res.data){
-          if (queryField.all === "candidates") {
-            res.data.map((candidate) => {
-              candidate = candidate;
-              candidate.friendlyId = candidate.urlPath.slice("/candidate/".length);
-              return candidate;
-            });
+        .then(res => {
+          if (res.status === 200 && res.data) {
+            if (queryField.all === 'candidates') {
+              res.data.map(candidate => {
+                candidate.friendlyId = candidate.urlPath.slice(
+                  '/candidate/'.length
+                );
+                return candidate;
+              });
+            }
+            let state = this.state;
+            state[queryField.stateName] = res.data;
+            this.setStateAndLocalStorage(state);
+          } else {
+            throw Error('error on', queryField.stateName, res);
           }
+        })
+        .catch(err => {
+          console.log(
+            `error acessing data for ${queryField.tableName} table`,
+            JSON.stringify(err)
+          );
           let state = this.state;
-          state[queryField.stateName] = res.data;
+          state.errors = err;
           this.setStateAndLocalStorage(state);
-        } else {
-          throw Error('error on', queryField.stateName,res);
-        }
-      })
-      .catch(err => {
-        console.log(`error acessing data for ${queryField.tableName} table`, JSON.stringify(err));
-        let state = this.state;
-        state.errors = err;
-        this.setStateAndLocalStorage(state);
-      });
+        });
     });
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.fetchData();
   }
   render() {
-    const {articles, candidates, contests, districts, issues, issuePrimers, parties, seats, states, talkingPoints} = this.state;
+    const {
+      articles,
+      candidates,
+      contests,
+      districts,
+      issues,
+      issuePrimers,
+      parties,
+      seats,
+      states,
+      talkingPoints,
+    } = this.state;
     // console.log('candidates before declaration', candidates)
     // const { articles, candidates, contests, districts, issues, issuePrimers, parties, seats, states, talkingPoints } = this.state.fixtures;
     // console.log('candidates after declaration', candidates)
     return (
-      <div className="App"
-      >
-        <Header 
-          props={this.props.children}
-        />
+      <div className="App">
+        <Header props={this.props.children} />
 
         <Switch>
           <Route
-            exact path="/"
+            exact
+            path="/"
             component={props => {
               return (
                 <Home
@@ -115,7 +131,7 @@ class App extends Component {
                   articles={articles}
                   talkingPoints={talkingPoints}
                 />
-              )
+              );
             }}
           />
           <Route
@@ -123,7 +139,8 @@ class App extends Component {
             component={props => {
               const district = districts.find(
                 district =>
-                  props.match.params.id === district.id.slice('district-'.length)
+                  props.match.params.id ===
+                  district.id.slice('district-'.length)
               );
               const candidate = candidates.find(
                 candidate =>
@@ -154,12 +171,19 @@ class App extends Component {
           />
           <Route
             path="/candidates"
-            component={props => <Candidates {...props} candidates={candidates} />}
+            component={props => (
+              <Candidates {...props} candidates={candidates} />
+            )}
           />
           <Route
             path="/issues/:id"
             component={props => {
-              console.log('logging from routing for /issues/:id -- issues are', issues, 'param is', props.match.params.id);
+              console.log(
+                'logging from routing for /issues/:id -- issues are',
+                issues,
+                'param is',
+                props.match.params.id
+              );
               const issue = issues.find(
                 issue => props.match.params.id === issue.id
               );
@@ -173,8 +197,10 @@ class App extends Component {
           <Route
             path="/articles/:id"
             component={props => {
-              const article = articles.find(article => props.match.params.id === article.path)
-              return (<ArticleHolder article={article} {...props} />)
+              const article = articles.find(
+                article => props.match.params.id === article.path
+              );
+              return <ArticleHolder article={article} {...props} />;
             }}
           />
           <Route path="/about-us" component={AboutUs} />
