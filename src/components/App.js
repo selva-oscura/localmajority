@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import Header from './Header';
 import Home from './Home/Home';
 import CandidateHolder from './Candidates/CandidateHolder';
@@ -12,13 +13,12 @@ import ArticleHolder from './Articles/ArticleHolder';
 import AboutUs from './AboutUs/AboutUs';
 import Elements from './common/Elements';
 import FourZeroFour from './FourZeroFour';
-
 import axios from 'axios';
 import cmsQueries from '../api/cmsQueries';
 import queryFields from '../api/queryFields';
 import './App.css';
 
-console.log('cmsQueries', cmsQueries);
+injectTapEventPlugin();
 
 class App extends Component {
   constructor(props, context) {
@@ -26,9 +26,9 @@ class App extends Component {
 
     // check if there is local storage capability and stored data from last time
     let localMajorityData =
-      localStorage && localStorage.localMajorityData
-        ? localStorage.localMajorityData
-        : null;
+   localStorage && localStorage.localMajorityData
+     ? localStorage.localMajorityData
+     : null;
     if (localMajorityData) {
       // if there is stored data from last time, use that to bootstrap state (this will be fallback data in case of no internet access)
       let state = JSON.parse(localMajorityData);
@@ -140,12 +140,12 @@ class App extends Component {
               const district = districts.find(
                 district =>
                   props.match.params.id ===
-                  district.id.slice('district-'.length)
+         district.id.slice('district-'.length)
               );
               const candidate = candidates.find(
                 candidate =>
                   candidate.district.slice('District '.length) ===
-                  props.match.params.id
+         props.match.params.id
               );
               return (
                 <DistrictHolder
