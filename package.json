@@ -5,15 +5,18 @@
   "dependencies": {
     "axios": "^0.16.2",
     "d3": "^4.11.0",
-    "material-ui": "^1.0.0-beta.13",
+    "material-ui": "^0.19.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-social-icons": "^2.7.0",
+    "react-tap-event-plugin": "^3.0.2",
     "react-twitter-widgets": "^1.7.1"
   },
   "devDependencies": {
+    "eslint": "^4.8.0",
+    "eslint-plugin-react": "^7.4.0",
     "prettier": "^1.7.4",
     "react-scripts": "^1.0.14"
   },
