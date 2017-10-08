@@ -1,4 +1,4 @@
-.CandidateCard {
+/*.CandidateCard {
 	width: 100%;
 	max-width: 100%;
 	margin: 2.5vw 0;
@@ -21,7 +21,6 @@
 }
 
 .CandidateCard .image-holder .placeholder-image, .CandidateCard .image-holder .actual-image {
-  /*width: 100%;*/
   position: absolute;
   top:0;
   right:0;
@@ -82,9 +81,7 @@
   .CandidateCard.square{
     min-height: 150px;
     margin: 0;
-/*    margin: 2.5vw 0;*/
     padding: 4px;
-    /*border-top: 2px solid rgba(1, 54, 155, 1);*/
     border-bottom: 1px solid rgba(1, 54, 155, 1);
   }
 
@@ -106,3 +103,4 @@
   }
 }
 
+*/
