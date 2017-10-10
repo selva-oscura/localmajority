@@ -10,10 +10,8 @@ const AboutUs = () => {
         src="https://player.vimeo.com/video/220517251"
         width="640"
         height="360"
-        frameborder="0"
-        webkitallowfullscreen=""
-        mozallowfullscreen=""
-        allowfullscreen=""
+        frameBorder="0"
+        allowFullScreen=""
       />
       <h2>LOCAL MAJORITY IS A NEW POLITICAL ACTION COMMITTEE</h2>
       <h3>
