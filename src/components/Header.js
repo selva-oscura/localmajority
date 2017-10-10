@@ -7,6 +7,14 @@ import NavBar from './NavBar';
 // import './Header.css';
 
 class Header extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {open: false};
+    this.handleHamburgerClick = this.handleHamburgerClick.bind(this);
+  }
+  handleHamburgerClick(){
+    console.log('clicked!');
+  }
   render(){
 	  const navLinks = [
 	    { path: '/', name: 'Home', shortName: 'Home', exact: true },
@@ -28,6 +36,15 @@ class Header extends Component{
 	  return (
 	    <header className="Header">
 	      <div className="hidden-md-up">
+	        <AppBar
+	          position="static"
+	          color="primary"
+	          title={<span>Local Majority</span>}
+	          onLeftIconButtonTouchTap={this.handleHamburgerClick}
+	        >
+	        </AppBar>
+	        <Drawer>
+	        </Drawer>
 	      </div>
 	      <div className="hidden-sm-down">
 		      <NavBar 
