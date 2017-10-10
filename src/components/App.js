@@ -26,9 +26,9 @@ class App extends Component {
 
     // check if there is local storage capability and stored data from last time
     let localMajorityData =
-   localStorage && localStorage.localMajorityData
-     ? localStorage.localMajorityData
-     : null;
+      localStorage && localStorage.localMajorityData
+        ? localStorage.localMajorityData
+        : null;
     if (localMajorityData) {
       // if there is stored data from last time, use that to bootstrap state (this will be fallback data in case of no internet access)
       let state = JSON.parse(localMajorityData);
@@ -140,12 +140,12 @@ class App extends Component {
               const district = districts.find(
                 district =>
                   props.match.params.id ===
-         district.id.slice('district-'.length)
+                  district.id.slice('district-'.length)
               );
               const candidate = candidates.find(
                 candidate =>
                   candidate.district.slice('District '.length) ===
-         props.match.params.id
+                  props.match.params.id
               );
               return (
                 <DistrictHolder
