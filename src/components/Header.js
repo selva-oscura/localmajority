@@ -44,6 +44,17 @@ class Header extends Component{
 	        >
 	        </AppBar>
 	        <Drawer>
+            {navLinks.map((link, i) => (
+            	<h3 key={i}>
+							  <NavLink
+							    to={link.path}
+							    exact={link.exact}
+							    activeClassName="selected"
+							  >
+							    {link.name}
+							  </NavLink>
+						  </h3>
+            ))}
 	        </Drawer>
 	      </div>
 	      <div className="hidden-sm-down">
