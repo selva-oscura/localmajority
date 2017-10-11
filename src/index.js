@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import './bootstrap-reboot.css';
-import './bootstrap-grid.css';
+import './styles/bootstrap-reboot.css';
+import './styles/bootstrap-grid.css';
+import './styles/font-awesome.css';
 import './index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import localMajorityTheme from './configs/localMajorityTheme';
+import localMajorityTheme from './styles/localMajorityTheme';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 
