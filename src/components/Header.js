@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import { AppBar, Drawer, IconButton } from 'material-ui';
+import { AppBar, IconButton, FontIcon } from 'material-ui';
+import NavDrawer from './NavDrawer';
 import NavBar from './NavBar';
 // import './Header.css';
 
@@ -41,28 +41,22 @@ class Header extends Component {
             position="static"
             color="primary"
             title={<span>Local Majority</span>}
-            menuElementLeft={<IconButton label={'Open Navigation Menu'} />}
+            iconElementLeft={
+              <IconButton>
+                <FontIcon
+                  className="fa fa-bars"
+                  aria-label="Open navigation Menu"
+                />
+              </IconButton>
+            }
             onLeftIconButtonTouchTap={this.handleHamburgerClick}
           />
-          <Drawer
-            docked={false}
-            width={200}
+          <NavDrawer
+            navLinks={navLinks}
+            handleDrawerClose={this.handleDrawerClose}
             open={this.state.open}
-            onRequestChange={open => this.setState({ open })}
-          >
-            {navLinks.map((link, i) => (
-              <h3 key={i}>
-                <NavLink
-                  to={link.path}
-                  exact={link.exact}
-                  activeClassName="selected"
-                  onClick={this.handleDrawerClose}
-                >
-                  {link.name}
-                </NavLink>
-              </h3>
-            ))}
-          </Drawer>
+            changeDrawerState={open => this.setState({ open })}
+          />
         </div>
         <div className="hidden-sm-down">
           <NavBar navLinks={navLinks} />
