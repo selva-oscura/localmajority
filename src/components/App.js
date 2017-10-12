@@ -119,94 +119,97 @@ class App extends Component {
     return (
       <div className="App">
         <Header props={this.props.children} />
-
-        <Switch>
-          <Route
-            exact
-            path="/"
-            component={props => {
-              return (
-                <Home
-                  candidates={candidates}
-                  articles={articles}
-                  talkingPoints={talkingPoints}
-                />
-              );
-            }}
-          />
-          <Route
-            path="/districts/:id"
-            component={props => {
-              const district = districts.find(
-                district =>
-                  props.match.params.id ===
-                  district.id.slice('district-'.length)
-              );
-              const candidate = candidates.find(
-                candidate =>
-                  candidate.district.slice('District '.length) ===
+        <div className="container">
+          <Switch>
+            <Route
+              exact
+              path="/"
+              component={props => {
+                return (
+                  <Home
+                    candidates={candidates}
+                    articles={articles}
+                    talkingPoints={talkingPoints}
+                  />
+                );
+              }}
+            />
+            <Route
+              path="/districts/:id"
+              component={props => {
+                const district = districts.find(
+                  district =>
+                    props.match.params.id ===
+                    district.id.slice('district-'.length)
+                );
+                const candidate = candidates.find(
+                  candidate =>
+                    candidate.district.slice('District '.length) ===
+                    props.match.params.id
+                );
+                return (
+                  <DistrictHolder
+                    {...props}
+                    district={district}
+                    candidate={candidate}
+                  />
+                );
+              }}
+            />
+            <Route
+              path="/districts"
+              component={props => (
+                <Districts {...props} districts={districts} />
+              )}
+            />
+            <Route
+              path="/candidates/:id"
+              component={props => {
+                const candidate = candidates.find(
+                  candidate => props.match.params.id === candidate.friendlyId
+                );
+                return <CandidateHolder candidate={candidate} {...props} />;
+              }}
+            />
+            <Route
+              path="/candidates"
+              component={props => (
+                <Candidates {...props} candidates={candidates} />
+              )}
+            />
+            <Route
+              path="/issues/:id"
+              component={props => {
+                console.log(
+                  'logging from routing for /issues/:id -- issues are',
+                  issues,
+                  'param is',
                   props.match.params.id
-              );
-              return (
-                <DistrictHolder
-                  {...props}
-                  district={district}
-                  candidate={candidate}
-                />
-              );
-            }}
-          />
-          <Route
-            path="/districts"
-            component={props => <Districts {...props} districts={districts} />}
-          />
-          <Route
-            path="/candidates/:id"
-            component={props => {
-              const candidate = candidates.find(
-                candidate => props.match.params.id === candidate.friendlyId
-              );
-              return <CandidateHolder candidate={candidate} {...props} />;
-            }}
-          />
-          <Route
-            path="/candidates"
-            component={props => (
-              <Candidates {...props} candidates={candidates} />
-            )}
-          />
-          <Route
-            path="/issues/:id"
-            component={props => {
-              console.log(
-                'logging from routing for /issues/:id -- issues are',
-                issues,
-                'param is',
-                props.match.params.id
-              );
-              const issue = issues.find(
-                issue => props.match.params.id === issue.id
-              );
-              return <Issue {...props} issue={issue} />;
-            }}
-          />
-          <Route
-            path="/issues"
-            component={props => <Issues {...props} issues={issues} />}
-          />
-          <Route
-            path="/articles/:id"
-            component={props => {
-              const article = articles.find(
-                article => props.match.params.id === article.path
-              );
-              return <ArticleHolder article={article} {...props} />;
-            }}
-          />
-          <Route path="/about-us" component={AboutUs} />
-          <Route path="/elements" component={Elements} />
-          <Route component={FourZeroFour} />
-        </Switch>
+                );
+                const issue = issues.find(
+                  issue => props.match.params.id === issue.id
+                );
+                return <Issue {...props} issue={issue} />;
+              }}
+            />
+            <Route
+              path="/issues"
+              component={props => <Issues {...props} issues={issues} />}
+            />
+            <Route
+              path="/articles/:id"
+              component={props => {
+                const article = articles.find(
+                  article => props.match.params.id === article.path
+                );
+                return <ArticleHolder article={article} {...props} />;
+              }}
+            />
+            <Route path="/about-us" component={AboutUs} />
+            <Route path="/elements" component={Elements} />
+            <Route component={FourZeroFour} />
+          </Switch>
+        </div>
       </div>
     );
   }
