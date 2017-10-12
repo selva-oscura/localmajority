@@ -1,0 +1,32 @@
+.NavDrawer a, .NavDrawer a:hover {
+  text-decoration: none;
+}
+
+.NavDrawer a div span div div {
+  color: rgb(26, 35, 126);
+  font-weight: bolder;
+}
+
+.NavDrawer a div{
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+}
+
+.NavDrawer a:hover div span div div {
+  color: rgb(0, 173, 239);
+}
+
+.NavDrawer a div{
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+}
+
+.NavDrawer a.selected div span div div {
+  color: rgb(0, 173, 239);
+}
+
+.NavDrawer a.selected div {
+  border-left: 2px solid rgb(0, 173, 239);
+  border-right: 2px solid rgb(0, 173, 239);
+}
+
