@@ -12,11 +12,12 @@ const Districts = props => {
       {districts.map((district, i) => (
         <Card
           key={i}
-          title={district.title}
-          text={district.summary}
-          imgSrc={district.imgSrc}
+          id={district.id}
+          cardTitle={district.title}
+          cardText="need to add once we have data"
+          imgSrc="need to add once we have data"
           category="districts"
-          id={district.title.slice('District '.length)}
+          friendlyId="need to add once we have data"
           imgShape="landscape"
         />
       ))}
