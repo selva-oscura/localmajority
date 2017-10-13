@@ -7,7 +7,7 @@ const NoSuchArticle = ({ candidateId }) => {
       <h2>
         We're sorry. There has been an error and we could not retrieve this
         article. Would like to read another article?
-        <Link to="/issue">Return to Issues</Link>
+        <Link to="/issues">Return to Issues</Link>
       </h2>
     </div>
   );
