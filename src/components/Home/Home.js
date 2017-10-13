@@ -3,7 +3,6 @@ import './Home.css';
 import Aside from '../common/Aside';
 import VADistrictMap from '../Maps/VADistrictMap';
 import Card from '../common/Card';
-import CandidateCard from '../Candidates/CandidateCard';
 
 const Home = props => {
   document.title = 'Local Majority';
@@ -33,11 +32,13 @@ const Home = props => {
               articles.map((article, i) => (
                 <Card
                   key={`article-${i}`}
-                  title={article.title}
-                  text={article.description}
-                  imgSrc="ImageSourceNeeded"
-                  category="articles"
                   id={article.path}
+                  cardTitle={article.title}
+                  cardSubtitle="need author for articles"
+                  cardText={article.description}
+                  imgSrc="ImageSourceNeeded"
+                  category="article"
+                  friendlyId={article.friendlyId}
                   imgShape="landscape"
                 />
               ))
@@ -47,7 +48,27 @@ const Home = props => {
           </div>
           <h3>Featured Candidates</h3>
           <div className="flex">
-            {candidates.length ? <h2>Candidates Here</h2> : <h2>Loading</h2>}
+            {candidates.length ? (
+              candidates.map((candidate, i) => {
+                let headshot = candidate.headshotSm && candidate.headshotSm.url
+                  ? candidate.headshotSm.url
+                  : 'missing image';
+                return (
+                  <Card
+                    key={i}
+                    id={candidate.id}
+                    cardTitle={candidate.title}
+                    cardText="need to add once we have data"
+                    imgSrc={headshot}
+                    category="candidates"
+                    friendlyId={candidate.friendlyId}
+                    imgShape="square"
+                  />
+                );
+              })
+            ) : (
+              <h2>Loading</h2>
+            )}
           </div>
         </article>
         <Aside twitterHandles={['local_majority']} />
@@ -57,19 +78,3 @@ const Home = props => {
 };
 
 export default Home;
-// candidates.map((candidate, i) => {
-//   let headshot = candidate.headshotSm && candidate.headshotSm.data ? candidate.headshotSm.data : "incomplete data";
-//   return (
-//     <CandidateCard
-//       key={`candidate-${i}`}
-//       title={candidate.title}
-//       subtitle="District data"
-//       text="missing text"
-//       imgSrc={candidate.headshotSm.url}
-//       category="candidates"
-//       uid={candidate.uid}
-//       friendlyId="need"
-//       imgShape="square"
-//     />
-//   )
-// })
