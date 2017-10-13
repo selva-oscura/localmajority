@@ -77,6 +77,13 @@ class App extends Component {
                 );
                 return candidate;
               });
+            } else if (queryField.all === 'articles') {
+              res.data.map(article => {
+                article.friendlyId = article.urlPath.slice(
+                  '/article/'.length
+                );
+                return article;
+              });
             }
             let state = this.state;
             state[queryField.stateName] = res.data;
@@ -197,10 +204,10 @@ class App extends Component {
               component={props => <Issues {...props} issues={issues} />}
             />
             <Route
-              path="/articles/:id"
+              path="/article/:id"
               component={props => {
                 const article = articles.find(
-                  article => props.match.params.id === article.path
+                  article => props.match.params.id === article.friendlyId
                 );
                 return <ArticleHolder article={article} {...props} />;
               }}
