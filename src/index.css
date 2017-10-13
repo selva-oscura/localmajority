@@ -54,6 +54,16 @@
   display: none !important;
 }
 
+.flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: wrap;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
 
 /*body {
   box-sizing: border-box;
