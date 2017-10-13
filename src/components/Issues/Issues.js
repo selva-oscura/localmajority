@@ -11,12 +11,13 @@ const Issues = props => {
       {issues.map((issue, i) => (
         <Card
           key={i}
-          title={issue.title}
-          subtitle={`by ${issue.author}`}
-          text={issue.summary}
-          imgSrc={issue.imgSrc}
-          category="issues"
           id={issue.id}
+          cardTitle={issue.title}
+          cardSubtitle={`by ${issue.author}`}
+          cardText={issue.summary}
+          imgSrc="needs to be added"
+          category="issues"
+          friendlyId="needs to be added"
           imgShape="landscape"
         />
       ))}
