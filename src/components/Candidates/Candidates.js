@@ -1,5 +1,5 @@
 import React from 'react';
-import CandidateCard from './CandidateCard';
+import Card from '../common/Card';
 
 const Candidates = props => {
   console.log('props for Candidates', props);
@@ -14,11 +14,14 @@ const Candidates = props => {
               ? candidate.headshotSm.url
               : 'missing image';
           return (
-            <CandidateCard
+            <Card
               key={i}
-              title={candidate.title}
-              imgSrc={headshot}
+              id={candidate.id}
+              cardTitle={candidate.title}
+              cardSubtitle="need district data!"
+              cardText="need short text?"
               category="candidates"
+              imgSrc={headshot}
               friendlyId={candidate.friendlyId}
               imgShape="square"
             />
