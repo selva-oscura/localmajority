@@ -49,23 +49,18 @@ const Home = props => {
           <h3>Featured Candidates</h3>
           <div className="flex">
             {candidates.length ? (
-              candidates.map((candidate, i) => {
-                let headshot = candidate.headshotSm && candidate.headshotSm.url
-                  ? candidate.headshotSm.url
-                  : 'missing image';
-                return (
-                  <Card
-                    key={i}
-                    id={candidate.id}
-                    cardTitle={candidate.title}
-                    cardText="need to add once we have data"
-                    imgSrc={headshot}
-                    category="candidates"
-                    friendlyId={candidate.friendlyId}
-                    imgShape="square"
-                  />
-                );
-              })
+              candidates.map((candidate, i) => (
+                <Card
+                  key={i}
+                  id={candidate.id}
+                  cardTitle={candidate.title}
+                  cardText="need to add once we have data"
+                  imgSrc={candidate.headshotSm}
+                  category="candidates"
+                  friendlyId={candidate.friendlyId}
+                  imgShape="square"
+                />
+              ))
             ) : (
               <h2>Loading</h2>
             )}
