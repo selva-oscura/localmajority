@@ -44,9 +44,7 @@ Card.propTypes = {
   cardSubtitle: PropTypes.string,
   cardText: PropTypes.string.isRequired,
   imgSrc: PropTypes.string.isRequired,
+  friendlyId: PropTypes.string.isRequired,
 };
 
 export default Card;
-
-// imgShape: PropTypes.string.isRequired,
-// cardTitle, subtitle, imgSrc, cardText
