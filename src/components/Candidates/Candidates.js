@@ -9,19 +9,15 @@ const Candidates = props => {
     <div className="Candidates flex">
       {candidates.length ? (
         candidates.map((candidate, i) => {
-          let headshot =
-            candidate.headshotSm && candidate.headshotSm.url
-              ? candidate.headshotSm.url
-              : 'missing image';
           return (
             <Card
               key={i}
               id={candidate.id}
               cardTitle={candidate.title}
-              cardSubtitle="need district data!"
+              cardSubtitle={candidate.district}
               cardText="need short text?"
               category="candidates"
-              imgSrc={headshot}
+              imgSrc={candidate.headshotSm}
               friendlyId={candidate.friendlyId}
               imgShape="square"
             />
