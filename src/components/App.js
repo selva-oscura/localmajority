@@ -41,6 +41,7 @@ class App extends Component {
         candidates: [],
         contests: [],
         districts: [],
+        districtPrimers: [],
         issues: [],
         issuePrimers: [],
         parties: [],
@@ -79,9 +80,7 @@ class App extends Component {
               });
             } else if (queryField.all === 'articles') {
               res.data.map(article => {
-                article.friendlyId = article.urlPath.slice(
-                  '/article/'.length
-                );
+                article.friendlyId = article.urlPath.slice('/article/'.length);
                 return article;
               });
             }
