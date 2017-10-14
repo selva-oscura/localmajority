@@ -18,9 +18,15 @@ const queryFields = [
     one: 'contest',
   },
   // {tableName:"District", stateName:"districts", all:"districts", one: "district"},
+  {
+    tableName:'DistrictPrimer',
+    stateName:'districtPrimers',
+    all:'district-primers',
+    one: 'district-primer'
+  },
   // {tableName:"Issue", stateName:"issues", all:"issues", one: "issue"},
   {
-    tableName: 'IssuePrimers',
+    tableName: 'IssuePrimer',
     stateName: 'issuePrimers',
     all: 'issue-primers',
     one: 'issue-primer',
