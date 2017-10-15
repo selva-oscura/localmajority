@@ -112,6 +112,7 @@ class App extends Component {
       candidates,
       contests,
       districts,
+      districtPrimers,
       issues,
       issuePrimers,
       parties,
