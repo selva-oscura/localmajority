@@ -37,11 +37,10 @@ class Article extends Component {
         <h2>{article.title}</h2>
         {article.author ? (
           <h3>by {article.author}</h3>
-        ): (
+        ) : (
           <h3>MISSING AUTHOR INFORMATION</h3>
-        )
-        }
-        <h4>Last Updated: {article.created.slice(0,10)}</h4>
+        )}
+        <h4>Last Updated: {article.created.slice(0, 10)}</h4>
         <p>{article.description}</p>
         <div id="article-body" />
       </article>

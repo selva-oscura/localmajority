@@ -5,14 +5,15 @@ import PropTypes from 'prop-types';
 import './Card.css';
 
 class Card extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
-    this.state = { depth: 2 }
+    this.state = { depth: 2 };
   }
   onMouseOver = () => this.setState({ depth: 3 });
   onMouseOut = () => this.setState({ depth: 2 });
-  render(){
-    let { id,
+  render() {
+    let {
+      id,
       cardTitle,
       cardSubtitle,
       cardText,
@@ -46,6 +47,6 @@ class Card extends Component {
       </div>
     );
   }
-};
+}
 
 export default Card;

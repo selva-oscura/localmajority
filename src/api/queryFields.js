@@ -19,10 +19,10 @@ const queryFields = [
   },
   // {tableName:"District", stateName:"districts", all:"districts", one: "district"},
   {
-    tableName:'DistrictPrimer',
-    stateName:'districtPrimers',
-    all:'district-primers',
-    one: 'district-primer'
+    tableName: 'DistrictPrimer',
+    stateName: 'districtPrimers',
+    all: 'district-primers',
+    one: 'district-primer',
   },
   // {tableName:"Issue", stateName:"issues", all:"issues", one: "issue"},
   {

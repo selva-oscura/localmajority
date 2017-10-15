@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class TalkingPoint extends Component {
-  componentDidMount(){
+  componentDidMount() {
     let { body } = this.props.talkingPoint;
     let tpBodySpace = document.getElementsByClassName('tpBody')[0];
     if (body) {
@@ -10,12 +10,12 @@ class TalkingPoint extends Component {
       tpBodySpace.appendChild(d);
     }
   }
-  render(){
+  render() {
     let { title } = this.props.talkingPoint;
     return (
       <div className="TalkingPoint">
         <h2>{title}</h2>
-        <div className="tpBody"></div>
+        <div className="tpBody" />
       </div>
     );
   }

@@ -13,19 +13,27 @@ const CandidateAside = props => {
       <TwitterTimeline twitterHandle={[candidate.twitter]} />
       <h3>Contact the Candidate</h3>
       <div className="row">
-        { candidate.twitter && <SocialIcon url={`https://twitter.com/${candidate.twitter}`} /> }
-        { candidate.facebook && <SocialIcon url={`https://www.facebook.com/${candidate.facebook}`} /> }
-        { candidate.campaignEmail && <SocialIcon url={`mailto:${candidate.campaignEmail}`} network="email" /> }
+        {candidate.twitter && (
+          <SocialIcon url={`https://twitter.com/${candidate.twitter}`} />
+        )}
+        {candidate.facebook && (
+          <SocialIcon url={`https://www.facebook.com/${candidate.facebook}`} />
+        )}
+        {candidate.campaignEmail && (
+          <SocialIcon
+            url={`mailto:${candidate.campaignEmail}`}
+            network="email"
+          />
+        )}
       </div>
       <div className="row">
-        { candidate.donateUrl &&
+        {candidate.donateUrl && (
           <RaisedButton
             secondary={true}
             label="Donate"
             href={candidate.donateUrl}
-          >
-          </RaisedButton>
-        }
+          />
+        )}
       </div>
     </aside>
   );
