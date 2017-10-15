@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TalkingPoint from '../common/TalkingPoint';
 import CandidateAside from './CandidateAside';
 import './Candidate.css';
 
@@ -14,8 +15,8 @@ class Candidate extends Component {
     }
   }
   render(){
-    console.log('props from Candidate', this.props);
     let { candidate }= this.props;
+    let { talkingPoint } = candidate;
     return (
       <div className="Candidate">
         <article>
@@ -40,6 +41,7 @@ class Candidate extends Component {
                 : 'no descriptionText'}
             </p>
             <div id="bioText"></div>
+            { talkingPoint && <TalkingPoint talkingPoint={talkingPoint} /> }
           </div>
           <div className="main-and-aside">
             <div className="Main">
