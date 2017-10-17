@@ -105,9 +105,6 @@ class App extends Component {
       states,
       talkingPoints,
     } = this.state;
-    // console.log('candidates before declaration', candidates)
-    // const { articles, candidates, contests, districts, issues, issuePrimers, parties, seats, states, talkingPoints } = this.state.fixtures;
-    // console.log('candidates after declaration', candidates)
     return (
       <div className="App">
         <Header props={this.props.children} />
