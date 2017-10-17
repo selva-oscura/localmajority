@@ -9,17 +9,7 @@ const Issues = props => {
   return (
     <div className="Issues flex">
       {issues.map((issue, i) => (
-        <Card
-          key={i}
-          id={issue.id}
-          cardTitle={issue.title}
-          cardSubtitle={`by ${issue.author}`}
-          cardText={issue.summary}
-          imgSrc="needs to be added"
-          category="issues"
-          friendlyId="needs to be added"
-          imgShape="landscape"
-        />
+        <h3 key={i}>{issue.title}</h3>
       ))}
     </div>
   );
