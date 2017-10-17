@@ -71,23 +71,11 @@ class App extends Component {
       axios(query)
         .then(res => {
           if (res.status === 200 && res.data) {
-            if (queryField.all === 'candidates') {
-              res.data.map(candidate => {
-                candidate.friendlyId = candidate.urlPath.slice(
-                  '/candidate/'.length
-                );
-                return candidate;
-              });
-            } else if (queryField.all === 'articles') {
-              res.data.map(article => {
-                article.friendlyId = article.urlPath.slice('/article/'.length);
-                return article;
-              });
-            }
             let state = this.state;
             state[queryField.stateName] = res.data;
             this.setStateAndLocalStorage(state);
           } else {
+            console.log('error fetching', query, res);
             throw Error('error on', queryField.stateName, res);
           }
         })
@@ -96,9 +84,6 @@ class App extends Component {
             `error acessing data for ${queryField.tableName} table`,
             JSON.stringify(err)
           );
-          let state = this.state;
-          state.errors = err;
-          this.setStateAndLocalStorage(state);
         });
     });
   }
