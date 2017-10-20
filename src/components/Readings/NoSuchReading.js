@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NoSuchArticle = ({ candidateId }) => {
+const NoSuchReading = ({ readingId }) => {
   return (
-    <div className="NoSuchArticle">
+    <div className="NoSuchReading">
       <h2>
         We're sorry. There has been an error and we could not retrieve this
         article. Would like to read another article?
@@ -13,4 +13,4 @@ const NoSuchArticle = ({ candidateId }) => {
   );
 };
 
-export default NoSuchArticle;
+export default NoSuchReading;

@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 
 class Article extends Component {
   componentDidMount() {
-    let { article } = this.props;
-    let articleSpace = document.getElementById('article-body');
-    if (article.bodyText) {
+    let { reading } = this.props;
+    let readingSpace = document.getElementById('reading-body');
+    if (reading.bodyText) {
       let d = document.createElement('div');
-      d.id = 'article-{$i}';
-      d.innerHTML = article.bodyText;
-      articleSpace.appendChild(d);
+      d.id = 'reading';
+      d.innerHTML = reading.bodyText;
+      readingSpace.appendChild(d);
     }
 
     // this.fetchData();
@@ -31,18 +31,19 @@ class Article extends Component {
     // }
   }
   render() {
-    let { article } = this.props;
+    console.log('reading props from Article', this.props.reading);
+    let { title, author, description, created } = this.props.reading;
     return (
       <article className="Article">
-        <h2>{article.title}</h2>
-        {article.author ? (
-          <h3>by {article.author}</h3>
+        <h2>{title}</h2>
+        {author ? (
+          <h3>by {author}</h3>
         ) : (
           <h3>MISSING AUTHOR INFORMATION</h3>
         )}
-        <h4>Last Updated: {article.created.slice(0, 10)}</h4>
-        <p>{article.description}</p>
-        <div id="article-body" />
+        <h4>Last Updated: {created.slice(0, 10)}</h4>
+        <p>{description}</p>
+        <div id="reading-body" />
       </article>
     );
   }
