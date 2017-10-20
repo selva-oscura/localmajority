@@ -25,10 +25,10 @@ const queryFields = [
     one: 'district-primer',
   },
   {
-    tableName:"Issue",
-    stateName:"issues",
-    all:"issues",
-    one: "issue"
+    tableName: 'Issue',
+    stateName: 'issues',
+    all: 'issues',
+    one: 'issue',
   },
   {
     tableName: 'IssuePrimer',
@@ -49,10 +49,10 @@ const queryFields = [
     one: 'seat',
   },
   {
-    tableName:"State",
-    stateName:"states",
-    all: "states",
-    one: "state"
+    tableName: 'State',
+    stateName: 'states',
+    all: 'states',
+    one: 'state',
   },
   {
     tableName: 'TalkingPoints',
