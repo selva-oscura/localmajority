@@ -9,7 +9,7 @@ import DistrictHolder from './Districts/DistrictHolder';
 import Districts from './Districts/Districts';
 import Issue from './Issues/Issue';
 import Issues from './Issues/Issues';
-import ArticleHolder from './Articles/ArticleHolder';
+import ReadingHolder from './Readings/ReadingHolder';
 import AboutUs from './AboutUs/AboutUs';
 import Elements from './common/Elements';
 import FourZeroFour from './FourZeroFour';
@@ -188,10 +188,10 @@ class App extends Component {
             <Route
               path="/article/:id"
               component={props => {
-                const article = articles.find(
-                  article => props.match.params.id === article.friendlyId
+                const reading = articles.find(
+                  reading => props.match.params.id === reading.friendlyId
                 );
-                return <ArticleHolder article={article} {...props} />;
+                return <ReadingHolder reading={reading} {...props} />;
               }}
             />
             <Route path="/about-us" component={AboutUs} />
