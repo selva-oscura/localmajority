@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import './ReadingLink.css';
 
 const ReadingLink = ({ friendlyId, title, type }) => {
   const readingTypesText = {
