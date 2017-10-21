@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ReadingLink from '../common/ReadingLink';
+import './IssueTeaser.css';
 
 const IssueTeaser = ({ id, issueTitle, friendlyId, imgSrc, issueArticles }) => (
   <div className="IssueTeaser flex">

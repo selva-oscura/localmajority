@@ -1,0 +1,8 @@
+.IssueTeaser {
+	height: 200px;
+	overflow: hidden;
+}
+
+.IssueTeaser img{
+	width: 200px;
+}
