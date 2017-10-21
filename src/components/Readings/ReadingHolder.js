@@ -6,7 +6,7 @@ import NoSuchReading from './NoSuchReading';
 
 const ReadingHolder = props => {
   const { reading } = props;
-  console.log('props for ReadingHolder', reading, reading.type==="Article");
+  console.log('props for ReadingHolder', reading, reading.type === 'Article');
   if (reading && reading.title) {
     document.title = `Local Majority | ${reading.title}`;
   } else {
@@ -21,7 +21,7 @@ const ReadingHolder = props => {
         reading.type === 'DistrictPrimer' && (
           <DistrictPrimer reading={reading} />
         )}
-      { !reading && <NoSuchReading readingId={props.match.params.id} /> }
+      {!reading && <NoSuchReading readingId={props.match.params.id} />}
     </div>
   );
 };
