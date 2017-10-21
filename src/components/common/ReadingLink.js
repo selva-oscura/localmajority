@@ -7,6 +7,7 @@ const ReadingLink = ({ friendlyId, title, type }) => {
   const readingTypesText = {
     TalkingPoints: 'Talking Points',
     Articles: 'Article',
+    IssuePrimers: 'Issue Primer',
     DistrictPrimers: 'District Primer',
   };
   const readingTypesRoute = {};
