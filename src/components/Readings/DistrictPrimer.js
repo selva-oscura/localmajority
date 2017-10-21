@@ -4,12 +4,12 @@ import React, { Component } from 'react';
 class DistrictPrimer extends Component {
   componentDidMount() {
     let { reading } = this.props;
-    let readingSpace = document.getElementById('reading-body');
+    let readingBody = document.getElementById('reading-body');
     if (reading.bodyText) {
       let d = document.createElement('div');
       d.id = 'reading-{$i}';
       d.innerHTML = reading.bodyText;
-      readingSpace.appendChild(d);
+      readingBody.appendChild(d);
     }
 
     // this.fetchData();
@@ -35,11 +35,7 @@ class DistrictPrimer extends Component {
     return (
       <article className="DistrictPrimer">
         <h2>{title}</h2>
-        {author ? (
-          <h3>by {author}</h3>
-        ) : (
-          <h3>MISSING AUTHOR INFORMATION</h3>
-        )}
+        {author ? <h3>by {author}</h3> : <h3>MISSING AUTHOR INFORMATION</h3>}
         <h4>Last Updated: {created.slice(0, 10)}</h4>
         <p>{description}</p>
         <div id="reading-body" />
