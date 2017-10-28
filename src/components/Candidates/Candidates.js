@@ -9,6 +9,10 @@ const Candidates = props => {
     <div className="Candidates flex">
       {candidates.length ? (
         candidates.map((candidate, i) => {
+          let headshotUrl;
+          headshotUrl = candidate.headshotSmUrl
+            ? candidate.headshotSmUrl
+            : candidate.headshotLgUrl;
           return (
             <Card
               key={i}
@@ -17,7 +21,7 @@ const Candidates = props => {
               cardSubtitle={candidate.district}
               cardText="need short text?"
               category="candidates"
-              imgSrc={candidate.headshotSm}
+              imgSrc={headshotUrl}
               friendlyId={candidate.friendlyId}
               imgShape="square"
             />
