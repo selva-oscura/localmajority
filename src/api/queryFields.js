@@ -18,24 +18,24 @@ const queryFields = [
     one: 'contest',
   },
   // {tableName:"District", stateName:"districts", all:"districts", one: "district"},
-  {
-    tableName: 'DistrictPrimer',
-    stateName: 'districtPrimers',
-    all: 'district-primers',
-    one: 'district-primer',
-  },
+  // {
+  //   tableName: 'DistrictPrimer',
+  //   stateName: 'districtPrimers',
+  //   all: 'district-primers',
+  //   one: 'district-primer',
+  // },
   {
     tableName: 'Issue',
     stateName: 'issues',
     all: 'issues',
     one: 'issue',
   },
-  {
-    tableName: 'IssuePrimer',
-    stateName: 'issuePrimers',
-    all: 'issue-primers',
-    one: 'issue-primer',
-  },
+  // {
+  //   tableName: 'IssuePrimer',
+  //   stateName: 'issuePrimers',
+  //   all: 'issue-primers',
+  //   one: 'issue-primer',
+  // },
   {
     tableName: 'Party',
     stateName: 'parties',
@@ -54,12 +54,12 @@ const queryFields = [
     all: 'states',
     one: 'state',
   },
-  {
-    tableName: 'TalkingPoints',
-    stateName: 'talkingPoints',
-    all: 'talking-points',
-    one: 'talking-point',
-  },
+  // {
+  //   tableName: 'TalkingPoints',
+  //   stateName: 'talkingPoints',
+  //   all: 'talking-points',
+  //   one: 'talking-point',
+  // },
 ];
 
 export default queryFields;
