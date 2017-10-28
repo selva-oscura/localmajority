@@ -15,7 +15,6 @@ class IssuePrimer extends Component {
       }
     });
 
-
     // this.fetchData();
     // let articles = this.state.articles;
 
