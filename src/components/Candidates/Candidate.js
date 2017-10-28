@@ -14,30 +14,27 @@ class Candidate extends Component {
     }
   }
   render() {
-    let { candidate } = this.props;
+    let { candidate, seat } = this.props;
     let { talkingPoint } = candidate;
+    console.log('seat', seat);
     return (
       <div className="Candidate">
         <article>
           <div className="row">
             <div className="brief-info">
               <h2>{candidate.title}</h2>
-              <h3>
-                {candidate.district ? candidate.district : 'no district data'}
-              </h3>
+              <h3>{seat && seat.title ? seat.title : 'no district data'}</h3>
               <p className="hidden-sm-down">
-                {candidate.descriptionText
-                  ? candidate.descriptionText
-                  : 'no descriptionText'}
+                {candidate.description
+                  ? candidate.description
+                  : 'no description'}
               </p>
             </div>
             <div className="headshot">
               <img src={candidate.headshotSm} alt={candidate.title} />
             </div>
             <p className="hidden-md-up">
-              {candidate.descriptionText
-                ? candidate.descriptionText
-                : 'no descriptionText'}
+              {candidate.description ? candidate.description : 'no description'}
             </p>
             <div id="bioText" />
             {talkingPoint && <TalkingPoint talkingPoint={talkingPoint} />}
