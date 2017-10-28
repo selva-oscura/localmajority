@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 // import './District.css';
 
 const NoSuchDistrict = ({ seatId }) => {
-  // console.log("props from District", props.match.params.id);
   return (
     <div className="NoSuchDistrict">
       <h2>District {seatId} does not have a race this year</h2>
