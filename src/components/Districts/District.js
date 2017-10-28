@@ -11,7 +11,6 @@ const District = ({
   districtTP,
   candidateTP,
 }) => {
-  // return <p>districts</p>;
   console.log(
     'seatId',
     seatId,
@@ -26,6 +25,7 @@ const District = ({
     'candidateTP',
     candidateTP
   );
+
   let candidateHeadshot;
   candidateHeadshot = candidate.headshotSmUrl
     ? candidate.headshotSmUrl
@@ -130,18 +130,18 @@ const District = ({
           </div>
         ) : null}
       </div>
-      <div className="row" />
+      <div className="row">
+        {districtPrimer && Object.keys(districtPrimer) &&
+          <DistrictPrimer
+            reading={districtPrimer}
+          />
+        }
+      </div>
     </div>
   );
 };
 
 export default District;
-
-// {districtPrimer &&
-//   <DistrictPrimer
-//     reading={districtPrimer}
-//   />
-// }
 
 // <h2>Key District Demographic Data</h2>
 // <div className="row flex">
