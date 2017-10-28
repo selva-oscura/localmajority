@@ -14,8 +14,8 @@ const Districts = props => {
           key={i}
           id={seat.uid}
           cardTitle={seat.title}
-          cardText="need to add once we have data"
-          imgSrc="need to add once we have data"
+          cardText={seat.candidateName}
+          imgSrc={seat.mapSmUrl}
           category="districts"
           friendlyId={seat.friendlyId}
           imgShape="square"
