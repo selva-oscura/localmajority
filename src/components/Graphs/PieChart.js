@@ -47,7 +47,7 @@ class PieChart extends Component {
   render() {
     let pieChart = this.pie(this.props.data),
       translate = `translate(${this.props.x}, ${this.props.y})`;
-    console.log(pieChart);
+    // console.log(pieChart);
     return (
       <div className="PieChart">
         <h3>{this.props.title}</h3>
