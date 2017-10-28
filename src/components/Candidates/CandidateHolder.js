@@ -3,7 +3,7 @@ import Candidate from './Candidate';
 import NoSuchCandidate from './NoSuchCandidate';
 
 const CandidateHolder = props => {
-  const candidate = props.candidate;
+  const { candidate, candidateTP } = props;
   if (candidate) {
     document.title = `Local Majority | ${candidate.title}`;
   } else {
@@ -14,6 +14,7 @@ const CandidateHolder = props => {
       {candidate ? (
         <Candidate
           candidateId={props.match.params.id}
+          candidateTP={candidateTP}
           candidate={candidate}
           {...props}
         />
