@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 class DistrictPrimer extends Component {
   componentDidMount() {
     let { reading } = this.props;
+    console.log('districtPrimer', reading);
     let readingBody = document.getElementById('reading-body');
     if (reading.bodyText) {
       let d = document.createElement('div');
@@ -31,13 +32,10 @@ class DistrictPrimer extends Component {
     // }
   }
   render() {
-    let { title, author, description, created } = this.props.reading;
+    // let { title, author, description, created } = this.props.reading;
+    // console.log('reading', reading);
     return (
       <article className="DistrictPrimer">
-        <h2>{title}</h2>
-        {author ? <h3>by {author}</h3> : <h3>MISSING AUTHOR INFORMATION</h3>}
-        <h4>Last Updated: {created.slice(0, 10)}</h4>
-        <p>{description}</p>
         <div id="reading-body" />
       </article>
     );
@@ -45,3 +43,7 @@ class DistrictPrimer extends Component {
 }
 
 export default DistrictPrimer;
+// <h2>{title}</h2>
+// {author ? <h3>by {author}</h3> : <h3>MISSING AUTHOR INFORMATION</h3>}
+// <h4>Last Updated: {created.slice(0, 10)}</h4>
+// <p>{description}</p>
