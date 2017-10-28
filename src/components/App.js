@@ -40,14 +40,10 @@ class App extends Component {
         articles: [],
         candidates: [],
         contests: [],
-        districts: [],
-        districtPrimers: [],
         issues: [],
-        issuePrimers: [],
         parties: [],
         seats: [],
         states: [],
-        talkingPoints: [],
         errors: [],
       };
       if (localStorage) {
@@ -96,14 +92,10 @@ class App extends Component {
       articles,
       candidates,
       contests,
-      districts,
-      districtPrimers,
       issues,
-      issuePrimers,
       parties,
       seats,
       states,
-      talkingPoints,
     } = this.state;
     return (
       <div className="App">
@@ -114,42 +106,52 @@ class App extends Component {
               exact
               path="/"
               component={props => {
-                return (
-                  <Home
-                    candidates={candidates}
-                    articles={articles}
-                    talkingPoints={talkingPoints}
-                  />
-                );
+                return <Home candidates={candidates} articles={articles} />;
               }}
             />
             <Route
               path="/districts/:id"
               component={props => {
-                const district = districts.find(
-                  district =>
-                    props.match.params.id ===
-                    district.id.slice('district-'.length)
+                const seat = seats.find(
+                  seat => props.match.params.id === seat.friendlyId
                 );
-                const candidate = candidates.find(
-                  candidate =>
-                    candidate.district.slice('District '.length) ===
-                    props.match.params.id
+                let contest, candidate, districtPrimer, districtTP, candidateTP;
+                districtPrimer = articles.find(
+                  a =>
+                    a.type === 'DistrictPrimer' &&
+                    a.appliesTo.includes(seat.uid)
                 );
+                districtTP = articles.find(
+                  a =>
+                    a.type === 'TalkingPoints' && a.appliesTo.includes(seat.uid)
+                );
+                contest = contests.find(c => c.seatId === seat.uid);
+                if (contest) {
+                  candidate = candidates.find(c => contest.uid === c.inContest);
+                }
+                if (candidate) {
+                  candidateTP = articles.find(
+                    a =>
+                      a.type === 'TalkingPoints' &&
+                      a.appliesTo.includes(candidate.uid)
+                  );
+                }
+                // console.log(`seat and related candidate`, seat, candidate)
                 return (
                   <DistrictHolder
                     {...props}
-                    district={district}
+                    seat={seat}
                     candidate={candidate}
+                    districtPrimer={districtPrimer}
+                    districtTP={districtTP}
+                    candidateTP={candidateTP}
                   />
                 );
               }}
             />
             <Route
               path="/districts"
-              component={props => (
-                <Districts {...props} districts={districts} />
-              )}
+              component={props => <Districts {...props} seats={seats} />}
             />
             <Route
               path="/candidates/:id"
@@ -157,7 +159,18 @@ class App extends Component {
                 const candidate = candidates.find(
                   candidate => props.match.params.id === candidate.friendlyId
                 );
-                return <CandidateHolder candidate={candidate} {...props} />;
+                let contest, seat;
+                contest = contests.find(c => c.uid === candidate.inContest);
+                if (contest) {
+                  seat = seats.find(s => s.uid === contest.seatId);
+                }
+                return (
+                  <CandidateHolder
+                    candidate={candidate}
+                    seat={seat}
+                    {...props}
+                  />
+                );
               }}
             />
             <Route
