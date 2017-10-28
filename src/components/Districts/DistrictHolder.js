@@ -3,22 +3,18 @@ import District from './District';
 import NoSuchDistrict from './NoSuchDistrict';
 
 const DistrictHolder = props => {
-  const district = props.district;
-  if (district && district.title) {
-    document.title = `Local Majority | ${district.title}`;
+  const { seat } = props;
+  if (seat && seat.title) {
+    document.title = `Local Majority | ${seat.title}`;
   } else {
     document.title = 'Local Majority | Unrecognized District';
   }
   return (
     <div className="DistrictHolder">
-      {district ? (
-        <District
-          districtId={props.match.params.id}
-          district={district}
-          {...props}
-        />
+      {seat ? (
+        <District seatId={props.match.params.id} seat={seat} {...props} />
       ) : (
-        <NoSuchDistrict districtId={props.match.params.id} />
+        <NoSuchDistrict seatId={props.match.params.id} />
       )}
     </div>
   );
