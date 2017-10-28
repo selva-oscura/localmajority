@@ -116,25 +116,27 @@ class App extends Component {
                   seat => props.match.params.id === seat.friendlyId
                 );
                 let contest, candidate, districtPrimer, districtTP, candidateTP;
-                districtPrimer = articles.find(
-                  a =>
-                    a.type === 'DistrictPrimer' &&
-                    a.appliesTo.includes(seat.uid)
-                );
-                districtTP = articles.find(
-                  a =>
-                    a.type === 'TalkingPoints' && a.appliesTo.includes(seat.uid)
-                );
-                contest = contests.find(c => c.seatId === seat.uid);
-                if (contest) {
-                  candidate = candidates.find(c => contest.uid === c.inContest);
-                }
-                if (candidate) {
-                  candidateTP = articles.find(
+                if (seat) {
+                  districtPrimer = articles.find(
                     a =>
-                      a.type === 'TalkingPoints' &&
-                      a.appliesTo.includes(candidate.uid)
+                      a.type === 'DistrictPrimer' &&
+                      a.appliesTo.includes(seat.uid)
                   );
+                  districtTP = articles.find(
+                    a =>
+                      a.type === 'TalkingPoints' && a.appliesTo.includes(seat.uid)
+                  );
+                  contest = contests.find(c => c.seatId === seat.uid);
+                  if (contest) {
+                    candidate = candidates.find(c => contest.uid === c.inContest);
+                  }
+                  if (candidate) {
+                    candidateTP = articles.find(
+                      a =>
+                        a.type === 'TalkingPoints' &&
+                        a.appliesTo.includes(candidate.uid)
+                    );
+                  }
                 }
                 // console.log(`seat and related candidate`, seat, candidate)
                 return (
@@ -159,14 +161,23 @@ class App extends Component {
                 const candidate = candidates.find(
                   candidate => props.match.params.id === candidate.friendlyId
                 );
-                let contest, seat;
-                contest = contests.find(c => c.uid === candidate.inContest);
-                if (contest) {
-                  seat = seats.find(s => s.uid === contest.seatId);
+                let contest, seat, candidateTP;
+                if (candidate){
+                  candidateTP = articles.find(
+                    a =>
+                      a.type === 'TalkingPoints' &&
+                      a.appliesTo.includes(candidate.uid)
+
+                  );
+                  contest = contests.find(c => c.uid === candidate.inContest);
+                  if (contest) {
+                    seat = seats.find(s => s.uid === contest.seatId);
+                  }
                 }
                 return (
                   <CandidateHolder
                     candidate={candidate}
+                    candidateTP={candidateTP}
                     seat={seat}
                     {...props}
                   />
