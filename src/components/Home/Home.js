@@ -7,6 +7,7 @@ import Card from '../common/Card';
 const Home = props => {
   document.title = 'Local Majority';
   let { articles, candidates, talkingPoints } = props;
+  let issuePrimers = articles.filter(a => a.type==="IssuePrimer");
   return (
     <div className="Home">
       <div className="map-and-text">
@@ -28,17 +29,17 @@ const Home = props => {
         <article className="Main">
           <h3>Featured Articles</h3>
           <div className="flex">
-            {articles.length ? (
-              articles.map((article, i) => (
+            {issuePrimers.length ? (
+              issuePrimers.map((issuePrimer, i) => (
                 <Card
-                  key={`article-${i}`}
-                  id={article.path}
-                  cardTitle={article.title}
-                  cardSubtitle="need author for articles"
-                  cardText={article.description}
+                  key={`issuePrimer-${i}`}
+                  id={issuePrimer.id}
+                  cardTitle={issuePrimer.title}
+                  cardSubtitle={issuePrimer.author}
+                  cardText={issuePrimer.description}
                   imgSrc="ImageSourceNeeded"
                   category="article"
-                  friendlyId={article.friendlyId}
+                  friendlyId={issuePrimer.friendlyId}
                   imgShape="landscape"
                 />
               ))
@@ -54,8 +55,8 @@ const Home = props => {
                   key={i}
                   id={candidate.id}
                   cardTitle={candidate.title}
-                  cardText="need to add once we have data"
-                  imgSrc={candidate.headshotSm}
+                  cardText={candidate.seatName}
+                  imgSrc={candidate.headshotSmUrl}
                   category="candidates"
                   friendlyId={candidate.friendlyId}
                   imgShape="square"
