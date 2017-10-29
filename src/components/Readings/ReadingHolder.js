@@ -2,6 +2,7 @@ import React from 'react';
 import Article from './Article';
 import TalkingPoints from './TalkingPoints';
 import DistrictPrimer from './DistrictPrimer';
+import IssuePrimer from './IssuePrimer';
 import NoSuchReading from './NoSuchReading';
 
 const ReadingHolder = props => {
@@ -18,9 +19,14 @@ const ReadingHolder = props => {
       {reading &&
         reading.type === 'TalkingPoints' && <TalkingPoints reading={reading} />}
       {reading &&
-        reading.type === 'DistrictPrimer' && (
+        reading.type === 'DistrictPrimer' &&
           <DistrictPrimer reading={reading} />
-        )}
+      }
+      {reading &&
+        reading.type === 'IssuePrimer' &&
+          <IssuePrimer reading={reading} />
+      }
+
       {!reading && <NoSuchReading readingId={props.match.params.id} />}
     </div>
   );
