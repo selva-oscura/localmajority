@@ -14,24 +14,6 @@ class IssuePrimer extends Component {
         readingBody.appendChild(d);
       }
     });
-
-    // this.fetchData();
-    // let articles = this.state.articles;
-
-    // let articles = [
-    //   "<p>Filler text because we don't consistently have data......  Lorem ipsum, blah, blah, blah.....</p>",
-    // ];
-    // console.log('this.state.articles', articles);
-    // if (articles.length) {
-    //   let articleSpace = document.getElementById('article-space');
-    //   articles.forEach((article, i) => {
-    //     // console.log("count", i)
-    //     let d = document.createElement('div');
-    //     d.id = `article-{$i}`;
-    //     d.innerHTML = article;
-    //     articleSpace.appendChild(d);
-    //   });
-    // }
   }
   render() {
     let { title, author, description, created } = this.props.reading;
