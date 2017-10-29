@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import CandidateTalkingPoints from '../Readings/CandidateTalkingPoints';
+import { SocialIcon } from 'react-social-icons';
+
 import CandidateAside from './CandidateAside';
 import './Candidate.css';
 
@@ -36,6 +38,20 @@ class Candidate extends Component {
             <div className="col-12 col-md-6 lg-8 xl-9">
               <h2>{candidate.title}</h2>
               <h3>{seat && seat.title ? seat.title : 'no district data'}</h3>
+              <div>
+                {candidate.twitterId && (
+                  <SocialIcon url={`https://twitter.com/${candidate.twitterId}`} />
+                )}
+                {candidate.facebookId && (
+                  <SocialIcon url={`https://www.facebook.com/${candidate.facebookId}`} />
+                )}
+                {candidate.campaignEmail && (
+                  <SocialIcon
+                    url={`mailto:${candidate.campaignEmail}`}
+                    network="email"
+                  />
+                )}
+              </div>
             </div>
           </div>
           <div className="main-and-aside row">
