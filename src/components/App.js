@@ -7,7 +7,7 @@ import CandidateHolder from './Candidates/CandidateHolder';
 import Candidates from './Candidates/Candidates';
 import DistrictHolder from './Districts/DistrictHolder';
 import Districts from './Districts/Districts';
-import Issue from './Issues/Issue';
+import IssuePrimer from './Readings/IssuePrimer';
 import Issues from './Issues/Issues';
 import ReadingHolder from './Readings/ReadingHolder';
 import AboutUs from './AboutUs/AboutUs';
@@ -124,11 +124,14 @@ class App extends Component {
                   );
                   districtTP = articles.find(
                     a =>
-                      a.type === 'TalkingPoints' && a.appliesTo.includes(seat.uid)
+                      a.type === 'TalkingPoints' &&
+                      a.appliesTo.includes(seat.uid)
                   );
                   contest = contests.find(c => c.seatId === seat.uid);
                   if (contest) {
-                    candidate = candidates.find(c => contest.uid === c.inContest);
+                    candidate = candidates.find(
+                      c => contest.uid === c.inContest
+                    );
                   }
                   if (candidate) {
                     candidateTP = articles.find(
@@ -162,12 +165,11 @@ class App extends Component {
                   candidate => props.match.params.id === candidate.friendlyId
                 );
                 let contest, seat, candidateTP;
-                if (candidate){
+                if (candidate) {
                   candidateTP = articles.find(
                     a =>
                       a.type === 'TalkingPoints' &&
                       a.appliesTo.includes(candidate.uid)
-
                   );
                   contest = contests.find(c => c.uid === candidate.inContest);
                   if (contest) {
@@ -202,7 +204,7 @@ class App extends Component {
                 const issue = issues.find(
                   issue => props.match.params.id === issue.id
                 );
-                return <Issue {...props} issue={issue} />;
+                return <IssuePrimer {...props} issue={issue} />;
               }}
             />
             <Route
