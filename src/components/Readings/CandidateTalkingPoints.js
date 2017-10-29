@@ -19,10 +19,12 @@ class CandidateTalkingPoints extends Component {
   }
   render() {
     return (
-      <article className="CandidateTalkingPoints">
-        <h3>About the Candidate</h3>
-        <div id="candidate-talking-points-space" />
-      </article>
+      <div className="row">
+        <article className="CandidateTalkingPoints col-12">
+          <h3>About the Candidate</h3>
+          <div id="candidate-talking-points-space" />
+        </article>
+      </div>
     );
   }
 }
