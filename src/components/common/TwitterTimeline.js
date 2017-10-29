@@ -21,5 +21,4 @@ const TwitterTimeline = props => {
 
 export default TwitterTimeline;
 
-      // <p>Twitter Timeline will go here</p>
 // <div className="mask"></div>
