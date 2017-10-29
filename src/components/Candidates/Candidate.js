@@ -26,24 +26,31 @@ class Candidate extends Component {
       <div className="Candidate">
         <article>
           <div className="row">
-            <div className="brief-info">
+            <div className="col-12 col-md-6 lg-4 xl-3">
+              <img
+                src={candidate.headshotSmUrl}
+                className="img-fluid"
+                alt={candidate.title}
+              />
+            </div>
+            <div className="col-12 col-md-6 lg-8 xl-9">
               <h2>{candidate.title}</h2>
               <h3>{seat && seat.title ? seat.title : 'no district data'}</h3>
-              {candidate.introLinkText && <p className="hidden-sm-down">{candidate.introLinkText}</p>}
             </div>
-            <div className="headshot">
-              <img src={candidate.headshotSm} alt={candidate.title} />
-            </div>
-            {candidate.introLinkText && <p className="hidden-md-up">{candidate.introLinkText}</p>}
-            <div id="candidate-space" />
           </div>
-          <div className="main-and-aside">
-            <div className="Main">
-              <div className="row">
-              {candidateTP && <CandidateTalkingPoints reading={candidateTP} />}
+          <div className="main-and-aside row">
+            <div className="col-12 col-lg-8 col-xl-9">
+              <div id="candidate-space" />
+              <div className="Main">
+                <div className="row">
+                {candidate.introLinkText && <p>{candidate.introLinkText}</p>}
+                {candidateTP && <CandidateTalkingPoints reading={candidateTP} />}
+                </div>
               </div>
             </div>
-            <CandidateAside candidate={candidate} />
+            <div className="col-12 col-lg-4 col-xl-3">
+              <CandidateAside candidate={candidate} />
+            </div>
           </div>
         </article>
       </div>
@@ -52,6 +59,7 @@ class Candidate extends Component {
 }
 
 export default Candidate;
+
 
               //   <h2>Why this Race Matters</h2>
               //   <p>
