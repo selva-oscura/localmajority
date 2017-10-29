@@ -18,7 +18,7 @@ const Candidates = props => {
               key={i}
               id={candidate.id}
               cardTitle={candidate.title}
-              cardSubtitle={candidate.districtName}
+              cardSubtitle={candidate.seatName}
               cardText={candidate.introLinkText}
               category="candidates"
               imgSrc={headshotUrl}
