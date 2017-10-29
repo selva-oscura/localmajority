@@ -11,25 +11,69 @@ const District = ({
   districtTP,
   candidateTP,
 }) => {
-  console.log(
-    'seatId',
-    seatId,
-    'seat',
-    seat,
-    'candidate',
-    candidate,
-    'districtPrimer',
-    districtPrimer,
-    'districtTP',
-    districtTP,
-    'candidateTP',
-    candidateTP
-  );
-
+  // console.log(
+  //   'seatId',
+  //   seatId,
+  //   'seat',
+  //   seat,
+  //   'candidate',
+  //   candidate,
+  //   'districtPrimer',
+  //   districtPrimer,
+  //   'districtTP',
+  //   districtTP,
+  //   'candidateTP',
+  //   candidateTP
+  // );
   let candidateHeadshot;
   candidateHeadshot = candidate.headshotSmUrl
     ? candidate.headshotSmUrl
     : candidate.headshotLgUrl;
+  return (
+    <div className="District">
+      <div className="hidden-sm-down">
+        <div className="row">
+          <div className="col-6">
+            <h2>{seat.title}</h2>
+            <img src={seat.mapSmUrl}
+              className="img-fluid"
+              alt={`map of district ${seat.title}`}
+            />
+          </div>
+          {candidate ? (
+            <div className="col-6">
+              <h2>{candidate.title}</h2>
+              <img
+                src={candidateHeadshot}
+                className="img-fluid"
+                alt={`headshot of distict candidate ${candidate.title}`}
+              />
+            </div>
+          ) : null}
+        </div>
+      </div>
+      <div className="hidden-md-up">
+        <div className="row">
+          <div className="col">
+            <h2>{seat.title}</h2>
+            <img src={seat.mapSmUrl} className="img-fluid" alt={`map of district ${seat.title}`} />
+          </div>
+        </div>
+      </div>
+      {districtPrimer && Object.keys(districtPrimer) &&
+        <DistrictPrimer
+          reading={districtPrimer}
+          candidate={candidate}
+        />
+      }
+    </div>
+  );
+};
+
+export default District;
+
+
+
   // const demographicData = [
   //   {
   //     topic: 'Median Income',
@@ -113,35 +157,6 @@ const District = ({
 
   // console.log('seatId', seatId);
   // console.log('seat', seat);
-  return (
-    <div className="District">
-      <div className="row">
-        <div className="two-thirds">
-          <h2>{seat.title}</h2>
-          <img src={seat.mapSmUrl} alt={`map of district ${seat.title}`} />
-        </div>
-        {candidate ? (
-          <div className="one-third">
-            <h2>{candidate.title}</h2>
-            <img
-              src={candidateHeadshot}
-              alt={`headshot of distict candidate ${candidate.title}`}
-            />
-          </div>
-        ) : null}
-      </div>
-      <div className="row">
-        {districtPrimer && Object.keys(districtPrimer) &&
-          <DistrictPrimer
-            reading={districtPrimer}
-          />
-        }
-      </div>
-    </div>
-  );
-};
-
-export default District;
 
 // <h2>Key District Demographic Data</h2>
 // <div className="row flex">
