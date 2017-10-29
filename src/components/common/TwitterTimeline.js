@@ -6,20 +6,20 @@ const TwitterTimeline = props => {
   const twitterHandle = props.twitterHandle;
   return (
     <div className="TwitterTimeline">
-      <p>Twitter Timeline will go here</p>
+			<Timeline
+			  dataSource={{
+			    sourceType: 'profile',
+			    screenName: twitterHandle
+			  }}
+			  options={{
+			    height: '500',
+			  }}
+			/>
     </div>
   );
 };
 
 export default TwitterTimeline;
 
-// <Timeline
-//   dataSource={{
-//     sourceType: 'profile',
-//     screenName: twitterHandle
-//   }}
-//   options={{
-//     height: '500',
-//   }}
-// />
+      // <p>Twitter Timeline will go here</p>
 // <div className="mask"></div>
