@@ -4,18 +4,18 @@ import React, { Component } from 'react';
 class CandidateTalkingPoints extends Component {
   componentDidMount() {
     let { reading } = this.props;
-    let details = [
-      'bodyText',
-    ];
-    let candidateTalkingPointsSpace = document.getElementById('candidate-talking-points-space');
+    let details = ['bodyText'];
+    let candidateTalkingPointsSpace = document.getElementById(
+      'candidate-talking-points-space'
+    );
     details.forEach(detail => {
       if (reading[detail]) {
         let d = document.createElement('div');
-        d.id=detail;
+        d.id = detail;
         d.innerHTML = reading[detail];
         candidateTalkingPointsSpace.appendChild(d);
       }
-    })
+    });
   }
   render() {
     return (

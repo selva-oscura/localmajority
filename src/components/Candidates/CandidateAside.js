@@ -26,7 +26,9 @@ const CandidateAside = props => {
             <SocialIcon url={`https://twitter.com/${candidate.twitterId}`} />
           )}
           {candidate.facebookId && (
-            <SocialIcon url={`https://www.facebook.com/${candidate.facebookId}`} />
+            <SocialIcon
+              url={`https://www.facebook.com/${candidate.facebookId}`}
+            />
           )}
           {candidate.campaignEmail && (
             <SocialIcon

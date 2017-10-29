@@ -7,7 +7,7 @@ import Card from '../common/Card';
 const Home = props => {
   document.title = 'Local Majority';
   let { articles, candidates, talkingPoints } = props;
-  let issuePrimers = articles.filter(a => a.type==="IssuePrimer");
+  let issuePrimers = articles.filter(a => a.type === 'IssuePrimer');
   return (
     <div className="Home">
       <div className="map-and-text">

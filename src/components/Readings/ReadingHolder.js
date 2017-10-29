@@ -19,13 +19,11 @@ const ReadingHolder = props => {
       {reading &&
         reading.type === 'TalkingPoints' && <TalkingPoints reading={reading} />}
       {reading &&
-        reading.type === 'DistrictPrimer' &&
+        reading.type === 'DistrictPrimer' && (
           <DistrictPrimer reading={reading} />
-      }
+        )}
       {reading &&
-        reading.type === 'IssuePrimer' &&
-          <IssuePrimer reading={reading} />
-      }
+        reading.type === 'IssuePrimer' && <IssuePrimer reading={reading} />}
 
       {!reading && <NoSuchReading readingId={props.match.params.id} />}
     </div>

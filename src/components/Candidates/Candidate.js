@@ -8,14 +8,12 @@ import './Candidate.css';
 class Candidate extends Component {
   componentDidMount() {
     let { candidate } = this.props;
-    let details = [
-      'bioText',
-    ]
+    let details = ['bioText'];
     let candidateSpace = document.getElementById('candidate-space');
     details.forEach(detail => {
       if (candidate[detail]) {
         let d = document.createElement('div');
-        d.id=detail
+        d.id = detail;
         d.innerHTML = candidate[detail];
         candidateSpace.appendChild(d);
       }
@@ -40,10 +38,14 @@ class Candidate extends Component {
               <h3>{seat && seat.title ? seat.title : 'no district data'}</h3>
               <div>
                 {candidate.twitterId && (
-                  <SocialIcon url={`https://twitter.com/${candidate.twitterId}`} />
+                  <SocialIcon
+                    url={`https://twitter.com/${candidate.twitterId}`}
+                  />
                 )}
                 {candidate.facebookId && (
-                  <SocialIcon url={`https://www.facebook.com/${candidate.facebookId}`} />
+                  <SocialIcon
+                    url={`https://www.facebook.com/${candidate.facebookId}`}
+                  />
                 )}
                 {candidate.campaignEmail && (
                   <SocialIcon
@@ -59,8 +61,10 @@ class Candidate extends Component {
               <div id="candidate-space" />
               <div className="Main">
                 <div className="row">
-                {candidate.introLinkText && <p>{candidate.introLinkText}</p>}
-                {candidateTP && <CandidateTalkingPoints reading={candidateTP} />}
+                  {candidate.introLinkText && <p>{candidate.introLinkText}</p>}
+                  {candidateTP && (
+                    <CandidateTalkingPoints reading={candidateTP} />
+                  )}
                 </div>
               </div>
             </div>
@@ -76,63 +80,62 @@ class Candidate extends Component {
 
 export default Candidate;
 
-
-              //   <h2>Why this Race Matters</h2>
-              //   <p>
-              //     Lorem Ipsum is simply dummy text of the printing and
-              //     typesetting industry. Lorem Ipsum has been the industry's
-              //     standard dummy text ever since the 1500s, when an unknown
-              //     printer took a galley of type and scrambled it to make a type
-              //     specimen book. It has survived not only five centuries, but
-              //     also the leap into electronic typesetting, remaining
-              //     essentially unchanged. It was popularised in the 1960s with
-              //     the release of Letraset sheets containing Lorem Ipsum
-              //     passages, and more recently with desktop publishing software
-              //     like Aldus PageMaker including versions of Lorem Ipsum
-              //   </p>
-              // </div>
-              // <div className="row">
-              //   <h2>Comparing Candidates</h2>
-              //   <div className="half">
-              //     <p>
-              //       Lorem Ipsum is simply dummy text of the printing and
-              //       typesetting industry. Lorem Ipsum has been the industry's
-              //       standard dummy text ever since the 1500s, when an unknown
-              //       printer took a galley of type and scrambled it to make a
-              //       type specimen book. It has survived not only five centuries,
-              //       but also the leap into electronic typesetting, remaining
-              //       essentially unchanged. It was popularised in the 1960s with
-              //       the release of Letraset sheets containing Lorem Ipsum
-              //       passages, and more recently with desktop publishing software
-              //       like Aldus PageMaker including versions of Lorem Ipsum
-              //     </p>
-              //   </div>
-              //   <div className="half">
-              //     <p>
-              //       Lorem Ipsum is simply dummy text of the printing and
-              //       typesetting industry. Lorem Ipsum has been the industry's
-              //       standard dummy text ever since the 1500s, when an unknown
-              //       printer took a galley of type and scrambled it to make a
-              //       type specimen book. It has survived not only five centuries,
-              //       but also the leap into electronic typesetting, remaining
-              //       essentially unchanged. It was popularised in the 1960s with
-              //       the release of Letraset sheets containing Lorem Ipsum
-              //       passages, and more recently with desktop publishing software
-              //       like Aldus PageMaker including versions of Lorem Ipsum
-              //     </p>
-              //   </div>
-              // </div>
-              // <div className="row">
-              //   <h2>Why &amp; Why Not</h2>
-              //   <p>
-              //     Lorem Ipsum is simply dummy text of the printing and
-              //     typesetting industry. Lorem Ipsum has been the industry's
-              //     standard dummy text ever since the 1500s, when an unknown
-              //     printer took a galley of type and scrambled it to make a type
-              //     specimen book. It has survived not only five centuries, but
-              //     also the leap into electronic typesetting, remaining
-              //     essentially unchanged. It was popularised in the 1960s with
-              //     the release of Letraset sheets containing Lorem Ipsum
-              //     passages, and more recently with desktop publishing software
-              //     like Aldus PageMaker including versions of Lorem Ipsum
-              //   </p>
+//   <h2>Why this Race Matters</h2>
+//   <p>
+//     Lorem Ipsum is simply dummy text of the printing and
+//     typesetting industry. Lorem Ipsum has been the industry's
+//     standard dummy text ever since the 1500s, when an unknown
+//     printer took a galley of type and scrambled it to make a type
+//     specimen book. It has survived not only five centuries, but
+//     also the leap into electronic typesetting, remaining
+//     essentially unchanged. It was popularised in the 1960s with
+//     the release of Letraset sheets containing Lorem Ipsum
+//     passages, and more recently with desktop publishing software
+//     like Aldus PageMaker including versions of Lorem Ipsum
+//   </p>
+// </div>
+// <div className="row">
+//   <h2>Comparing Candidates</h2>
+//   <div className="half">
+//     <p>
+//       Lorem Ipsum is simply dummy text of the printing and
+//       typesetting industry. Lorem Ipsum has been the industry's
+//       standard dummy text ever since the 1500s, when an unknown
+//       printer took a galley of type and scrambled it to make a
+//       type specimen book. It has survived not only five centuries,
+//       but also the leap into electronic typesetting, remaining
+//       essentially unchanged. It was popularised in the 1960s with
+//       the release of Letraset sheets containing Lorem Ipsum
+//       passages, and more recently with desktop publishing software
+//       like Aldus PageMaker including versions of Lorem Ipsum
+//     </p>
+//   </div>
+//   <div className="half">
+//     <p>
+//       Lorem Ipsum is simply dummy text of the printing and
+//       typesetting industry. Lorem Ipsum has been the industry's
+//       standard dummy text ever since the 1500s, when an unknown
+//       printer took a galley of type and scrambled it to make a
+//       type specimen book. It has survived not only five centuries,
+//       but also the leap into electronic typesetting, remaining
+//       essentially unchanged. It was popularised in the 1960s with
+//       the release of Letraset sheets containing Lorem Ipsum
+//       passages, and more recently with desktop publishing software
+//       like Aldus PageMaker including versions of Lorem Ipsum
+//     </p>
+//   </div>
+// </div>
+// <div className="row">
+//   <h2>Why &amp; Why Not</h2>
+//   <p>
+//     Lorem Ipsum is simply dummy text of the printing and
+//     typesetting industry. Lorem Ipsum has been the industry's
+//     standard dummy text ever since the 1500s, when an unknown
+//     printer took a galley of type and scrambled it to make a type
+//     specimen book. It has survived not only five centuries, but
+//     also the leap into electronic typesetting, remaining
+//     essentially unchanged. It was popularised in the 1960s with
+//     the release of Letraset sheets containing Lorem Ipsum
+//     passages, and more recently with desktop publishing software
+//     like Aldus PageMaker including versions of Lorem Ipsum
+//   </p>
