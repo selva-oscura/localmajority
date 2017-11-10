@@ -4,8 +4,7 @@ import Filters from '../Filters/Filters';
 import ButtonFilters from '../Filters/ButtonFilters';
 import Card from '../common/Card';
 
-const Districts = props => {
-  const { seats, statesMasterList, districtsStatesSelected, districtsSeatTypeSelected, updateFilter } = props;
+const Districts = ({ seats, statesMasterList, districtsStatesSelected, districtsSeatTypeSelected, updateFilter }) => {
   document.title = 'Local Majority | Districts';
   let seatsInSelectedStates = seats.filter(seat => districtsStatesSelected[seat.stateName])
   //  console.log('districts', districts);
