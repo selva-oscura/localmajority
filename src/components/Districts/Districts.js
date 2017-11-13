@@ -2,17 +2,33 @@ import React from 'react';
 // import districts from '../../data/districts.json';
 import Filters from '../Filters/Filters';
 import ButtonFilters from '../Filters/ButtonFilters';
+import SelectMultiFilter from '../Filters/SelectMultiFilter';
 import Card from '../common/Card';
 
-const Districts = ({ seats, statesMasterList, districtsStatesSelected, districtsSeatTypeSelected, updateFilter }) => {
+const Districts = ({
+  seats,
+  statesMasterList,
+  districtsStatesSelected,
+  districtsSeatTypeSelected,
+  updateFilter,
+}) => {
   document.title = 'Local Majority | Districts';
-  let seatsInSelectedStates = seats.filter(seat => districtsStatesSelected[seat.stateName])
-  //  console.log('districts', districts);
+  let seatsInSelectedStates = seats.filter(
+    seat => districtsStatesSelected[seat.stateName]
+  );
   return (
     <div className="Districts">
       <Filters>
         <ButtonFilters
           filterCategory="districtsStatesSelected"
+          includeAllNone={true}
+          masterList={statesMasterList}
+          filterItems={districtsStatesSelected}
+          updateFilter={updateFilter}
+        />
+        <SelectMultiFilter
+          filterCategory="districtsStatesSelected"
+          hintText="select state(s)"
           includeAllNone={true}
           masterList={statesMasterList}
           filterItems={districtsStatesSelected}
