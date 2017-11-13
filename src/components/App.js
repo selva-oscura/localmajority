@@ -43,7 +43,7 @@ class App extends Component {
         issues: [],
         parties: [],
         seats: [],
-        statesMasterList:[],
+        statesMasterList: [],
         seatTypesMasterList: [],
         districtsStatesSelected: {},
         districtsSeatTypeSelected: {},
@@ -75,11 +75,15 @@ class App extends Component {
         .then(res => {
           if (res.status === 200 && res.data) {
             let state = this.state;
-            if (queryField.stateName === "states") {
-              res.data.sort((a,b) => {
-                if (a.title > b.title) { return 1; }
-                else if (a.title < b.title) { return -1; }
-                else { return 0; }
+            if (queryField.stateName === 'states') {
+              res.data.sort((a, b) => {
+                if (a.title > b.title) {
+                  return 1;
+                } else if (a.title < b.title) {
+                  return -1;
+                } else {
+                  return 0;
+                }
               });
               let statesMasterList = res.data.map(item => item.title);
               state[queryField.stateName] = res.data;
@@ -107,12 +111,18 @@ class App extends Component {
   }
   updateFilter(filterCategories, filterItem) {
     let state = this.state;
-    if (filterItem === "all"){
-      Object.keys(state[filterCategories]).forEach(key => state[filterCategories][key] = true);
-    } else if (filterItem === "none") {
-      Object.keys(state[filterCategories]).forEach(key => state[filterCategories][key] = false);
+    if (filterItem === 'all') {
+      Object.keys(state[filterCategories]).forEach(
+        key => (state[filterCategories][key] = true)
+      );
+    } else if (filterItem === 'none') {
+      Object.keys(state[filterCategories]).forEach(
+        key => (state[filterCategories][key] = false)
+      );
     } else {
-      state[filterCategories][filterItem] = !state[filterCategories][filterItem];
+      state[filterCategories][filterItem] = !state[filterCategories][
+        filterItem
+      ];
     }
     this.setState(...state, state[filterCategories]);
   }

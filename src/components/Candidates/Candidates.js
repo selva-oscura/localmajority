@@ -1,7 +1,13 @@
 import React from 'react';
 import Card from '../common/Card';
 
-const Candidates = ({ candidates, statesMasterList, candidatesStatesSelected, candidateSeatTypesSelected, candidatesTextSelected }) => {
+const Candidates = ({
+  candidates,
+  statesMasterList,
+  candidatesStatesSelected,
+  candidateSeatTypesSelected,
+  candidatesTextSelected,
+}) => {
   document.title = 'Local Majority | Candidates';
   return (
     <div className="Candidates flex">

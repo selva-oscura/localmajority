@@ -9,22 +9,22 @@ const ButtonFilters = ({
   updateFilter,
 }) => (
   <div className="ButtonFilters flex">
-  	{includeAllNone && ([
-  		<ButtonFilter 
-  			key="all"
-  			filterCategory={filterCategory}
-  			currentItem="all"
-  			filterItems={filterItems}
-  			updateFilter={updateFilter}
-  		/>,
-  		<ButtonFilter 
-  			key="none"
-  			filterCategory={filterCategory}
-  			currentItem="none"
-  			filterItems={filterItems}
-  			updateFilter={updateFilter}
-  		/>
-  	])}
+    {includeAllNone && [
+      <ButtonFilter
+        key="all"
+        filterCategory={filterCategory}
+        currentItem="all"
+        filterItems={filterItems}
+        updateFilter={updateFilter}
+      />,
+      <ButtonFilter
+        key="none"
+        filterCategory={filterCategory}
+        currentItem="none"
+        filterItems={filterItems}
+        updateFilter={updateFilter}
+      />,
+    ]}
     {masterList.map((item, i) => (
       <ButtonFilter
         key={i}
@@ -36,6 +36,5 @@ const ButtonFilters = ({
     ))}
   </div>
 );
-
 
 export default ButtonFilters;
