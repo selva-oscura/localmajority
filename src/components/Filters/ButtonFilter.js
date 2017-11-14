@@ -4,19 +4,19 @@ import { RaisedButton } from 'material-ui';
 const ButtonFilter = ({
   filterCategory,
   currentItem,
-  filterItems,
-  updateFilter,
+  selectedValues,
+  updateSelectedValues,
 }) => {
-  const handleClick = () => updateFilter(filterCategory, currentItem);
-  const style = { margin: 6 };
+  const handleClick = () => updateSelectedValues(filterCategory, currentItem);
+  const style = { margin: '1vw' };
   const [isPrimary, isDefault] =
-    filterItems[currentItem] ||
+    selectedValues[currentItem] ||
     (currentItem === 'none' &&
-      Object.entries(filterItems).reduce((sum, item) => sum + item[1], 0) ===
+      Object.values(selectedValues).reduce((sum, item) => sum + item, 0) ===
         0) ||
     (currentItem === 'all' &&
-      Object.entries(filterItems).reduce((sum, item) => sum + item[1], 0) ===
-        Object.entries(filterItems).length)
+      Object.values(selectedValues).reduce((sum, item) => sum + item, 0) ===
+        Object.values(selectedValues).length)
       ? [true, false]
       : [false, true];
 
