@@ -45,11 +45,6 @@ class App extends Component {
         seats: [],
         statesMasterList: [],
         seatTypesMasterList: [],
-        districtsStatesSelected: {},
-        districtsSeatTypeSelected: {},
-        candidatesStatesSelected: {},
-        candidateSeatTypesSelected: {},
-        candidatesTextSelected: [],
         errors: [],
       };
       if (localStorage) {
@@ -57,7 +52,6 @@ class App extends Component {
         localStorage.localMajorityData = JSON.stringify(this.state);
       }
     }
-    this.updateFilter = this.updateFilter.bind(this);
   }
 
   setStateAndLocalStorage(state) {
@@ -86,15 +80,9 @@ class App extends Component {
                 }
               });
               let statesMasterList = res.data.map(item => item.title);
-              state[queryField.stateName] = res.data;
               state.statesMasterList = statesMasterList;
-              statesMasterList.forEach(stateName => {
-                state.districtsStatesSelected[stateName] = true;
-                state.candidatesStatesSelected[stateName] = true;
-              });
-            } else {
-              state[queryField.stateName] = res.data;
             }
+            state[queryField.stateName] = res.data;
             this.setStateAndLocalStorage(state);
           } else {
             console.log('error fetching', query, res);
@@ -109,24 +97,6 @@ class App extends Component {
         });
     });
   }
-  updateFilter(filterCategories, filterItem) {
-    let state = this.state;
-    if (filterItem === 'all') {
-      Object.keys(state[filterCategories]).forEach(
-        key => (state[filterCategories][key] = true)
-      );
-    } else if (filterItem === 'none') {
-      Object.keys(state[filterCategories]).forEach(
-        key => (state[filterCategories][key] = false)
-      );
-    } else {
-      state[filterCategories][filterItem] = !state[filterCategories][
-        filterItem
-      ];
-    }
-    this.setState(...state, state[filterCategories]);
-  }
-
   componentDidMount() {
     this.fetchData();
   }
@@ -210,9 +180,7 @@ class App extends Component {
                   {...props}
                   seats={seats}
                   statesMasterList={statesMasterList}
-                  districtsStatesSelected={districtsStatesSelected}
-                  districtsSeatTypeSelected={districtsSeatTypeSelected}
-                  updateFilter={this.updateFilter}
+                  seatTypesMasterList={seatTypesMasterList}
                 />
               )}
             />
@@ -251,9 +219,7 @@ class App extends Component {
                   {...props}
                   candidates={candidates}
                   statesMasterList={statesMasterList}
-                  candidatesStatesSelected={candidatesStatesSelected}
-                  candidateSeatTypesSelected={candidateSeatTypesSelected}
-                  candidatesTextSelected={candidatesTextSelected}
+                  seatTypesMasterList={seatTypesMasterList}
                 />
               )}
             />
