@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import ButtonFilter from './ButtonFilter';
 
+/* Calling of this Component should resemble the following:
+    <ButtonFilters
+      filterCategory="districtsStatesSelected" // <- this is the name of the variable used as the filter in the parent component
+      includeAllNone={true}                    // <- boolean denoting whether all and none buttons will be displayed
+      masterList={statesMasterList}            // <- sorted array with all possible values (excepting all/none)
+      updateFilter={this.updateFilter}         // <- parent component's function for updating updating the filter that will be used to display parent component's candidates, articles, districts, etc.
+    />
+*/
+
 class ButtonFilters extends Component {
   constructor(props, context) {
     super(props, context);
