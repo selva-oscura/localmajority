@@ -54,6 +54,12 @@
   display: none !important;
 }
 
+
+.img-fluid{max-width:100%;width:100%;height:auto}
+
+
+/* Custom styles */
+
 .flex {
   display: -webkit-box;
   display: -moz-box;
@@ -65,8 +71,11 @@
   justify-content: space-between;
 }
 
+.social-icon {
+  margin-right: 8px;
+}
 
-.img-fluid{max-width:100%;width:100%;height:auto}
+
 
 /*body {
   box-sizing: border-box;
@@ -144,10 +153,6 @@ img{
 
 .text-right {
   text-align: right;
-}
-
-.social-icon {
-  margin-right: 8px;
 }
 
 @media(min-width: 768px){
