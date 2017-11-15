@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CandidateTalkingPoints from '../Readings/CandidateTalkingPoints';
 import { SocialIcon } from 'react-social-icons';
-
+import CandidateDonateButton from './CandidateDonateButton';
 import CandidateAside from './CandidateAside';
 import './Candidate.css';
 
@@ -53,6 +53,13 @@ class Candidate extends Component {
                     network="email"
                   />
                 )}
+              </div>
+              <div className="hidden-sm-down">
+                {candidate.donateUrl &&
+                  <CandidateDonateButton
+                    candidate={candidate}
+                  />
+                }
               </div>
             </div>
           </div>
