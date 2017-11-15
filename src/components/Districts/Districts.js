@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-// import districts from '../../data/districts.json';
 import Filters from '../Filters/Filters';
 import ButtonFilters from '../Filters/ButtonFilters';
-import SelectMultiFilter from '../Filters/SelectMultiFilter';
 import Card from '../common/Card';
 
 class Districts extends Component {
@@ -38,13 +36,6 @@ class Districts extends Component {
         <Filters>
           <ButtonFilters
             filterCategory="districtsStatesSelected"
-            includeAllNone={true}
-            masterList={statesMasterList}
-            updateFilter={this.updateFilter}
-          />
-          <SelectMultiFilter
-            filterCategory="districtsStatesSelected"
-            hintText="select state(s)"
             includeAllNone={true}
             masterList={statesMasterList}
             updateFilter={this.updateFilter}
