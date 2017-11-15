@@ -2,7 +2,7 @@ import React from 'react';
 import '../common/Aside.css';
 import TwitterTimeline from '../common/TwitterTimeline';
 import { SocialIcon } from 'react-social-icons';
-import RaisedButton from 'material-ui/RaisedButton';
+import CandidateDonateButton from './CandidateDonateButton';
 
 const CandidateAside = props => {
   console.log('props from Aside', props);
@@ -38,17 +38,15 @@ const CandidateAside = props => {
           )}
         </div>
       </div>
-      <div className="row">
-        <div className="col-12">
-          {candidate.donateUrl && (
-            <RaisedButton
-              secondary={true}
-              label="Donate"
-              href={candidate.donateUrl}
+      {candidate.donateUrl && (
+        <div className="row">
+          <div className="col-12">
+            <CandidateDonateButton
+              candidate={props.candidate}
             />
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </aside>
   );
 };
