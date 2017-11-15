@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import { MenuItem, SelectField } from 'material-ui';
 
+/* Calling of this Component should resemble the following:
+    <SelectMultiFilter
+      filterCategory="candidatesStatesSelected" // <- this is the name of the variable used as the filter in the parent component
+      hintText="select state"
+      includeAllNone={true}                     // <- boolean denoting whether all and none are options for select
+      masterList={statesMasterList}             // <- sorted array with all possible values (excepting all/none)
+      updateFilter={this.updateFilter}          // <- parent component's function for updating updating the filter that will be used to display parent component's candidates, articles, districts, etc.
+    />
+*/
+
 class SelectMultiFilter extends Component {
   constructor(props, context) {
     super(props, context);
@@ -31,7 +41,6 @@ class SelectMultiFilter extends Component {
       hintText,
       includeAllNone,
       masterList,
-      updateFilter,
     } = this.props;
     const menuItems = (masterList, selectedValues) =>
       masterList.map(item => (
