@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Filters from '../Filters/Filters';
-import ButtonFilters from '../Filters/ButtonFilters';
-import SelectMultiFilter from '../Filters/SelectMultiFilter';
+import SelectFilter from '../Filters/SelectFilter';
 import Card from '../common/Card';
 
 class Candidates extends Component {
@@ -40,16 +39,10 @@ class Candidates extends Component {
     return (
       <div className="Candidates">
         <Filters>
-          <ButtonFilters
+          <SelectFilter
             filterCategory="candidatesStatesSelected"
-            includeAllNone={true}
-            masterList={statesMasterList}
-            updateFilter={this.updateFilter}
-          />
-          <SelectMultiFilter
-            filterCategory="candidatesStatesSelected"
-            hintText="select state(s)"
-            includeAllNone={true}
+            hintText="select state"
+            includeAll={true}
             masterList={statesMasterList}
             updateFilter={this.updateFilter}
           />
