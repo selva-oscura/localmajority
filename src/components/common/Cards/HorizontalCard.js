@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import './HorizontalCard.css';
 
 class HorizontalCard extends Component {
   constructor(props) {
