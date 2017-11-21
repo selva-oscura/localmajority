@@ -17,8 +17,6 @@
 .HorizontalCard .image-holder{
 	width: 200px;
 	position: relative;
-/*	height: 200px;
-	overflow: hidden;*/
 }
 
 .HorizontalCard .placeholder-image, .HorizontalCard .actual-image{
