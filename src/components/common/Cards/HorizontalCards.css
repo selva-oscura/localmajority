@@ -1,0 +1,17 @@
+.HorizontalCards{
+	display: grid;
+	grid-gap:24px;
+	margin-top: 24px;
+}
+
+@media (min-width: 576px) {
+	.HorizontalCards{
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	}
+}
+
+@media (min-width: 992px) {
+	.HorizontalCards{
+		grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+	}
+}
