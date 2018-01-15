@@ -50,7 +50,9 @@ class Elements extends Component {
     ];
     queries.forEach(query => {
       const apiOptions = {
-        url: `https://cmsdev.localmajority.net/nuxeo/api/v1/search/lang/NXQL/execute?query=select%20*%20from%20${query.tableName}`,
+        url: `https://cmsdev.localmajority.net/nuxeo/api/v1/search/lang/NXQL/execute?query=select%20*%20from%20${
+          query.tableName
+        }`,
         headers: {
           Authorization: 'Basic anNvbjpjc3d4V2xSdk5XTnBHN0FKTzhIeg==',
           'X-NXproperties': '*',

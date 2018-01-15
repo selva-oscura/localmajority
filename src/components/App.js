@@ -83,7 +83,7 @@ class App extends Component {
               state.statesMasterList = statesMasterList;
             }
             state[queryField.stateName] = res.data;
-            console.log('query results for', queryField.stateName, res.data)
+            console.log('query results for', queryField.stateName, res.data);
             this.setStateAndLocalStorage(state);
           } else {
             console.log('error fetching', query, res);
