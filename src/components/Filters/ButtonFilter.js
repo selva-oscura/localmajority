@@ -8,7 +8,6 @@ const ButtonFilter = ({
   updateSelectedValues,
 }) => {
   const handleClick = () => updateSelectedValues(filterCategory, currentItem);
-  const style = { margin: '1vw' };
   const [isPrimary, isDefault] =
     selectedValues[currentItem] ||
     (currentItem === 'none' &&
@@ -26,7 +25,6 @@ const ButtonFilter = ({
       primary={isPrimary}
       default={isDefault}
       label={currentItem}
-      style={style}
       onClick={handleClick}
     />
   );

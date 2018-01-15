@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ButtonFilter from './ButtonFilter';
+import PropTypes from 'prop-types';
+import './ButtonFilters.css';
 
 /* Calling of this Component should resemble the following:
     <ButtonFilters
@@ -14,10 +16,9 @@ class ButtonFilters extends Component {
   constructor(props, context) {
     super(props, context);
     const selectedValues = {};
-    this.props.masterList.forEach(item => {
-      selectedValues[item] = true;
-    });
+    this.props.masterList.forEach(item => (selectedValues[item] = true));
     this.state = { selectedValues };
+
     this.updateSelectedValues = this.updateSelectedValues.bind(this);
   }
   updateSelectedValues(filterCategory, currentItem) {
@@ -35,16 +36,10 @@ class ButtonFilters extends Component {
     this.props.updateFilter(filterCategory, selectedValues);
   }
   render() {
-    const {
-      filterCategory,
-      includeAllNone,
-      masterList,
-      filterItems,
-      updateFilter,
-    } = this.props;
+    const { filterCategory, includeAllNone, masterList } = this.props;
     const { selectedValues } = this.state;
     return (
-      <div className="ButtonFilters flex">
+      <div className="ButtonFilters">
         {includeAllNone && [
           <ButtonFilter
             key="all"
@@ -74,5 +69,12 @@ class ButtonFilters extends Component {
     );
   }
 }
+
+// ButtonFilters.propTypes = {
+//   filterCategory: PropTypes.string.isRequired,
+//   includeAllNone: PropTypes.boolean,
+//   masterList: PropTypes.array.isRequired,
+//   updateFilter: PropTypes.function.isRequired,
+// };
 
 export default ButtonFilters;
