@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Filters from '../Filters/Filters';
 import SelectFilter from '../Filters/SelectFilter';
-import Card from '../common/Card';
+import HorizontalCards from '../common/Cards/HorizontalCards';
+import HorizontalCard from '../common/Cards/HorizontalCard';
 
 class Candidates extends Component {
   constructor(props, context) {
@@ -47,15 +48,15 @@ class Candidates extends Component {
             updateFilter={this.updateFilter}
           />
         </Filters>
-        <div className="flex">
-          {candidatesMeetingFilters.length ? (
-            candidatesMeetingFilters.map((candidate, i) => {
+        {candidatesMeetingFilters.length ? (
+          <HorizontalCards>
+            {candidatesMeetingFilters.map((candidate, i) => {
               let headshotUrl;
               headshotUrl = candidate.headshotSmUrl
                 ? candidate.headshotSmUrl
                 : candidate.headshotLgUrl;
               return (
-                <Card
+                <HorizontalCard
                   key={i}
                   id={candidate.id}
                   cardTitle={candidate.title}
@@ -67,11 +68,11 @@ class Candidates extends Component {
                   imgShape="square"
                 />
               );
-            })
-          ) : (
-            <h2>No Candidates Meet Your Criteria.</h2>
-          )}
-        </div>
+            })}
+          </HorizontalCards>
+        ) : (
+          <h2>No Candidates Meet Your Criteria.</h2>
+        )}
       </div>
     );
   }
