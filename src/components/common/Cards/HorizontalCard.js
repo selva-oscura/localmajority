@@ -13,7 +13,6 @@ class HorizontalCard extends Component {
   onMouseOut = () => this.setState({ depth: 2 });
   render() {
     let {
-      id,
       cardTitle,
       cardSubtitle,
       cardText,
@@ -23,7 +22,7 @@ class HorizontalCard extends Component {
     } = this.props;
     return (
       <div
-        className={`HorizontalCard`}
+        className="HorizontalCard"
         onMouseOver={this.onMouseOver}
         onMouseOut={this.onMouseOut}
       >
@@ -48,5 +47,15 @@ class HorizontalCard extends Component {
     );
   }
 }
+
+HorizontalCard.propTypes = {
+  cardTitle: PropTypes.string.isRequired,
+  cardSubtitle: PropTypes.string,
+  cardText: PropTypes.string,
+  imgSrc: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  friendlyId: PropTypes.string.isRequired,
+}
+
 
 export default HorizontalCard;
