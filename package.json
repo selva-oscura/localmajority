@@ -3,12 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "apollo-client": "^2.2.0",
+    "apollo-client-preset": "^1.0.6",
     "axios": "^0.16.2",
     "d3": "^4.11.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "graphql": "^0.12.3",
+    "graphql-tag": "^2.6.1",
+    "react": "^16.2.0",
+    "react-apollo": "^2.0.4",
+    "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "react-social-icons": "^2.8.0",
     "react-tap-event-plugin": "^3.0.2"
   },
   "devDependencies": {
@@ -17,7 +23,6 @@
     "material-ui": "^0.19.4",
     "prettier": "^1.7.4",
     "react-scripts": "^1.0.14",
-    "react-social-icons": "^2.7.0",
     "react-twitter-widgets": "^1.7.1"
   },
   "scripts": {
