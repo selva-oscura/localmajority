@@ -36,12 +36,7 @@ class SelectMultiFilter extends Component {
     this.props.updateFilter(this.props.filterCategory, selectedValues);
   }
   render() {
-    const {
-      filterCategory,
-      hintText,
-      includeAllNone,
-      masterList,
-    } = this.props;
+    const { filterCategory, hintText, includeAllNone, masterList } = this.props;
     const menuItems = (masterList, selectedValues) =>
       masterList.map(item => (
         <MenuItem

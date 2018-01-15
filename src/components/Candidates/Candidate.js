@@ -55,11 +55,9 @@ class Candidate extends Component {
                 )}
               </div>
               <div className="hidden-sm-down">
-                {candidate.donateUrl &&
-                  <CandidateDonateButton
-                    candidate={candidate}
-                  />
-                }
+                {candidate.donateUrl && (
+                  <CandidateDonateButton candidate={candidate} />
+                )}
               </div>
             </div>
           </div>

@@ -15,7 +15,7 @@ class SelectFilter extends Component {
   constructor(props, context) {
     super(props, context);
     const selectedValues = {};
-    if(this.props.includeAll){
+    if (this.props.includeAll) {
       this.props.masterList.forEach(item => {
         selectedValues[item] = true;
       });
@@ -23,7 +23,7 @@ class SelectFilter extends Component {
     this.state = { selectedValues };
     this.handleChange = this.handleChange.bind(this);
   }
-  handleChange(e, i, clickedItem) {    
+  handleChange(e, i, clickedItem) {
     let selectedValues = this.state.selectedValues;
     this.setState({ selectedValues: clickedItem[0] });
     if (clickedItem[0] === 'all') {
@@ -36,12 +36,7 @@ class SelectFilter extends Component {
     this.props.updateFilter(this.props.filterCategory, selectedValues);
   }
   render() {
-    const {
-      filterCategory,
-      hintText,
-      includeAll,
-      masterList,
-    } = this.props;
+    const { filterCategory, hintText, includeAll, masterList } = this.props;
     const menuItems = (masterList, selectedValues) =>
       masterList.map(item => (
         <MenuItem
@@ -72,7 +67,7 @@ class SelectFilter extends Component {
         selectionRenderer={selectionRenderer}
         onChange={this.handleChange}
       >
-        {includeAll &&
+        {includeAll && (
           <MenuItem
             key="all"
             insetChildren={true}
@@ -80,12 +75,11 @@ class SelectFilter extends Component {
             value="all"
             primaryText="All"
           />
-        }
+        )}
         {menuItems(masterList, this.state.selectedValues)}
       </SelectField>
     );
   }
 }
-
 
 export default SelectFilter;

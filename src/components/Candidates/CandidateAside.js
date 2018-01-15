@@ -41,9 +41,7 @@ const CandidateAside = props => {
       {candidate.donateUrl && (
         <div className="row">
           <div className="col-12">
-            <CandidateDonateButton
-              candidate={props.candidate}
-            />
+            <CandidateDonateButton candidate={props.candidate} />
           </div>
         </div>
       )}
