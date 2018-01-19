@@ -72,6 +72,17 @@ const queries = {
       }
     }
   `,
+  Parties: gql`
+    query Parties {
+      allParties {
+        id
+        title
+        color
+        homepageUrl
+        iconUrl
+      }
+    }
+  `,
 };
 
 const graphQLAPI = {
