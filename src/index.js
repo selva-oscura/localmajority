@@ -1,5 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ApolloProvider } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import graphQLAPI from './api/graphQLAPI';
 import { BrowserRouter } from 'react-router-dom';
 import './styles/bootstrap-reboot.css';
 import './styles/bootstrap-grid.css';
@@ -11,12 +16,25 @@ import localMajorityTheme from './styles/localMajorityTheme';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 
+// console.log('endpoints', graphQLAPI.endpoints);
+// console.log('queries', graphQLAPI.queries);
+
+const client = new ApolloClient({
+  link: new HttpLink({ uri: graphQLAPI.endpoints.graphQL }),
+  cache: new InMemoryCache(),
+});
+
+// console.log('Apollo Client', ApolloClient);
+
 ReactDOM.render(
-  <BrowserRouter>
-    <MuiThemeProvider muiTheme={getMuiTheme(localMajorityTheme)}>
-      <App />
-    </MuiThemeProvider>
-  </BrowserRouter>,
+  <ApolloProvider client={client}>
+    <BrowserRouter>
+      <MuiThemeProvider muiTheme={getMuiTheme(localMajorityTheme)}>
+        <App />
+      </MuiThemeProvider>
+    </BrowserRouter>
+  </ApolloProvider>,
   document.getElementById('root')
 );
+
 registerServiceWorker();
