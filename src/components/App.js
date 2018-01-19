@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import graphQLAPI from '../api/graphQLAPI';
+import { graphql, compose } from 'react-apollo';
 import Header from './Header';
 import Home from './Home/Home';
 import CandidateHolder from './Candidates/CandidateHolder';
@@ -13,9 +15,6 @@ import ReadingHolder from './Readings/ReadingHolder';
 import AboutUs from './AboutUs/AboutUs';
 import Elements from './common/Elements';
 import FourZeroFour from './FourZeroFour';
-import axios from 'axios';
-import cmsQueries from '../api/cmsQueries';
-import queryFields from '../api/queryFields';
 import './App.css';
 
 injectTapEventPlugin();
@@ -51,6 +50,13 @@ class App extends Component {
         // store data to localStorage if available
         localStorage.localMajorityData = JSON.stringify(this.state);
       }
+      console.log(
+        'this props from App....anything coming from graphql?',
+        '\n',
+        this,
+        '\n',
+        this.props
+      );
     }
   }
 
@@ -62,45 +68,6 @@ class App extends Component {
     }
   }
 
-  fetchData() {
-    queryFields.forEach(queryField => {
-      let query = cmsQueries.getAll(queryField.all);
-      axios(query)
-        .then(res => {
-          if (res.status === 200 && res.data) {
-            let state = this.state;
-            if (queryField.stateName === 'states') {
-              res.data.sort((a, b) => {
-                if (a.title > b.title) {
-                  return 1;
-                } else if (a.title < b.title) {
-                  return -1;
-                } else {
-                  return 0;
-                }
-              });
-              let statesMasterList = res.data.map(item => item.title);
-              state.statesMasterList = statesMasterList;
-            }
-            state[queryField.stateName] = res.data;
-            console.log('query results for', queryField.stateName, res.data);
-            this.setStateAndLocalStorage(state);
-          } else {
-            console.log('error fetching', query, res);
-            throw Error('error on', queryField.stateName, res);
-          }
-        })
-        .catch(err => {
-          console.log(
-            `error acessing data for ${queryField.tableName} table`,
-            JSON.stringify(err)
-          );
-        });
-    });
-  }
-  componentDidMount() {
-    this.fetchData();
-  }
   render() {
     const {
       articles,
@@ -117,6 +84,8 @@ class App extends Component {
       candidateSeatTypesSelected,
       candidatesTextSelected,
     } = this.state;
+        console.log('this from App', this);
+    console.log('this.props from App', this.props);
     return (
       <div className="App">
         <Header props={this.props.children} />
@@ -161,7 +130,6 @@ class App extends Component {
                     );
                   }
                 }
-                // console.log(`seat and related candidate`, seat, candidate)
                 return (
                   <DistrictHolder
                     {...props}
@@ -262,6 +230,7 @@ class App extends Component {
   }
 }
 
-export default App;
-
-// <Route exact path="/" component={Home} />
+export default compose(
+  graphql(graphQLAPI.queries.AllStatesCandidates, { name: 'AllStatesCandidates' }),
+  graphql(graphQLAPI.queries.Parties, { name: 'Parties' })
+)(App);
