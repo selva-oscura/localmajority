@@ -70,7 +70,7 @@ class App extends Component {
   //     'this props from App componentDidMount....anything coming from graphql?',
   //     '\n',
   //     this.props
-  //   );    
+  //   );
   // }
   render() {
     // const {
@@ -90,16 +90,23 @@ class App extends Component {
     // } = this.state;
     const candidates = this.props.CandidatesBasics.allCandidates;
     const seats = this.props.SeatsBasics.allSeats;
-    const statesMasterList = this.props.States && this.props.States.allStates ? this.props.States.allStates
-      .map(state => state.title)
-      .sort()
-      : null;
-      const regionTypesMasterList = ["Federal District", "State", "State District"]
+    const statesMasterList =
+      this.props.States && this.props.States.allStates
+        ? this.props.States.allStates.map(state => state.title).sort()
+        : null;
+    const regionTypesMasterList = [
+      'Federal District',
+      'State',
+      'State District',
+    ];
     const parties = {};
-    if(this.props.Parties && this.props.Parties.allParties){
-      this.props.Parties.allParties.forEach((party) => parties[`${party.id}`] = party);
+    if (this.props.Parties && this.props.Parties.allParties) {
+      this.props.Parties.allParties.forEach(
+        party => (parties[`${party.id}`] = party)
+      );
     }
-    const articles = [], contests = [];
+    const articles = [],
+      contests = [];
     // console.log('this from App', this);
     // console.log('this.props from App', this.props);
     console.log('candidates', candidates);
@@ -122,16 +129,12 @@ class App extends Component {
             <Route
               path="/candidates/:slug"
               component={props => {
-                const candidate = candidates 
-                  ? (candidates.find(
-                      candidate => props.match.params.slug === candidate.slug))
+                const candidate = candidates
+                  ? candidates.find(
+                      candidate => props.match.params.slug === candidate.slug
+                    )
                   : null;
-                return (
-                  <CandidateHolder
-                    candidate={candidate}
-                    {...props}
-                  />
-                );
+                return <CandidateHolder candidate={candidate} {...props} />;
               }}
             />
             <Route
@@ -162,51 +165,49 @@ export default compose(
   graphql(graphQLAPI.queries.States, { name: 'States' })
 )(App);
 
-
-
 //            <Route
-              // path="/districts/:id"
-              // component={props => {
-              //   const seat = seats.find(
-              //     seat => props.match.params.id === seat.slug
-              //   );
-              //   let contest, candidate, districtPrimer, districtTP, candidateTP;
-              //   if (seat) {
-              //     districtPrimer = articles.find(
-              //       a =>
-              //         a.type === 'DistrictPrimer' &&
-              //         a.appliesTo.includes(seat.id)
-              //     );
-              //     districtTP = articles.find(
-              //       a =>
-              //         a.type === 'TalkingPoints' &&
-              //         a.appliesTo.includes(seat.id)
-              //     );
-              //     contest = contests.find(c => c.seatId === seat.id);
-              //     if (contest) {
-              //       candidate = candidates.find(
-              //         c => contest.id === c.inContest
-              //       );
-              //     }
-              //     if (candidate) {
-              //       candidateTP = articles.find(
-              //         a =>
-              //           a.type === 'TalkingPoints' &&
-              //           a.appliesTo.includes(candidate.id)
-              //       );
-              //     }
-              //   }
-              //   return (
-              //     <DistrictHolder
-              //       {...props}
-              //       seat={seat}
-              //       candidate={candidate}
-              //       districtPrimer={districtPrimer}
-              //       districtTP={districtTP}
-              //       candidateTP={candidateTP}
-              //     />
-              //   );
-              // }}
+// path="/districts/:id"
+// component={props => {
+//   const seat = seats.find(
+//     seat => props.match.params.id === seat.slug
+//   );
+//   let contest, candidate, districtPrimer, districtTP, candidateTP;
+//   if (seat) {
+//     districtPrimer = articles.find(
+//       a =>
+//         a.type === 'DistrictPrimer' &&
+//         a.appliesTo.includes(seat.id)
+//     );
+//     districtTP = articles.find(
+//       a =>
+//         a.type === 'TalkingPoints' &&
+//         a.appliesTo.includes(seat.id)
+//     );
+//     contest = contests.find(c => c.seatId === seat.id);
+//     if (contest) {
+//       candidate = candidates.find(
+//         c => contest.id === c.inContest
+//       );
+//     }
+//     if (candidate) {
+//       candidateTP = articles.find(
+//         a =>
+//           a.type === 'TalkingPoints' &&
+//           a.appliesTo.includes(candidate.id)
+//       );
+//     }
+//   }
+//   return (
+//     <DistrictHolder
+//       {...props}
+//       seat={seat}
+//       candidate={candidate}
+//       districtPrimer={districtPrimer}
+//       districtTP={districtTP}
+//       candidateTP={candidateTP}
+//     />
+//   );
+// }}
 //            />
 //            <Route
 //              path="/districts"
@@ -220,31 +221,31 @@ export default compose(
 //              )}
 //            />
 //            <Route
-              // path="/article/:id"
-              // component={props => {
-              //   const reading = articles.find(
-              //     reading => props.match.params.id === reading.slug
-              //   );
-              //   return <ReadingHolder reading={reading} {...props} />;
-              // }}
+// path="/article/:id"
+// component={props => {
+//   const reading = articles.find(
+//     reading => props.match.params.id === reading.slug
+//   );
+//   return <ReadingHolder reading={reading} {...props} />;
+// }}
 //            />
 
-            // <Route
-            //   path="/issues/:id"
-            //   component={props => {
-            //     console.log(
-            //       'logging from routing for /issues/:id -- issues are',
-            //       issues,
-            //       'param is',
-            //       props.match.params.id
-            //     );
-            //     const issue = issues.find(
-            //       issue => props.match.params.id === issue.id
-            //     );
-            //     return <IssuePrimer {...props} issue={issue} />;
-            //   }}
-            // />
-            // <Route
-            //   path="/issues"
-            //   component={props => <Issues {...props} issues={issues} />}
-            // />
+// <Route
+//   path="/issues/:id"
+//   component={props => {
+//     console.log(
+//       'logging from routing for /issues/:id -- issues are',
+//       issues,
+//       'param is',
+//       props.match.params.id
+//     );
+//     const issue = issues.find(
+//       issue => props.match.params.id === issue.id
+//     );
+//     return <IssuePrimer {...props} issue={issue} />;
+//   }}
+// />
+// <Route
+//   path="/issues"
+//   component={props => <Issues {...props} issues={issues} />}
+// />

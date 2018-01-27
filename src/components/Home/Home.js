@@ -31,7 +31,7 @@ const Home = props => {
         <article className="Main">
           <h3>Featured Candidates</h3>
           <div className="flex">
-            { candidates && candidates.length ? (
+            {candidates && candidates.length ? (
               candidates.map((candidate, i) => (
                 <Card
                   key={i}
@@ -57,25 +57,23 @@ const Home = props => {
 
 export default Home;
 
-
-
-          // <h3>Featured Articles</h3>
-          // <div className="flex">
-          //   {issuePrimers.length ? (
-          //     issuePrimers.map((issuePrimer, i) => (
-          //       <Card
-          //         key={`issuePrimer-${i}`}
-          //         id={issuePrimer.id}
-          //         cardTitle={issuePrimer.title}
-          //         cardSubtitle={issuePrimer.author}
-          //         cardText={issuePrimer.description}
-          //         imgSrc="ImageSourceNeeded"
-          //         category="article"
-          //         slug={issuePrimer.slug}
-          //         imgShape="landscape"
-          //       />
-          //     ))
-          //   ) : (
-          //     <h2>Loading</h2>
-          //   )}
-          // </div>
+// <h3>Featured Articles</h3>
+// <div className="flex">
+//   {issuePrimers.length ? (
+//     issuePrimers.map((issuePrimer, i) => (
+//       <Card
+//         key={`issuePrimer-${i}`}
+//         id={issuePrimer.id}
+//         cardTitle={issuePrimer.title}
+//         cardSubtitle={issuePrimer.author}
+//         cardText={issuePrimer.description}
+//         imgSrc="ImageSourceNeeded"
+//         category="article"
+//         slug={issuePrimer.slug}
+//         imgShape="landscape"
+//       />
+//     ))
+//   ) : (
+//     <h2>Loading</h2>
+//   )}
+// </div>

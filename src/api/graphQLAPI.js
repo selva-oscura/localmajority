@@ -57,7 +57,7 @@ const queries = {
   `,
   SingleStateByAbbrevCandidatesBasics: gql`
     query SingleStateCandidatesBasics($abbrev: String!) {
-      State(abbrev: $abbrev){
+      State(abbrev: $abbrev) {
         id
         title
         abbrev
@@ -74,14 +74,13 @@ const queries = {
           headshotId {
             url
           }
-
         }
       }
     }
   `,
   CandidateDetail: gql`
-    query CandidateDetail($id: ID!){
-      Candidate(id:$id){
+    query CandidateDetail($id: ID!) {
+      Candidate(id: $id) {
         id
         title
         bioText
@@ -89,7 +88,7 @@ const queries = {
         contestId {
           electionDate
           seatId {
-            lat 
+            lat
             lng
             regionKind
             regionName
