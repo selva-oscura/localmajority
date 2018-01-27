@@ -18,7 +18,7 @@ class HorizontalCard extends Component {
       cardText,
       imgSrc,
       category,
-      friendlyId,
+      slug,
     } = this.props;
     return (
       <div
@@ -27,7 +27,7 @@ class HorizontalCard extends Component {
         onMouseOut={this.onMouseOut}
       >
         <Paper zDepth={this.state.depth} className="Paper">
-          <Link to={`/${category}/${friendlyId}`}>
+          <Link to={`/${category}/${slug}`}>
             <div className="image-holder">
               <img
                 className="placeholder-image"
@@ -54,7 +54,7 @@ HorizontalCard.propTypes = {
   cardText: PropTypes.string,
   imgSrc: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
-  friendlyId: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
 }
 
 

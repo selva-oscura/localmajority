@@ -23,6 +23,6 @@ export default Issues;
 //   cardText={issue.summary}
 //   imgSrc="needs to be added"
 //   category="issues"
-//   friendlyId="needs to be added"
+//   slug="needs to be added"
 //   imgShape="landscape"
 // />

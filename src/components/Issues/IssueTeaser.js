@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import ReadingLink from '../common/ReadingLink';
 import './IssueTeaser.css';
 
-const IssueTeaser = ({ id, issueTitle, friendlyId, imgSrc, issueArticles }) => (
+const IssueTeaser = ({ id, issueTitle, slug, imgSrc, issueArticles }) => (
   <div className="IssueTeaser flex">
-    <Link to={`/issues/${friendlyId}`}>
+    <Link to={`/issues/${slug}`}>
       <div className="image-holder">
         <img
           className="placeholder-image"
@@ -17,13 +17,13 @@ const IssueTeaser = ({ id, issueTitle, friendlyId, imgSrc, issueArticles }) => (
       </div>
     </Link>
     <div>
-      <Link to={`/issues/${friendlyId}`}>
+      <Link to={`/issues/${slug}`}>
         <h3>{issueTitle}</h3>
       </Link>
       issueArticles.map((reading, i) => (
       <ReadingLink
         key={i}
-        friendlyId={reading.friendlyId}
+        slug={reading.slug}
         title={reading.title}
         type={reading.type}
       />

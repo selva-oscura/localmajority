@@ -19,7 +19,7 @@ class BaseballCard extends Component {
       cardText,
       imgSrc,
       category,
-      friendlyId,
+      slug,
       imgShape,
     } = this.props;
     let aspectRatio = imgShape || '';
@@ -30,7 +30,7 @@ class BaseballCard extends Component {
         onMouseOut={this.onMouseOut}
       >
         <Paper zDepth={this.state.depth} className="Paper">
-          <Link to={`/${category}/${friendlyId}`}>
+          <Link to={`/${category}/${slug}`}>
             <div className="image-holder">
               <img
                 className="placeholder-image"
