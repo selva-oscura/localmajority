@@ -9,13 +9,13 @@ const CandidateCard = ({
   text = 'missing text',
   imgSrc,
   category,
-  friendlyId,
+  slug,
   imgShape,
 }) => {
   let aspectRatio = imgShape || '';
   return (
     <div className={`CandidateCard ${aspectRatio}`}>
-      <Link to={`/${category}/${friendlyId}`}>
+      <Link to={`/${category}/${slug}`}>
         <div className="show-on-small">
           <div className="brief-info">
             <h3>{title}</h3>
