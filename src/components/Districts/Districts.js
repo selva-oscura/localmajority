@@ -26,7 +26,7 @@ class Districts extends Component {
     document.title = 'Local Majority | Districts';
   }
   render() {
-    const { seats, statesMasterList, seatTypesMasterList } = this.props;
+    const { seats, statesMasterList, regionTypesMasterList } = this.props;
     const { districtsStatesSelected, districtsSeatTypeSelected } = this.state;
     let seatsMeetingFilters = seats.filter(
       seat => districtsStatesSelected[seat.stateName]
@@ -51,7 +51,7 @@ class Districts extends Component {
                 cardText={seat.candidateName}
                 imgSrc={seat.mapSmUrl}
                 category="districts"
-                friendlyId={seat.friendlyId}
+                slug={seat.slug}
                 imgShape="square"
               />
             ))
