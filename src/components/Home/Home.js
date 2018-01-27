@@ -6,8 +6,10 @@ import Card from '../common/Card';
 
 const Home = props => {
   document.title = 'Local Majority';
-  let { articles, candidates } = props;
-  let issuePrimers = articles.filter(a => a.type === 'IssuePrimer');
+  console.log('from Home', props);
+  let { candidates } = props;
+  // let { articles, candidates } = props;
+  // let issuePrimers = articles.filter(a => a.type === 'IssuePrimer');
   return (
     <div className="Home">
       <div className="map-and-text">
@@ -27,38 +29,18 @@ const Home = props => {
       </div>
       <div className="main-and-aside">
         <article className="Main">
-          <h3>Featured Articles</h3>
-          <div className="flex">
-            {issuePrimers.length ? (
-              issuePrimers.map((issuePrimer, i) => (
-                <Card
-                  key={`issuePrimer-${i}`}
-                  id={issuePrimer.id}
-                  cardTitle={issuePrimer.title}
-                  cardSubtitle={issuePrimer.author}
-                  cardText={issuePrimer.description}
-                  imgSrc="ImageSourceNeeded"
-                  category="article"
-                  friendlyId={issuePrimer.friendlyId}
-                  imgShape="landscape"
-                />
-              ))
-            ) : (
-              <h2>Loading</h2>
-            )}
-          </div>
           <h3>Featured Candidates</h3>
           <div className="flex">
-            {candidates.length ? (
+            { candidates && candidates.length ? (
               candidates.map((candidate, i) => (
                 <Card
                   key={i}
                   id={candidate.id}
                   cardTitle={candidate.title}
-                  cardText={candidate.seatName}
-                  imgSrc={candidate.headshotSmUrl}
+                  cardText={candidate.contestId.seatId.title}
+                  imgSrc={candidate.headshotId.url}
                   category="candidates"
-                  friendlyId={candidate.friendlyId}
+                  slug={candidate.slug}
                   imgShape="square"
                 />
               ))
@@ -74,3 +56,26 @@ const Home = props => {
 };
 
 export default Home;
+
+
+
+          // <h3>Featured Articles</h3>
+          // <div className="flex">
+          //   {issuePrimers.length ? (
+          //     issuePrimers.map((issuePrimer, i) => (
+          //       <Card
+          //         key={`issuePrimer-${i}`}
+          //         id={issuePrimer.id}
+          //         cardTitle={issuePrimer.title}
+          //         cardSubtitle={issuePrimer.author}
+          //         cardText={issuePrimer.description}
+          //         imgSrc="ImageSourceNeeded"
+          //         category="article"
+          //         slug={issuePrimer.slug}
+          //         imgShape="landscape"
+          //       />
+          //     ))
+          //   ) : (
+          //     <h2>Loading</h2>
+          //   )}
+          // </div>
