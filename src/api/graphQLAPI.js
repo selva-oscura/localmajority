@@ -55,6 +55,99 @@ const queries = {
       }
     }
   `,
+  SingleStateByAbbrevCandidatesBasics: gql`
+    query SingleStateCandidatesBasics($abbrev: String!) {
+      State(abbrev: $abbrev){
+        id
+        title
+        abbrev
+        candidates {
+          id
+          title
+          slug
+          contestId {
+            electionDate
+            seatId {
+              title
+            }
+          }
+          headshotId {
+            url
+          }
+
+        }
+      }
+    }
+  `,
+  CandidateDetail: gql`
+    query CandidateDetail($id: ID!){
+      Candidate(id:$id){
+        id
+        title
+        bioText
+        campaignEmail
+        contestId {
+          electionDate
+          seatId {
+            lat 
+            lng
+            regionKind
+            regionName
+            slug
+            title
+          }
+        }
+        donateUrl
+        facebook
+        firstName
+        lastName
+        headshotId {
+          id
+          url
+        }
+        homepageUrl
+        partyId {
+          title
+        }
+        primers {
+          articleType
+          author
+          updatedAt
+          sections
+          title
+        }
+        summaryText
+        state {
+          id
+          abbrev
+          title
+        }
+        twitter
+      }
+    }
+  `,
+  CandidatesBasics: gql`
+    query CandidatesBasics {
+      allCandidates {
+        id
+        title
+        slug
+        state {
+          abbrev
+          title
+        }
+        contestId {
+          electionDate
+          seatId {
+            title
+          }
+        }
+        headshotId {
+          url
+        }
+      }
+    }
+  `,
   Candidates: gql`
     query Candidates {
       allCandidates {
@@ -72,6 +165,29 @@ const queries = {
       }
     }
   `,
+  SeatsBasics: gql`
+    query SeatsBasics {
+      allSeats {
+        id
+        title
+        slug
+        state {
+          id
+          title
+        }
+        regionKind
+        contestIds {
+          title
+          electionDate
+          candidateIds {
+            id
+            title
+            slug
+          }
+        }
+      }
+    }
+  `,
   Parties: gql`
     query Parties {
       allParties {
@@ -80,6 +196,14 @@ const queries = {
         color
         homepageUrl
         iconUrl
+      }
+    }
+  `,
+  States: gql`
+    query States {
+      allStates {
+        abbrev
+        title
       }
     }
   `,
