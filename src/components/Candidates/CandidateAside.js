@@ -3,6 +3,7 @@ import '../common/Aside.css';
 import TwitterTimeline from '../common/TwitterTimeline';
 import { SocialIcon } from 'react-social-icons';
 import CandidateDonateButton from './CandidateDonateButton';
+import CandidateWebsiteButton from './CandidateWebsiteButton';
 
 const CandidateAside = props => {
   console.log('props from Aside', props);
@@ -12,7 +13,9 @@ const CandidateAside = props => {
     <aside id="Aside">
       <div className="row">
         <div className="col-12">
-          <TwitterTimeline twitterHandle={[candidate.twitterId]} />
+          {candidate.twitter && (
+            <TwitterTimeline twitterHandle={[candidate.twitter]} />
+          )}
         </div>
       </div>
       <div className="row">
@@ -22,12 +25,12 @@ const CandidateAside = props => {
       </div>
       <div className="row">
         <div className="col-12">
-          {candidate.twitterId && (
-            <SocialIcon url={`https://twitter.com/${candidate.twitterId}`} />
+          {candidate.twitter && (
+            <SocialIcon url={`https://twitter.com/${candidate.twitter}`} />
           )}
-          {candidate.facebookId && (
+          {candidate.facebook && (
             <SocialIcon
-              url={`https://www.facebook.com/${candidate.facebookId}`}
+              url={`https://www.facebook.com/${candidate.facebook}`}
             />
           )}
           {candidate.campaignEmail && (
@@ -38,6 +41,13 @@ const CandidateAside = props => {
           )}
         </div>
       </div>
+      {candidate.homepageUrl && (
+        <div className="row">
+          <div className="col-12">
+            <CandidateWebsiteButton candidate={props.candidate} />
+          </div>
+        </div>
+      )}
       {candidate.donateUrl && (
         <div className="row">
           <div className="col-12">
