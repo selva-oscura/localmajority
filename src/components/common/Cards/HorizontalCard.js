@@ -16,6 +16,7 @@ class HorizontalCard extends Component {
       cardTitle,
       cardSubtitle,
       cardText,
+      cardTextHtml,
       imgSrc,
       category,
       slug,
@@ -39,7 +40,12 @@ class HorizontalCard extends Component {
             <div className="card-body">
               <h3>{cardTitle}</h3>
               {cardSubtitle && <h4>{cardSubtitle}</h4>}
-              <p>{cardText}</p>
+              {cardText && <p>{cardText}</p>}
+              {cardTextHtml && <div
+                dangerouslySetInnerHTML={{
+                  __html: cardTextHtml
+                }}
+              />}
             </div>
           </Link>
         </Paper>

@@ -17,6 +17,7 @@ class Card extends Component {
       cardTitle,
       cardSubtitle,
       cardText,
+      cardTextHtml,
       imgSrc,
       category,
       slug,
@@ -41,7 +42,14 @@ class Card extends Component {
             </div>
             <h3>{cardTitle}</h3>
             {cardSubtitle && <h4>{cardSubtitle}</h4>}
-            <p>{cardText}</p>
+            {cardText && <p>{cardText}</p>}
+            {cardTextHtml && (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: cardTextHtml,
+                }}
+              />
+            )}
           </Link>
         </Paper>
       </div>
