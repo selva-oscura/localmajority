@@ -64,6 +64,7 @@ const queries = {
         candidates {
           id
           title
+          summaryText
           slug
           contestId {
             electionDate
@@ -130,6 +131,7 @@ const queries = {
       allCandidates {
         id
         title
+        summaryText
         slug
         state {
           abbrev
