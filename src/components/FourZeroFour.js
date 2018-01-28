@@ -3,8 +3,11 @@ import React from 'react';
 
 const FourZeroFour = props => {
   return (
-    <div className="FourZeroFour">
-      <a href="">FourZeroFour</a>
+    <div className="FourZeroFour row">
+      <div className="s12">
+        <p>Page Not Found</p>
+        <a href="./">Return to Home</a>
+      </div>
     </div>
   );
 };
