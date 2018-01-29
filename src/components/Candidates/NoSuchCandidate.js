@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const NoSuchCandidate = ({ candidateId }) => {
   return (
     <div className="NoSuchCandidate">
-      <h2>Candidate {candidateId} does not have a race this year</h2>
+      <h2>Error fetching Candidate {candidateId}</h2>
       <Link to="/candidates">Return to List of Candidates</Link>
     </div>
   );
