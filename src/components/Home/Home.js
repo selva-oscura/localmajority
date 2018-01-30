@@ -6,7 +6,7 @@ import Card from '../common/Card';
 
 const Home = props => {
   document.title = 'Local Majority';
-  console.log('from Home', props);
+  // console.log('from Home', props);
   let { candidates } = props;
   // let { articles, candidates } = props;
   // let issuePrimers = articles.filter(a => a.type === 'IssuePrimer');
