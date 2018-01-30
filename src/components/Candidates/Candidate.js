@@ -2,21 +2,40 @@ import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import graphQLAPI from '../../api/graphQLAPI';
 import Aux from '../common/Aux';
-import CandidateTalkingPoints from '../Readings/CandidateTalkingPoints';
+import NoSuchCandidate from './NoSuchCandidate';
 import { SocialIcon } from 'react-social-icons';
 import CandidateDonateButton from './CandidateDonateButton';
 import CandidateWebsiteButton from './CandidateWebsiteButton';
 import CandidateAside from './CandidateAside';
+import { standardizeDate } from '../../utils/functions';
 import './Candidate.css';
 
 class Candidate extends Component {
-  componentDidMount() {}
-  standardizeDate(dateString) {
-    return `${dateString.slice(5, 7)}/${dateString.slice(
-      8,
-      10
-    )}/${dateString.slice(0, 4)}`;
+  constructor(props, context) {
+    super(props, context);
+    console.log(
+      'props from CandidateHolder',
+      this.props.match.params,
+      this.props.params
+    );
+    console.log('props for fake candidate', this.props.candidate);
+    if (!this.props.candidate.id) {
+      this.props.candidate.id = 'bad0data';
+    }
+    const { candidate } = this.props;
+    if (candidate) {
+      document.title = `Local Majority | ${candidate.title}`;
+    } else {
+      document.title = 'Local Majority | Unrecognized Candidate';
+    }
   }
+  componentDidMount() {}
+  // standardizeDate(dateString) {
+  //   return `${dateString.slice(5, 7)}/${dateString.slice(
+  //     8,
+  //     10
+  //   )}/${dateString.slice(0, 4)}`;
+  // }
   componentDidUpdate() {
     console.log(
       'updated and at this point, the data looks like this: this.props.candidate',
@@ -26,9 +45,13 @@ class Candidate extends Component {
     );
   }
   render() {
-    let candidate = this.props.CandidateDetail.Candidate
+    console.log('this.props.candidate from Candidate render', this.props);
+    const candidate = this.props.CandidateDetail.Candidate
       ? this.props.CandidateDetail.Candidate
       : this.props.candidate;
+    if (!this.props.candidate && !this.props.CandidateDetail.loading) {
+      return <NoSuchCandidate candidateId={this.props.match.params.slug} />;
+    }
     return (
       <div className="Candidate">
         <article>
@@ -47,9 +70,7 @@ class Candidate extends Component {
                   ? candidate.contestId.seatId.title
                   : 'no district data'}
                 {candidate.contestId && candidate.contestId.electionDate
-                  ? ` on ${this.standardizeDate(
-                      candidate.contestId.electionDate
-                    )}`
+                  ? ` on ${standardizeDate(candidate.contestId.electionDate)}`
                   : null}
               </h3>
               <div>
@@ -162,10 +183,6 @@ class Candidate extends Component {
     );
   }
 }
-// {candidate.introLinkText && <p>{candidate.introLinkText}</p>}
-// {candidateTP && (
-//   <CandidateTalkingPoints reading={candidateTP} />
-// )}
 
 export default compose(
   graphql(graphQLAPI.queries.CandidateDetail, {

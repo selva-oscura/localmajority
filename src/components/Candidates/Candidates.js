@@ -9,7 +9,7 @@ class Candidates extends Component {
     super(props, context);
     let candidatesStatesSelected = {},
       candidatesRegionTypesSelected = {};
-    if(this.props.statesMasterList){    
+    if (this.props.statesMasterList) {
       this.props.statesMasterList.forEach(stateName => {
         candidatesStatesSelected[stateName] = true;
       });
@@ -38,9 +38,11 @@ class Candidates extends Component {
       candidatesRegionTypesSelected,
       candidatesTextSelected,
     } = this.state;
-    let candidatesMeetingFilters = candidates && candidates.filter(
-      candidate => candidatesStatesSelected[candidate.state.title]
-    );
+    let candidatesMeetingFilters =
+      candidates &&
+      candidates.filter(
+        candidate => candidatesStatesSelected[candidate.state.title]
+      );
     return (
       <div className="Candidates">
         {candidatesMeetingFilters && candidatesMeetingFilters.length ? (
@@ -62,7 +64,7 @@ class Candidates extends Component {
                   id={candidate.id}
                   cardTitle={candidate.title}
                   cardSubtitle={seatTitle}
-                  cardText="none for right now"
+                  cardTextHtml={candidate.summaryText}
                   category="candidates"
                   imgSrc={headshotUrl}
                   slug={candidate.slug}
@@ -80,12 +82,12 @@ class Candidates extends Component {
 }
 
 export default Candidates;
-        // <Filters>
-        //   <SelectFilter
-        //     filterCategory="candidatesStatesSelected"
-        //     hintText="select state"
-        //     includeAll={true}
-        //     masterList={statesMasterList}
-        //     updateFilter={this.updateFilter}
-        //   />
-        // </Filters>
+// <Filters>
+//   <SelectFilter
+//     filterCategory="candidatesStatesSelected"
+//     hintText="select state"
+//     includeAll={true}
+//     masterList={statesMasterList}
+//     updateFilter={this.updateFilter}
+//   />
+// </Filters>

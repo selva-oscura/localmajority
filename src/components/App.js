@@ -4,8 +4,10 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import graphQLAPI from '../api/graphQLAPI';
 import { graphql, compose } from 'react-apollo';
 import Header from './Header';
+import ErrorBoundary from './common/ErrorBoundary';
 import Home from './Home/Home';
 import CandidateHolder from './Candidates/CandidateHolder';
+import Candidate from './Candidates/Candidate';
 import Candidates from './Candidates/Candidates';
 import DistrictHolder from './Districts/DistrictHolder';
 import Districts from './Districts/Districts';
@@ -15,48 +17,49 @@ import ReadingHolder from './Readings/ReadingHolder';
 import AboutUs from './AboutUs/AboutUs';
 import Elements from './common/Elements';
 import FourZeroFour from './FourZeroFour';
+import Loading from './common/Loading';
 import './App.css';
 
 injectTapEventPlugin();
 
 class App extends Component {
-  constructor(props, context) {
-    super(props, context);
+  // constructor(props, context) {
+  //   super(props, context);
 
-    // // check if there is local storage capability and stored data from last time
-    // let localMajorityData =
-    //   localStorage && localStorage.localMajorityData
-    //     ? localStorage.localMajorityData
-    //     : null;
-    // if (localMajorityData) {
-    //   // if there is stored data from last time, use that to bootstrap state (this will be fallback data in case of no internet access)
-    //   let state = JSON.parse(localMajorityData);
-    //   state.errors = [];
-    //   this.state = state;
-    // } else {
-    //   // default state if no localStorage or no stored data in localStorage
-    //   this.state = {
-    //     articles: [],
-    //     candidates: [],
-    //     contests: [],
-    //     issues: [],
-    //     parties: [],
-    //     seats: [],
-    //     statesMasterList: [],
-    //     regionTypesMasterList: [],
-    //     errors: [],
-    //   };
-    //   if (localStorage) {
-    //     // store data to localStorage if available
-    //     localStorage.localMajorityData = JSON.stringify(this.state);
-    //   }
-    // }
-    // console.log(
-    //   'this props from App....anything coming from graphql?',
-    //   '\n',
-    //   this.props
-    // );
-  }
+  // // check if there is local storage capability and stored data from last time
+  // let localMajorityData =
+  //   localStorage && localStorage.localMajorityData
+  //     ? localStorage.localMajorityData
+  //     : null;
+  // if (localMajorityData) {
+  //   // if there is stored data from last time, use that to bootstrap state (this will be fallback data in case of no internet access)
+  //   let state = JSON.parse(localMajorityData);
+  //   state.errors = [];
+  //   this.state = state;
+  // } else {
+  //   // default state if no localStorage or no stored data in localStorage
+  //   this.state = {
+  //     articles: [],
+  //     candidates: [],
+  //     contests: [],
+  //     issues: [],
+  //     parties: [],
+  //     seats: [],
+  //     statesMasterList: [],
+  //     regionTypesMasterList: [],
+  //     errors: [],
+  //   };
+  //   if (localStorage) {
+  //     // store data to localStorage if available
+  //     localStorage.localMajorityData = JSON.stringify(this.state);
+  //   }
+  // }
+  // console.log(
+  //   'this props from App....anything coming from graphql?',
+  //   '\n',
+  //   this.props
+  // );
+  // }
 
   // setStateAndLocalStorage(state) {
   //   state = Object.assign({}, state);
@@ -72,24 +75,18 @@ class App extends Component {
   //     this.props
   //   );
   // }
-  render() {
-    // const {
-    //   articles,
-    //   candidates,
-    //   contests,
-    //   issues,
-    //   parties,
-    //   seats,
-    //   statesMasterList,
-    //   regionTypesMasterList,
-    //   districtsStatesSelected,
-    //   districtsSeatTypeSelected,
-    //   candidatesStatesSelected,
-    //   candidateSeatTypesSelected,
-    //   candidatesTextSelected,
-    // } = this.state;
+  renderPage() {
+    // show Loading spinner if graphql queries are still being loaded
+    Object.keys(this.props).forEach(query => {
+      if (query.loading) {
+        return <Loading />;
+      }
+    });
+
+    // once queries are no longer being loaded, display content
     const candidates = this.props.CandidatesBasics.allCandidates;
     const seats = this.props.SeatsBasics.allSeats;
+    console.log('seats from renderPage', seats);
     const statesMasterList =
       this.props.States && this.props.States.allStates
         ? this.props.States.allStates.map(state => state.title).sort()
@@ -107,52 +104,106 @@ class App extends Component {
     }
     const articles = [],
       contests = [];
-    // console.log('this from App', this);
-    // console.log('this.props from App', this.props);
     console.log('candidates', candidates);
     console.log('seats', seats);
     console.log('parties', parties);
     console.log('statesMasterList', statesMasterList);
-    // return null;
+
     return (
-      <div className="App">
-        <Header props={this.props.children} />
-        <div className="container">
-          <Switch>
-            <Route
-              exact
-              path="/"
-              component={props => {
-                return <Home candidates={candidates} articles={articles} />;
-              }}
+      <Switch>
+        <Route
+          exact
+          path="/"
+          component={props => {
+            return <Home candidates={candidates} articles={articles} />;
+          }}
+        />
+        <Route
+          path="/candidates/:slug"
+          component={props => {
+            const candidate = candidates
+              ? candidates.find(
+                  candidate => props.match.params.slug === candidate.slug
+                )
+              : { id: 'bad-data', headshotId: { url: null } };
+            return <Candidate candidate={candidate} {...props} />;
+          }}
+        />
+        <Route
+          path="/candidates"
+          component={props => (
+            <Candidates
+              {...props}
+              candidates={candidates}
+              statesMasterList={statesMasterList}
+              regionTypesMasterList={regionTypesMasterList}
             />
-            <Route
-              path="/candidates/:slug"
-              component={props => {
-                const candidate = candidates
-                  ? candidates.find(
-                      candidate => props.match.params.slug === candidate.slug
-                    )
-                  : null;
-                return <CandidateHolder candidate={candidate} {...props} />;
-              }}
-            />
-            <Route
-              path="/candidates"
-              component={props => (
-                <Candidates
+          )}
+        />
+        <Route
+          path="/districts/:slug"
+          component={props => {
+            const seat = seats.find(
+              seat => props.match.params.slug === seat.slug
+            );
+            return (
+              <ErrorBoundary>
+                <DistrictHolder
                   {...props}
-                  candidates={candidates}
+                  seat={seat}
+                />
+              </ErrorBoundary>
+            );
+          }}
+        />
+        <Route
+          path="/districts"
+          component={props => (
+            seats && statesMasterList && statesMasterList.length && regionTypesMasterList 
+            ? (
+                <Districts
+                  {...props}
+                  seats={seats}
                   statesMasterList={statesMasterList}
                   regionTypesMasterList={regionTypesMasterList}
                 />
-              )}
-            />
-            <Route path="/about-us" component={AboutUs} />
-            <Route path="/elements" component={Elements} />
-            <Route component={FourZeroFour} />
-          </Switch>
-        </div>
+              )
+            : (
+                <Loading />
+              )
+            )
+          }
+        />
+        <Route path="/about-us" component={AboutUs} />
+        <Route path="/elements" component={Elements} />
+        <Route component={FourZeroFour} />
+      </Switch>
+    );
+  }
+
+  render() {
+    // const {
+    //   articles,
+    //   candidates,
+    //   contests,
+    //   issues,
+    //   parties,
+    //   seats,
+    //   statesMasterList,
+    //   regionTypesMasterList,
+    //   districtsStatesSelected,
+    //   districtsSeatTypeSelected,
+    //   candidatesStatesSelected,
+    //   candidateSeatTypesSelected,
+    //   candidatesTextSelected,
+    // } = this.state;
+
+    return (
+      <div className="App">
+        <Header props={this.props.children} />
+        <ErrorBoundary>
+          <div className="container">{this.renderPage()}</div>
+        </ErrorBoundary>
       </div>
     );
   }
@@ -165,70 +216,17 @@ export default compose(
   graphql(graphQLAPI.queries.States, { name: 'States' })
 )(App);
 
-//            <Route
-// path="/districts/:id"
-// component={props => {
-//   const seat = seats.find(
-//     seat => props.match.params.id === seat.slug
-//   );
-//   let contest, candidate, districtPrimer, districtTP, candidateTP;
-//   if (seat) {
-//     districtPrimer = articles.find(
-//       a =>
-//         a.type === 'DistrictPrimer' &&
-//         a.appliesTo.includes(seat.id)
-//     );
-//     districtTP = articles.find(
-//       a =>
-//         a.type === 'TalkingPoints' &&
-//         a.appliesTo.includes(seat.id)
-//     );
-//     contest = contests.find(c => c.seatId === seat.id);
-//     if (contest) {
-//       candidate = candidates.find(
-//         c => contest.id === c.inContest
-//       );
-//     }
-//     if (candidate) {
-//       candidateTP = articles.find(
-//         a =>
-//           a.type === 'TalkingPoints' &&
-//           a.appliesTo.includes(candidate.id)
-//       );
-//     }
-//   }
-//   return (
-//     <DistrictHolder
-//       {...props}
-//       seat={seat}
-//       candidate={candidate}
-//       districtPrimer={districtPrimer}
-//       districtTP={districtTP}
-//       candidateTP={candidateTP}
-//     />
-//   );
-// }}
-//            />
-//            <Route
-//              path="/districts"
-//              component={props => (
-//                <Districts
-//                  {...props}
-//                  seats={seats}
-//                  statesMasterList={statesMasterList}
-//                  regionTypesMasterList={regionTypesMasterList}
-//                />
-//              )}
-//            />
-//            <Route
-// path="/article/:id"
-// component={props => {
-//   const reading = articles.find(
-//     reading => props.match.params.id === reading.slug
-//   );
-//   return <ReadingHolder reading={reading} {...props} />;
-// }}
-//            />
+/*
+           <Route
+              path="/article/:id"
+              component={props => {
+                const reading = articles.find(
+                  reading => props.match.params.id === reading.slug
+                );
+                return <ReadingHolder reading={reading} {...props} />;
+              }}
+           />
+*/
 
 // <Route
 //   path="/issues/:id"

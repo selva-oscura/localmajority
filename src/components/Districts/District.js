@@ -4,12 +4,7 @@ import DistrictPrimer from '../Readings/DistrictPrimer';
 import './District.css';
 
 const District = ({
-  seatId,
   seat,
-  candidate,
-  districtPrimer,
-  districtTP,
-  candidateTP,
 }) => {
   // console.log(
   //   'seatId',
@@ -25,10 +20,14 @@ const District = ({
   //   'candidateTP',
   //   candidateTP
   // );
-  let candidateHeadshot;
-  candidateHeadshot = candidate.headshotSmUrl
-    ? candidate.headshotSmUrl
-    : candidate.headshotLgUrl;
+  const candidateHeadshot = null;
+  const seatMap = seat.mapSmUrl ? seat.mapSmUrl : "";
+  const candidates = seat && seat.contestIds && seat.contestIds[0].candidateIds ? seat.contestIds[0].candidateIds : undefined;
+  // candidateHeadshot = candidate.headshotSmUrl
+  //   ? candidate.headshotSmUrl
+  //   : candidate.headshotLgUrl;
+  console.log('seat from District', seat);
+  console.log('candidates from District page', candidates);
   return (
     <div className="District">
       <div className="hidden-sm-down">
@@ -36,21 +35,28 @@ const District = ({
           <div className="col-6">
             <h2>{seat.title}</h2>
             <img
-              src={seat.mapSmUrl}
+              src={seatMap}
               className="img-fluid"
               alt={`map of district ${seat.title}`}
             />
           </div>
-          {candidate ? (
+          {candidates ? (
+            candidates.map((candidate, i) => (
+              <div className="col-6" key={i}>
+                <h2>{candidate.title}</h2>
+                <img
+                  src={candidateHeadshot}
+                  className="img-fluid"
+                  alt={`headshot of distict candidate ${candidate.title}`}
+                />
+              </div>
+            ))
+          ) : (
             <div className="col-6">
-              <h2>{candidate.title}</h2>
-              <img
-                src={candidateHeadshot}
-                className="img-fluid"
-                alt={`headshot of distict candidate ${candidate.title}`}
-              />
+              <h2>Previously had candidate headshot here.</h2>
+              <p>Will we have multiple candidates here or just 'our' candidate or....?</p>
             </div>
-          ) : null}
+          )}
         </div>
       </div>
       <div className="hidden-md-up">
@@ -58,17 +64,13 @@ const District = ({
           <div className="col">
             <h2>{seat.title}</h2>
             <img
-              src={seat.mapSmUrl}
+              src={seatMap}
               className="img-fluid"
               alt={`map of district ${seat.title}`}
             />
           </div>
         </div>
       </div>
-      {districtPrimer &&
-        Object.keys(districtPrimer) && (
-          <DistrictPrimer reading={districtPrimer} candidate={candidate} />
-        )}
     </div>
   );
 };

@@ -8,9 +8,11 @@ class Districts extends Component {
     super(props, context);
     let districtsStatesSelected = {},
       districtsSeatTypeSelected = {};
-    this.props.statesMasterList.forEach(stateName => {
-      districtsStatesSelected[stateName] = true;
-    });
+    if (this.props.statesMasterList) {
+      this.props.statesMasterList.forEach(stateName => {
+        districtsStatesSelected[stateName] = true;
+      });
+    }
     this.state = {
       districtsStatesSelected,
       districtsSeatTypeSelected,
@@ -28,35 +30,48 @@ class Districts extends Component {
   render() {
     const { seats, statesMasterList, regionTypesMasterList } = this.props;
     const { districtsStatesSelected, districtsSeatTypeSelected } = this.state;
-    let seatsMeetingFilters = seats.filter(
-      seat => districtsStatesSelected[seat.stateName]
-    );
+    if (districtsStatesSelected) {
+      console.log('districtsStatesSelected', districtsStatesSelected);
+      console.log('seats', seats);
+    }
+    // let seatsMeetingFilters = seats.filter(
+    //   seat => districtsStatesSelected[seat.state.title]
+    // );
+
+    let seatsMeetingFilters =
+      districtsStatesSelected && seats
+        ? seats.filter(seat => districtsStatesSelected[seat.state.title])
+        : [];
+    // console.log('--> districtsStatesSelected', districtsStatesSelected);
+    // console.log('--> seats', seats);
+    // console.log('--> seatsMeetingFilters', seatsMeetingFilters);
     return (
       <div className="Districts">
-        <Filters>
-          <ButtonFilters
-            filterCategory="districtsStatesSelected"
-            includeAllNone={true}
-            masterList={statesMasterList}
-            updateFilter={this.updateFilter}
-          />
-        </Filters>
+        { statesMasterList && 
+          <Filters>
+            <ButtonFilters
+              filterCategory="districtsStatesSelected"
+              includeAllNone={true}
+              masterList={statesMasterList}
+              updateFilter={this.updateFilter}
+            />
+          </Filters>
+        }
         <div className="flex">
-          {seatsMeetingFilters.length ? (
+          {seatsMeetingFilters && seatsMeetingFilters.length ? (
             seatsMeetingFilters.map((seat, i) => (
               <Card
                 key={i}
-                id={seat.uid}
+                id={seat.id}
                 cardTitle={seat.title}
-                cardText={seat.candidateName}
-                imgSrc={seat.mapSmUrl}
+                imgSrc="missing"
                 category="districts"
                 slug={seat.slug}
                 imgShape="square"
               />
             ))
           ) : (
-            <h2>No Candidates Meet Your Criteria.</h2>
+            <h2>No Districts Meet Your Criteria.</h2>
           )}
         </div>
       </div>
@@ -65,3 +80,4 @@ class Districts extends Component {
 }
 
 export default Districts;
+
