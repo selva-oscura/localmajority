@@ -1,4 +1,6 @@
 import React from 'react';
+import { graphql, compose } from 'react-apollo';
+import graphQLAPI from '../../api/graphQLAPI';
 import District from './District';
 import NoSuchDistrict from './NoSuchDistrict';
 
@@ -20,4 +22,13 @@ const DistrictHolder = props => {
   );
 };
 
-export default DistrictHolder;
+// export default DistrictHolder;
+
+export default compose(
+  graphql(graphQLAPI.queries.SeatDetail, {
+    name: 'SeatDetail',
+    options: props => {
+      return { variables: { id: props.seat.id } };
+    },
+  })
+)(DistrictHolder);

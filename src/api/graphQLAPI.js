@@ -189,6 +189,40 @@ const queries = {
       }
     }
   `,
+  SeatDetail: gql`
+    query SeatDetail($id: ID!) {
+      Seat(id: $id){
+        id
+        title
+        slug
+        state {
+          id
+          title
+        }
+        primers {
+          articleType
+          author
+          createdAt
+          updatedAt
+          id
+          author
+          sections
+          slug
+          title
+        }
+        regionKind
+        contestIds {
+          title
+          electionDate
+          candidateIds {
+            id
+            title
+            slug
+          }
+        }        
+      }
+    }
+  `,
   Parties: gql`
     query Parties {
       allParties {
