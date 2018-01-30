@@ -191,7 +191,7 @@ const queries = {
   `,
   SeatDetail: gql`
     query SeatDetail($id: ID!) {
-      Seat(id: $id){
+      Seat(id: $id) {
         id
         title
         slug
@@ -219,7 +219,7 @@ const queries = {
             title
             slug
           }
-        }        
+        }
       }
     }
   `,
