@@ -1,28 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import graphQLAPI from '../../api/graphQLAPI';
 import District from './District';
 import NoSuchDistrict from './NoSuchDistrict';
 
-const DistrictHolder = props => {
-  const { seat } = props;
-  if (seat && seat.title) {
-    document.title = `Local Majority | ${seat.title}`;
-  } else {
-    document.title = 'Local Majority | Unrecognized District';
+class DistrictHolder extends Component {
+  constructor(props, context) {
+    super(props, context);
   }
-  return (
-    <div className="DistrictHolder">
-      {seat ? (
-        <District seatId={props.match.params.id} seat={seat} {...props} />
-      ) : (
-        <NoSuchDistrict seatId={props.match.params.id} />
-      )}
-    </div>
-  );
-};
-
-// export default DistrictHolder;
+  render() {
+    const seat = this.props.SeatDetail.Seat
+      ? this.props.SeatDetail.Seat
+      : this.props.seat;
+    console.log('props', this.props);
+    if (seat && seat.title) {
+      document.title = `Local Majority | ${seat.title}`;
+    } else {
+      document.title = 'Local Majority | Unrecognized District';
+    }
+    return (
+      <div className="DistrictHolder">
+        {seat ? (
+          <District seat={seat} {...this.props} />
+        ) : (
+          <NoSuchDistrict seatId={this.props.match.params.slug} />
+        )}
+      </div>
+    );
+  }
+}
 
 export default compose(
   graphql(graphQLAPI.queries.SeatDetail, {
