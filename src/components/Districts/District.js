@@ -3,9 +3,7 @@ import React from 'react';
 import DistrictPrimer from '../Readings/DistrictPrimer';
 import './District.css';
 
-const District = ({
-  seat,
-}) => {
+const District = ({ seat }) => {
   // console.log(
   //   'seatId',
   //   seatId,
@@ -21,8 +19,11 @@ const District = ({
   //   candidateTP
   // );
   const candidateHeadshot = null;
-  const seatMap = seat.mapSmUrl ? seat.mapSmUrl : "";
-  const candidates = seat && seat.contestIds && seat.contestIds[0].candidateIds ? seat.contestIds[0].candidateIds : undefined;
+  const seatMap = seat.mapSmUrl ? seat.mapSmUrl : '';
+  const candidates =
+    seat && seat.contestIds && seat.contestIds[0].candidateIds
+      ? seat.contestIds[0].candidateIds
+      : undefined;
   // candidateHeadshot = candidate.headshotSmUrl
   //   ? candidate.headshotSmUrl
   //   : candidate.headshotLgUrl;
@@ -54,7 +55,10 @@ const District = ({
           ) : (
             <div className="col-6">
               <h2>Previously had candidate headshot here.</h2>
-              <p>Will we have multiple candidates here or just 'our' candidate or....?</p>
+              <p>
+                Will we have multiple candidates here or just 'our' candidate
+                or....?
+              </p>
             </div>
           )}
         </div>
@@ -68,6 +72,10 @@ const District = ({
               className="img-fluid"
               alt={`map of district ${seat.title}`}
             />
+            <p>
+              We seriously need to get some data into Seats, DistrictPrimers,
+              etc.....
+            </p>
           </div>
         </div>
       </div>
