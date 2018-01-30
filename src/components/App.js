@@ -86,7 +86,6 @@ class App extends Component {
     // once queries are no longer being loaded, display content
     const candidates = this.props.CandidatesBasics.allCandidates;
     const seats = this.props.SeatsBasics.allSeats;
-    console.log('seats from renderPage', seats);
     const statesMasterList =
       this.props.States && this.props.States.allStates
         ? this.props.States.allStates.map(state => state.title).sort()
@@ -104,10 +103,12 @@ class App extends Component {
     }
     const articles = [],
       contests = [];
-    console.log('candidates', candidates);
-    console.log('seats', seats);
-    console.log('parties', parties);
-    console.log('statesMasterList', statesMasterList);
+    if(candidates && seats){
+      console.log('candidates', candidates);
+      console.log('seats', seats);
+      console.log('parties', parties);
+      console.log('statesMasterList', statesMasterList);
+    }
 
     return (
       <Switch>
@@ -148,29 +149,26 @@ class App extends Component {
             );
             return (
               <ErrorBoundary>
-                <DistrictHolder
-                  {...props}
-                  seat={seat}
-                />
+                <DistrictHolder {...props} seat={seat} />
               </ErrorBoundary>
             );
           }}
         />
         <Route
           path="/districts"
-          component={props => (
-            seats && statesMasterList && statesMasterList.length && regionTypesMasterList 
-            ? (
-                <Districts
-                  {...props}
-                  seats={seats}
-                  statesMasterList={statesMasterList}
-                  regionTypesMasterList={regionTypesMasterList}
-                />
-              )
-            : (
-                <Loading />
-              )
+          component={props =>
+            seats &&
+            statesMasterList &&
+            statesMasterList.length &&
+            regionTypesMasterList ? (
+              <Districts
+                {...props}
+                seats={seats}
+                statesMasterList={statesMasterList}
+                regionTypesMasterList={regionTypesMasterList}
+              />
+            ) : (
+              <Loading />
             )
           }
         />
