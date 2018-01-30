@@ -3,7 +3,7 @@ import './Aside.css';
 import TwitterTimeline from './TwitterTimeline';
 
 const Aside = props => {
-  console.log('props', props);
+  // console.log('props', props);
   const twitterHandles = props.twitterHandles;
   // return (
   //   <aside id="Aside">
