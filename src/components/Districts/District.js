@@ -1,89 +1,108 @@
-import React from 'react';
-// import PieChart from '../Graphs/PieChart';
-import DistrictPrimer from '../Readings/DistrictPrimer';
+import React, { Component } from 'react';
+import { graphql, compose } from 'react-apollo';
+import graphQLAPI from '../../api/graphQLAPI';
+import NoSuchDistrict from './NoSuchDistrict';
+import Loading from '../common/Loading';
 import './District.css';
 
-const District = ({ seat }) => {
-  // console.log(
-  //   'seatId',
-  //   seatId,
-  //   'seat',
-  //   seat,
-  //   'candidate',
-  //   candidate,
-  //   'districtPrimer',
-  //   districtPrimer,
-  //   'districtTP',
-  //   districtTP,
-  //   'candidateTP',
-  //   candidateTP
-  // );
-  const candidateHeadshot = null;
-  const seatMap = seat.mapSmUrl ? seat.mapSmUrl : '';
-  const candidates =
-    seat && seat.contestIds && seat.contestIds[0].candidateIds
-      ? seat.contestIds[0].candidateIds
-      : undefined;
-  // candidateHeadshot = candidate.headshotSmUrl
-  //   ? candidate.headshotSmUrl
-  //   : candidate.headshotLgUrl;
-  console.log('seat from District', seat);
-  console.log('candidates from District page', candidates);
-  return (
-    <div className="District">
-      <div className="hidden-sm-down">
-        <div className="row">
-          <div className="col-6">
-            <h2>{seat.title}</h2>
-            <img
-              src={seatMap}
-              className="img-fluid"
-              alt={`map of district ${seat.title}`}
-            />
-          </div>
-          {candidates ? (
-            candidates.map((candidate, i) => (
-              <div className="col-6" key={i}>
-                <h2>{candidate.title}</h2>
-                <img
-                  src={candidateHeadshot}
-                  className="img-fluid"
-                  alt={`headshot of distict candidate ${candidate.title}`}
-                />
-              </div>
-            ))
-          ) : (
+
+class District extends Component {
+  constructor(props, context) {
+    super(props, context);
+    const { seat } = this.props;
+    if (seat) {
+      document.title = `Local Majority | ${seat.title}`;
+    } else {
+      document.title = 'Local Majority | Unrecognized Seat';
+    }
+  }
+
+  render(){
+    const isLoading = this.props.SeatDetailBySlug.loading;
+
+    if(isLoading){
+      return <Loading />
+    }
+
+    const seat = this.props.SeatDetailBySlug.Seat
+      ? this.props.SeatDetailBySlug.Seat
+      : this.props.seat;
+    if(!seat) {
+      return <NoSuchDistrict seatId={this.props.match.params.slug} />
+    }
+    const candidateHeadshot = null;
+    const seatMap = seat.mapSmUrl ? seat.mapSmUrl : '';
+    const candidates =
+      seat && seat.contestIds && seat.contestIds[0].candidateIds
+        ? seat.contestIds[0].candidateIds
+        : undefined;
+
+    return (
+      <div className="District">
+        <div className="hidden-sm-down">
+          <div className="row">
             <div className="col-6">
-              <h2>Previously had candidate headshot here.</h2>
+              <h2>{seat.title}</h2>
+              <img
+                src={seatMap}
+                className="img-fluid"
+                alt={`map of district ${seat.title}`}
+              />
+            </div>
+            {candidates ? (
+              candidates.map((candidate, i) => (
+                <div className="col-6" key={i}>
+                  <h2>{candidate.title}</h2>
+                  <img
+                    src={candidateHeadshot}
+                    className="img-fluid"
+                    alt={`headshot of distict candidate ${candidate.title}`}
+                  />
+                </div>
+              ))
+            ) : (
+              <div className="col-6">
+                <h2>Previously had candidate headshot here.</h2>
+                <p>
+                  Will we have multiple candidates here or just 'our' candidate
+                  or....?
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="hidden-md-up">
+          <div className="row">
+            <div className="col">
+              <h2>{seat.title}</h2>
+              <img
+                src={seatMap}
+                className="img-fluid"
+                alt={`map of district ${seat.title}`}
+              />
               <p>
-                Will we have multiple candidates here or just 'our' candidate
-                or....?
+                We seriously need to get some data into Seats, DistrictPrimers,
+                etc.....
               </p>
             </div>
-          )}
-        </div>
-      </div>
-      <div className="hidden-md-up">
-        <div className="row">
-          <div className="col">
-            <h2>{seat.title}</h2>
-            <img
-              src={seatMap}
-              className="img-fluid"
-              alt={`map of district ${seat.title}`}
-            />
-            <p>
-              We seriously need to get some data into Seats, DistrictPrimers,
-              etc.....
-            </p>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
-export default District;
+// export default District;
+
+export default compose(
+  graphql(graphQLAPI.queries.SeatDetailBySlug, {
+    name: 'SeatDetailBySlug',
+    options: props => {
+      return { variables: { slug: props.match.params.slug } };
+    },
+  })
+)(District);
+
 
 // const demographicData = [
 //   {
