@@ -126,7 +126,7 @@ class App extends Component {
               ? candidates.find(
                   candidate => props.match.params.slug === candidate.slug
                 )
-              : { id: 'bad-data', headshotId: { url: null } };
+              : { id: 'no-cached-data', headshotId: { url: null } };
             return <Candidate candidate={candidate} {...props} />;
           }}
         />
@@ -144,9 +144,10 @@ class App extends Component {
         <Route
           path="/districts/:slug"
           component={props => {
-            const seat = seats.find(
-              seat => props.match.params.slug === seat.slug
-            );
+            const seat = seats
+              ? seats.find(
+                seat => props.match.params.slug === seat.slug
+              ) : { id: 'no-cached-data', mapSmUrl: { url: null } };
             return (
               <ErrorBoundary>
                 <DistrictHolder {...props} seat={seat} />
