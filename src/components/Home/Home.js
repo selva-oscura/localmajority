@@ -2,7 +2,7 @@ import React from 'react';
 import './Home.css';
 import Aside from '../common/Aside';
 import VADistrictMap from '../Maps/VADistrictMap';
-import Card from '../common/Card';
+import Card from '../common/Cards/Card';
 
 const Home = props => {
   document.title = 'Local Majority';

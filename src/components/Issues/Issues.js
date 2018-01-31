@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../common/Card';
+import Card from '../common/Cards/Card';
 
 const Issues = props => {
   console.log('props for Issues', props);
