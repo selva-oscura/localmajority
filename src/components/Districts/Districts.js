@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Filters from '../Filters/Filters';
 import ButtonFilters from '../Filters/ButtonFilters';
-import Card from '../common/Card';
+import Card from '../common/Cards/Card';
 
 class Districts extends Component {
   constructor(props, context) {
@@ -47,7 +47,7 @@ class Districts extends Component {
     // console.log('--> seatsMeetingFilters', seatsMeetingFilters);
     return (
       <div className="Districts">
-        { statesMasterList && 
+        {statesMasterList && (
           <Filters>
             <ButtonFilters
               filterCategory="districtsStatesSelected"
@@ -56,7 +56,7 @@ class Districts extends Component {
               updateFilter={this.updateFilter}
             />
           </Filters>
-        }
+        )}
         <div className="flex">
           {seatsMeetingFilters && seatsMeetingFilters.length ? (
             seatsMeetingFilters.map((seat, i) => (
@@ -80,4 +80,3 @@ class Districts extends Component {
 }
 
 export default Districts;
-
