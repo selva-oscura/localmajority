@@ -126,6 +126,54 @@ const queries = {
       }
     }
   `,
+  CandidateDetailBySlug: gql`
+    query CandidateDetail($slug: String!) {
+      Candidate(slug: $slug) {
+        id
+        title
+        bioText
+        campaignEmail
+        contestId {
+          electionDate
+          seatId {
+            lat
+            lng
+            regionKind
+            regionName
+            slug
+            title
+          }
+        }
+        donateUrl
+        facebook
+        firstName
+        lastName
+        headshotId {
+          id
+          url
+        }
+        homepageUrl
+        partyId {
+          title
+        }
+        primers {
+          articleType
+          author
+          updatedAt
+          sections
+          title
+        }
+        summaryText
+        state {
+          id
+          abbrev
+          title
+        }
+        twitter
+      }
+    }
+  `,
+
   CandidatesBasics: gql`
     query CandidatesBasics {
       allCandidates {
