@@ -9,7 +9,7 @@ import Home from './Home/Home';
 import CandidateHolder from './Candidates/CandidateHolder';
 import Candidate from './Candidates/Candidate';
 import Candidates from './Candidates/Candidates';
-import DistrictHolder from './Districts/DistrictHolder';
+import District from './Districts/District';
 import Districts from './Districts/Districts';
 import IssuePrimer from './Readings/IssuePrimer';
 import Issues from './Issues/Issues';
@@ -150,7 +150,7 @@ class App extends Component {
               ) : { id: 'no-cached-data', mapSmUrl: { url: null } };
             return (
               <ErrorBoundary>
-                <DistrictHolder {...props} seat={seat} />
+                <District {...props} seat={seat} />
               </ErrorBoundary>
             );
           }}
