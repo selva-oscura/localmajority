@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import graphQLAPI from '../../api/graphQLAPI';
 import Aux from '../common/Aux';
+import Loading from '../common/Loading';
 import NoSuchCandidate from './NoSuchCandidate';
 import { SocialIcon } from 'react-social-icons';
 import CandidateDonateButton from './CandidateDonateButton';
@@ -13,15 +14,6 @@ import './Candidate.css';
 class Candidate extends Component {
   constructor(props, context) {
     super(props, context);
-    console.log(
-      'props from CandidateHolder',
-      this.props.match.params,
-      this.props.params
-    );
-    console.log('props for fake candidate', this.props.candidate);
-    if (!this.props.candidate.id) {
-      this.props.candidate.id = 'bad0data';
-    }
     const { candidate } = this.props;
     if (candidate) {
       document.title = `Local Majority | ${candidate.title}`;
@@ -29,27 +21,20 @@ class Candidate extends Component {
       document.title = 'Local Majority | Unrecognized Candidate';
     }
   }
-  componentDidMount() {}
-  // standardizeDate(dateString) {
-  //   return `${dateString.slice(5, 7)}/${dateString.slice(
-  //     8,
-  //     10
-  //   )}/${dateString.slice(0, 4)}`;
-  // }
-  componentDidUpdate() {
-    console.log(
-      'updated and at this point, the data looks like this: this.props.candidate',
-      this.props.candidate,
-      'and this.props.CandidateDetail',
-      this.props.CandidateDetail && this.props.CandidateDetail.Candidate
-    );
-  }
+
   render() {
-    console.log('this.props.candidate from Candidate render', this.props);
-    const candidate = this.props.CandidateDetail.Candidate
-      ? this.props.CandidateDetail.Candidate
+
+    const isLoading = this.props.CandidateDetailBySlug.loading;
+
+    if(isLoading){
+      return <Loading />
+    }
+
+    const candidate = this.props.CandidateDetailBySlug.Candidate
+      ? this.props.CandidateDetailBySlug.Candidate
       : this.props.candidate;
-    if (!this.props.candidate && !this.props.CandidateDetail.loading) {
+
+    if(!candidate){
       return <NoSuchCandidate candidateId={this.props.match.params.slug} />;
     }
     return (
@@ -126,49 +111,32 @@ class Candidate extends Component {
                 )}
                 {candidate.primers && (
                   <Aux>
-                    <h3>
-                      NOTE: data params rather than just the content are being
-                      shown here until we narrow down what should be shown on
-                      the page
-                    </h3>
                     {candidate.primers.map((primer, i) => (
                       <Aux key={`primer-${i}`}>
                         <h3>{primer.title}</h3>
-                        {primer.sections.map((section, s) => (
-                          <Aux key={`primer-${i}-section-${s}`}>
-                            <h4>
-                              Section Tag from Section {i}:<br />
-                              {section.tag}
-                            </h4>
-                            <h4>
-                              Section Body Heading from Section {i}:<br />
-                              {section.body && section.body.heading
-                                ? section.body.heading
-                                : null}
-                            </h4>
-                            <h4>
-                              Section Body Label from Section {i}:<br />
-                              {section.body && section.body.label
-                                ? section.body.label
-                                : null}
-                            </h4>
-                            <h4>
-                              Section Body Description from Section {i}:<br />
-                              {section.body && section.body.description
-                                ? section.body.description
-                                : null}
-                            </h4>
-                            <h4>Section Body Text from Section {i}</h4>
-                            {section.body.text && (
-                              <div
-                                dangerouslySetInnerHTML={{
-                                  __html: section.body.text,
-                                }}
-                              />
-                            )}
-                          </Aux>
-                        ))}
-                      </Aux>
+                        {primer.sections.map((section, s) => {
+                          const title = section.heading && section.heading.title 
+                            ? section.heading.title
+                            : null;
+                          const body = section.body;
+                          const btype = body && body.type;
+                          if (!body && !title) { return null;}
+                          return (
+                            <Aux key={`primer-${i}-section-${s}`}>
+                              <div className={section.tag} key={section.tag}>
+                                { title && <div className="section-head" style={articleStyles.sectionHead}>{title}</div> }
+
+                                { btype === 'RichText' &&
+                                    <div className="section-body"  dangerouslySetInnerHTML={{__html: body.text}} /> }
+                                { btype === 'Image' &&
+                                    <img src={body.url} alt="alt text FIXME"/>  }
+                                { btype === 'PlainText' &&
+                                    <div className="section-body">{body.text}</div> }
+                              </div>
+
+                            </Aux>
+                          )})}
+                        </Aux>
                     ))}
                   </Aux>
                 )}
@@ -184,78 +152,22 @@ class Candidate extends Component {
   }
 }
 
+const articleStyles = {
+    title: {
+    fontSize: "3em",
+    fontWeight: 700
+  },
+  sectionHead: {
+      fontSize: "2em",
+      fontWeight: 400
+  },
+};
+
 export default compose(
-  graphql(graphQLAPI.queries.CandidateDetail, {
-    name: 'CandidateDetail',
+  graphql(graphQLAPI.queries.CandidateDetailBySlug, {
+    name: 'CandidateDetailBySlug',
     options: props => {
-      return { variables: { id: props.candidate.id } };
+      return { variables: { slug: props.match.params.slug } };
     },
   })
 )(Candidate);
-
-// export default compose(
-//   graphql(graphQLAPI.queries.CandidatesBasics, { name: 'CandidatesBasics' }),
-//   graphql(graphQLAPI.queries.SeatsBasics, { name: 'SeatsBasics' }),
-//   graphql(graphQLAPI.queries.Parties, { name: 'Parties' }),
-//   graphql(graphQLAPI.queries.States, { name: 'States' })
-// )(App);
-
-//   <h2>Why this Race Matters</h2>
-//   <p>
-//     Lorem Ipsum is simply dummy text of the printing and
-//     typesetting industry. Lorem Ipsum has been the industry's
-//     standard dummy text ever since the 1500s, when an unknown
-//     printer took a galley of type and scrambled it to make a type
-//     specimen book. It has survived not only five centuries, but
-//     also the leap into electronic typesetting, remaining
-//     essentially unchanged. It was popularised in the 1960s with
-//     the release of Letraset sheets containing Lorem Ipsum
-//     passages, and more recently with desktop publishing software
-//     like Aldus PageMaker including versions of Lorem Ipsum
-//   </p>
-// </div>
-// <div className="row">
-//   <h2>Comparing Candidates</h2>
-//   <div className="half">
-//     <p>
-//       Lorem Ipsum is simply dummy text of the printing and
-//       typesetting industry. Lorem Ipsum has been the industry's
-//       standard dummy text ever since the 1500s, when an unknown
-//       printer took a galley of type and scrambled it to make a
-//       type specimen book. It has survived not only five centuries,
-//       but also the leap into electronic typesetting, remaining
-//       essentially unchanged. It was popularised in the 1960s with
-//       the release of Letraset sheets containing Lorem Ipsum
-//       passages, and more recently with desktop publishing software
-//       like Aldus PageMaker including versions of Lorem Ipsum
-//     </p>
-//   </div>
-//   <div className="half">
-//     <p>
-//       Lorem Ipsum is simply dummy text of the printing and
-//       typesetting industry. Lorem Ipsum has been the industry's
-//       standard dummy text ever since the 1500s, when an unknown
-//       printer took a galley of type and scrambled it to make a
-//       type specimen book. It has survived not only five centuries,
-//       but also the leap into electronic typesetting, remaining
-//       essentially unchanged. It was popularised in the 1960s with
-//       the release of Letraset sheets containing Lorem Ipsum
-//       passages, and more recently with desktop publishing software
-//       like Aldus PageMaker including versions of Lorem Ipsum
-//     </p>
-//   </div>
-// </div>
-// <div className="row">
-//   <h2>Why &amp; Why Not</h2>
-//   <p>
-//     Lorem Ipsum is simply dummy text of the printing and
-//     typesetting industry. Lorem Ipsum has been the industry's
-//     standard dummy text ever since the 1500s, when an unknown
-//     printer took a galley of type and scrambled it to make a type
-//     specimen book. It has survived not only five centuries, but
-//     also the leap into electronic typesetting, remaining
-//     essentially unchanged. It was popularised in the 1960s with
-//     the release of Letraset sheets containing Lorem Ipsum
-//     passages, and more recently with desktop publishing software
-//     like Aldus PageMaker including versions of Lorem Ipsum
-//   </p>
