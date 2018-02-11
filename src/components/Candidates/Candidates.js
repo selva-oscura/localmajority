@@ -20,7 +20,7 @@ class Candidates extends Component {
       candidatesRegionTypesSelected,
       candidatesTextSelected: [],
     };
-    console.log('this.props from constructor', this.props);
+    // console.log('this.props from constructor', this.props);
     this.updateFilter = this.updateFilter.bind(this);
   }
   updateFilter(filterCategory, selectedValues) {
@@ -37,16 +37,10 @@ class Candidates extends Component {
       !this.state.candidatesStatesSelected ||
       !Object.keys(this.state.candidatesStatesSelected).length ||
       !this.state.candidatesRegionTypesSelected;
-    console.log(
-      !this.props.candidates,
-      !this.state.candidatesStatesSelected,
-      !Object.keys(this.state.candidatesStatesSelected).length,
-      !this.state.candidatesRegionTypesSelected
-    );
     if (isLoading) {
       return <Loading />;
     }
-    console.log('this.props from Candidates page', this.props);
+    // console.log('this.props from Candidates page', this.props);
     const { candidates, statesMasterList, regionTypesMasterList } = this.props;
     const {
       candidatesStatesSelected,
