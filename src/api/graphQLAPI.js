@@ -113,7 +113,7 @@ const queries = {
           articleType
           author
           updatedAt
-          sections
+          content
           title
         }
         summaryText
@@ -160,7 +160,7 @@ const queries = {
           articleType
           author
           updatedAt
-          sections
+          content
           title
         }
         summaryText
@@ -253,8 +253,7 @@ const queries = {
           updatedAt
           id
           author
-          sections
-          slug
+          content
           title
         }
         regionKind
@@ -287,8 +286,7 @@ const queries = {
           updatedAt
           id
           author
-          sections
-          slug
+          content
           title
         }
         regionKind
@@ -299,6 +297,9 @@ const queries = {
             id
             title
             slug
+            headshotId {
+              url
+            }
           }
         }
       }
