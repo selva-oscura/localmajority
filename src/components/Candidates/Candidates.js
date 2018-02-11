@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loading from '../common/Loading';
 import Filters from '../Filters/Filters';
 import SelectFilter from '../Filters/SelectFilter';
 import HorizontalCards from '../common/Cards/HorizontalCards';
@@ -31,6 +32,20 @@ class Candidates extends Component {
     document.title = 'Local Majority | Candidates';
   }
   render() {
+    const isLoading =
+      !this.props.candidates ||
+      !this.state.candidatesStatesSelected ||
+      !Object.keys(this.state.candidatesStatesSelected).length ||
+      !this.state.candidatesRegionTypesSelected;
+    console.log(
+      !this.props.candidates,
+      !this.state.candidatesStatesSelected,
+      !Object.keys(this.state.candidatesStatesSelected).length,
+      !this.state.candidatesRegionTypesSelected
+    );
+    if (isLoading) {
+      return <Loading />;
+    }
     console.log('this.props from Candidates page', this.props);
     const { candidates, statesMasterList, regionTypesMasterList } = this.props;
     const {
