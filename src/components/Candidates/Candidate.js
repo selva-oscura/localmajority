@@ -23,18 +23,17 @@ class Candidate extends Component {
   }
 
   render() {
-
     const isLoading = this.props.CandidateDetailBySlug.loading;
 
-    if(isLoading){
-      return <Loading />
+    if (isLoading) {
+      return <Loading />;
     }
 
     const candidate = this.props.CandidateDetailBySlug.Candidate
       ? this.props.CandidateDetailBySlug.Candidate
       : this.props.candidate;
 
-    if(!candidate){
+    if (!candidate) {
       return <NoSuchCandidate candidateId={this.props.match.params.slug} />;
     }
     return (
@@ -114,29 +113,49 @@ class Candidate extends Component {
                     {candidate.primers.map((primer, i) => (
                       <Aux key={`primer-${i}`}>
                         <h3>{primer.title}</h3>
-                        {primer.sections.map((section, s) => {
-                          const title = section.heading && section.heading.title 
-                            ? section.heading.title
-                            : null;
+                        {primer.content.map((section, s) => {
+                          const title =
+                            section.heading && section.heading.title
+                              ? section.heading.title
+                              : null;
                           const body = section.body;
                           const btype = body && body.type;
-                          if (!body && !title) { return null;}
+                          if (!body && !title) {
+                            return null;
+                          }
                           return (
                             <Aux key={`primer-${i}-section-${s}`}>
                               <div className={section.tag} key={section.tag}>
-                                { title && <div className="section-head" style={articleStyles.sectionHead}>{title}</div> }
+                                {title && (
+                                  <div
+                                    className="section-head"
+                                    style={articleStyles.sectionHead}
+                                  >
+                                    {title}
+                                  </div>
+                                )}
 
-                                { btype === 'RichText' &&
-                                    <div className="section-body"  dangerouslySetInnerHTML={{__html: body.text}} /> }
-                                { btype === 'Image' &&
-                                    <img src={body.url} alt="alt text FIXME"/>  }
-                                { btype === 'PlainText' &&
-                                    <div className="section-body">{body.text}</div> }
+                                {btype === 'RichText' && (
+                                  <div
+                                    className="section-body"
+                                    dangerouslySetInnerHTML={{
+                                      __html: body.text,
+                                    }}
+                                  />
+                                )}
+                                {btype === 'Image' && (
+                                  <img src={body.url} alt="alt text FIXME" />
+                                )}
+                                {btype === 'PlainText' && (
+                                  <div className="section-body">
+                                    {body.text}
+                                  </div>
+                                )}
                               </div>
-
                             </Aux>
-                          )})}
-                        </Aux>
+                          );
+                        })}
+                      </Aux>
                     ))}
                   </Aux>
                 )}
@@ -153,13 +172,13 @@ class Candidate extends Component {
 }
 
 const articleStyles = {
-    title: {
-    fontSize: "3em",
-    fontWeight: 700
+  title: {
+    fontSize: '3em',
+    fontWeight: 700,
   },
   sectionHead: {
-      fontSize: "2em",
-      fontWeight: 400
+    fontSize: '2em',
+    fontWeight: 400,
   },
 };
 
