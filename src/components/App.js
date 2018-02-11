@@ -6,7 +6,6 @@ import { graphql, compose } from 'react-apollo';
 import Header from './Header';
 import ErrorBoundary from './common/ErrorBoundary';
 import Home from './Home/Home';
-import CandidateHolder from './Candidates/CandidateHolder';
 import Candidate from './Candidates/Candidate';
 import Candidates from './Candidates/Candidates';
 import District from './Districts/District';
@@ -103,7 +102,7 @@ class App extends Component {
     }
     const articles = [],
       contests = [];
-    if(candidates && seats){
+    if (candidates && seats) {
       console.log('candidates', candidates);
       console.log('seats', seats);
       console.log('parties', parties);
@@ -145,9 +144,8 @@ class App extends Component {
           path="/districts/:slug"
           component={props => {
             const seat = seats
-              ? seats.find(
-                seat => props.match.params.slug === seat.slug
-              ) : { id: 'no-cached-data', mapSmUrl: { url: null } };
+              ? seats.find(seat => props.match.params.slug === seat.slug)
+              : { id: 'no-cached-data', mapSmUrl: { url: null } };
             return (
               <ErrorBoundary>
                 <District {...props} seat={seat} />
