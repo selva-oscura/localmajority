@@ -1,24 +1,24 @@
-import React from 'react';
-import { Timeline } from 'react-twitter-widgets';
+import React, { PureComponent } from 'react'
+import { Timeline } from 'react-twitter-widgets'
 import './TwitterTimeline.css';
 
-const TwitterTimeline = props => {
-  const twitterHandle = props.twitterHandle;
-  return (
-    <div className="TwitterTimeline">
-      <Timeline
-        dataSource={{
-          sourceType: 'profile',
-          screenName: twitterHandle,
-        }}
-        options={{
-          height: '500',
-        }}
-      />
-    </div>
-  );
-};
+class TwitterTimeline extends PureComponent {
+  render () {
+    return (
+      <div className="TwitterTimeline">
+        <Timeline
+          dataSource={{
+            sourceType: 'profile',
+            screenName: this.props.twitterHandle,
+          }}
+          options={{
+            height: '600',
+          }}
+        />
+       <div className="mask"></div>
+     </div>
+    )
+  }
+}
 
 export default TwitterTimeline;
-
-// <div className="mask"></div>
