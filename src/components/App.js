@@ -102,12 +102,12 @@ class App extends Component {
     }
     const articles = [],
       contests = [];
-    if (candidates && seats) {
-      console.log('candidates', candidates);
-      console.log('seats', seats);
-      console.log('parties', parties);
-      console.log('statesMasterList', statesMasterList);
-    }
+    // if (candidates && seats) {
+    //   console.log('candidates', candidates);
+    //   console.log('seats', seats);
+    //   console.log('parties', parties);
+    //   console.log('statesMasterList', statesMasterList);
+    // }
 
     return (
       <Switch>
