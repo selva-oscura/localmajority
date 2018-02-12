@@ -8,13 +8,12 @@ import CandidateWebsiteButton from './CandidateWebsiteButton';
 const CandidateAside = props => {
   console.log('props from Aside', props);
   const candidate = props.candidate;
-  const twitterHandles = props.twitterHandles;
   return (
     <aside id="Aside">
       <div className="row">
         <div className="col-12">
           {candidate.twitter && (
-            <TwitterTimeline twitterHandle={[candidate.twitter]} />
+            <TwitterTimeline twitterHandle={candidate.twitter} />
           )}
         </div>
       </div>
