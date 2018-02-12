@@ -1,6 +1,7 @@
-/*.TwitterTimeline {
+.TwitterTimeline {
 	position: relative;
-	height: 500px;
+	height: 600px;
+	margin-bottom: 24px;
 }
 
 .TwitterTimeline > div{
@@ -15,4 +16,3 @@
 	z-index: 5;
 	background-color: white;
 }
-*/
