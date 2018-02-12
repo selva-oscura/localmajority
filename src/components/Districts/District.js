@@ -5,7 +5,6 @@ import NoSuchDistrict from './NoSuchDistrict';
 import Loading from '../common/Loading';
 import './District.css';
 
-
 class District extends Component {
   constructor(props, context) {
     super(props, context);
@@ -17,25 +16,27 @@ class District extends Component {
     }
   }
 
-  render(){
+  render() {
     const isLoading = this.props.SeatDetailBySlug.loading;
 
-    if(isLoading){
-      return <Loading />
+    if (isLoading) {
+      return <Loading />;
     }
 
     const seat = this.props.SeatDetailBySlug.Seat
       ? this.props.SeatDetailBySlug.Seat
       : this.props.seat;
-    if(!seat) {
-      return <NoSuchDistrict seatId={this.props.match.params.slug} />
+    if (!seat) {
+      return <NoSuchDistrict seatId={this.props.match.params.slug} />;
     }
-    const candidateHeadshot = null;
+
     const seatMap = seat.mapSmUrl ? seat.mapSmUrl : '';
     const candidates =
       seat && seat.contestIds && seat.contestIds[0].candidateIds
         ? seat.contestIds[0].candidateIds
         : undefined;
+    console.log('candidates from Seat', candidates);
+    const candidateHeadshot = null;
 
     return (
       <div className="District">
@@ -90,9 +91,7 @@ class District extends Component {
       </div>
     );
   }
-};
-
-// export default District;
+}
 
 export default compose(
   graphql(graphQLAPI.queries.SeatDetailBySlug, {
@@ -102,7 +101,6 @@ export default compose(
     },
   })
 )(District);
-
 
 // const demographicData = [
 //   {
