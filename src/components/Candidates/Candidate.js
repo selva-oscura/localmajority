@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import graphQLAPI from '../../api/graphQLAPI';
+import Primer from '../Primers/Primer';
 import Aux from '../common/Aux';
 import Loading from '../common/Loading';
 import NoSuchCandidate from './NoSuchCandidate';
@@ -111,51 +112,7 @@ class Candidate extends Component {
                 {candidate.primers && (
                   <Aux>
                     {candidate.primers.map((primer, i) => (
-                      <Aux key={`primer-${i}`}>
-                        <h3>{primer.title}</h3>
-                        {primer.content.map((section, s) => {
-                          const title =
-                            section.heading && section.heading.title
-                              ? section.heading.title
-                              : null;
-                          const body = section.body;
-                          const btype = body && body.type;
-                          if (!body && !title) {
-                            return null;
-                          }
-                          return (
-                            <Aux key={`primer-${i}-section-${s}`}>
-                              <div className={section.tag} key={section.tag}>
-                                {title && (
-                                  <div
-                                    className="section-head"
-                                    style={articleStyles.sectionHead}
-                                  >
-                                    {title}
-                                  </div>
-                                )}
-
-                                {btype === 'RichText' && (
-                                  <div
-                                    className="section-body"
-                                    dangerouslySetInnerHTML={{
-                                      __html: body.text,
-                                    }}
-                                  />
-                                )}
-                                {btype === 'Image' && (
-                                  <img src={body.url} alt="alt text FIXME" />
-                                )}
-                                {btype === 'PlainText' && (
-                                  <div className="section-body">
-                                    {body.text}
-                                  </div>
-                                )}
-                              </div>
-                            </Aux>
-                          );
-                        })}
-                      </Aux>
+                      <Primer primer={primer} i={i} key={i} />
                     ))}
                   </Aux>
                 )}
@@ -170,17 +127,6 @@ class Candidate extends Component {
     );
   }
 }
-
-const articleStyles = {
-  title: {
-    fontSize: '3em',
-    fontWeight: 700,
-  },
-  sectionHead: {
-    fontSize: '2em',
-    fontWeight: 400,
-  },
-};
 
 export default compose(
   graphql(graphQLAPI.queries.CandidateDetailBySlug, {
