@@ -10,9 +10,9 @@ import Candidate from './Candidates/Candidate';
 import Candidates from './Candidates/Candidates';
 import District from './Districts/District';
 import Districts from './Districts/Districts';
-import IssuePrimer from './Readings/IssuePrimer';
 import Issues from './Issues/Issues';
-import ReadingHolder from './Readings/ReadingHolder';
+// import IssuePrimer from './Readings/IssuePrimer';
+// import ReadingHolder from './Readings/ReadingHolder';
 import AboutUs from './AboutUs/AboutUs';
 import Elements from './common/Elements';
 import FourZeroFour from './FourZeroFour';
@@ -100,8 +100,8 @@ class App extends Component {
         party => (parties[`${party.id}`] = party)
       );
     }
-    const articles = [],
-      contests = [];
+    // const articles = [],
+    //   contests = [];
     // if (candidates && seats) {
     //   console.log('candidates', candidates);
     //   console.log('seats', seats);
@@ -114,9 +114,7 @@ class App extends Component {
         <Route
           exact
           path="/"
-          component={props => {
-            return <Home candidates={candidates} articles={articles} />;
-          }}
+          component={props => <Home candidates={candidates} />}
         />
         <Route
           path="/candidates/:slug"
