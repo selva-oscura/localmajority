@@ -100,8 +100,7 @@ class App extends Component {
         party => (parties[`${party.id}`] = party)
       );
     }
-    // const articles = [],
-    //   contests = [];
+
     // if (candidates && seats) {
     //   console.log('candidates', candidates);
     //   console.log('seats', seats);
