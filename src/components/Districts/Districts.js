@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Filters from '../Filters/Filters';
-import ButtonFilters from '../Filters/ButtonFilters';
+import SelectFilter from '../Filters/SelectFilter';
 import Card from '../common/Cards/Card';
 
 class Districts extends Component {
@@ -9,9 +9,19 @@ class Districts extends Component {
     let districtsStatesSelected = {},
       districtsSeatTypeSelected = {};
     if (this.props.statesMasterList) {
-      this.props.statesMasterList.forEach(stateName => {
-        districtsStatesSelected[stateName] = true;
-      });
+      if (
+        this.props.match.params.state &&
+        this.props.statesMasterList.includes(this.props.match.params.state)
+      ) {
+        this.props.statesMasterList.forEach(stateName => {
+          districtsStatesSelected[stateName] = false;
+        });
+        districtsStatesSelected[this.props.match.params.state] = true;
+      } else {
+        this.props.statesMasterList.forEach(stateName => {
+          districtsStatesSelected[stateName] = true;
+        });
+      }
     }
     this.state = {
       districtsStatesSelected,
@@ -19,39 +29,35 @@ class Districts extends Component {
     };
     this.updateFilter = this.updateFilter.bind(this);
   }
-  updateFilter(filterCategory, selectedValues) {
-    let state = this.state;
-    state[filterCategory] = { ...selectedValues };
-    this.setState(state);
+  updateFilter(filterCategory, selectedValue) {
+    selectedValue === 'all'
+      ? this.props.history.push('/districts')
+      : this.props.history.push(`/districts/${selectedValue}`);
   }
   componentDidMount() {
-    document.title = 'Local Majority | Districts';
+    this.props.match.params.state
+      ? (document.title = `Local Majority | Districts | ${
+          this.props.match.params.state
+        }`)
+      : (document.title = 'Local Majority | Districts');
   }
   render() {
     const { seats, statesMasterList, regionTypesMasterList } = this.props;
     const { districtsStatesSelected, districtsSeatTypeSelected } = this.state;
-    if (districtsStatesSelected) {
-      console.log('districtsStatesSelected', districtsStatesSelected);
-      console.log('seats', seats);
-    }
-    // let seatsMeetingFilters = seats.filter(
-    //   seat => districtsStatesSelected[seat.state.title]
-    // );
-
-    let seatsMeetingFilters =
+    const seatsMeetingFilters =
       districtsStatesSelected && seats
         ? seats.filter(seat => districtsStatesSelected[seat.state.title])
         : [];
-    // console.log('--> districtsStatesSelected', districtsStatesSelected);
-    // console.log('--> seats', seats);
-    // console.log('--> seatsMeetingFilters', seatsMeetingFilters);
+
     return (
       <div className="Districts">
         {statesMasterList && (
           <Filters>
-            <ButtonFilters
+            <SelectFilter
               filterCategory="districtsStatesSelected"
-              includeAllNone={true}
+              hintText="select state"
+              includeAll={true}
+              passedParam={this.props.match.params.state}
               masterList={statesMasterList}
               updateFilter={this.updateFilter}
             />
@@ -66,7 +72,7 @@ class Districts extends Component {
                 cardTitle={seat.title}
                 imgSrc="missing"
                 category="districts"
-                slug={seat.slug}
+                slug={`${seat.state.title}/${seat.slug}`}
                 imgShape="square"
               />
             ))
