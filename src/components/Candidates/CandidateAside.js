@@ -6,54 +6,42 @@ import CandidateDonateButton from './CandidateDonateButton';
 import CandidateWebsiteButton from './CandidateWebsiteButton';
 
 const CandidateAside = props => {
-  console.log('props from Aside', props);
   const candidate = props.candidate;
   return (
     <aside id="Aside">
       <div className="row">
-        <div className="col-12">
+        <div className="col-sm-12 col-md-6">
           {candidate.twitter && (
             <TwitterTimeline twitterHandle={candidate.twitter} />
           )}
         </div>
-      </div>
-      <div className="row">
-        <div className="col-12">
+        <div className="col-sm-12 col-md-6 text-right">
           <h3>Contact the Candidate</h3>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-12">
-          {candidate.twitter && (
-            <SocialIcon url={`https://twitter.com/${candidate.twitter}`} />
-          )}
-          {candidate.facebook && (
-            <SocialIcon
-              url={`https://www.facebook.com/${candidate.facebook}`}
-            />
-          )}
-          {candidate.campaignEmail && (
-            <SocialIcon
-              url={`mailto:${candidate.campaignEmail}`}
-              network="email"
-            />
-          )}
-        </div>
-      </div>
-      {candidate.homepageUrl && (
-        <div className="row">
-          <div className="col-12">
+          <div className="social-icons-space">
+            {candidate.facebook && (
+              <SocialIcon
+                url={`https://www.facebook.com/${candidate.facebook}`}
+              />
+            )}
+            {candidate.twitter && (
+              <SocialIcon url={`https://twitter.com/${candidate.twitter}`} />
+            )}
+            {candidate.campaignEmail && (
+              <SocialIcon
+                url={`mailto:${candidate.campaignEmail}`}
+                network="email"
+                color="#E4002D"
+              />
+            )}
+          </div>
+          {candidate.homepageUrl && (
             <CandidateWebsiteButton candidate={props.candidate} />
-          </div>
-        </div>
-      )}
-      {candidate.donateUrl && (
-        <div className="row">
-          <div className="col-12">
+          )}
+          {candidate.donateUrl && (
             <CandidateDonateButton candidate={props.candidate} />
-          </div>
+          )}
         </div>
-      )}
+      </div>
     </aside>
   );
 };
