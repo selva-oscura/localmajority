@@ -116,29 +116,63 @@ class App extends Component {
           component={props => <Home candidates={candidates} />}
         />
         <Route
-          path="/candidates/:slug"
+          path="/candidates/:state/:slug"
           component={props => {
             const candidate = candidates
               ? candidates.find(
                   candidate => props.match.params.slug === candidate.slug
                 )
               : { id: 'no-cached-data', headshotId: { url: null } };
-            return <Candidate candidate={candidate} {...props} />;
+            return (
+              <ErrorBoundary>
+                <Candidate {...props} candidate={candidate} />
+              </ErrorBoundary>
+            );
           }}
+        />
+
+        <Route
+          path="/candidates/:state"
+          component={props => (
+            <ErrorBoundary>
+              { candidates &&
+              statesMasterList &&
+              statesMasterList.length &&
+              regionTypesMasterList ? (
+                <Candidates
+                  {...props}
+                  candidates={candidates}
+                  statesMasterList={statesMasterList}
+                  regionTypesMasterList={regionTypesMasterList}
+                />
+              ) : (
+                <Loading />
+              )}
+            </ErrorBoundary>
+          )}
         />
         <Route
           path="/candidates"
           component={props => (
-            <Candidates
-              {...props}
-              candidates={candidates}
-              statesMasterList={statesMasterList}
-              regionTypesMasterList={regionTypesMasterList}
-            />
+            <ErrorBoundary>
+              { candidates &&
+              statesMasterList &&
+              statesMasterList.length &&
+              regionTypesMasterList ? (
+                <Candidates
+                  {...props}
+                  candidates={candidates}
+                  statesMasterList={statesMasterList}
+                  regionTypesMasterList={regionTypesMasterList}
+                />
+              ) : (
+                <Loading />
+              )}
+            </ErrorBoundary>
           )}
         />
         <Route
-          path="/districts/:slug"
+          path="/districts/:state/:slug"
           component={props => {
             const seat = seats
               ? seats.find(seat => props.match.params.slug === seat.slug)
@@ -150,6 +184,27 @@ class App extends Component {
             );
           }}
         />
+        <Route
+          path="/districts/:state"
+          component={props => (
+            <ErrorBoundary>
+              {seats &&
+              statesMasterList &&
+              statesMasterList.length &&
+              regionTypesMasterList ? (
+                <Districts
+                  {...props}
+                  seats={seats}
+                  statesMasterList={statesMasterList}
+                  regionTypesMasterList={regionTypesMasterList}
+                />
+              ) : (
+                <Loading />
+              )}
+            </ErrorBoundary>
+          )}
+        />
+
         <Route
           path="/districts"
           component={props =>
