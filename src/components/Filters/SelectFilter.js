@@ -3,11 +3,12 @@ import { MenuItem, SelectField } from 'material-ui';
 
 /* Calling of this Component should resemble the following:
     <SelectFilter
-      filterCategory="candidatesStatesSelected" // <- this is the name of the variable used as the filter in the parent component
-      hintText="select state"
+      filterCategory="candidatesStatesSelected" // <- string representing the name of the variable used as the filter in the parent component
+      hintText="select state"                   // <- string used as hint text when no value is selected
       includeAll={true}                         // <- boolean denoting whether all is an option for select
+      passedParam                               // <- optional value, representing the selected item IF routing is being used to specify the selected item
       masterList={statesMasterList}             // <- sorted array with all possible values (excepting all/none)
-      updateFilter={this.updateFilter}          // <- parent component's function for updating updating the filter that will be used to display parent component's candidates, articles, districts, etc.
+      updateFilter={this.updateFilter}          // <- parent component's function for updating the filter that will be used to display parent component's candidates, articles, districts, etc.
     />
 */
 
@@ -16,24 +17,23 @@ class SelectFilter extends Component {
     super(props, context);
     const selectedValues = {};
     if (this.props.includeAll) {
-      this.props.masterList.forEach(item => {
-        selectedValues[item] = true;
-      });
+      if (this.props.passedParam) {
+        this.props.masterList.forEach(item => {
+          selectedValues[item] = false;
+        });
+        selectedValues[this.props.passedParam] = true;
+      } else {
+        this.props.masterList.forEach(item => {
+          selectedValues[item] = true;
+        });
+      }
     }
     this.state = { selectedValues };
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(e, i, clickedItem) {
-    let selectedValues = this.state.selectedValues;
-    this.setState({ selectedValues: clickedItem[0] });
-    if (clickedItem[0] === 'all') {
-      Object.keys(selectedValues).map(key => (selectedValues[key] = true));
-    } else {
-      Object.keys(selectedValues).map(key => (selectedValues[key] = false));
-      selectedValues[clickedItem[0]] = true;
-    }
-    this.setState({ selectedValues });
-    this.props.updateFilter(this.props.filterCategory, selectedValues);
+    let selectedValue = clickedItem[0];
+    this.props.updateFilter(this.props.filterCategory, selectedValue);
   }
   render() {
     const { filterCategory, hintText, includeAll, masterList } = this.props;
