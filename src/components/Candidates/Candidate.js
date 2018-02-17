@@ -48,7 +48,7 @@ class Candidate extends Component {
                 alt={candidate.title}
               />
             </div>
-            <div className="col-12 col-md-6 lg-8 xl-9">
+            <div className="col-12 col-md-6 lg-8 xl-9 text-right">
               <h2>{candidate.title}</h2>
               <h3>
                 {candidate.contestId && candidate.contestId.seatId
@@ -58,21 +58,20 @@ class Candidate extends Component {
                   ? ` on ${standardizeDate(candidate.contestId.electionDate)}`
                   : null}
               </h3>
-              <div>
-                {candidate.twitter && (
-                  <SocialIcon
-                    url={`https://twitter.com/${candidate.twitter}`}
-                  />
-                )}
+              <div className="social-icons-space">
                 {candidate.facebook && (
                   <SocialIcon
                     url={`https://www.facebook.com/${candidate.facebook}`}
                   />
                 )}
+                {candidate.twitter && (
+                  <SocialIcon url={`https://twitter.com/${candidate.twitter}`} />
+                )}
                 {candidate.campaignEmail && (
                   <SocialIcon
                     url={`mailto:${candidate.campaignEmail}`}
                     network="email"
+                    color="#E4002D"
                   />
                 )}
               </div>
