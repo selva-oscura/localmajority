@@ -11,25 +11,38 @@ class Candidates extends Component {
     let candidatesStatesSelected = {},
       candidatesRegionTypesSelected = {};
     if (this.props.statesMasterList) {
-      this.props.statesMasterList.forEach(stateName => {
-        candidatesStatesSelected[stateName] = true;
-      });
+      if (
+        this.props.match.params.state &&
+        this.props.statesMasterList.includes(this.props.match.params.state)
+      ) {
+        this.props.statesMasterList.forEach(stateName => {
+          candidatesStatesSelected[stateName] = false;
+        });
+        candidatesStatesSelected[this.props.match.params.state] = true;
+      } else {
+        this.props.statesMasterList.forEach(stateName => {
+          candidatesStatesSelected[stateName] = true;
+        });
+      }
     }
     this.state = {
       candidatesStatesSelected,
       candidatesRegionTypesSelected,
       candidatesTextSelected: [],
     };
-    // console.log('this.props from constructor', this.props);
     this.updateFilter = this.updateFilter.bind(this);
   }
-  updateFilter(filterCategory, selectedValues) {
-    let state = this.state;
-    state[filterCategory] = { ...selectedValues };
-    this.setState(state);
+  updateFilter(filterCategory, selectedValue) {
+    selectedValue === 'all'
+      ? this.props.history.push('/candidates')
+      : this.props.history.push(`/candidates/${selectedValue}`);
   }
   componentDidMount() {
-    document.title = 'Local Majority | Candidates';
+    this.props.match.params.state
+      ? (document.title = `Local Majority | Candidates | ${
+          this.props.match.params.state
+        }`)
+      : (document.title = 'Local Majority | Candidates');
   }
   render() {
     const isLoading =
@@ -40,7 +53,6 @@ class Candidates extends Component {
     if (isLoading) {
       return <Loading />;
     }
-    // console.log('this.props from Candidates page', this.props);
     const { candidates, statesMasterList, regionTypesMasterList } = this.props;
     const {
       candidatesStatesSelected,
@@ -48,12 +60,24 @@ class Candidates extends Component {
       candidatesTextSelected,
     } = this.state;
     let candidatesMeetingFilters =
-      candidates &&
-      candidates.filter(
-        candidate => candidatesStatesSelected[candidate.state.title]
-      );
+      this.props.match.params.state
+      ? candidates.filter(
+        candidate => candidate.state.title === this.props.match.params.state
+      ) : candidates;
     return (
       <div className="Candidates">
+        {statesMasterList && (
+          <Filters>
+            <SelectFilter
+              filterCategory="candidatesStatesSelected"
+              hintText="select state"
+              includeAll={true}
+              passedParam={this.props.match.params.state}
+              masterList={statesMasterList}
+              updateFilter={this.updateFilter}
+            />
+          </Filters>
+        )}
         {candidatesMeetingFilters && candidatesMeetingFilters.length ? (
           <HorizontalCards>
             {candidatesMeetingFilters.map((candidate, i) => {
@@ -76,7 +100,7 @@ class Candidates extends Component {
                   cardTextHtml={candidate.summaryText}
                   category="candidates"
                   imgSrc={headshotUrl}
-                  slug={candidate.slug}
+                  slug={`${candidate.state.title}/${candidate.slug}`}
                   imgShape="square"
                 />
               );
@@ -91,12 +115,3 @@ class Candidates extends Component {
 }
 
 export default Candidates;
-// <Filters>
-//   <SelectFilter
-//     filterCategory="candidatesStatesSelected"
-//     hintText="select state"
-//     includeAll={true}
-//     masterList={statesMasterList}
-//     updateFilter={this.updateFilter}
-//   />
-// </Filters>
