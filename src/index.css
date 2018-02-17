@@ -1,6 +1,87 @@
+/* Custom styles */
+
+body {
+  font-family: 'Open Sans', Arial, sans-serif;
+  color: #01369B;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: .5rem;
+}
+
+h1, h2, h3, h4, h5, h6, svg text {
+  color: #01369B;
+}
+
+p, li {
+  color: #656565;
+}
+
+a, a h1, a h2, a h3, a h4, a h5, a h6, a p {
+  color: #006EED;
+  text-decoration: none;
+  transition: color 0.5s ease-out;
+}
+
+a:hover, a:hover, a:hover h1, a:hover h2, a:hover h3, a:hover h4, a:hover h5, a:hover h6, a:hover p {
+  color: #43B3E0;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: wrap;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
+
+.social-icons-space {
+  margin: 4vw 0 2vw;
+}
+
+.social-icon {
+  margin: 0px 8px;
+}
+
+.social-icon:first-child {
+  margin-left: 0px;
+}
+
+.social-icon:last-child {
+  margin-right: 0px;
+}
+
+.splash-image {
+  width: 100%;
+  padding: 24px 0px;
+}
+
 .hidden-xs-up {
   display: none !important;
 }
+
+
+
+/* Bootstrap 4 grid */
 
 @media (max-width: 575px) {
   .hidden-xs-down {
@@ -54,26 +135,7 @@
   display: none !important;
 }
 
-
 .img-fluid{max-width:100%;width:100%;height:auto}
-
-
-/* Custom styles */
-
-.flex {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-flow: wrap;
-  flex-flow: wrap;
-  justify-content: space-between;
-}
-
-.social-icon {
-  margin-right: 8px;
-}
 
 
 
@@ -86,20 +148,6 @@
   background-color: #ffffff;
   min-height: 100vh;
   color: #01369B;
-}
-
-h1, h2, h3, h4, h5, h6, p, li, svg text {
-  color: #01369B;
-}
-
-a {
-  color: #006EED;
-  text-decoration: none;
-  transition: color 0.5s ease-out;
-}
-
-a:hover {
-	color: #43B3E0;
 }
 
 .flex {
