@@ -7,16 +7,83 @@ const Home = props => {
   document.title = 'Local Majority';
   // console.log('from Home', props);
   let { candidates } = props;
+  const sockPuppetStateData = [
+    {
+      title: 'Florida',
+      abbrev: 'FL',
+      districts: [
+        'House District 11',
+        'House District 20',
+        'House District 24',
+      ],
+    },
+    {
+      title: 'Michigan',
+      abbrev: 'MI',
+      districts: [
+        'Assembly District 1',
+        'Assembly District 2',
+        'Assembly District 3',
+      ],
+    },
+    {
+      title: 'Minnesota',
+      abbrev: 'MN',
+      districts: ['Assembly 1', 'Assembly 12', 'Assembly District 33'],
+    },
+  ];
+  const arrayToSentence = arr => {
+    if (arr.length === 1) {
+      return arr[0];
+    } else if (arr.length === 2) {
+      return arr.join(' and ');
+    } else if (arr.length > 2) {
+      arr[arr.length - 1] = `and ${arr[arr.length - 1]}`;
+      return arr.join(', ');
+    } else {
+      return null;
+    }
+  };
   // let { articles, candidates } = props;
   // let issuePrimers = articles.filter(a => a.type === 'IssuePrimer');
   return (
     <div className="Home">
       <div className="main-and-aside">
         <article className="Main">
-          <img src="../images/faces.png" alt="faces of candidates" />
-          <h2 className="text-center">Working Locally to Take Back State Legislatures</h2>
-          <p className="text-center">Local Majority provides research and other support for small state legislative campaigns who may not have many resources. Our goal is to build from the grassroots the local support that will help Democrats take back state legislatures across the country, beginning with Virginia in 2017, and continuing with Florida, Michigan and Minnesota in 2018.</p>
-          <h3>Featured Candidates</h3>
+          <img
+            className="splash-image"
+            src="../images/faces.png"
+            alt="faces of candidates"
+          />
+          <h2 className="text-center">
+            Working Locally to Take Back State Legislatures
+          </h2>
+          <p className="text-center">
+            Local Majority provides research and other support for small state
+            legislative campaigns who may not have many resources. Our goal is
+            to build from the grassroots the local support that will help
+            Democrats take back state legislatures across the country, beginning
+            with Virginia in 2017, and continuing with Florida, Michigan and
+            Minnesota in 2018.
+          </p>
+          <h2 className="text-center">Our States</h2>
+          <div className="flex">
+            {sockPuppetStateData.map((state, i) => (
+              <Card
+                key={i}
+                id={i}
+                cardTitle={state.title}
+                cardText={`We are contesting House Seat races in ${
+                  state.title
+                } in ${arrayToSentence(state.districts)}`}
+                imgSrc={`../images/${state.title}.jpg`}
+                category="districts"
+                slug={state.title}
+                imgShape="square"
+              />
+            ))}
+          </div>
+          <h2 className="text-center">Featured Candidates</h2>
           <div className="flex">
             {candidates && candidates.length ? (
               candidates.map((candidate, i) => (
@@ -27,7 +94,7 @@ const Home = props => {
                   cardText={candidate.contestId.seatId.title}
                   imgSrc={candidate.headshotId.url}
                   category="candidates"
-                  slug={candidate.slug}
+                  slug={`${candidate.state.title}/${candidate.slug}`}
                   imgShape="square"
                 />
               ))
