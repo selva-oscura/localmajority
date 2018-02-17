@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react'
-import { Timeline } from 'react-twitter-widgets'
+import React, { PureComponent } from 'react';
+import { Timeline } from 'react-twitter-widgets';
 import './TwitterTimeline.css';
 
 class TwitterTimeline extends PureComponent {
-  render () {
+  render() {
     return (
       <div className="TwitterTimeline">
         <Timeline
@@ -15,9 +15,9 @@ class TwitterTimeline extends PureComponent {
             height: '600',
           }}
         />
-       <div className="mask"></div>
-     </div>
-    )
+        <div className="mask" />
+      </div>
+    );
   }
 }
 
