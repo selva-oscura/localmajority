@@ -16,9 +16,9 @@ const Primer = ({ primer, i }) => (
         <Aux key={`primer-${i}-section-${s}`}>
           <div className={section.tag} key={section.tag}>
             {title && (
-              <div className="section-head" style={style.sectionHead}>
+              <h3 className="section-head">
                 {title}
-              </div>
+              </h3>
             )}
 
             {btype === 'RichText' && (
@@ -39,16 +39,5 @@ const Primer = ({ primer, i }) => (
     })}
   </Aux>
 );
-
-const style = {
-  title: {
-    fontSize: '3em',
-    fontWeight: 700,
-  },
-  sectionHead: {
-    fontSize: '2em',
-    fontWeight: 400,
-  },
-};
 
 export default Primer;
