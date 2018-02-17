@@ -2,7 +2,7 @@ import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const CandidateDonateButton = ({ candidate }) => {
-  const style = { margin: '1vw 1vw 1vw 0' };
+  const style = { margin: '2vw 0'};
   const donate = candidate.firstName
     ? `Donate to ${candidate.firstName}`
     : 'Donate';

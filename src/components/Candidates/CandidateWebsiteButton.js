@@ -2,7 +2,7 @@ import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const CandidateWebsiteButton = ({ candidate }) => {
-  const style = { margin: '1vw 1vw 1vw 0' };
+  const style = { margin: '2vw 0'};
   const text = candidate.firstName
     ? `${candidate.firstName}'s Campaign Website`
     : 'Campaign Website';
