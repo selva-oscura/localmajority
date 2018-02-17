@@ -10,12 +10,12 @@ const CandidateAside = props => {
   return (
     <aside id="Aside">
       <div className="row">
-        <div className="col-sm-12 col-md-6">
+        <div className="col-12 col-sm-6">
           {candidate.twitter && (
             <TwitterTimeline twitterHandle={candidate.twitter} />
           )}
         </div>
-        <div className="col-sm-12 col-md-6 text-right">
+        <div className="col-12 col-sm-6 text-right">
           <h3>Contact the Candidate</h3>
           <div className="social-icons-space">
             {candidate.facebook && (
