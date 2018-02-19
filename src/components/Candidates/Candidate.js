@@ -65,7 +65,9 @@ class Candidate extends Component {
                   />
                 )}
                 {candidate.twitter && (
-                  <SocialIcon url={`https://twitter.com/${candidate.twitter}`} />
+                  <SocialIcon
+                    url={`https://twitter.com/${candidate.twitter}`}
+                  />
                 )}
                 {candidate.campaignEmail && (
                   <SocialIcon

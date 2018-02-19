@@ -59,11 +59,11 @@ class Candidates extends Component {
       candidatesRegionTypesSelected,
       candidatesTextSelected,
     } = this.state;
-    let candidatesMeetingFilters =
-      this.props.match.params.state
+    let candidatesMeetingFilters = this.props.match.params.state
       ? candidates.filter(
-        candidate => candidate.state.title === this.props.match.params.state
-      ) : candidates;
+          candidate => candidate.state.title === this.props.match.params.state
+        )
+      : candidates;
     return (
       <div className="Candidates">
         {statesMasterList && (

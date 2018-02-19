@@ -135,7 +135,7 @@ class App extends Component {
           path="/candidates/:state"
           component={props => (
             <ErrorBoundary>
-              { candidates &&
+              {candidates &&
               statesMasterList &&
               statesMasterList.length &&
               regionTypesMasterList ? (
@@ -155,7 +155,7 @@ class App extends Component {
           path="/candidates"
           component={props => (
             <ErrorBoundary>
-              { candidates &&
+              {candidates &&
               statesMasterList &&
               statesMasterList.length &&
               regionTypesMasterList ? (

@@ -15,11 +15,7 @@ const Primer = ({ primer, i }) => (
       return (
         <Aux key={`primer-${i}-section-${s}`}>
           <div className={section.tag} key={section.tag}>
-            {title && (
-              <h3 className="section-head">
-                {title}
-              </h3>
-            )}
+            {title && <h3 className="section-head">{title}</h3>}
 
             {btype === 'RichText' && (
               <div
