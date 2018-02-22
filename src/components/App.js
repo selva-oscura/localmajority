@@ -56,6 +56,7 @@ class App extends Component {
       }
     }
     // this.setStateAndLocalStorage = this.setStateAndLocalStorage.bind(this);
+    this.updateStateDetail = this.updateStateDetail.bind(this);
   }
 
   updateStateAndLocalStorage(state) {
@@ -64,12 +65,29 @@ class App extends Component {
     if (localStorage) {
       localStorage.localMajorityData = JSON.stringify(state);
     }
+    console.log('updatingStateAndLocalStorage', state);
+  }
+
+  updateStateDetail(detail, key, value) {
+    // this is for seatsDetails and candidatesDetails
+    // detail specifies whether it is seatsDetails or candidatesDetails
+    // key is the slug that is used in routing
+    // value is the data returned from the detailed query
+    console.log('updatingStateDetail', detail, key, value);
+    let state = { ...this.state };
+    state[detail][key] = value;
+    this.updateStateAndLocalStorage(state);
   }
 
   componentDidUpdate(prevProps, prevState) {
     let state = { ...this.state };
     Object.keys(this.props).forEach(query => {
-      if (prevProps[query].loading && !this.props[query].loading) {
+      console.log('query', query, this.props[query].loading, this.props[query]);
+      if (
+        prevProps[query].loading &&
+        !this.props[query].loading &&
+        !this.props[query].error
+      ) {
         if (query === 'CandidatesBasics') {
           state.candidates = this.props[query].allCandidates;
         } else if (query === 'SeatsBasics') {
@@ -112,7 +130,13 @@ class App extends Component {
     });
 
     // once queries are no longer being loaded, display content
-    const { candidates, seats, statesMasterList } = this.state;
+    const {
+      candidates,
+      seats,
+      seatsDetails,
+      candidatesDetails,
+      statesMasterList,
+    } = this.state;
 
     const regionTypesMasterList = [
       { title: 'Federal District', abbrev: 'FD_US' },
@@ -140,7 +164,7 @@ class App extends Component {
                 <Candidate
                   {...props}
                   candidate={candidate}
-                  updateStateAndLocalStorage={this.updateStateAndLocalStorage}
+                  updateStateDetail={this.updateStateDetail}
                 />
               </ErrorBoundary>
             );
@@ -193,12 +217,16 @@ class App extends Component {
             const seat = seats
               ? seats.find(seat => props.match.params.slug === seat.slug)
               : { id: 'no-cached-data', mapSmUrl: { url: null } };
+            const seatDetail = seatsDetails[props.match.params.slug]
+              ? seatsDetails[props.match.params.slug]
+              : null;
             return (
               <ErrorBoundary>
                 <District
                   {...props}
                   seat={seat}
-                  updateStateAndLocalStorage={this.updateStateAndLocalStorage}
+                  seatDetail={seatDetail}
+                  updateStateDetail={this.updateStateDetail}
                 />
               </ErrorBoundary>
             );
