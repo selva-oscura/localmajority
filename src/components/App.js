@@ -59,35 +59,36 @@ class App extends Component {
   }
 
   updateStateAndLocalStorage(state) {
-    state = {...state};
+    state = { ...state };
     this.setState(state);
     if (localStorage) {
       localStorage.localMajorityData = JSON.stringify(state);
     }
   }
 
-  componentDidUpdate(prevProps, prevState){
-    let state = {...this.state};
+  componentDidUpdate(prevProps, prevState) {
+    let state = { ...this.state };
     Object.keys(this.props).forEach(query => {
       if (prevProps[query].loading && !this.props[query].loading) {
-        if(query === "CandidatesBasics"){
+        if (query === 'CandidatesBasics') {
           state.candidates = this.props[query].allCandidates;
-        } else if (query === "SeatsBasics") {
+        } else if (query === 'SeatsBasics') {
           state.seats = this.props[query].allSeats;
-        } else if (query === "States") {
+        } else if (query === 'States') {
           state.states = this.props[query].allStates
             .map(item => {
               let { title, abbrev } = item;
-              return { title, abbrev }
-            }).sort((a,b) => {
-              if(a.title > b.title){
+              return { title, abbrev };
+            })
+            .sort((a, b) => {
+              if (a.title > b.title) {
                 return 1;
               } else {
                 return -1;
               }
             });
-            state.statesMasterList = state.states.map(state => (state.title))
-        } else if (query === "Parties") {
+          state.statesMasterList = state.states.map(state => state.title);
+        } else if (query === 'Parties') {
           if (this.props.Parties && this.props.Parties.allParties) {
             this.props[query].allParties.forEach(
               party => (state.parties[`${party.id}`] = party)
@@ -97,7 +98,7 @@ class App extends Component {
         state.timestamp = new Date().getTime();
       }
     });
-    if(prevProps !== this.props){
+    if (prevProps !== this.props) {
       this.updateStateAndLocalStorage(state);
     }
   }
@@ -114,9 +115,9 @@ class App extends Component {
     const { candidates, seats, statesMasterList } = this.state;
 
     const regionTypesMasterList = [
-      {title: 'Federal District', abbrev: 'FD_US'},
-      {title: 'State', abbrev: 'State_US'},
-      {title: 'State District', abbrev: 'SD_US'},
+      { title: 'Federal District', abbrev: 'FD_US' },
+      { title: 'State', abbrev: 'State_US' },
+      { title: 'State District', abbrev: 'SD_US' },
     ];
 
     return (
