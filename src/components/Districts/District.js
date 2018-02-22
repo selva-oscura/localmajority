@@ -1,18 +1,45 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import graphQLAPI from '../../api/graphQLAPI';
-import NoSuchDistrict from './NoSuchDistrict';
+import Primer from '../Primers/Primer';
+import Aux from '../common/Aux';
 import Loading from '../common/Loading';
+import NoSuchDistrict from './NoSuchDistrict';
 import './District.css';
 
 class District extends Component {
   constructor(props, context) {
     super(props, context);
-    const { seat } = this.props;
-    if (seat) {
-      document.title = `Local Majority | ${seat.title}`;
+    // console.log(this.props)
+
+    if (this.props.seat) {
+      document.title = `Local Majority | ${this.props.seat.title}`;
     } else {
       document.title = 'Local Majority | Unrecognized Seat';
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    let now = new Date().getTime();
+    // only update if no seatDetail information or if the timestamp for it is more than a day old
+    if (
+      !this.props.seatDetail ||
+      now - this.props.seatDetail.timestamp > 1000 * 60 * 60 * 24
+    ) {
+      // only update if props have changed and if SeatDetailBySlug just changed from loading to resolved
+      if (
+        prevProps !== this.props &&
+        prevProps.SeatDetailBySlug &&
+        !this.props.SeatDetailBySlug.loading
+      ) {
+        let details = { ...this.props.SeatDetailBySlug.Seat };
+        details.timestamp = now;
+        this.props.updateStateDetail(
+          'seatsDetails',
+          this.props.seat.slug,
+          details
+        );
+      }
     }
   }
 
@@ -23,19 +50,24 @@ class District extends Component {
       return <Loading />;
     }
 
-    const seat = this.props.SeatDetailBySlug.Seat
-      ? this.props.SeatDetailBySlug.Seat
+    const seat = this.props.seatDetail
+      ? this.props.seatDetail
       : this.props.seat;
+
+    console.log('seat data from District', seat);
+
     if (!seat) {
       return <NoSuchDistrict seatId={this.props.match.params.slug} />;
     }
 
     const seatMap = seat.mapSmUrl ? seat.mapSmUrl : '';
     const candidates =
-      seat && seat.contestIds && seat.contestIds[0].candidateIds
+      seat &&
+      seat.contestIds &&
+      seat.contestIds.length &&
+      seat.contestIds[0].candidateIds
         ? seat.contestIds[0].candidateIds
         : undefined;
-    console.log('candidates from Seat', candidates);
     const candidateHeadshot = null;
 
     return (
@@ -81,10 +113,13 @@ class District extends Component {
                 className="img-fluid"
                 alt={`map of district ${seat.title}`}
               />
-              <p>
-                We seriously need to get some data into Seats, DistrictPrimers,
-                etc.....
-              </p>
+              {seat.primers && (
+                <Aux>
+                  {seat.primers.map((primer, i) => (
+                    <Primer primer={primer} i={i} key={i} />
+                  ))}
+                </Aux>
+              )}
             </div>
           </div>
         </div>
