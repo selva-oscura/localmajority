@@ -1,8 +1,9 @@
 import {
   indigo900, lightBlue500,
-  lightBlueA100, red900,
+  lightBlueA100,
+  red600, red900,
   cyan500, cyan700,
-  grey100, grey300, grey400, grey500,
+  grey100, grey300,
   white, darkBlack, fullBlack,
 } from 'material-ui/styles/colors';
 import {fade} from 'material-ui/utils/colorManipulator';
@@ -10,11 +11,11 @@ import spacing from 'material-ui/styles/spacing';
 
 export default {
   spacing: spacing,
-  fontFamily: 'Georgia, serif',
+  fontFamily: "'Open Sans', Arial, sans-serif",
   palette: {
     primary1Color: indigo900,
     primary2Color: cyan700,
-    primary3Color: grey400,
+    primary3Color: red600,
     accent1Color: lightBlueA100,
     accent2Color: grey100,
     accent3Color: red900,
@@ -28,6 +29,8 @@ export default {
     shadowColor: fullBlack,
   },
 };
+    // primary3Color: grey300,
+
 
 // import {
 //   cyan500, cyan700,
