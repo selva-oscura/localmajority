@@ -1,4 +1,5 @@
 import React from 'react';
+import Styling from '../common/Styling';
 import Aux from '../common/Aux';
 
 const Primer = ({ primer, i }) => (
@@ -7,6 +8,12 @@ const Primer = ({ primer, i }) => (
     {primer.content.map((section, s) => {
       const title =
         section.heading && section.heading.title ? section.heading.title : null;
+      const specialStyling =
+        section.heading &&
+        section.heading.options &&
+        section.heading.options.style
+          ? section.heading.options.style
+          : '';
       const body = section.body;
       const btype = body && body.type;
       if (!body && !title) {
@@ -15,7 +22,11 @@ const Primer = ({ primer, i }) => (
       return (
         <Aux key={`primer-${i}-section-${s}`}>
           <div className={section.tag} key={section.tag}>
-            {title && <h3 className="section-head">{title}</h3>}
+            {title && (
+              <h3 className="section-head">
+                <Styling styling={specialStyling}>{title}</Styling>
+              </h3>
+            )}
 
             {btype === 'RichText' && (
               <div
