@@ -75,11 +75,12 @@ const Home = props => {
                 cardTitle={state.title}
                 cardText={`We are contesting House Seat races in ${
                   state.title
-                } in ${arrayToSentence(state.districts)}`}
+                } in ${arrayToSentence(state.districts)}.`}
                 imgSrc={`../images/${state.title}.jpg`}
                 category="districts"
                 slug={state.title}
                 imgShape="square"
+                insetImg="true"
               />
             ))}
           </div>
