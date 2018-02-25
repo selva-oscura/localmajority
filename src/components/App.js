@@ -36,13 +36,14 @@ class App extends Component {
     } else {
       // default state if no localStorage or no stored data in localStorage
       this.state = {
+        articles: [],
+        articlesDetails: {},
         candidates: [],
         candidatesDetails: {},
         seats: [],
         seatsDetails: {},
         parties: {},
         states: [],
-        // articles: [],
         // contests: [],
         // issues: [],
         statesMasterList: [],
@@ -81,43 +82,72 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     let state = { ...this.state };
+    // let allQueriesSuccessful = true;
+    let allQueriesConcluded = true;
     Object.keys(this.props).forEach(query => {
-      console.log('query', query, this.props[query].loading, this.props[query]);
-      if (
-        prevProps[query].loading &&
-        !this.props[query].loading &&
-        !this.props[query].error
-      ) {
-        if (query === 'CandidatesBasics') {
-          state.candidates = this.props[query].allCandidates;
-        } else if (query === 'SeatsBasics') {
-          state.seats = this.props[query].allSeats;
-        } else if (query === 'States') {
-          state.states = this.props[query].allStates
-            .map(item => {
-              let { title, abbrev } = item;
-              return { title, abbrev };
-            })
-            .sort((a, b) => {
-              if (a.title > b.title) {
-                return 1;
-              } else {
-                return -1;
-              }
-            });
-          state.statesMasterList = state.states.map(state => state.title);
-        } else if (query === 'Parties') {
-          if (this.props.Parties && this.props.Parties.allParties) {
-            this.props[query].allParties.forEach(
-              party => (state.parties[`${party.id}`] = party)
-            );
-          }
-        }
-        state.timestamp = new Date().getTime();
+      // if (this.props[query].loading || this.props[query].error) {
+      //   allQueriesSuccessful = false;
+      // }
+      if (this.props[query].loading || this.props[query].error) {
+        console.log(
+          query,
+          'loading?',
+          this.props[query].loading,
+          'error?',
+          this.props[query].error && this.props[query].error.length > 0
+        );
+        allQueriesConcluded = false;
       }
     });
-    if (prevProps !== this.props) {
-      this.updateStateAndLocalStorage(state);
+    console.log('allQueriesConcluded', allQueriesConcluded);
+    if (allQueriesConcluded && prevProps !== this.props) {
+      Object.keys(this.props).forEach(query => {
+        if (!this.props[query].error) {
+          if (query === 'ArticlesBasics') {
+            state.articles = this.props[query].allArticles;
+          } else if (query === 'CandidatesBasics') {
+            state.candidates = this.props[query].allCandidates;
+          } else if (query === 'SeatsBasics') {
+            state.seats = this.props[query].allSeats;
+          } else if (query === 'States') {
+            state.states = this.props[query].allStates
+              .map(item => {
+                let { title, abbrev } = item;
+                return { title, abbrev };
+              })
+              .sort((a, b) => {
+                if (a.title > b.title) {
+                  return 1;
+                } else {
+                  return -1;
+                }
+              });
+            state.statesMasterList = state.states.map(state => state.title);
+          } else if (query === 'Parties') {
+            if (this.props.Parties && this.props.Parties.allParties) {
+              this.props[query].allParties.forEach(
+                party => (state.parties[`${party.id}`] = party)
+              );
+            }
+          } else {
+            console.log(
+              `Huh....  Had a successful query for ${query} amd nothing was done with the data.\nReturned ${
+                this.props[query]
+              }`
+            );
+          }
+        } else {
+          console.log(
+            `Huh....  Had an error on the query for ${query}.\nReturned ${
+              this.props[query]
+            }`
+          );
+        }
+      });
+      state.timestamp = new Date().getTime();
+      if (prevProps !== this.props) {
+        this.updateStateAndLocalStorage(state);
+      }
     }
   }
 
@@ -131,6 +161,8 @@ class App extends Component {
 
     // once queries are no longer being loaded, display content
     const {
+      articles,
+      articlesDetails,
       candidates,
       seats,
       seatsDetails,
@@ -149,7 +181,10 @@ class App extends Component {
         <Route
           exact
           path="/"
-          component={props => <Home candidates={candidates} />}
+          component={props => <Home
+            articles={articles}
+            candidates={candidates}
+          />}
         />
         <Route
           path="/candidates/:state/:slug"
@@ -164,6 +199,7 @@ class App extends Component {
                 <Candidate
                   {...props}
                   candidate={candidate}
+                  slug={props.match.params.slug}
                   updateStateDetail={this.updateStateDetail}
                 />
               </ErrorBoundary>
@@ -307,6 +343,7 @@ class App extends Component {
 }
 
 export default compose(
+  graphql(graphQLAPI.queries.ArticlesBasics, { name: 'ArticlesBasics' }),
   graphql(graphQLAPI.queries.CandidatesBasics, { name: 'CandidatesBasics' }),
   graphql(graphQLAPI.queries.SeatsBasics, { name: 'SeatsBasics' }),
   graphql(graphQLAPI.queries.Parties, { name: 'Parties' }),
