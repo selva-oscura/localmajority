@@ -9,7 +9,7 @@ import { SocialIcon } from 'react-social-icons';
 import CandidateDonateButton from './CandidateDonateButton';
 import CandidateWebsiteButton from './CandidateWebsiteButton';
 import CandidateAside from './CandidateAside';
-import { standardizeDate } from '../../utils/functions';
+import { prettifyDate } from '../../utils/functions';
 import './Candidate.css';
 
 class Candidate extends Component {
@@ -55,7 +55,7 @@ class Candidate extends Component {
                   ? candidate.contestId.seatId.title
                   : 'no district data'}
                 {candidate.contestId && candidate.contestId.electionDate
-                  ? ` on ${standardizeDate(candidate.contestId.electionDate)}`
+                  ? ` on ${prettifyDate(candidate.contestId.electionDate)}`
                   : null}
               </h3>
               <div className="social-icons-space">
