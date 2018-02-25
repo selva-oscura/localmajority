@@ -8,6 +8,33 @@ const endpoints = {
 };
 
 const queries = {
+  ArticlesBasics: gql`
+    query ArticlesBasics {
+      allArticles {
+        articleType
+        author
+        createdAt
+        id
+        slug
+        title
+        updatedAt
+      }
+    }
+  `,
+  ArticleDetailBySlug: gql`
+    query ArticleDetail($slug: String!) {
+      Article(slug: $slug) {
+        articleType
+        author
+        content
+        createdAt
+        id
+        slug
+        title
+        updatedAt
+      }
+    }
+  `,
   AllStatesCandidates: gql`
     query allStatesCandidates {
       allStates {
