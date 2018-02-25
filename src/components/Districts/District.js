@@ -4,14 +4,13 @@ import graphQLAPI from '../../api/graphQLAPI';
 import Primer from '../Primers/Primer';
 import Aux from '../common/Aux';
 import Loading from '../common/Loading';
+import Offline from '../common/Offline';
 import NoSuchDistrict from './NoSuchDistrict';
 import './District.css';
 
 class District extends Component {
   constructor(props, context) {
     super(props, context);
-    // console.log(this.props)
-
     if (this.props.seat) {
       document.title = `Local Majority | ${this.props.seat.title}`;
     } else {
@@ -45,16 +44,19 @@ class District extends Component {
 
   render() {
     const isLoading = this.props.SeatDetailBySlug.loading;
-
     if (isLoading) {
       return <Loading />;
     }
 
+    const isOffline =
+      this.props.SeatDetailBySlug.error &&
+      this.props.SeatDetailBySlug.error.message.indexOf('Network error') > -1
+        ? true
+        : false;
+
     const seat = this.props.seatDetail
       ? this.props.seatDetail
       : this.props.seat;
-
-    console.log('seat data from District', seat);
 
     if (!seat) {
       return <NoSuchDistrict seatId={this.props.match.params.slug} />;
@@ -72,57 +74,76 @@ class District extends Component {
 
     return (
       <div className="District">
-        <div className="hidden-sm-down">
-          <div className="row">
-            <div className="col-6">
-              <h2>{seat.title}</h2>
-              <img
-                src={seatMap}
-                className="img-fluid"
-                alt={`map of district ${seat.title}`}
-              />
-            </div>
-            {candidates ? (
-              candidates.map((candidate, i) => (
-                <div className="col-6" key={i}>
-                  <h2>{candidate.title}</h2>
-                  <img
-                    src={candidateHeadshot}
-                    className="img-fluid"
-                    alt={`headshot of distict candidate ${candidate.title}`}
-                  />
-                </div>
-              ))
-            ) : (
+        {isOffline && <Offline timestamp={seat.timestamp} />}
+        <section>
+          <div className="hidden-sm-down">
+            <div className="row">
               <div className="col-6">
-                <h2>Previously had candidate headshot here.</h2>
-                <p>
-                  Will we have multiple candidates here or just 'our' candidate
-                  or....?
-                </p>
+                <h2>{seat.title}</h2>
+                <img
+                  src={seatMap}
+                  className="img-fluid"
+                  alt={`map of district ${seat.title}`}
+                />
               </div>
-            )}
+              { candidates
+                ? candidates.map((candidate, i) => (
+                    <div className="col-6" key={i}>
+                      <h2>{candidate.title}</h2>
+                      <img
+                        src={candidateHeadshot}
+                        className="img-fluid"
+                        alt={`headshot of distict candidate ${candidate.title}`}
+                      />
+                    </div>
+                  ))
+                : null
+              }
+            </div>
           </div>
-        </div>
-        <div className="hidden-md-up">
+          <div className="hidden-md-up">
+            <div className="row">
+              <div className="col">
+                <h2>{seat.title}</h2>
+                <img
+                  src={seatMap}
+                  className="img-fluid"
+                  alt={`map of district ${seat.title}`}
+                />
+              </div>
+              { candidates
+                ? candidates.map((candidate, i) => (
+                    <div className="col" key={i}>
+                      <h2>{candidate.title}</h2>
+                      <img
+                        src={candidateHeadshot}
+                        className="img-fluid"
+                        alt={`headshot of distict candidate ${candidate.title}`}
+                      />
+                    </div>
+                  ))
+                : null
+              }
+            </div>
+          </div>
           <div className="row">
             <div className="col">
-              <h2>{seat.title}</h2>
-              <img
-                src={seatMap}
-                className="img-fluid"
-                alt={`map of district ${seat.title}`}
-              />
-              {seat.primers && (
-                <Aux>
-                  {seat.primers.map((primer, i) => (
-                    <Primer primer={primer} i={i} key={i} />
-                  ))}
-                </Aux>
-              )}
+              <h2>Going with the old way of having the candidate headshot here, but.....</h2>
+              <p>
+                Will we have multiple candidates here or just 'our' candidate or....?
+              </p>
             </div>
           </div>
-        </div>
+        </section>
+        <section>
+          {seat.primers && (
+            <Aux>
+              {seat.primers.map((primer, i) => (
+                <Primer primer={primer} i={i} key={i} />
+              ))}
+            </Aux>
+          )}
+        </section>
       </div>
     );
   }
