@@ -2,11 +2,12 @@ import React from 'react';
 import './Home.css';
 import Aside from '../common/Aside';
 import Card from '../common/Cards/Card';
+import { prettifyDate } from '../../utils/functions';
 
 const Home = props => {
   document.title = 'Local Majority';
   // console.log('from Home', props);
-  let { candidates } = props;
+  let { articles, candidates } = props;
   const sockPuppetStateData = [
     {
       title: 'Florida',
@@ -50,59 +51,92 @@ const Home = props => {
     <div className="Home">
       <div className="main-and-aside">
         <article className="Main">
-          <img
-            className="splash-image"
-            src="../images/faces.png"
-            alt="faces of candidates"
-          />
-          <h2 className="text-center">
-            Working Locally to Take Back State Legislatures
-          </h2>
-          <p className="text-center">
-            Local Majority provides research and other support for small state
-            legislative campaigns who may not have many resources. Our goal is
-            to build from the grassroots the local support that will help
-            Democrats take back state legislatures across the country, beginning
-            with Virginia in 2017, and continuing with Florida, Michigan and
-            Minnesota in 2018.
-          </p>
-          <h2 className="text-center">Our States</h2>
-          <div className="flex">
-            {sockPuppetStateData.map((state, i) => (
-              <Card
-                key={i}
-                id={i}
-                cardTitle={state.title}
-                cardText={`We are contesting House Seat races in ${
-                  state.title
-                } in ${arrayToSentence(state.districts)}.`}
-                imgSrc={`../images/${state.title}.jpg`}
-                category="districts"
-                slug={state.title}
-                imgShape="square"
-                insetImg="true"
-              />
-            ))}
-          </div>
-          <h2 className="text-center">Featured Candidates</h2>
-          <div className="flex">
-            {candidates && candidates.length ? (
-              candidates.map((candidate, i) => (
+          
+          <section>          
+            <img
+              className="splash-image"
+              src="../images/faces.png"
+              alt="faces of candidates"
+            />
+            <h2 className="text-center">
+              Working Locally to Take Back State Legislatures
+            </h2>
+            <p className="text-center">
+              Local Majority provides research and other support for small state
+              legislative campaigns who may not have many resources. Our goal is
+              to build from the grassroots the local support that will help
+              Democrats take back state legislatures across the country, beginning
+              with Virginia in 2017, and continuing with Florida, Michigan and
+              Minnesota in 2018.
+            </p>
+          </section>
+          
+          <section>          
+            <h2 className="text-center">Our States</h2>
+            <div className="flex">
+              {sockPuppetStateData.map((state, i) => (
                 <Card
                   key={i}
-                  id={candidate.id}
-                  cardTitle={candidate.title}
-                  cardText={candidate.contestId.seatId.title}
-                  imgSrc={candidate.headshotId.url}
-                  category="candidates"
-                  slug={`${candidate.state.title}/${candidate.slug}`}
+                  id={i}
+                  cardTitle={state.title}
+                  cardText={`We are contesting House Seat races in ${
+                    state.title
+                  } in ${arrayToSentence(state.districts)}.`}
+                  imgSrc={`../images/${state.title}.jpg`}
+                  category="districts"
+                  slug={state.title}
                   imgShape="square"
+                  insetImg="true"
                 />
-              ))
-            ) : (
-              <h2>Loading</h2>
-            )}
-          </div>
+              ))}
+            </div>
+          </section>
+          
+          <section>          
+            <h2 className="text-center">Featured Candidates</h2>
+            <div className="flex">
+              {candidates && candidates.length ? (
+                candidates.map((candidate, i) => (
+                  <Card
+                    key={i}
+                    id={candidate.id}
+                    cardTitle={candidate.title}
+                    cardText={candidate.contestId.seatId.title}
+                    imgSrc={candidate.headshotId.url}
+                    category="candidates"
+                    slug={`${candidate.state.title}/${candidate.slug}`}
+                    imgShape="square"
+                  />
+                ))
+              ) : (
+                <h2>Loading</h2>
+              )}
+            </div>
+          </section>
+
+          <section>          
+            <h2 className="text-center">Featured Articles</h2>
+            <div className="flex">
+              {articles && articles.length ? (
+                articles.map((article) => (
+                  <Card
+                    key={article.id}
+                    id={article.id}
+                    cardTitle={article.title}
+                    cardSubtitle={`by ${article.author}`}
+                    cardText={prettifyDate(article.updatedAt)}
+                    imgSrc={"ImageSourceNeeded"}
+                    category="articles"
+                    slug={`${article.slug}`}
+                    imgShape="square"
+                  />
+                ))
+              ) : (
+                <h2>Loading</h2>
+              )}
+            </div>
+          </section>
+
         </article>
         <Aside twitterHandles={['local_majority']} />
       </div>
