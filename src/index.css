@@ -39,6 +39,11 @@ a:hover, a:hover, a:hover h1, a:hover h2, a:hover h3, a:hover h4, a:hover h5, a:
   text-align: right;
 }
 
+.error {
+  background-color: rgba(183, 28, 28, 0.2);
+  color: rgba(183, 28, 28, 1);
+}
+
 .full-width {
   width: 100%;
 }
