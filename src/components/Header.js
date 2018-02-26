@@ -28,6 +28,12 @@ class Header extends Component {
       },
       { path: '/issues', name: 'Issues', shortName: 'Issues', exact: false },
       {
+        path: '/take-action',
+        name: 'Take Action!',
+        shortName: 'Act!',
+        exact: true,
+      },
+      {
         path: '/about-us',
         name: 'About Us',
         shortName: 'About Us',
