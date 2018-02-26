@@ -6,7 +6,7 @@ import Aux from '../common/Aux';
 
 class TakeAction extends Component {
   state = {
-    stateSelected: "All",
+    stateSelected: "",
   }
 
   updateFilter = (filterCategory, selectedValues) => {
@@ -15,41 +15,65 @@ class TakeAction extends Component {
 
   render(){
     const { statesMasterList } = this.props;
-    const regionText = this.state.stateSelected === "All" 
+    const regionText = this.state.stateSelected === "" 
       ? "America" 
       : this.state.stateSelected;
     return (
       <article className="TakeAction">
+        <h2 className="tertiary-text-color">NOTE: content in red on this page is currently being used to specify content that will need to be changed in response to the individual state.  In the long-run we may want to use red for deadlines and other particularly emphasized issues....</h2>
         <div className="row">
           <div className="col-xs-12">
+
             <section>
-              <h2 className="text-right secondary-text-color">Your Vote is Your Voice</h2>
+              <h2 className="text-right secondary-text-color"><i>Your Vote is Your Voice</i></h2>
               <h1>Take Action!</h1>
-              <h3>Choose Your State</h3>
+              <h3>Select Your State</h3>
               <Filters>              
                 <ButtonlessFilters
                   filterCategory="stateSelected"
+                  includeAll={false}
                   masterList={statesMasterList}
                   updateFilter={this.updateFilter}
                 />
               </Filters>
-              <h2 className="tertiary-text-color">NOTE: content in red on this page is currently being used to specify content that will need to be changed in response to the individual state.  In the long-run we may want to use red for deadlines and other particularly emphasized issues....</h2>
-              <p>Filter: {this.state.stateSelected}</p>
             </section>
+
             <hr />
+
             <section>
-              <h2 className="text-right secondary-text-color">Voting is not a Spectator Sport</h2>
+              <h2 className="text-right secondary-text-color"><i>Voting is not a Spectator Sport</i></h2>
               <h2>Voter Registration</h2>
-            </section>
-            <hr />
-            <section>
-              <h2 className="text-right secondary-text-color">Your Vote Counts More than Ever!<br />
-                &amp; it is the Only Way to turn {regionText} Blue Again</h2>
-              <h2>Vote By Mail</h2>
-              {this.state.stateSelected === "All"
+              {this.state.stateSelected === ""
                 ? (
                   <Aux>
-                    <h4>Voting By Mail / An Absentee Ballot May be able to Help You Avoid the Lines and Give you Peace of Mind on Election Day.</h4>
+                    <h4>Are you Registered to Vote?</h4>
+                    <h4 className="text-center">Is your Voter Registration Information Accurate?</h4>
+                    <h4 className="text-right">Looking for General Voting &amp; Registration Information?</h4>
+                    <p>To see voter and registration information for your state, please select your state above.</p>
+                  </Aux>
+                ) : (
+                  <Aux>
+                    <h4>Are you Registered to Vote?</h4>
+                    <p>Register to vote at <a href="https://vote.elections.virginia.gov/Registration/Eligibility" target="register"><span className="secondary-text-color">https://vote.elections.virginia.gov/Registration/Eligibility</span></a></p>
+                    <h4>Is your Voter Registration Information Current and Accurate?</h4>
+                    <p>Check your registration details at <a href="https://vote.elections.virginia.gov/VoterInformation" target="accurate"><span className="secondary-text-color">https://vote.elections.virginia.gov/VoterInformation</span></a></p>
+                    <h4>Looking for General Voting &amp; Registration Information?</h4>
+                    <p>Check what's on your ballot, your polling location, what voter photo ids are valid, upcoming elections, accessibility, and much more at <a href="https://www.elections.virginia.gov/voter-outreach/" target="voter-outreach"><span className="secondary-text-color">https://www.elections.virginia.gov/voter-outreach/</span></a></p>
+                  </Aux>
+                )
+              }
+            </section>
+
+            <hr />
+
+            <section>
+              <h2 className="text-right secondary-text-color"><i>Your Vote Counts More than Ever!<br />
+                &amp; it is the Only Way to turn {regionText} Blue Again</i></h2>
+              <h2>Vote By Mail</h2>
+              {this.state.stateSelected === ""
+                ? (
+                  <Aux>
+                    <h4>An Absentee Ballot (Vote By Mail) can Help You Avoid the Lines and Give you Peace of Mind on Election Day.</h4>
                     <p>To see if you can vote by mail, select your state above.</p>
                   </Aux>
                 ) : (
@@ -77,13 +101,17 @@ class TakeAction extends Component {
                 )
               }
             </section>
+
             <hr />
+
             <section>
-              <h2 className="text-right secondary-text-color">TIME TO GET OUT THE VOTE!!</h2>
+              <h2 className="text-right secondary-text-color"><i>TIME TO GET OUT THE VOTE!!</i></h2>
               <h2>Volunteer</h2>
             </section>
+
             <hr />
-            <h2 className="text-right secondary-text-color">DEMOCRACY’S ONLY HOPE!</h2>
+
+            <h2 className="text-right secondary-text-color"><i>DEMOCRACY’S ONLY HOPE!</i></h2>
 
           </div>
         </div>
