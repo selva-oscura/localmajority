@@ -6,7 +6,7 @@ import './ButtonlessFilters.css';
 /* Calling of this Component should resemble the following:
     <ButtonFilters
       filterCategory="districtsStatesSelected" // <- this is the name of the variable used as the filter in the parent component
-
+      includeAll            // <- Boolean showing whether all should be an option
       masterList={statesMasterList}            // <- sorted array with all possible values (excepting all/none)
       updateFilter={this.updateFilter}         // <- parent component's function for updating updating the filter that will be used to display parent component's candidates, articles, districts, etc.
     />
@@ -15,8 +15,12 @@ import './ButtonlessFilters.css';
 class ButtonlessFilters extends Component {
   constructor(props, context) {
     super(props, context);
+    let { includeAll } = this.props;
+    let selectedValue = includeAll 
+      ? "All"
+      : "";
     this.state = {
-      selectedValue: "All"
+      selectedValue
     }
     this.updateSelectedValues = this.updateSelectedValues.bind(this);
   }
@@ -32,13 +36,15 @@ class ButtonlessFilters extends Component {
     return (
       <div className="ButtonlessFilters">
         <p>
-          <ButtonlessFilter
-            key="All"
-            filterCategory={filterCategory}
-            currentItem="All"
-            selectedValue={selectedValue}
-            updateSelectedValues={this.updateSelectedValues}
-          />
+          {includeAll && 
+            <ButtonlessFilter
+              key="All"
+              filterCategory={filterCategory}
+              currentItem="All"
+              selectedValue={selectedValue}
+              updateSelectedValues={this.updateSelectedValues}
+            />
+          }
           {masterList.map((item, i) => (
             <ButtonlessFilter
               key={i}

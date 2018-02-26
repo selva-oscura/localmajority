@@ -10,8 +10,8 @@ const ButtonlessFilter = ({
 
   const handleClick = () => updateSelectedValues(filterCategory, currentItem);
   const selectedClassName = (currentItem) => {
-    return selectedValue === currentItem
-      ? "primary-text-color"
+    return selectedValue === currentItem || selectedValue === "all"
+      ? "secondary-text-color"
       : "default-text-color";
   }
   return (
