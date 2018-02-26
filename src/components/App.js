@@ -12,6 +12,7 @@ import District from './Districts/District';
 import Districts from './Districts/Districts';
 import Issues from './Issues/Issues';
 import AboutUs from './AboutUs/AboutUs';
+import TakeAction from './TakeAction/TakeAction';
 import Elements from './common/Elements';
 import FourZeroFour from './FourZeroFour';
 import Loading from './common/Loading';
@@ -308,6 +309,7 @@ class App extends Component {
           }
         />
         <Route path="/about-us" component={AboutUs} />
+        <Route path="/take-action" component={TakeAction} />
         <Route path="/elements" component={Elements} />
         <Route component={FourZeroFour} />
       </Switch>
