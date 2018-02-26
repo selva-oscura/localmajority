@@ -9,15 +9,28 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: .5rem;
 }
 
-h1, h2, h3, h4, h5, h6, svg text {
+h1, h2, h3, h4, h5, h6, svg text, .primary-text-color {
   color: #01369B;
 }
 
-p, li {
+/*.primary-text-color {
+  color: rgb(26, 35, 126);
+}
+
+.secondary-text-color {
+  rgb(26, 35, 126)
+}
+*/
+
+.tertiary-text-color {
+  color: rgba(183, 28, 28, 1);
+}
+
+p, li, .default-text-color {
   color: #656565;
 }
 
-a, a h1, a h2, a h3, a h4, a h5, a h6, a p {
+a, a h1, a h2, a h3, a h4, a h5, a h6, a p, .secondary-text-color {
   color: rgba(0, 110, 237, 0.75);
   text-decoration: none;
   transition: color 0.5s ease-out;
@@ -26,6 +39,7 @@ a, a h1, a h2, a h3, a h4, a h5, a h6, a p {
 a:hover, a:hover, a:hover h1, a:hover h2, a:hover h3, a:hover h4, a:hover h5, a:hover h6, a:hover p {
   color: rgba(0, 110, 237, 1);
 }
+
 
 .text-left {
   text-align: left;
