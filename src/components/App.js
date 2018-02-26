@@ -308,10 +308,28 @@ class App extends Component {
             )
           }
         />
+
+        <Route
+          path="/take-action"
+          component={props =>
+            statesMasterList
+            ? (
+              <TakeAction
+                {...props}
+                statesMasterList={statesMasterList}
+              />
+            ) : (
+              <Loading />
+            )
+          }
+        />
+
         <Route path="/about-us" component={AboutUs} />
-        <Route path="/take-action" component={TakeAction} />
+
         <Route path="/elements" component={Elements} />
+
         <Route component={FourZeroFour} />
+
       </Switch>
     );
   }
