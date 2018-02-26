@@ -12,7 +12,7 @@ class TakeAction extends Component {
     this.setState({stateSelected: selectedValues});
   };
 
-  render(){  
+  render(){
     const { statesMasterList } = this.props;
 
     return (
@@ -24,9 +24,9 @@ class TakeAction extends Component {
               <h2>Choose Your State</h2>
               <Filters>              
                 <ButtonlessFilters
-                  filterCategory="stateSelected" // <- this is the name of the variable used as the filter in the parent component
-                  masterList={statesMasterList}            // <- sorted array with all possible values (excepting all/none)
-                  updateFilter={this.updateFilter}         // <- parent component's function for updating updating the filter that will be used to display parent component's candidates, articles, districts, etc.
+                  filterCategory="stateSelected"
+                  masterList={statesMasterList}
+                  updateFilter={this.updateFilter}
                 />
               </Filters>
               <p>Filter: {this.state.stateSelected}</p>
