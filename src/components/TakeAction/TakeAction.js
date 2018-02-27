@@ -119,6 +119,7 @@ class TakeAction extends Component {
                       </span>
                     </a>
                   </p>
+                  <p>Hope to see you at the polls.  The next criticla election in {this.state.stateSelected} is <span className="tertiary-text-color">whatever the date should be</span>.</p>
                 </Aux>
               )}
             </section>
@@ -227,10 +228,27 @@ class TakeAction extends Component {
             <hr />
 
             <section>
+              <h2>Volunteer</h2>
+              <h2 className="text-right secondary-text-color">
+                <i>Join Our Team</i>
+              </h2>
+              <h3>Want to Help Turn State Legislatures Back to Blue? </h3>
+              <p>Don’t just spend time answering online petitions! Join Local Majority to help with our research work or go to Mobilize to help with phonebanking. The work can be done from your home.</p>
               <h2 className="text-right secondary-text-color">
                 <i>TIME TO GET OUT THE VOTE!!</i>
               </h2>
-              <h2>Volunteer</h2>
+              {!this.state.stateSelected ? (
+                <Aux>
+                  <h3>Interested in Reaching out to People from your State? </h3>
+                  <p>Mobilize can hook you in to Democratic campaigns for canvassing and phonebanking opportunities!</p>
+                </Aux>
+              ):(
+                <Aux>
+                  <p>If you live near {this.state.stateSelected}, Mobilize can hook you in to Democratic campaigns for <span className="tertiary-text-color">House of Delegates or whatever it is called IN THAT STATE</span> for canvassing and phonebanking. Opportunities <span className="tertiary-text-color">this weekend</span>!</p>
+                  <p>{this.state.stateSelected} elections on <span className="tertiary-text-color">November 7, 2017</span>.</p>
+                </Aux>
+              )}
+              <h2 className="text-center">First Step to reclaim our Democracy!!!</h2>
             </section>
 
             <hr />
