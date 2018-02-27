@@ -7,18 +7,14 @@ const ButtonlessFilter = ({
   selectedValue,
   updateSelectedValues,
 }) => {
-
   const handleClick = () => updateSelectedValues(filterCategory, currentItem);
-  const selectedClassName = (currentItem) => {
-    return selectedValue === currentItem || selectedValue === "all"
-      ? "secondary-text-color"
-      : "default-text-color";
-  }
+  const selectedClassName = currentItem => {
+    return selectedValue === currentItem || (currentItem === "All" && selectedValue === "")
+      ? 'secondary-text-color'
+      : 'default-text-color';
+  };
   return (
-    <span
-      onClick={handleClick}
-      className={selectedClassName(currentItem)}
-    >
+    <span onClick={handleClick} className={selectedClassName(currentItem)}>
       {currentItem}
     </span>
   );

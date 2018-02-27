@@ -8,35 +8,32 @@ import './ButtonlessFilters.css';
       filterCategory="districtsStatesSelected" // <- this is the name of the variable used as the filter in the parent component
       includeAll            // <- Boolean showing whether all should be an option
       masterList={statesMasterList}            // <- sorted array with all possible values (excepting all/none)
+      passedParam                               // <- optional value, representing the selected item IF routing is being used to specify the selected item
       updateFilter={this.updateFilter}         // <- parent component's function for updating updating the filter that will be used to display parent component's candidates, articles, districts, etc.
     />
 */
 
 class ButtonlessFilters extends Component {
-  constructor(props, context) {
-    super(props, context);
-    let { includeAll } = this.props;
-    let selectedValue = includeAll 
-      ? "All"
-      : "";
+  constructor (props) {
+    super (props);
+    const { passedParam=''} = this.props;
     this.state = {
-      selectedValue
+      selectedValue: passedParam,
     }
     this.updateSelectedValues = this.updateSelectedValues.bind(this);
   }
 
   updateSelectedValues(filterCategory, currentItem) {
-    this.setState({ selectedValue: currentItem });
     this.props.updateFilter(filterCategory, currentItem);
   }
 
   render() {
-    const { filterCategory, includeAll, masterList } = this.props;
+    const { filterCategory, includeAll=true, masterList } = this.props;
     const { selectedValue } = this.state;
     return (
       <div className="ButtonlessFilters">
         <p>
-          {includeAll && 
+          {includeAll && (
             <ButtonlessFilter
               key="All"
               filterCategory={filterCategory}
@@ -44,7 +41,7 @@ class ButtonlessFilters extends Component {
               selectedValue={selectedValue}
               updateSelectedValues={this.updateSelectedValues}
             />
-          }
+          )}
           {masterList.map((item, i) => (
             <ButtonlessFilter
               key={i}
