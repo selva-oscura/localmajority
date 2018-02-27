@@ -51,8 +51,7 @@ const Home = props => {
     <div className="Home">
       <div className="main-and-aside">
         <article className="Main">
-          
-          <section>          
+          <section>
             <img
               className="splash-image"
               src="../images/faces.png"
@@ -65,13 +64,13 @@ const Home = props => {
               Local Majority provides research and other support for small state
               legislative campaigns who may not have many resources. Our goal is
               to build from the grassroots the local support that will help
-              Democrats take back state legislatures across the country, beginning
-              with Virginia in 2017, and continuing with Florida, Michigan and
-              Minnesota in 2018.
+              Democrats take back state legislatures across the country,
+              beginning with Virginia in 2017, and continuing with Florida,
+              Michigan and Minnesota in 2018.
             </p>
           </section>
-          
-          <section>          
+
+          <section>
             <h2 className="text-center">Our States</h2>
             <div className="flex">
               {sockPuppetStateData.map((state, i) => (
@@ -91,8 +90,8 @@ const Home = props => {
               ))}
             </div>
           </section>
-          
-          <section>          
+
+          <section>
             <h2 className="text-center">Featured Candidates</h2>
             <div className="flex">
               {candidates && candidates.length ? (
@@ -114,18 +113,18 @@ const Home = props => {
             </div>
           </section>
 
-          <section>          
+          <section>
             <h2 className="text-center">Featured Articles</h2>
             <div className="flex">
               {articles && articles.length ? (
-                articles.map((article) => (
+                articles.map(article => (
                   <Card
                     key={article.id}
                     id={article.id}
                     cardTitle={article.title}
                     cardSubtitle={`by ${article.author}`}
                     cardText={prettifyDate(article.updatedAt)}
-                    imgSrc={"ImageSourceNeeded"}
+                    imgSrc={'ImageSourceNeeded'}
                     category="articles"
                     slug={`${article.slug}`}
                     imgShape="square"
@@ -136,7 +135,6 @@ const Home = props => {
               )}
             </div>
           </section>
-
         </article>
         <Aside twitterHandles={['local_majority']} />
       </div>

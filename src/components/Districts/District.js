@@ -86,7 +86,7 @@ class District extends Component {
                   alt={`map of district ${seat.title}`}
                 />
               </div>
-              { candidates
+              {candidates
                 ? candidates.map((candidate, i) => (
                     <div className="col-6" key={i}>
                       <h2>{candidate.title}</h2>
@@ -97,8 +97,7 @@ class District extends Component {
                       />
                     </div>
                   ))
-                : null
-              }
+                : null}
             </div>
           </div>
           <div className="hidden-md-up">
@@ -111,7 +110,7 @@ class District extends Component {
                   alt={`map of district ${seat.title}`}
                 />
               </div>
-              { candidates
+              {candidates
                 ? candidates.map((candidate, i) => (
                     <div className="col" key={i}>
                       <h2>{candidate.title}</h2>
@@ -122,15 +121,18 @@ class District extends Component {
                       />
                     </div>
                   ))
-                : null
-              }
+                : null}
             </div>
           </div>
           <div className="row">
             <div className="col">
-              <h2>Going with the old way of having the candidate headshot here, but.....</h2>
+              <h2>
+                Going with the old way of having the candidate headshot here,
+                but.....
+              </h2>
               <p>
-                Will we have multiple candidates here or just 'our' candidate or....?
+                Will we have multiple candidates here or just 'our' candidate
+                or....?
               </p>
             </div>
           </div>
