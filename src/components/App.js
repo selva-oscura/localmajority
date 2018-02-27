@@ -182,10 +182,9 @@ class App extends Component {
         <Route
           exact
           path="/"
-          component={props => <Home
-            articles={articles}
-            candidates={candidates}
-          />}
+          component={props => (
+            <Home articles={articles} candidates={candidates} />
+          )}
         />
         <Route
           path="/candidates/:state/:slug"
@@ -310,14 +309,21 @@ class App extends Component {
         />
 
         <Route
+          path="/take-action/:state"
+          component={props =>
+            statesMasterList ? (
+              <TakeAction {...props} statesMasterList={statesMasterList} />
+            ) : (
+              <Loading />
+            )
+          }
+        />
+
+        <Route
           path="/take-action"
           component={props =>
-            statesMasterList
-            ? (
-              <TakeAction
-                {...props}
-                statesMasterList={statesMasterList}
-              />
+            statesMasterList ? (
+              <TakeAction {...props} statesMasterList={statesMasterList} />
             ) : (
               <Loading />
             )
@@ -329,7 +335,6 @@ class App extends Component {
         <Route path="/elements" component={Elements} />
 
         <Route component={FourZeroFour} />
-
       </Switch>
     );
   }
