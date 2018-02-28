@@ -1,6 +1,6 @@
 import React from 'react';
-import Styling from '../common/Styling';
-import Aux from '../common/Aux';
+import Styling from '../Styling';
+import Aux from '../Aux';
 
 const Primer = ({ primer, i }) => (
   <Aux>
