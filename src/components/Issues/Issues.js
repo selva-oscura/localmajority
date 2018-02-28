@@ -5,7 +5,11 @@ const Issues = props => {
 
   const issues = [];
 	for(let i = 1; i<10; i++){
-		issues.push({id: i, title: `Sock Puppet ${i}`, slug: `sock-puppet-${i}`});
+		let subIssues = []
+		for(let j = 1; i<5; j++){
+			subIssues.push({id: `${i}_${j}`, title: `Sock Puppet ${i} - ${j}`, slug: `sock-puppet-${i}-${j}`});
+		}
+		issues.push({id: i, title: `Sock Puppet ${i}`, slug: `sock-puppet-${i}`, subIssues: subIssues});
 	}
 	// console.log('props for Issues', props);
 	// const issues = props.issues;
