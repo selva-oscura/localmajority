@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import graphQLAPI from '../../api/graphQLAPI';
-import Primer from '../Primers/Primer';
+import Primer from '../common/Primers/Primer';
 import Aux from '../common/Aux';
 import Loading from '../common/Loading';
 import Offline from '../common/Offline';
