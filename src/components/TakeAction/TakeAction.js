@@ -15,18 +15,22 @@ class TakeAction extends Component {
       : this.props.history.push(`/take-action/${selectedValue}`);
   };
 
-  componentDidMount(){
+  componentDidMount() {
     // redirect to /take-action if /take-action/:state is not a state for which we have information
     //(shouldn't be called if picking state from selector on page, but if directly typing in url or following faulty link this will redirect to the default page)
-    if(this.props.match.params.state && !this.props.statesMasterList.includes(this.props.match.params.state)){
+    if (
+      this.props.match.params.state &&
+      !this.props.statesMasterList.includes(this.props.match.params.state)
+    ) {
       this.props.history.push('/take-action');
     }
   }
 
   render() {
     const { statesMasterList } = this.props;
-    const regionText =
-      !this.state.stateSelected ? 'America' : this.state.stateSelected;
+    const regionText = !this.state.stateSelected
+      ? 'America'
+      : this.state.stateSelected;
 
     return (
       <article className="TakeAction">
@@ -69,8 +73,8 @@ class TakeAction extends Component {
                 Looking for General Voting &amp; Registration Information?
               </h4>
               <p>
-                To see voter and registration information for your state,
-                please select your state above.
+                To see voter and registration information for your state, please
+                select your state above.
               </p>
             </Aux>
           ) : (
@@ -105,9 +109,9 @@ class TakeAction extends Component {
                 Looking for General Voting &amp; Registration Information?
               </h4>
               <p>
-                Check what's on your ballot, your polling location, what
-                voter photo ids are valid, upcoming elections,
-                accessibility, and much more at{' '}
+                Check what's on your ballot, your polling location, what voter
+                photo ids are valid, upcoming elections, accessibility, and much
+                more at{' '}
                 <a
                   href="https://www.elections.virginia.gov/voter-outreach/"
                   target="voter-outreach"
@@ -117,7 +121,13 @@ class TakeAction extends Component {
                   </span>
                 </a>
               </p>
-              <p>Hope to see you at the polls.  The next criticla election in {this.state.stateSelected} is <span className="tertiary-text-color">whatever the date should be</span>.</p>
+              <p>
+                Hope to see you at the polls. The next criticla election in{' '}
+                {this.state.stateSelected} is{' '}
+                <span className="tertiary-text-color">
+                  whatever the date should be
+                </span>.
+              </p>
             </Aux>
           )}
         </section>
@@ -135,26 +145,22 @@ class TakeAction extends Component {
           {!this.state.stateSelected ? (
             <Aux>
               <h4>
-                An Absentee Ballot (Vote By Mail) can Help You Avoid the
-                Lines and Give you Peace of Mind on Election Day.
+                An Absentee Ballot (Vote By Mail) can Help You Avoid the Lines
+                and Give you Peace of Mind on Election Day.
               </h4>
-              <p>
-                To see if you can vote by mail, select your state above.
-              </p>
+              <p>To see if you can vote by mail, select your state above.</p>
             </Aux>
           ) : (
             <Aux>
-              <h4>
-                {this.state.stateSelected} Absentee Ballot Application
-              </h4>
+              <h4>{this.state.stateSelected} Absentee Ballot Application</h4>
               <p>
                 You can also apply to vote absentee{' '}
                 <span className="tertiary-text-color">
                   as early as one year
                 </span>{' '}
-                before the election. Ballots are available 45 days before
-                most elections. The deadline for receipt of your application
-                to vote absentee by mail is{' '}
+                before the election. Ballots are available 45 days before most
+                elections. The deadline for receipt of your application to vote
+                absentee by mail is{' '}
                 <span className="tertiary-text-color">
                   5:00 PM the Tuesday before the election
                 </span>. You can contact{' '}
@@ -190,8 +196,8 @@ class TakeAction extends Component {
                 to be mailed to you is{' '}
                 <span className="tertiary-text-color">
                   5:00 p.m. Tuesday, October 31, 2017
-                </span>. Your request must be received by your Registrar by
-                5:00 p.m.
+                </span>. Your request must be received by your Registrar by 5:00
+                p.m.
               </p>
               <p>
                 It only takes a couple minutes to sign up for an absentee
@@ -202,7 +208,9 @@ class TakeAction extends Component {
                 from work to the polls. No more waiting in long lines at the
                 polls.
               </p>
-              <p className="tertiary-text-color">Some Allowed Reasons to Sign up for an Absentee Ballot:</p>
+              <p className="tertiary-text-color">
+                Some Allowed Reasons to Sign up for an Absentee Ballot:
+              </p>
               <ul>
                 <li>Commute to a different city/county</li>
                 <li>Work/commute more than 11 hours</li>
@@ -232,11 +240,18 @@ class TakeAction extends Component {
           </h2>
           <h3>Want to Help Turn State Legislatures Back to Blue? </h3>
           <p>Don’t just spend time answering online petitions!</p>
-          <p>Join Local Majority to help with our research and outreach work. The work can be done from your home.</p>
+          <p>
+            Join Local Majority to help with our research and outreach work. The
+            work can be done from your home.
+          </p>
           <div className="row">
             <div className="col-6 order-2 col-sm-12 order-sm-1">
-              <h3 className="hidden-sm-up text-left">Local Majority<br />Volunteers Needed</h3>
-              <h3 className="hidden-xs-down text-center">Local Majority Volunteers Needed</h3>
+              <h3 className="hidden-sm-up text-left">
+                Local Majority<br />Volunteers Needed
+              </h3>
+              <h3 className="hidden-xs-down text-center">
+                Local Majority Volunteers Needed
+              </h3>
             </div>
             <div className="col-6 order-1 col-sm-4 order-sm-2">Icon</div>
             <div className="col-6 order-3 col-sm-4 order-3">
@@ -260,18 +275,37 @@ class TakeAction extends Component {
           {!this.state.stateSelected ? (
             <Aux>
               <h3>Interested in Reaching out to People from your State? </h3>
-              <p>Mobilize can hook you in to Democratic campaigns for canvassing and phonebanking opportunities!</p>
+              <p>
+                Mobilize can hook you in to Democratic campaigns for canvassing
+                and phonebanking opportunities!
+              </p>
             </Aux>
-          ):(
+          ) : (
             <Aux>
-              <p>If you live near {this.state.stateSelected}, Mobilize can hook you in to Democratic campaigns for <span className="tertiary-text-color">House of Delegates or whatever it is called IN THAT STATE (NEED STATE-SPECIFIC TERMS in the database!)</span> for canvassing and phonebanking. Opportunities <span className="tertiary-text-color">this weekend</span>!</p>
-              <p>{this.state.stateSelected} elections on <span className="tertiary-text-color">November 7, 2017</span>.</p>
+              <p>
+                If you live near {this.state.stateSelected}, Mobilize can hook
+                you in to Democratic campaigns for{' '}
+                <span className="tertiary-text-color">
+                  House of Delegates or whatever it is called IN THAT STATE
+                  (NEED STATE-SPECIFIC TERMS in the database!)
+                </span>{' '}
+                for canvassing and phonebanking. Opportunities{' '}
+                <span className="tertiary-text-color">this weekend</span>!
+              </p>
+              <p>
+                {this.state.stateSelected} elections on{' '}
+                <span className="tertiary-text-color">November 7, 2017</span>.
+              </p>
             </Aux>
           )}
           <div className="row">
             <div className="col-6 order-2 col-sm-12 order-sm-1">
-              <h3 className="hidden-sm-up text-left">Mobilize<br />Volunteers Needed</h3>
-              <h3 className="hidden-xs-down text-center">Mobilize Volunteers Needed</h3>
+              <h3 className="hidden-sm-up text-left">
+                Mobilize<br />Volunteers Needed
+              </h3>
+              <h3 className="hidden-xs-down text-center">
+                Mobilize Volunteers Needed
+              </h3>
             </div>
             <div className="col-6 order-1 col-sm-4 order-sm-2">Icon</div>
             <div className="col-6 order-3 col-sm-4 order-3">
@@ -285,7 +319,9 @@ class TakeAction extends Component {
               </ul>
             </div>
           </div>
-          <h2 className="text-center">First Step to reclaim our Democracy!!!</h2>
+          <h2 className="text-center">
+            First Step to reclaim our Democracy!!!
+          </h2>
         </section>
 
         <hr />
