@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Filters from '../Filters/Filters';
-import SelectFilter from '../Filters/SelectFilter';
+import Filters from '../common/Filters/Filters';
+import SelectFilter from '../common/Filters/SelectFilter';
 import Card from '../common/Cards/Card';
 
 class Districts extends Component {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Loading from '../common/Loading';
-import Filters from '../Filters/Filters';
-import SelectFilter from '../Filters/SelectFilter';
+import Filters from '../common/Filters/Filters';
+import SelectFilter from '../common/Filters/SelectFilter';
 import HorizontalCards from '../common/Cards/HorizontalCards';
 import HorizontalCard from '../common/Cards/HorizontalCard';
 

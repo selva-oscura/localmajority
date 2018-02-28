@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Filters from '../Filters/Filters';
-import ButtonlessFilters from '../Filters/ButtonlessFilters';
+import Filters from '../common/Filters/Filters';
+import ButtonlessFilters from '../common/Filters/ButtonlessFilters';
 import Aux from '../common/Aux';
 // import './TakeAction.css';
 
