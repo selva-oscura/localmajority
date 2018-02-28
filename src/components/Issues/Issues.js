@@ -2,8 +2,14 @@ import React from 'react';
 import Card from '../common/Cards/Card';
 
 const Issues = props => {
-  console.log('props for Issues', props);
-  const issues = props.issues;
+
+  const issues = [];
+	for(let i = 1; i<10; i++){
+		issues.push({id: i, title: `Sock Puppet ${i}`, slug: `sock-puppet-${i}`});
+	}
+	// console.log('props for Issues', props);
+	// const issues = props.issues;
+
   document.title = 'Local Majority | Issues';
 
   return (
