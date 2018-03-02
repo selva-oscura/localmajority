@@ -6,10 +6,12 @@ import { graphql, compose } from 'react-apollo';
 import Header from './Header';
 import ErrorBoundary from './common/ErrorBoundary';
 import Home from './Home/Home';
+import Article from './Articles/Article';
 import Candidate from './Candidates/Candidate';
 import Candidates from './Candidates/Candidates';
 import District from './Districts/District';
 import Districts from './Districts/Districts';
+import Issue from './Issues/Issue';
 import Issues from './Issues/Issues';
 import AboutUs from './AboutUs/AboutUs';
 import TakeAction from './TakeAction/TakeAction';
@@ -57,7 +59,6 @@ class App extends Component {
         localStorage.localMajorityData = JSON.stringify(this.state);
       }
     }
-    // this.setStateAndLocalStorage = this.setStateAndLocalStorage.bind(this);
     this.updateStateDetail = this.updateStateDetail.bind(this);
   }
 
@@ -100,7 +101,8 @@ class App extends Component {
         allQueriesConcluded = false;
       }
     });
-    console.log('allQueriesConcluded', allQueriesConcluded);
+    // console.log('allQueriesConcluded', allQueriesConcluded);
+    // Freeze-dry updates to state in localStorage
     if (allQueriesConcluded && prevProps !== this.props) {
       Object.keys(this.props).forEach(query => {
         if (!this.props[query].error) {
@@ -116,13 +118,7 @@ class App extends Component {
                 let { title, abbrev } = item;
                 return { title, abbrev };
               })
-              .sort((a, b) => {
-                if (a.title > b.title) {
-                  return 1;
-                } else {
-                  return -1;
-                }
-              });
+              .sort((a, b) => (a.title > b.title ? 1 : -1));
             state.statesMasterList = state.states.map(state => state.title);
           } else if (query === 'Parties') {
             if (this.props.Parties && this.props.Parties.allParties) {
@@ -162,7 +158,7 @@ class App extends Component {
 
     // once queries are no longer being loaded, display content
     const {
-      articles,
+      // articles,
       articlesDetails,
       candidates,
       seats,
@@ -170,6 +166,45 @@ class App extends Component {
       candidatesDetails,
       statesMasterList,
     } = this.state;
+    let { articles } = this.state;
+
+    const issues = [];
+    for (let i = 1; i < 10; i++) {
+      let subIssues = [];
+      for (let j = 1; j < 5; j++) {
+        const sockPuppetArticles = [];
+        for (let k = 1; k < 4; k++) {
+          let type = '';
+          if (k === 1) {
+            type = 'TalkingPoints';
+          } else {
+            type = 'Research Article';
+          }
+          sockPuppetArticles.push({
+            id: `${i}_${j}_${k}`,
+            title: `Article blah, blah, blah ${i} - ${j} - ${k}`,
+            slug: `filler-article-${i}-${j}-${k}`,
+            articleType: type,
+          });
+        }
+        subIssues.push({
+          id: `${i}_${j}`,
+          title: `Sock Puppet ${i} - ${j}`,
+          slug: `sock-puppet-${i}-${j}`,
+          articles: sockPuppetArticles,
+        });
+        articles = articles.concat(sockPuppetArticles);
+        // sockPuppetArticles.forEach((article => {
+        //   articles.push(article);
+        // }))
+      }
+      issues.push({
+        id: i,
+        title: `Sock Puppet ${i}`,
+        slug: `sock-puppet-${i}`,
+        subIssues: subIssues,
+      });
+    }
 
     const regionTypesMasterList = [
       { title: 'Federal District', abbrev: 'FD_US' },
@@ -253,9 +288,10 @@ class App extends Component {
             const seat = seats
               ? seats.find(seat => props.match.params.slug === seat.slug)
               : { id: 'no-cached-data', mapSmUrl: { url: null } };
-            const seatDetail = seatsDetails[props.match.params.slug]
-              ? seatsDetails[props.match.params.slug]
-              : null;
+            const seatDetail =
+              seatsDetails && seatsDetails[props.match.params.slug]
+                ? seatsDetails[props.match.params.slug]
+                : null;
             return (
               <ErrorBoundary>
                 <District
@@ -306,6 +342,48 @@ class App extends Component {
               <Loading />
             )
           }
+        />
+
+        <Route
+          path="/articles/:slug"
+          component={props => {
+            const article = articles
+              ? articles.find(
+                  article => props.match.params.slug === article.slug
+                )
+              : null;
+            const articleDetail = articlesDetails[props.match.params.slug]
+              ? articlesDetails[props.match.params.slug]
+              : null;
+            return (
+              <Article
+                {...props}
+                article={article}
+                articleDetail={articleDetail}
+              />
+            );
+          }}
+        />
+
+        <Route
+          path="/issues/:slug"
+          component={props => {
+            console.log(
+              'logging from routing for /issues/:slug -- issues are',
+              issues,
+              'param is',
+              props.match.params.slug
+            );
+            const issue = issues.find(
+              issue => props.match.params.slug === issue.slug
+            );
+            return <Issue {...props} issue={issue} />;
+          }}
+        />
+
+        <Route
+          path="/issues"
+          component={props => <Issues {...props} issues={issues} />}
         />
 
         <Route
@@ -374,35 +452,3 @@ export default compose(
   graphql(graphQLAPI.queries.Parties, { name: 'Parties' }),
   graphql(graphQLAPI.queries.States, { name: 'States' })
 )(App);
-
-/*
-           <Route
-              path="/article/:id"
-              component={props => {
-                const reading = articles.find(
-                  reading => props.match.params.id === reading.slug
-                );
-                return <ReadingHolder reading={reading} {...props} />;
-              }}
-           />
-*/
-
-// <Route
-//   path="/issues/:id"
-//   component={props => {
-//     console.log(
-//       'logging from routing for /issues/:id -- issues are',
-//       issues,
-//       'param is',
-//       props.match.params.id
-//     );
-//     const issue = issues.find(
-//       issue => props.match.params.id === issue.id
-//     );
-//     return <IssuePrimer {...props} issue={issue} />;
-//   }}
-// />
-// <Route
-//   path="/issues"
-//   component={props => <Issues {...props} issues={issues} />}
-// />
