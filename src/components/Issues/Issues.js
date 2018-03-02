@@ -1,24 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Card from '../common/Cards/Card';
 
 const Issues = props => {
-
-  const issues = [];
-	for(let i = 1; i<10; i++){
-		let subIssues = []
-		for(let j = 1; i<5; j++){
-			subIssues.push({id: `${i}_${j}`, title: `Sock Puppet ${i} - ${j}`, slug: `sock-puppet-${i}-${j}`});
-		}
-		issues.push({id: i, title: `Sock Puppet ${i}`, slug: `sock-puppet-${i}`, subIssues: subIssues});
-	}
-	// console.log('props for Issues', props);
-	// const issues = props.issues;
+  console.log('props for Issues', props);
+  const issues = props.issues;
 
   document.title = 'Local Majority | Issues';
 
   return (
     <div className="Issues flex">
-      {issues.map((issue, i) => <h3 key={i}>{issue.title}</h3>)}
+      {issues.map((issue, i) => (
+        <h3 key={i}>
+          <Link to={`/issues/${issue.slug}`}>{issue.title}</Link>
+        </h3>
+      ))}
     </div>
   );
 };
@@ -36,3 +32,5 @@ export default Issues;
 //   slug="needs to be added"
 //   imgShape="landscape"
 // />
+
+<Link to="/candidates">Return to List of Candidates</Link>;
