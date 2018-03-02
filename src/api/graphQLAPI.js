@@ -240,6 +240,15 @@ const queries = {
       }
     }
   `,
+  IssuesBasics: gql`
+    query IssuesDetails {
+      allIssues {
+        id
+        title
+        slug
+      }
+    }
+  `,
   SeatsBasics: gql`
     query SeatsBasics {
       allSeats {
