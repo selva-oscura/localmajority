@@ -117,7 +117,7 @@ const Home = props => {
             <h2 className="text-center">Featured Articles</h2>
             <div className="flex">
               {articles && articles.length ? (
-                articles.map(article => (
+                articles.slice(0,6).map(article => (
                   <Card
                     key={article.id}
                     id={article.id}
