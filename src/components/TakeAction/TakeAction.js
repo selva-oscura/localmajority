@@ -265,7 +265,7 @@ class TakeAction extends Component {
             </div>
             <div className="col-6 order-3 col-sm-4 order-3">
               { localMajorityVolunteerRoles.slice(0, Math.ceil(localMajorityVolunteerRoles.length/2)).map((role, i) => (
-                <p>
+                <p key={i}>
                   <FontIcon
                     className="fa fa-star star-bullet"
                   />
@@ -276,7 +276,7 @@ class TakeAction extends Component {
             </div>
             <div className="col-6 col-sm-4 order-4">
               { localMajorityVolunteerRoles.slice(Math.ceil(localMajorityVolunteerRoles.length/2)).map((role, i) => (
-                <p>
+                <p key={i}>
                   <FontIcon
                     className="fa fa-star star-bullet"
                   />
@@ -333,7 +333,7 @@ class TakeAction extends Component {
             </div>
             <div className="col-6 order-3 col-sm-4 order-3">
               { mobilizeVolunteerRoles.slice(0, Math.ceil(mobilizeVolunteerRoles.length/2)).map((role, i) => (
-                <p>
+                <p key={i}>
                   <FontIcon
                     className="fa fa-star star-bullet"
                   />
@@ -344,7 +344,7 @@ class TakeAction extends Component {
             </div>
             <div className="col-6 col-sm-4 order-4">
               { mobilizeVolunteerRoles.slice(Math.ceil(mobilizeVolunteerRoles.length/2)).map((role, i) => (
-                <p>
+                <p key={i}>
                   <FontIcon
                     className="fa fa-star star-bullet"
                   />
