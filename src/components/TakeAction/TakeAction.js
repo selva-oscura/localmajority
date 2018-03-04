@@ -18,7 +18,7 @@ class TakeAction extends Component {
 
   componentDidMount() {
     // redirect to /take-action if /take-action/:state is not a state for which we have information
-    //(shouldn't be called if picking state from selector on page, but if directly typing in url or following faulty link this will redirect to the default page)
+    // (shouldn't be called if picking state from selector on page, but if directly typing in url or following faulty link this will redirect to the default page)
     if (
       this.props.match.params.state &&
       !this.props.statesMasterList.includes(this.props.match.params.state)
@@ -256,7 +256,13 @@ class TakeAction extends Component {
                 Local Majority Volunteers Needed
               </h3>
             </div>
-            <div className="col-6 order-1 col-sm-4 order-sm-2">Icon</div>
+            <div className="col-6 order-1 col-sm-4 order-sm-2">
+              <img
+                src='../images/local_majority_banner.png'
+                className="full-width"
+                alt='local majority logo'
+              />
+            </div>
             <div className="col-6 order-3 col-sm-4 order-3">
               { localMajorityVolunteerRoles.slice(0, Math.ceil(localMajorityVolunteerRoles.length/2)).map((role, i) => (
                 <p>
@@ -318,7 +324,13 @@ class TakeAction extends Component {
                 Mobilize Volunteers Needed
               </h3>
             </div>
-            <div className="col-6 order-1 col-sm-4 order-sm-2">Icon</div>
+            <div className="col-6 order-1 col-sm-4 order-sm-2">
+              <img
+                src='../images/mobilizelogo.jpg'
+                className="full-width"
+                alt='mobilize logo'
+              />
+            </div>
             <div className="col-6 order-3 col-sm-4 order-3">
               { mobilizeVolunteerRoles.slice(0, Math.ceil(mobilizeVolunteerRoles.length/2)).map((role, i) => (
                 <p>
