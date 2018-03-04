@@ -32,8 +32,15 @@ class TakeAction extends Component {
     const regionText = !this.state.stateSelected
       ? 'America'
       : this.state.stateSelected;
-    const localMajorityVolunteerRoles = ["Researchers", "Writers", "Editors", "Videographers", "Graphic Designers", "Web Designers"];
-    const mobilizeVolunteerRoles = ["Canvassers", "Phonebankers"];
+    const localMajorityVolunteerRoles = [
+      'Researchers',
+      'Writers',
+      'Editors',
+      'Videographers',
+      'Graphic Designers',
+      'Web Designers',
+    ];
+    const mobilizeVolunteerRoles = ['Canvassers', 'Phonebankers'];
 
     return (
       <article className="TakeAction">
@@ -258,32 +265,30 @@ class TakeAction extends Component {
             </div>
             <div className="col-6 order-1 col-sm-4 order-sm-2">
               <img
-                src='../images/local_majority_banner.png'
+                src="../images/local_majority_banner.png"
                 className="full-width"
-                alt='local majority logo'
+                alt="local majority logo"
               />
             </div>
             <div className="col-6 order-3 col-sm-4 order-3">
-              { localMajorityVolunteerRoles.slice(0, Math.ceil(localMajorityVolunteerRoles.length/2)).map((role, i) => (
-                <p key={i}>
-                  <FontIcon
-                    className="fa fa-star star-bullet"
-                  />
-                  {` ${role}`}
-                </p>
-                ))
-              }
+              {localMajorityVolunteerRoles
+                .slice(0, Math.ceil(localMajorityVolunteerRoles.length / 2))
+                .map((role, i) => (
+                  <p key={i}>
+                    <FontIcon className="fa fa-star star-bullet" />
+                    {` ${role}`}
+                  </p>
+                ))}
             </div>
             <div className="col-6 col-sm-4 order-4">
-              { localMajorityVolunteerRoles.slice(Math.ceil(localMajorityVolunteerRoles.length/2)).map((role, i) => (
-                <p key={i}>
-                  <FontIcon
-                    className="fa fa-star star-bullet"
-                  />
-                  {` ${role}`}
-                </p>
-                ))
-              }
+              {localMajorityVolunteerRoles
+                .slice(Math.ceil(localMajorityVolunteerRoles.length / 2))
+                .map((role, i) => (
+                  <p key={i}>
+                    <FontIcon className="fa fa-star star-bullet" />
+                    {` ${role}`}
+                  </p>
+                ))}
             </div>
           </div>
           <h2 className="text-right secondary-text-color">
@@ -326,32 +331,30 @@ class TakeAction extends Component {
             </div>
             <div className="col-6 order-1 col-sm-4 order-sm-2">
               <img
-                src='../images/mobilizelogo.jpg'
+                src="../images/mobilizelogo.jpg"
                 className="full-width"
-                alt='mobilize logo'
+                alt="mobilize logo"
               />
             </div>
             <div className="col-6 order-3 col-sm-4 order-3">
-              { mobilizeVolunteerRoles.slice(0, Math.ceil(mobilizeVolunteerRoles.length/2)).map((role, i) => (
-                <p key={i}>
-                  <FontIcon
-                    className="fa fa-star star-bullet"
-                  />
-                  {` ${role}`}
-                </p>
-                ))
-              }
+              {mobilizeVolunteerRoles
+                .slice(0, Math.ceil(mobilizeVolunteerRoles.length / 2))
+                .map((role, i) => (
+                  <p key={i}>
+                    <FontIcon className="fa fa-star star-bullet" />
+                    {` ${role}`}
+                  </p>
+                ))}
             </div>
             <div className="col-6 col-sm-4 order-4">
-              { mobilizeVolunteerRoles.slice(Math.ceil(mobilizeVolunteerRoles.length/2)).map((role, i) => (
-                <p key={i}>
-                  <FontIcon
-                    className="fa fa-star star-bullet"
-                  />
-                  {` ${role}`}
-                </p>
-                ))
-              }
+              {mobilizeVolunteerRoles
+                .slice(Math.ceil(mobilizeVolunteerRoles.length / 2))
+                .map((role, i) => (
+                  <p key={i}>
+                    <FontIcon className="fa fa-star star-bullet" />
+                    {` ${role}`}
+                  </p>
+                ))}
             </div>
           </div>
           <h2 className="text-center">
