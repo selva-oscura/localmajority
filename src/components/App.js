@@ -168,9 +168,84 @@ class App extends Component {
     } = this.state;
     let { articles } = this.state;
 
+    const hasElectionData = candidate =>
+      candidate.contestId &&
+      candidate.contestId.seatId &&
+      candidate.contestId.seatId.title;
+    const hasFutureElection = candidate => {
+      const electionDate =
+        candidate.contestId && candidate.contestId.electionDate
+          ? new Date(candidate.contestId.electionDate).getTime()
+          : null;
+      const now = new Date().getTime();
+      return electionDate && electionDate > now;
+    };
+    const hasPastElection = candidate => {
+      const electionDate =
+        candidate.contestId && candidate.contestId.electionDate
+          ? new Date(candidate.contestId.electionDate).getTime()
+          : null;
+      const now = new Date().getTime();
+      return electionDate && electionDate < now;
+    };
+    const isMissingCandidateData = candidate => {
+      if (!candidate.headshotId || !candidate.headshotId.url) {
+        console.log(`${candidate.title} is missing headshot`);
+      }
+      if (!candidate.contestId) {
+        console.log(`${candidate.title} is missing contest data`);
+      }
+      if (!candidate.contestId || !candidate.contestId.electionDate) {
+        console.log(`${candidate.title} is missing election date`);
+      }
+      if (
+        !candidate.contestId ||
+        !candidate.contestId.seatId ||
+        !candidate.contestId.seatId.title
+      ) {
+        console.log(`${candidate.title} is missing seat data`);
+      }
+      if (!candidate.state || !candidate.state.title) {
+        console.log(`${candidate.title} is missing state data`);
+      }
+      if (
+        !candidate.headshotId ||
+        !candidate.headshotId.url ||
+        !candidate.contestId ||
+        !candidate.contestId.electionDate ||
+        !candidate.contestId.seatId ||
+        !candidate.state
+      ) {
+        return true;
+      }
+      return false;
+    };
+
+    const validCandidates = candidates.filter(hasElectionData);
+    console.log('validCandidates', validCandidates);
+
+    const validFutureCandidates = candidates
+      .filter(hasElectionData)
+      .filter(hasFutureElection);
+    console.log('validFutureCandidates', validFutureCandidates);
+
+    const validPastCandidates = candidates
+      .filter(hasElectionData)
+      .filter(hasPastElection);
+    console.log('validPastCandidates', validPastCandidates);
+
+    const candidatesWithProblematicData = candidates.filter(
+      isMissingCandidateData
+    );
+    console.log('candidatesWithProblematicData', candidatesWithProblematicData);
+
+    console.log('article', articles);
+
     const issues = [];
     for (let i = 1; i < 10; i++) {
       let subIssues = [];
+      let date = new Date().toISOString();
+      let author = 'somebody or other';
       for (let j = 1; j < 5; j++) {
         const sockPuppetArticles = [];
         for (let k = 1; k < 4; k++) {
@@ -185,6 +260,9 @@ class App extends Component {
             title: `Article blah, blah, blah ${i} - ${j} - ${k}`,
             slug: `filler-article-${i}-${j}-${k}`,
             articleType: type,
+            createdAt: date,
+            updatedAt: date,
+            author: author,
           });
         }
         subIssues.push({
@@ -218,14 +296,14 @@ class App extends Component {
           exact
           path="/"
           component={props => (
-            <Home articles={articles} candidates={candidates} />
+            <Home articles={articles} candidates={validCandidates} />
           )}
         />
         <Route
           path="/candidates/:state/:slug"
           component={props => {
-            const candidate = candidates
-              ? candidates.find(
+            const candidate = validCandidates
+              ? validCandidates.find(
                   candidate => props.match.params.slug === candidate.slug
                 )
               : { id: 'no-cached-data', headshotId: { url: null } };
@@ -246,13 +324,13 @@ class App extends Component {
           path="/candidates/:state"
           component={props => (
             <ErrorBoundary>
-              {candidates &&
+              {validCandidates &&
               statesMasterList &&
               statesMasterList.length &&
               regionTypesMasterList ? (
                 <Candidates
                   {...props}
-                  candidates={candidates}
+                  candidates={validCandidates}
                   statesMasterList={statesMasterList}
                   regionTypesMasterList={regionTypesMasterList}
                 />
@@ -266,13 +344,13 @@ class App extends Component {
           path="/candidates"
           component={props => (
             <ErrorBoundary>
-              {candidates &&
+              {validCandidates &&
               statesMasterList &&
               statesMasterList.length &&
               regionTypesMasterList ? (
                 <Candidates
                   {...props}
-                  candidates={candidates}
+                  candidates={validCandidates}
                   statesMasterList={statesMasterList}
                   regionTypesMasterList={regionTypesMasterList}
                 />
