@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Filters from '../common/Filters/Filters';
 import ButtonlessFilters from '../common/Filters/ButtonlessFilters';
 import Aux from '../common/Aux';
-// import './TakeAction.css';
+import { FontIcon } from 'material-ui';
+import './TakeAction.css';
 
 class TakeAction extends Component {
   state = {
@@ -31,6 +32,8 @@ class TakeAction extends Component {
     const regionText = !this.state.stateSelected
       ? 'America'
       : this.state.stateSelected;
+    const localMajorityVolunteerRoles = ["Researchers", "Writers", "Editors", "Videographers", "Graphic Designers", "Web Designers"];
+    const mobilizeVolunteerRoles = ["Canvassers", "Phonebankers"];
 
     return (
       <article className="TakeAction">
@@ -255,18 +258,26 @@ class TakeAction extends Component {
             </div>
             <div className="col-6 order-1 col-sm-4 order-sm-2">Icon</div>
             <div className="col-6 order-3 col-sm-4 order-3">
-              <ul>
-                <li>Researchers</li>
-                <li>Writers</li>
-                <li>Editors</li>
-              </ul>
+              { localMajorityVolunteerRoles.slice(0, Math.ceil(localMajorityVolunteerRoles.length/2)).map((role, i) => (
+                <p>
+                  <FontIcon
+                    className="fa fa-star star-bullet"
+                  />
+                  {` ${role}`}
+                </p>
+                ))
+              }
             </div>
             <div className="col-6 col-sm-4 order-4">
-              <ul>
-                <li>Videographers</li>
-                <li>Graphic Designers</li>
-                <li>Web Designers and IT</li>
-              </ul>
+              { localMajorityVolunteerRoles.slice(Math.ceil(localMajorityVolunteerRoles.length/2)).map((role, i) => (
+                <p>
+                  <FontIcon
+                    className="fa fa-star star-bullet"
+                  />
+                  {` ${role}`}
+                </p>
+                ))
+              }
             </div>
           </div>
           <h2 className="text-right secondary-text-color">
@@ -309,14 +320,26 @@ class TakeAction extends Component {
             </div>
             <div className="col-6 order-1 col-sm-4 order-sm-2">Icon</div>
             <div className="col-6 order-3 col-sm-4 order-3">
-              <ul>
-                <li>Canvassers</li>
-              </ul>
+              { mobilizeVolunteerRoles.slice(0, Math.ceil(mobilizeVolunteerRoles.length/2)).map((role, i) => (
+                <p>
+                  <FontIcon
+                    className="fa fa-star star-bullet"
+                  />
+                  {` ${role}`}
+                </p>
+                ))
+              }
             </div>
             <div className="col-6 col-sm-4 order-4">
-              <ul>
-                <li>Phonebankers</li>
-              </ul>
+              { mobilizeVolunteerRoles.slice(Math.ceil(mobilizeVolunteerRoles.length/2)).map((role, i) => (
+                <p>
+                  <FontIcon
+                    className="fa fa-star star-bullet"
+                  />
+                  {` ${role}`}
+                </p>
+                ))
+              }
             </div>
           </div>
           <h2 className="text-center">
