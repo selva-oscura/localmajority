@@ -1,42 +1,22 @@
 import React, { Component } from 'react';
 import Loading from '../common/Loading';
+import Aux from '../common/Aux';
 import Filters from '../common/Filters/Filters';
-import SelectFilter from '../common/Filters/SelectFilter';
+import ButtonlessFilters from '../common/Filters/ButtonlessFilters';
 import HorizontalCards from '../common/Cards/HorizontalCards';
 import HorizontalCard from '../common/Cards/HorizontalCard';
 
 class Candidates extends Component {
-  constructor(props, context) {
-    super(props, context);
-    let candidatesStatesSelected = {},
-      candidatesRegionTypesSelected = {};
-    if (this.props.statesMasterList) {
-      if (
-        this.props.match.params.state &&
-        this.props.statesMasterList.includes(this.props.match.params.state)
-      ) {
-        this.props.statesMasterList.forEach(stateName => {
-          candidatesStatesSelected[stateName] = false;
-        });
-        candidatesStatesSelected[this.props.match.params.state] = true;
-      } else {
-        this.props.statesMasterList.forEach(stateName => {
-          candidatesStatesSelected[stateName] = true;
-        });
-      }
-    }
-    this.state = {
-      candidatesStatesSelected,
-      candidatesRegionTypesSelected,
-      candidatesTextSelected: [],
-    };
-    this.updateFilter = this.updateFilter.bind(this);
-  }
-  updateFilter(filterCategory, selectedValue) {
+  state = {
+    stateSelected: this.props.match.params.state,
+  };
+
+  updateFilter = (filterCategory, selectedValue) => {
     selectedValue === 'all'
       ? this.props.history.push('/candidates')
       : this.props.history.push(`/candidates/${selectedValue}`);
-  }
+  };
+
   componentDidMount() {
     this.props.match.params.state
       ? (document.title = `Local Majority | Candidates | ${
@@ -44,39 +24,34 @@ class Candidates extends Component {
         }`)
       : (document.title = 'Local Majority | Candidates');
   }
+
   render() {
-    const isLoading =
-      !this.props.candidates ||
-      !this.state.candidatesStatesSelected ||
-      !Object.keys(this.state.candidatesStatesSelected).length ||
-      !this.state.candidatesRegionTypesSelected;
-    if (isLoading) {
-      return <Loading />;
-    }
-    const { candidates, statesMasterList, regionTypesMasterList } = this.props;
-    const {
-      candidatesStatesSelected,
-      candidatesRegionTypesSelected,
-      candidatesTextSelected,
-    } = this.state;
-    let candidatesMeetingFilters = this.props.match.params.state
+    const { candidates, statesMasterList } = this.props;
+
+    const candidatesMeetingFilters = this.props.match.params.state
       ? candidates.filter(
           candidate => candidate.state.title === this.props.match.params.state
         )
       : candidates;
+
+    if (!candidates) {
+      return <Loading />;
+    }
+
     return (
       <div className="Candidates">
         {statesMasterList && (
-          <Filters>
-            <SelectFilter
-              filterCategory="candidatesStatesSelected"
-              hintText="select state"
-              includeAll={true}
-              passedParam={this.props.match.params.state}
-              masterList={statesMasterList}
-              updateFilter={this.updateFilter}
-            />
-          </Filters>
+          <Aux>
+            <h3>Select Your State</h3>
+            <Filters>
+              <ButtonlessFilters
+                filterCategory="stateSelected"
+                passedParam={this.state.stateSelected}
+                masterList={statesMasterList}
+                updateFilter={this.updateFilter}
+              />
+            </Filters>
+          </Aux>
         )}
         {candidatesMeetingFilters && candidatesMeetingFilters.length ? (
           <HorizontalCards>
