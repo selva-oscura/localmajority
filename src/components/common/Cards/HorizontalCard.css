@@ -1,25 +1,25 @@
-.HorizontalCard{
-	height: 200px;
-	max-height: 200px;
+.HorizontalCard {
+	height: 150px;
+	max-height: 150px;
 }
 
-.HorizontalCard .Paper{
-	max-height: 200px !important; 
+.HorizontalCard .Paper {
+	max-height: 150px !important;
 }
 
-.HorizontalCard .image-holder, .HorizontalCard .card-body{
-	height: 200px;
-	max-height: 200px;
+.HorizontalCard .image-holder, .HorizontalCard .card-body {
+	height: 150px;
+	max-height: 150px;
 	display: inline-block;
 	overflow: hidden;
 }
 
-.HorizontalCard .image-holder{
-	width: 200px;
+.HorizontalCard .image-holder {
+	width: 150px;
 	position: relative;
 }
 
-.HorizontalCard .placeholder-image, .HorizontalCard .actual-image{
+.HorizontalCard .placeholder-image, .HorizontalCard .actual-image {
 	position: absolute;
 	top: 0;
 	bottom:0;
@@ -37,43 +37,28 @@
 	z-index: 2;
 }
 
-.HorizontalCard .card-body{
-	width: calc(100% - 200px);
-	padding: 12px;
+.HorizontalCard .card-body {
+	width: calc(100% - 150px);
+	padding: 8px;
 }
 
 .HorizontalCard h3, .HorizontalCard h4 {
 	margin: 0;
 }
 
-@media screen and (max-width: 575px) {
-	.HorizontalCard, .HorizontalCard .image-holder, .HorizontalCard .card-body{
-		height: 150px;
-		max-height: 150px;
-	}
-	.HorizontalCard .Paper{
-		max-height: 150px !important; 
-	}
-	.HorizontalCard .image-holder{
-		width: 150px;
-	}
-	.HorizontalCard .card-body{
-		width: calc(100% - 150px);
-	}
-}
 
-@media screen and (min-width: 768px) and (max-width: 991px){
-	.HorizontalCard, .HorizontalCard .image-holder, .HorizontalCard .card-body{
-		height: 150px;
-		max-height: 150px;
+@media screen and (min-width: 768px) and (max-width: 991px) {
+	.HorizontalCard, .HorizontalCard .image-holder, .HorizontalCard .card-body {
+		height: 125px;
+		max-height: 125px;
 	}
-	.HorizontalCard .Paper{
-		max-height: 150px !important; 
+	.HorizontalCard .Paper {
+		max-height: 125px !important; 
 	}
-	.HorizontalCard .image-holder{
-		width: 150px;
+	.HorizontalCard .image-holder {
+		width: 125px;
 	}
-	.HorizontalCard .card-body{
-		width: calc(100% - 150px);
+	.HorizontalCard .card-body {
+		width: calc(100% - 125px);
 	}
 }
