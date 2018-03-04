@@ -117,19 +117,21 @@ const Home = props => {
             <h2 className="text-center">Featured Articles</h2>
             <div className="flex">
               {articles && articles.length ? (
-                articles.slice(0,6).map(article => (
-                  <Card
-                    key={article.id}
-                    id={article.id}
-                    cardTitle={article.title}
-                    cardSubtitle={`by ${article.author}`}
-                    cardText={prettifyDate(article.updatedAt)}
-                    imgSrc={'ImageSourceNeeded'}
-                    category="articles"
-                    slug={`${article.slug}`}
-                    imgShape="square"
-                  />
-                ))
+                articles
+                  .slice(0, 6)
+                  .map(article => (
+                    <Card
+                      key={article.id}
+                      id={article.id}
+                      cardTitle={article.title}
+                      cardSubtitle={`by ${article.author}`}
+                      cardText={prettifyDate(article.updatedAt)}
+                      imgSrc={'ImageSourceNeeded'}
+                      category="articles"
+                      slug={`${article.slug}`}
+                      imgShape="square"
+                    />
+                  ))
               ) : (
                 <h2>Loading</h2>
               )}
