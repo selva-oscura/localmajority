@@ -40,6 +40,13 @@ class TakeAction extends Component {
       'Graphic Designers',
       'Web Designers',
     ];
+
+    const mobilizeURLs = {
+      website: 'https://events.mobilizeamerica.io/',
+      apple: 'https://itunes.apple.com/us/app/mobilize-america/id1245726310',
+      android:
+        'https://play.google.com/store/apps/details?id=org.mobilize2020.mobilize',
+    };
     const mobilizeVolunteerRoles = ['Canvassers', 'Phonebankers'];
 
     return (
@@ -298,9 +305,17 @@ class TakeAction extends Component {
             <Aux>
               <h3>Interested in Reaching out to People from your State? </h3>
               <p>
+                Local Majority has partnered with Mobilize to take back control
+                of state legislatures. It’s critical for Democrats to fight
+                gerrymandering and ensure every citizen has a vote. Mobilize
+                helps connect volunteers with high-impact, local races.
+                Supporting these races will help Democrats start flipping states
+                blue again and preserve our Democracy.
+              </p>
+              <h3>
                 Mobilize can hook you in to Democratic campaigns for canvassing
                 and phonebanking opportunities!
-              </p>
+              </h3>
             </Aux>
           ) : (
             <Aux>
