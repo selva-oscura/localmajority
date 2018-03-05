@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
+import CardHover from './CardHover';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Card.css';
@@ -7,10 +8,7 @@ import './Card.css';
 class Card extends Component {
   constructor(props) {
     super(props);
-    this.state = { depth: 2 };
   }
-  onMouseOver = () => this.setState({ depth: 3 });
-  onMouseOut = () => this.setState({ depth: 2 });
   render() {
     let {
       id,
@@ -27,12 +25,8 @@ class Card extends Component {
     let aspectRatio = imgShape || '';
     let insetStyle = insetImg ? "insetImg" : '';
     return (
-      <div
-        className={`Card ${aspectRatio}`}
-        onMouseOver={this.onMouseOver}
-        onMouseOut={this.onMouseOut}
-      >
-        <Paper zDepth={this.state.depth}>
+      <div className={`Card ${aspectRatio}`}>
+        <CardHover>
           <Link to={`/${category}/${slug}`}>
             <div className="image-holder">
               <img
@@ -55,7 +49,7 @@ class Card extends Component {
               )}
             </div>
           </Link>
-        </Paper>
+        </CardHover>
       </div>
     );
   }

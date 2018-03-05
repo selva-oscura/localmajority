@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import { Link } from 'react-router-dom';
+import CardHover from './CardHover';
 import PropTypes from 'prop-types';
 import './BaseballCard.css';
 
 class BaseballCard extends Component {
   constructor(props) {
     super(props);
-    this.state = { depth: 2 };
+    // this.state = { depth: 2 };
   }
-  onMouseOver = () => this.setState({ depth: 3 });
-  onMouseOut = () => this.setState({ depth: 2 });
+  // onMouseOver = () => this.setState({ depth: 3 });
+  // onMouseOut = () => this.setState({ depth: 2 });
   render() {
     let {
       id,
@@ -29,10 +30,8 @@ class BaseballCard extends Component {
     return (
       <div
         className={`BaseballCard ${aspectRatio}`}
-        onMouseOver={this.onMouseOver}
-        onMouseOut={this.onMouseOut}
       >
-        <Paper zDepth={this.state.depth} className="Paper">
+        <CardHover>
           <Link to={`/${category}/${slug}`}>
             <div className="image-holder">
               <img
@@ -51,10 +50,15 @@ class BaseballCard extends Component {
               }}
             />}
           </Link>
-        </Paper>
+        </CardHover>
       </div>
     );
   }
 }
 
 export default BaseballCard;
+
+        // onMouseOver={this.onMouseOver}
+        // onMouseOut={this.onMouseOut}
+        // <Paper zDepth={this.state.depth} className="Paper">
+        // </Paper>
