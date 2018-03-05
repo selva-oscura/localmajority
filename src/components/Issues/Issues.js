@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import GridXSmallIsOneMedIsTwoLargeIsThree from '../common/Grids/GridXSmallIsOneMedIsTwoLargeIsThree';
+import CardHover from '../common/Cards/CardHover';
 import ImageOverlayCard from '../common/Cards/ImageOverlayCard';
 
 const Issues = props => {
@@ -9,8 +11,14 @@ const Issues = props => {
   document.title = 'Local Majority | Issues';
 
   return (
-    <div className="Issues flex">
-      {issues.map((issue, i) => <ImageOverlayCard />)}
+    <div className="Issues row">
+      {issues.map((issue, i) => (
+        <GridXSmallIsOneMedIsTwoLargeIsThree key={i}>
+          <CardHover>
+            <ImageOverlayCard />
+          </CardHover>
+        </GridXSmallIsOneMedIsTwoLargeIsThree>
+      ))}
     </div>
   );
 };
