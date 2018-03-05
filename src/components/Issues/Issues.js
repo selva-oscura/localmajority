@@ -15,7 +15,12 @@ const Issues = props => {
       {issues.map((issue, i) => (
         <GridXSmallIsOneMedIsTwoLargeIsThree key={i}>
           <CardHover>
-            <ImageOverlayCard />
+            <Link to={`/issues/${issue.slug}`}>
+              <ImageOverlayCard
+                cardTitle={issue.title}
+                imgSrc={`../images/District_1_map.png`}
+              />
+            </Link>
           </CardHover>
         </GridXSmallIsOneMedIsTwoLargeIsThree>
       ))}
@@ -24,18 +29,3 @@ const Issues = props => {
 };
 
 export default Issues;
-
-//        <h3 key={i}>
-//          <Link to={`/issues/${issue.slug}`}>{issue.title}</Link>
-//        </h3>
-// <Card
-//   key={i}
-//   id={issue.id}
-//   cardTitle={issue.title}
-//   cardSubtitle={`by ${issue.author}`}
-//   cardText={issue.summary}
-//   imgSrc="needs to be added"
-//   category="issues"
-//   slug="needs to be added"
-//   imgShape="landscape"
-// />
