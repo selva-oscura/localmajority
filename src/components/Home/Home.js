@@ -1,14 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Home.css';
 import Aside from '../common/Aside';
-import Card from '../common/Cards/Card';
+import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
+import GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour from '../common/Grids/GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour';
+import CardHover from '../common/Cards/CardHover';
+import FooterCard from '../common/Cards/FooterCard';
 import { prettifyDate } from '../../utils/functions';
 
 const Home = props => {
   document.title = 'Local Majority';
   // console.log('from Home', props);
   let { articles, candidates } = props;
-  const sockPuppetStateData = [
+  const currentStateRaces = [
     {
       title: 'Florida',
       abbrev: 'FL',
@@ -73,20 +77,20 @@ const Home = props => {
           <section>
             <h2 className="text-center">Our States</h2>
             <div className="flex">
-              {sockPuppetStateData.map((state, i) => (
-                <Card
+              {currentStateRaces.map((state, i) => (
+                <GridXSmallIsOneSmallIsThree
                   key={i}
-                  id={i}
-                  cardTitle={state.title}
-                  cardText={`We are contesting House Seat races in ${
-                    state.title
-                  } in ${arrayToSentence(state.districts)}.`}
-                  imgSrc={`../images/${state.title}.jpg`}
-                  category="districts"
-                  slug={state.title}
-                  imgShape="square"
-                  insetImg="true"
-                />
+                >
+                  <CardHover>
+                    <Link to={`districts/${state.title}`}>
+                      <FooterCard
+                        cardTitle={state.title}
+                        imgSrc={`../images/${state.title}.jpg`}
+                        insetImg="insetImg"
+                      />
+                    </Link>
+                  </CardHover>
+                </GridXSmallIsOneSmallIsThree>
               ))}
             </div>
           </section>
@@ -96,16 +100,20 @@ const Home = props => {
             <div className="flex">
               {candidates && candidates.length ? (
                 candidates.map((candidate, i) => (
-                  <Card
+                  <GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour
                     key={i}
-                    id={candidate.id}
-                    cardTitle={candidate.title}
-                    cardText={candidate.contestId.seatId.title}
-                    imgSrc={candidate.headshotId.url}
-                    category="candidates"
-                    slug={`${candidate.state.title}/${candidate.slug}`}
-                    imgShape="square"
-                  />
+                  >
+                    <CardHover>
+                      <Link to={`candidates/${candidate.state.title}/${candidate.slug}`}>
+                        <FooterCard
+                          cardTitle={candidate.title}
+                          cardSubtitle={candidate.contestId.seatId.title}
+                          imgSrc={candidate.headshotId.url}
+                        />
+                      </Link>
+                    </CardHover>
+
+                  </GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour>
                 ))
               ) : (
                 <h2>Loading</h2>
@@ -118,19 +126,22 @@ const Home = props => {
             <div className="flex">
               {articles && articles.length ? (
                 articles
-                  .slice(0, 6)
+                  .slice(0, 8)
                   .map(article => (
-                    <Card
+                    <GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour
                       key={article.id}
-                      id={article.id}
-                      cardTitle={article.title}
-                      cardSubtitle={`by ${article.author}`}
-                      cardText={prettifyDate(article.updatedAt)}
-                      imgSrc={'ImageSourceNeeded'}
-                      category="articles"
-                      slug={`${article.slug}`}
-                      imgShape="square"
-                    />
+                    >
+                      <CardHover>
+                        <Link to={`articles/${article.slug}`}>
+                          <FooterCard
+                            cardTitle={article.title}
+                            cardSubtitle={`by ${article.author}`}
+                            cardText={prettifyDate(article.updatedAt)}
+                            imgSrc={null}
+                          />
+                        </Link>
+                      </CardHover>
+                    </GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour>
                   ))
               ) : (
                 <h2>Loading</h2>
