@@ -241,6 +241,8 @@ class App extends Component {
 
     console.log('article', articles);
 
+    // RETURN HERE
+    // delete next next section once we have real issues and articles
     const issues = [];
     for (let i = 1; i < 10; i++) {
       let subIssues = [];
@@ -283,6 +285,8 @@ class App extends Component {
         subIssues: subIssues,
       });
     }
+    // RETURN HERE -- END
+    // END -- delete next next section once we have real issues and articles
 
     const regionTypesMasterList = [
       { title: 'Federal District', abbrev: 'FD_US' },
@@ -326,13 +330,11 @@ class App extends Component {
             <ErrorBoundary>
               {validCandidates &&
               statesMasterList &&
-              statesMasterList.length &&
-              regionTypesMasterList ? (
+              statesMasterList.length ? (
                 <Candidates
                   {...props}
                   candidates={validCandidates}
                   statesMasterList={statesMasterList}
-                  regionTypesMasterList={regionTypesMasterList}
                 />
               ) : (
                 <Loading />
@@ -346,13 +348,11 @@ class App extends Component {
             <ErrorBoundary>
               {validCandidates &&
               statesMasterList &&
-              statesMasterList.length &&
-              regionTypesMasterList ? (
+              statesMasterList.length ? (
                 <Candidates
                   {...props}
                   candidates={validCandidates}
                   statesMasterList={statesMasterList}
-                  regionTypesMasterList={regionTypesMasterList}
                 />
               ) : (
                 <Loading />
@@ -388,13 +388,11 @@ class App extends Component {
             <ErrorBoundary>
               {seats &&
               statesMasterList &&
-              statesMasterList.length &&
-              regionTypesMasterList ? (
+              statesMasterList.length ? (
                 <Districts
                   {...props}
                   seats={seats}
                   statesMasterList={statesMasterList}
-                  regionTypesMasterList={regionTypesMasterList}
                 />
               ) : (
                 <Loading />
@@ -408,13 +406,11 @@ class App extends Component {
           component={props =>
             seats &&
             statesMasterList &&
-            statesMasterList.length &&
-            regionTypesMasterList ? (
+            statesMasterList.length ? (
               <Districts
                 {...props}
                 seats={seats}
                 statesMasterList={statesMasterList}
-                regionTypesMasterList={regionTypesMasterList}
               />
             ) : (
               <Loading />
@@ -461,7 +457,22 @@ class App extends Component {
 
         <Route
           path="/issues"
-          component={props => <Issues {...props} issues={issues} />}
+          component={props => (
+            <ErrorBoundary>
+              { issues &&
+                statesMasterList &&
+                statesMasterList.length ? (
+                  <Issues
+                    {...props}
+                    issues={issues}
+                    statesMasterList={statesMasterList}
+                  />
+                ) : (
+                  <Loading />
+                )
+              }
+            </ErrorBoundary>
+          )}
         />
 
         <Route
@@ -496,22 +507,6 @@ class App extends Component {
   }
 
   render() {
-    // const {
-    //   articles,
-    //   candidates,
-    //   contests,
-    //   issues,
-    //   parties,
-    //   seats,
-    //   statesMasterList,
-    //   regionTypesMasterList,
-    //   districtsStatesSelected,
-    //   districtsSeatTypeSelected,
-    //   candidatesStatesSelected,
-    //   candidateSeatTypesSelected,
-    //   candidatesTextSelected,
-    // } = this.state;
-
     return (
       <div className="App">
         <Header props={this.props.children} />
