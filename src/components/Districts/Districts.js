@@ -42,8 +42,8 @@ class Districts extends Component {
       : (document.title = 'Local Majority | Districts');
   }
   render() {
-    const { seats, statesMasterList, regionTypesMasterList } = this.props;
-    const { districtsStatesSelected, districtsSeatTypeSelected } = this.state;
+    const { seats, statesMasterList } = this.props;
+    const { districtsStatesSelected } = this.state;
     const seatsMeetingFilters =
       districtsStatesSelected && seats
         ? seats.filter(seat => districtsStatesSelected[seat.state.title])
