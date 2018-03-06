@@ -33,7 +33,7 @@ p, li, .default-text-color {
 
 a, a h1, a h2, a h3, a h4, a h5, a h6, a p, .secondary-text-color {
   color: rgba(0, 110, 237, 0.75);
-  text-decoration: none;
+  text-decoration: none !important;
   transition: color 0.5s ease-out;
 }
 
