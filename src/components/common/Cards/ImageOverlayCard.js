@@ -6,7 +6,6 @@ const ImageOverlayCard = ({ cardTitle="title missing", imgSrc }) => (
     <CardMedia
       overlay={<CardTitle title={cardTitle} titleStyle={{marginLeft: "12px"}} />}
       overlayContentStyle={{height: "100%", background: "rgba(0, 0, 0, 0.54)", background: "-webkit-linear-gradient(-45deg, rgba(0, 0, 0, .85) 0%, rgba(0, 0, 0, 0.4) 100%)"}}
-      style={{height: "150px", overflow: "hidden",}}
     >
 			{imgSrc && <img src={imgSrc} alt={cardTitle} />}
     </CardMedia>
