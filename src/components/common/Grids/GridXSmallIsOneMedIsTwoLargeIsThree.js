@@ -7,7 +7,8 @@ const GridXSmallIsOneMedIsTwoLargeIsThree = (props) => (
 );
 
 const style = {
-	padding: "20px 8px 0px 8px",
+	padding: "1vw 0.5vw 0.5vw 0.5vw",
+	margin: "1vw 0",
 }
 
 export default GridXSmallIsOneMedIsTwoLargeIsThree;
