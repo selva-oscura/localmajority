@@ -386,9 +386,7 @@ class App extends Component {
           path="/districts/:state"
           component={props => (
             <ErrorBoundary>
-              {seats &&
-              statesMasterList &&
-              statesMasterList.length ? (
+              {seats && statesMasterList && statesMasterList.length ? (
                 <Districts
                   {...props}
                   seats={seats}
@@ -404,9 +402,7 @@ class App extends Component {
         <Route
           path="/districts"
           component={props =>
-            seats &&
-            statesMasterList &&
-            statesMasterList.length ? (
+            seats && statesMasterList && statesMasterList.length ? (
               <Districts
                 {...props}
                 seats={seats}
@@ -459,18 +455,15 @@ class App extends Component {
           path="/issues"
           component={props => (
             <ErrorBoundary>
-              { issues &&
-                statesMasterList &&
-                statesMasterList.length ? (
-                  <Issues
-                    {...props}
-                    issues={issues}
-                    statesMasterList={statesMasterList}
-                  />
-                ) : (
-                  <Loading />
-                )
-              }
+              {issues && statesMasterList && statesMasterList.length ? (
+                <Issues
+                  {...props}
+                  issues={issues}
+                  statesMasterList={statesMasterList}
+                />
+              ) : (
+                <Loading />
+              )}
             </ErrorBoundary>
           )}
         />

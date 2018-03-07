@@ -78,9 +78,7 @@ const Home = props => {
             <h2 className="text-center">Our States</h2>
             <div className="flex">
               {currentStateRaces.map((state, i) => (
-                <GridXSmallIsOneSmallIsThree
-                  key={i}
-                >
+                <GridXSmallIsOneSmallIsThree key={i}>
                   <CardHover>
                     <Link to={`districts/${state.title}`}>
                       <FooterCard
@@ -100,11 +98,13 @@ const Home = props => {
             <div className="flex">
               {candidates && candidates.length ? (
                 candidates.map((candidate, i) => (
-                  <GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour
-                    key={i}
-                  >
+                  <GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour key={i}>
                     <CardHover>
-                      <Link to={`candidates/${candidate.state.title}/${candidate.slug}`}>
+                      <Link
+                        to={`candidates/${candidate.state.title}/${
+                          candidate.slug
+                        }`}
+                      >
                         <FooterCard
                           cardTitle={candidate.title}
                           cardSubtitle={candidate.contestId.seatId.title}
@@ -112,7 +112,6 @@ const Home = props => {
                         />
                       </Link>
                     </CardHover>
-
                   </GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour>
                 ))
               ) : (
@@ -125,24 +124,20 @@ const Home = props => {
             <h2 className="text-center">Featured Articles</h2>
             <div className="flex">
               {articles && articles.length ? (
-                articles
-                  .slice(0, 8)
-                  .map(article => (
-                    <GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour
-                      key={article.id}
-                    >
-                      <CardHover>
-                        <Link to={`articles/${article.slug}`}>
-                          <FooterCard
-                            cardTitle={article.title}
-                            cardSubtitle={`by ${article.author}`}
-                            cardText={prettifyDate(article.updatedAt)}
-                            imgSrc={null}
-                          />
-                        </Link>
-                      </CardHover>
-                    </GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour>
-                  ))
+                articles.slice(0, 8).map(article => (
+                  <GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour key={article.id}>
+                    <CardHover>
+                      <Link to={`articles/${article.slug}`}>
+                        <FooterCard
+                          cardTitle={article.title}
+                          cardSubtitle={`by ${article.author}`}
+                          cardText={prettifyDate(article.updatedAt)}
+                          imgSrc={null}
+                        />
+                      </Link>
+                    </CardHover>
+                  </GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour>
+                ))
               ) : (
                 <h2>Loading</h2>
               )}
