@@ -37,18 +37,7 @@ const Home = props => {
       districts: ['Assembly 1', 'Assembly 12', 'Assembly District 33'],
     },
   ];
-  const arrayToSentence = arr => {
-    if (arr.length === 1) {
-      return arr[0];
-    } else if (arr.length === 2) {
-      return arr.join(' and ');
-    } else if (arr.length > 2) {
-      arr[arr.length - 1] = `and ${arr[arr.length - 1]}`;
-      return arr.join(', ');
-    } else {
-      return null;
-    }
-  };
+
   // let { articles, candidates } = props;
   // let issuePrimers = articles.filter(a => a.type === 'IssuePrimer');
   return (

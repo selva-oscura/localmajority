@@ -21,8 +21,22 @@ export function prettifyTimestamp(timestamp){
 	return `${datetime.toLocaleDateString('en-US')}, ${datetime.toLocaleTimeString('en-US')}`;
 };
 
+export function arrayToSentenceWithCommasAndAnd(arr){
+    if (arr.length === 1) {
+      return arr[0];
+    } else if (arr.length === 2) {
+      return arr.join(' and ');
+    } else if (arr.length > 2) {
+      arr[arr.length - 1] = `and ${arr[arr.length - 1]}`;
+      return arr.join(', ');
+    } else {
+      return null;
+    }
+  };
+
 export default {
 	prettifyDate,
 	prettifyDateAndTime,
 	prettifyTimestamp,
+	arrayToSentenceWithCommasAndAnd,
 }
