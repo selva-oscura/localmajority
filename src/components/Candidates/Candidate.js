@@ -4,6 +4,7 @@ import graphQLAPI from '../../api/graphQLAPI';
 import Primer from '../common/Primers/Primer';
 import Aux from '../common/Aux';
 import Loading from '../common/Loading';
+import Offline from '../common/Offline';
 import NoSuchCandidate from './NoSuchCandidate';
 import { SocialIcon } from 'react-social-icons';
 import CandidateDonateButton from './CandidateDonateButton';
@@ -23,15 +24,40 @@ class Candidate extends Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    console.log('this.props', this.props);
+    let now = new Date().getTime();
+    // only update if no candidateDetail information or if the timestamp for it is more than a day old
+    if (
+      !this.props.candidateDetail ||
+      now - this.props.candidateDetail.timestamp > 1000 * 60 * 60 * 24
+    ) {
+      // only update if props have changed and if CandidateDetailBySlug just changed from loading to resolved
+      if (
+        prevProps !== this.props &&
+        prevProps.CandidateDetailBySlug &&
+        !this.props.CandidateDetailBySlug.loading
+      ) {
+        let details = { ...this.props.CandidateDetailBySlug.Candidate };
+        details.timestamp = now;
+        this.props.updateStateDetail(
+          'candidatesDetails',
+          this.props.candidate.slug,
+          details
+        );
+      }
+    }
+  }
+
   render() {
     const isLoading = this.props.CandidateDetailBySlug.loading;
-
+    console.log('this.props.CandidateDetailBySlug', this.props.CandidateDetailBySlug);
     if (isLoading) {
       return <Loading />;
     }
 
-    const candidate = this.props.CandidateDetailBySlug.Candidate
-      ? this.props.CandidateDetailBySlug.Candidate
+    const candidate = this.props.candidateDetail
+      ? this.props.candidateDetail
       : this.props.candidate;
 
     if (!candidate) {
