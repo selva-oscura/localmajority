@@ -43,15 +43,12 @@ class App extends Component {
         articlesDetails: {},
         candidates: [],
         candidatesDetails: {},
+        issues: [],
         seats: [],
         seatsDetails: {},
         parties: {},
         states: [],
-        // contests: [],
-        // issues: [],
         statesMasterList: [],
-        regionTypesMasterList: [],
-        // errors: [],
         timestamp: -Infinity,
       };
       if (localStorage) {
@@ -287,12 +284,6 @@ class App extends Component {
     }
     // RETURN HERE -- END
     // END -- delete next next section once we have real issues and articles
-
-    const regionTypesMasterList = [
-      { title: 'Federal District', abbrev: 'FD_US' },
-      { title: 'State', abbrev: 'State_US' },
-      { title: 'State District', abbrev: 'SD_US' },
-    ];
 
     return (
       <Switch>
