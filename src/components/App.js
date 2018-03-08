@@ -302,12 +302,17 @@ class App extends Component {
                   candidate => props.match.params.slug === candidate.slug
                 )
               : { id: 'no-cached-data', headshotId: { url: null } };
+            const candidateDetail =
+              candidatesDetails && candidatesDetails[props.match.params.slug]
+                ? candidatesDetails[props.match.params.slug]
+                : null;
             return (
               <ErrorBoundary>
                 <Candidate
                   {...props}
                   candidate={candidate}
                   slug={props.match.params.slug}
+                  candidateDetail={candidateDetail}
                   updateStateDetail={this.updateStateDetail}
                 />
               </ErrorBoundary>
