@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import graphQLAPI from '../api/graphQLAPI';
 import { graphql, compose } from 'react-apollo';
-import Header from './Header';
+import Header from './Header/Header';
 import ErrorBoundary from './common/ErrorBoundary';
 import Home from './Home/Home';
 import Article from './Articles/Article';
