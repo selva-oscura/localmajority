@@ -56,6 +56,12 @@ class Candidate extends Component {
       return <Loading />;
     }
 
+    const isOffline =
+      this.props.CandidateDetailBySlug.error &&
+      this.props.CandidateDetailBySlug.error.message.indexOf('Network error') > -1
+        ? true
+        : false;
+
     const candidate = this.props.candidateDetail
       ? this.props.candidateDetail
       : this.props.candidate;
@@ -65,6 +71,7 @@ class Candidate extends Component {
     }
     return (
       <div className="Candidate">
+        {isOffline && <Offline timestamp={candidate.timestamp} />}
         <article>
           <div className="row">
             <div className="col-12 col-md-6 lg-4 xl-3">
