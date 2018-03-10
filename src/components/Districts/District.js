@@ -6,6 +6,7 @@ import Aux from '../common/Aux';
 import Loading from '../common/Loading';
 import Offline from '../common/Offline';
 import NoSuchDistrict from './NoSuchDistrict';
+import { getMostRecentUpdateTimestamp } from '../../utils/functions';
 import './District.css';
 
 class District extends Component {
@@ -19,23 +20,18 @@ class District extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    let now = new Date().getTime();
-    // only update if no seatDetail information or if the timestamp for it is more than a day old
-    if (
-      !this.props.seatDetail ||
-      now - this.props.seatDetail.timestamp > 1000 * 60 * 60 * 24
-    ) {
-      // only update if props have changed and if SeatDetailBySlug just changed from loading to resolved
-      if (
-        prevProps !== this.props &&
-        prevProps.SeatDetailBySlug &&
-        !this.props.SeatDetailBySlug.loading
-      ) {
+    // only consider updating localStorage if query is resolved and successful
+    if (this.props.SeatDetailBySlug.Seat) {
+      const mostRecentUpdateToSeatDetailBySlug = getMostRecentUpdateTimestamp(this.props.SeatDetailBySlug.Seat);
+      // only update localStorage if no seatDetail (freeze-dried record passed to component by App) or if the timestamp for SeatDetailBySlug (grapql query) includes data newer than timestamp in seatDetail(freeze-dried record)
+      if (!this.props.seatDetail
+          || this.props.seatDetail.timestamp < mostRecentUpdateToSeatDetailBySlug){
+        let now = new Date().getTime();
         let details = { ...this.props.SeatDetailBySlug.Seat };
         details.timestamp = now;
         this.props.updateStateDetail(
           'seatsDetails',
-          this.props.seat.slug,
+          this.props.match.params.slug,
           details
         );
       }
@@ -57,86 +53,66 @@ class District extends Component {
     const seat = this.props.seatDetail
       ? this.props.seatDetail
       : this.props.seat;
+    console.log('seat at this point', seat);
 
     if (!seat) {
       return <NoSuchDistrict seatId={this.props.match.params.slug} />;
     }
 
-    const seatMap = seat.mapSmUrl ? seat.mapSmUrl : '';
-    const candidates =
+    const seatMap = seat.mapSmUrl ? seat.mapSmUrl : null;
+    const seatInState = seat.whatever ? seat.whatever : null;
+    const candidate =
       seat &&
       seat.contestIds &&
       seat.contestIds.length &&
-      seat.contestIds[0].candidateIds
-        ? seat.contestIds[0].candidateIds
-        : undefined;
-    const candidateHeadshot = null;
+      seat.contestIds[0].candidateIds &&
+      seat.contestIds[0].candidateIds[0]
+        ? seat.contestIds[0].candidateIds[0]
+        : null;
+    const candidateHeadshot = candidate && candidate.headshotId && candidate.headshotId.url
+      ? candidate.headshotId.url
+      : null;
+
+    console.log('seat', seat)
+    console.log('\ncandidate from seat', candidate)
 
     return (
       <div className="District">
         {isOffline && <Offline timestamp={seat.timestamp} />}
         <section>
-          <div className="hidden-sm-down">
-            <div className="row">
-              <div className="col-6">
-                <h2>{seat.title}</h2>
-                <img
-                  src={seatMap}
-                  className="img-fluid"
-                  alt={`map of district ${seat.title}`}
-                />
-              </div>
-              {candidates
-                ? candidates.map((candidate, i) => (
-                    <div className="col-6" key={i}>
-                      <h2>{candidate.title}</h2>
-                      <img
-                        src={candidateHeadshot}
-                        className="img-fluid"
-                        alt={`headshot of distict candidate ${candidate.title}`}
-                      />
-                    </div>
-                  ))
-                : null}
-            </div>
-          </div>
-          <div className="hidden-md-up">
-            <div className="row">
-              <div className="col">
-                <h2>{seat.title}</h2>
-                <img
-                  src={seatMap}
-                  className="img-fluid"
-                  alt={`map of district ${seat.title}`}
-                />
-              </div>
-              {candidates
-                ? candidates.map((candidate, i) => (
-                    <div className="col" key={i}>
-                      <h2>{candidate.title}</h2>
-                      <img
-                        src={candidateHeadshot}
-                        className="img-fluid"
-                        alt={`headshot of distict candidate ${candidate.title}`}
-                      />
-                    </div>
-                  ))
-                : null}
-            </div>
-          </div>
           <div className="row">
-            <div className="col">
-              <h2>
-                Going with the old way of having the candidate headshot here,
-                but.....
-              </h2>
-              <p>
-                Will we have multiple candidates here or just 'our' candidate
-                or....?
-              </p>
+            <div className="col-8">
+              <h2>{seat.title}</h2>
             </div>
+            <div className="col-4">
+              { candidate && <h2 className="text-right">{candidate.title}</h2>
+              }
+            </div>
+            <div className="col-4">
+              <img
+                src={seatMap}
+                className="img-fluid"
+                alt={`map of district ${seat.title}`}
+              />
+            </div>
+            <div className="col-4">
+              <img
+                src={seatInState}
+                className="img-fluid"
+                alt={`map of district ${seat.title}'s location in ${seat.state.title}`}
+              />
+            </div>
+            {candidate && <div className="col-4">
+                <img
+                  src={candidateHeadshot}
+                  className="img-fluid"
+                  alt={`headshot of district candidate ${candidate.title}`}
+                />
+              </div>
+            }
           </div>
         </section>
+
         <section>
           {seat.primers && (
             <Aux>
