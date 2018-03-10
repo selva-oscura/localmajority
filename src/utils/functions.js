@@ -1,4 +1,42 @@
 /*
+getMostRecentUpdateTimestamp
+	INPUT: data -- the resolved, successful graphql query
+	OUTPUT: the most recent updatedAt's timestamp
+*/
+export function getMostRecentUpdateTimestamp(data){
+  let mostRecent = -Infinity;
+
+  const checkObject = obj => {
+    Object.keys(obj).forEach(key => {
+      if(key === "updatedAt"){
+        let timestamp = new Date(obj[key]).getTime();
+        mostRecent = Math.max(timestamp, mostRecent);
+      } else if (Array.isArray(obj[key])) {
+        checkArray(obj[key]);
+      } else if (obj[key] instanceof Object) {
+        checkObject(obj[key]);
+      }
+    });
+  }
+
+  const checkArray = arr => {
+    arr.forEach(val => {
+      if(Array.isArray(val)){
+        checkArray(val);
+      } else if (val instanceof Object) {
+        checkObject(val);
+      }
+    });
+  }
+
+  Array.isArray(data) ? checkArray(data) : checkObject(data);
+
+  return mostRecent;
+}
+
+
+/*
+PRETTIFYING Dates and Times
 NOTE REGARDING INPUTS:
 	timestamp is the result of new Date().getTime()
 		e.g. 1517385346000
@@ -17,24 +55,24 @@ export function prettifyDateAndTime(dateString){
 
 export function prettifyTimestamp(timestamp){
 	let datetime = new Date(timestamp);
-	console.log(datetime.toLocaleString('en-US'));
 	return `${datetime.toLocaleDateString('en-US')}, ${datetime.toLocaleTimeString('en-US')}`;
 };
 
 export function arrayToSentenceWithCommasAndAnd(arr){
-    if (arr.length === 1) {
-      return arr[0];
-    } else if (arr.length === 2) {
-      return arr.join(' and ');
-    } else if (arr.length > 2) {
-      arr[arr.length - 1] = `and ${arr[arr.length - 1]}`;
-      return arr.join(', ');
-    } else {
-      return null;
-    }
-  };
+  if (arr.length === 1) {
+    return arr[0];
+  } else if (arr.length === 2) {
+    return arr.join(' and ');
+  } else if (arr.length > 2) {
+    arr[arr.length - 1] = `and ${arr[arr.length - 1]}`;
+    return arr.join(', ');
+  } else {
+    return null;
+  }
+};
 
 export default {
+	getMostRecentUpdateTimestamp,
 	prettifyDate,
 	prettifyDateAndTime,
 	prettifyTimestamp,
