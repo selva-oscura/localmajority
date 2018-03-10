@@ -10,7 +10,7 @@ import { SocialIcon } from 'react-social-icons';
 import CandidateDonateButton from './CandidateDonateButton';
 import CandidateWebsiteButton from './CandidateWebsiteButton';
 import CandidateAside from './CandidateAside';
-import { prettifyDate } from '../../utils/functions';
+import { prettifyDate, getMostRecentUpdateTimestamp } from '../../utils/functions';
 import './Candidate.css';
 
 class Candidate extends Component {
@@ -25,24 +25,18 @@ class Candidate extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('this.props', this.props);
-    let now = new Date().getTime();
-    // only update if no candidateDetail information or if the timestamp for it is more than a day old
-    if (
-      !this.props.candidateDetail ||
-      now - this.props.candidateDetail.timestamp > 1000 * 60 * 60 * 24
-    ) {
-      // only update if props have changed and if CandidateDetailBySlug just changed from loading to resolved
-      if (
-        prevProps !== this.props &&
-        prevProps.CandidateDetailBySlug &&
-        !this.props.CandidateDetailBySlug.loading
-      ) {
+    // only consider updating localStorage if query is resolved and successful
+    if (this.props.CandidateDetailBySlug.Candidate) {
+      const mostRecentUpdateToCandidateDetailBySlug = getMostRecentUpdateTimestamp(this.props.CandidateDetailBySlug.Candidate);
+      // only update localStorage if no candidateDetail (freeze-dried record passed to component by App) or if the timestamp for CandidateDetailBySlug (grapql query) includes data newer than timestamp in candidateDetail(freeze-dried record)
+      if (!this.props.candidateDetail
+          || this.props.candidateDetail.timestamp < mostRecentUpdateToCandidateDetailBySlug){
+        let now = new Date().getTime();
         let details = { ...this.props.CandidateDetailBySlug.Candidate };
         details.timestamp = now;
         this.props.updateStateDetail(
           'candidatesDetails',
-          this.props.candidate.slug,
+          this.props.match.params.slug,
           details
         );
       }
@@ -51,7 +45,7 @@ class Candidate extends Component {
 
   render() {
     const isLoading = this.props.CandidateDetailBySlug.loading;
-    console.log('this.props.CandidateDetailBySlug', this.props.CandidateDetailBySlug);
+
     if (isLoading) {
       return <Loading />;
     }
@@ -69,6 +63,17 @@ class Candidate extends Component {
     if (!candidate) {
       return <NoSuchCandidate candidateId={this.props.match.params.slug} />;
     }
+
+    const candidateHeadshot = candidate.headshotId && candidate.headshotId.url
+      ? candidate.headshotId.url
+      : null;
+    const districtTitle = candidate.contestId && candidate.contestId.seatId && candidate.contestId.seatId.title
+      ? candidate.contestId.seatId.title
+      : 'No District Data Available';
+    const electionDate = candidate.contestId && candidate.contestId.electionDate
+      ? prettifyDate(candidate.contestId.electionDate)
+      : null;
+
     return (
       <div className="Candidate">
         {isOffline && <Offline timestamp={candidate.timestamp} />}
@@ -76,7 +81,7 @@ class Candidate extends Component {
           <div className="row">
             <div className="col-12 col-md-6 lg-4 xl-3">
               <img
-                src={candidate.headshotId.url}
+                src={candidateHeadshot}
                 className="img-fluid"
                 alt={candidate.title}
               />
@@ -84,11 +89,11 @@ class Candidate extends Component {
             <div className="col-12 col-md-6 lg-8 xl-9 text-right">
               <h2>{candidate.title}</h2>
               <h3>
-                {candidate.contestId && candidate.contestId.seatId
-                  ? candidate.contestId.seatId.title
-                  : 'no district data'}
-                {candidate.contestId && candidate.contestId.electionDate
-                  ? ` on ${prettifyDate(candidate.contestId.electionDate)}`
+                { districtTitle
+                  ? districtTitle
+                  : 'No District Data Available'}
+                { electionDate
+                  ? ` on ${electionDate}`
                   : null}
               </h3>
               <div className="social-icons-space">
