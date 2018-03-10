@@ -11,10 +11,10 @@ const queries = {
   ArticlesBasics: gql`
     query ArticlesBasics {
       allArticles {
+        id
         articleType
         author
         createdAt
-        id
         slug
         title
         updatedAt
@@ -24,85 +24,14 @@ const queries = {
   ArticleDetailBySlug: gql`
     query ArticleDetail($slug: String!) {
       Article(slug: $slug) {
+        id
         articleType
         author
         content
         createdAt
-        id
         slug
         title
         updatedAt
-      }
-    }
-  `,
-  AllStatesCandidates: gql`
-    query allStatesCandidates {
-      allStates {
-        abbrev
-        title
-        seats {
-          id
-          primers {
-            id
-          }
-          regionKind
-          regionName
-          title
-          contestIds {
-            electionDate
-            title
-            candidateIds {
-              id
-              bioText
-              campaignEmail
-              donateUrl
-              facebook
-              firstName
-              headshotId {
-                id
-                url
-              }
-              homepageUrl
-              lastName
-              partyId {
-                id
-                title
-              }
-              state {
-                id
-                abbrev
-              }
-              summaryText
-              title
-              twitter
-              volunteerUrl
-            }
-          }
-        }
-      }
-    }
-  `,
-  SingleStateByAbbrevCandidatesBasics: gql`
-    query SingleStateCandidatesBasics($abbrev: String!) {
-      State(abbrev: $abbrev) {
-        id
-        title
-        abbrev
-        candidates {
-          id
-          title
-          summaryText
-          slug
-          contestId {
-            electionDate
-            seatId {
-              title
-            }
-          }
-          headshotId {
-            url
-          }
-        }
       }
     }
   `,
@@ -114,8 +43,10 @@ const queries = {
         bioText
         campaignEmail
         contestId {
+          id
           electionDate
           seatId {
+            id
             lat
             lng
             regionKind
@@ -134,56 +65,11 @@ const queries = {
         }
         homepageUrl
         partyId {
+          id
           title
         }
         primers {
-          articleType
-          author
-          updatedAt
-          content
-          title
-        }
-        summaryText
-        state {
           id
-          abbrev
-          title
-        }
-        twitter
-      }
-    }
-  `,
-  CandidateDetailBySlug: gql`
-    query CandidateDetail($slug: String!) {
-      Candidate(slug: $slug) {
-        id
-        title
-        bioText
-        campaignEmail
-        contestId {
-          electionDate
-          seatId {
-            lat
-            lng
-            regionKind
-            regionName
-            slug
-            title
-          }
-        }
-        donateUrl
-        facebook
-        firstName
-        lastName
-        headshotId {
-          id
-          url
-        }
-        homepageUrl
-        partyId {
-          title
-        }
-        primers {
           articleType
           author
           updatedAt
@@ -208,17 +94,77 @@ const queries = {
         summaryText
         slug
         state {
+          id
           abbrev
           title
         }
         contestId {
+          id
           electionDate
           seatId {
+            id
             title
           }
         }
         headshotId {
+          id
           url
+        }
+      }
+    }
+  `,
+  CandidateDetailBySlug: gql`
+    query CandidateDetail($slug: String!) {
+      Candidate(slug: $slug) {
+        id
+        title
+        bioText
+        campaignEmail
+        donateUrl
+        facebook
+        firstName
+        lastName
+        homepageUrl
+        summaryText
+        twitter
+        updatedAt
+        contestId {
+          id
+          electionDate
+          seatId {
+            id
+            lat
+            lng
+            regionKind
+            regionName
+            slug
+            title
+          }
+          updatedAt
+        }
+        headshotId {
+          id
+          url
+          updatedAt
+        }
+        partyId {
+          id
+          title
+          updatedAt
+        }
+        primers {
+          id
+          articleType
+          author
+          content
+          title
+          updatedAt
+        }
+        state {
+          id
+          abbrev
+          title
+          updatedAt
         }
       }
     }
@@ -234,6 +180,7 @@ const queries = {
         campaignEmail
         homepageUrl
         state {
+          id
           abbrev
           title
         }
@@ -255,10 +202,6 @@ const queries = {
         id
         title
         slug
-        state {
-          id
-          title
-        }
         regionKind
         contestIds {
           title
@@ -268,6 +211,10 @@ const queries = {
             title
             slug
           }
+        }
+        state {
+          id
+          title
         }
       }
     }
@@ -276,31 +223,32 @@ const queries = {
     query SeatDetail($id: ID!) {
       Seat(id: $id) {
         id
-        title
-        slug
-        state {
-          id
-          title
-        }
-        primers {
-          articleType
-          author
-          createdAt
-          updatedAt
-          id
-          author
-          content
-          title
-        }
         regionKind
+        slug
+        title
         contestIds {
+          id
           title
           electionDate
+          updatedAt
           candidateIds {
             id
             title
             slug
+            updatedAt
           }
+        }
+        primers {
+          articleType
+          author
+          author
+          content
+          title
+          updatedAt
+        }
+        state {
+          title
+          updatedAt
         }
       }
     }
@@ -310,31 +258,35 @@ const queries = {
       Seat(slug: $slug) {
         id
         title
+        regionKind
         slug
+        updatedAt
         state {
           id
           title
+          updatedAt
         }
         primers {
-          articleType
-          author
-          createdAt
-          updatedAt
           id
+          articleType
           author
           content
           title
+          updatedAt
         }
-        regionKind
         contestIds {
+          id
           title
           electionDate
+          updatedAt
           candidateIds {
             id
             title
             slug
+            updatedAt
             headshotId {
               url
+              updatedAt
             }
           }
         }
@@ -355,6 +307,7 @@ const queries = {
   States: gql`
     query States {
       allStates {
+        id
         abbrev
         title
       }
