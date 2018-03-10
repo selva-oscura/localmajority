@@ -260,7 +260,6 @@ const queries = {
         title
         regionKind
         slug
-        updatedAt
         state {
           id
           title
@@ -285,6 +284,7 @@ const queries = {
             slug
             updatedAt
             headshotId {
+              id
               url
               updatedAt
             }
