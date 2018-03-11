@@ -3,7 +3,7 @@ import {
   lightBlueA100,
   red600, red900,
   cyan500, cyan700,
-  grey100, grey300,
+  grey300,
   white, darkBlack, fullBlack,
 } from 'material-ui/styles/colors';
 import {fade} from 'material-ui/utils/colorManipulator';
@@ -17,7 +17,7 @@ export default {
     primary2Color: cyan700,
     primary3Color: red600,
     accent1Color: lightBlueA100,
-    accent2Color: grey100,
+    accent2Color: grey300,
     accent3Color: red900,
     textColor: indigo900,
     alternateTextColor: white,
