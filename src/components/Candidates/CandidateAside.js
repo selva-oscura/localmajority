@@ -1,5 +1,5 @@
 import React from 'react';
-import '../common/Aside.css';
+import './CandidateAside.css';
 import Aux from '../common/Aux';
 import TwitterTimeline from '../common/TwitterTimeline';
 import { SocialIcon } from 'react-social-icons';
