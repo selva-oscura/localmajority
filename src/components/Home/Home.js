@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Home.css';
-import Aside from '../common/Aside';
+import HomeAside from './HomeAside';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour from '../common/Grids/GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour';
 import CardHover from '../common/Cards/CardHover';
 import FooterCard from '../common/Cards/FooterCard';
 import { prettifyDate } from '../../utils/functions';
+import './Home.css';
 
 const Home = props => {
   document.title = 'Local Majority';
@@ -40,98 +40,94 @@ const Home = props => {
 
   return (
     <div className="Home">
-      <div className="main-and-aside">
-        <article className="Main">
-          <section>
-            <img
-              className="splash-image"
-              src="../images/faces.png"
-              alt="faces of candidates"
-            />
-            <h2 className="text-center">
-              Working Locally to Take Back State Legislatures
-            </h2>
-            <p className="text-center">
-              Local Majority provides research and other support for small state
-              legislative campaigns who may not have many resources. Our goal is
-              to build from the grassroots the local support that will help
-              Democrats take back state legislatures across the country,
-              beginning with Virginia in 2017, and continuing with Florida,
-              Michigan and Minnesota in 2018.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-center">Our States</h2>
-            <div className="flex">
-              {currentStateRaces.map((state, i) => (
-                <GridXSmallIsOneSmallIsThree key={i}>
+      <div className="row">
+        <section className="col-12">
+          <img
+            className="splash-image"
+            src="../images/faces.png"
+            alt="faces of candidates"
+          />
+          <h2 className="text-center">
+            Working Locally to Take Back State Legislatures
+          </h2>
+          <p className="text-center">
+            Local Majority provides research and other support for small state
+            legislative campaigns who may not have many resources. Our goal is
+            to build from the grassroots the local support that will help
+            Democrats take back state legislatures across the country, beginning
+            with Virginia in 2017, and continuing with Florida, Michigan and
+            Minnesota in 2018.
+          </p>
+        </section>
+        <section className="col-12">
+          <h2 className="text-center">Our States</h2>
+          <div className="flex">
+            {currentStateRaces.map((state, i) => (
+              <GridXSmallIsOneSmallIsThree key={i}>
+                <CardHover>
+                  <Link to={`districts/${state.title}`}>
+                    <FooterCard
+                      cardTitle={state.title}
+                      imgSrc={`../images/${state.title}.jpg`}
+                      insetImg="insetImg"
+                    />
+                  </Link>
+                </CardHover>
+              </GridXSmallIsOneSmallIsThree>
+            ))}
+          </div>
+        </section>
+        <section className="col-12">
+          <h2 className="text-center">Featured Candidates</h2>
+          <div className="flex">
+            {candidates && candidates.length ? (
+              candidates.map((candidate, i) => (
+                <GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour key={i}>
                   <CardHover>
-                    <Link to={`districts/${state.title}`}>
+                    <Link
+                      to={`candidates/${candidate.state.title}/${
+                        candidate.slug
+                      }`}
+                    >
                       <FooterCard
-                        cardTitle={state.title}
-                        imgSrc={`../images/${state.title}.jpg`}
-                        insetImg="insetImg"
+                        cardTitle={candidate.title}
+                        cardSubtitle={candidate.contestId.seatId.title}
+                        imgSrc={candidate.headshotId.url}
                       />
                     </Link>
                   </CardHover>
-                </GridXSmallIsOneSmallIsThree>
-              ))}
-            </div>
-          </section>
+                </GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour>
+              ))
+            ) : (
+              <h2>Loading</h2>
+            )}
+          </div>
+        </section>
 
-          <section>
-            <h2 className="text-center">Featured Candidates</h2>
-            <div className="flex">
-              {candidates && candidates.length ? (
-                candidates.map((candidate, i) => (
-                  <GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour key={i}>
-                    <CardHover>
-                      <Link
-                        to={`candidates/${candidate.state.title}/${
-                          candidate.slug
-                        }`}
-                      >
-                        <FooterCard
-                          cardTitle={candidate.title}
-                          cardSubtitle={candidate.contestId.seatId.title}
-                          imgSrc={candidate.headshotId.url}
-                        />
-                      </Link>
-                    </CardHover>
-                  </GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour>
-                ))
-              ) : (
-                <h2>Loading</h2>
-              )}
-            </div>
-          </section>
+        <section className="col-12 col-lg-8 col-xl-9">
+          <h2 className="text-center">Featured Articles</h2>
+          {articles && articles.length ? (
+            articles.slice(0, 8).map(article => (
+              <Link to={`/articles/${article.slug}`}>
+                <p className="row">
+                  <span className="col-sm-4">{article.articleType}</span>
+                  <span className="col-sm-8">
+                    {article.title}
+                    by {article.author}
+                    <br />
+                    {prettifyDate(article.updatedAt)}
+                  </span>
+                </p>
+              </Link>
+            ))
+          ) : (
+            <h2>Loading</h2>
+          )}
+        </section>
 
-          <section>
-            <h2 className="text-center">Featured Articles</h2>
-            <div className="flex">
-              {articles && articles.length ? (
-                articles.slice(0, 8).map(article => (
-                  <GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour key={article.id}>
-                    <CardHover>
-                      <Link to={`articles/${article.slug}`}>
-                        <FooterCard
-                          cardTitle={article.title}
-                          cardSubtitle={`by ${article.author}`}
-                          cardText={prettifyDate(article.updatedAt)}
-                          imgSrc={null}
-                        />
-                      </Link>
-                    </CardHover>
-                  </GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour>
-                ))
-              ) : (
-                <h2>Loading</h2>
-              )}
-            </div>
-          </section>
-        </article>
-        <Aside twitterHandles={['local_majority']} />
+        <div className="col-12 col-lg-4 col-xl-3">
+          <HomeAside twitterHandles={['local_majority']} />
+        </div>
       </div>
     </div>
   );
