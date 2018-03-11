@@ -1,43 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Filters from '../common/Filters/Filters';
-import SelectFilter from '../common/Filters/SelectFilter';
-// import Card from '../common/Cards/Card';
+import ButtonlessFilters from '../common/Filters/ButtonlessFilters';
 import GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour from '../common/Grids/GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour';
 import CardHover from '../common/Cards/CardHover';
 import FooterCard from '../common/Cards/FooterCard';
+import Aux from '../common/Aux';
 
 class Districts extends Component {
-  constructor(props, context) {
-    super(props, context);
-    let districtsStatesSelected = {},
-      districtsSeatTypeSelected = {};
-    if (this.props.statesMasterList) {
-      if (
-        this.props.match.params.state &&
-        this.props.statesMasterList.includes(this.props.match.params.state)
-      ) {
-        this.props.statesMasterList.forEach(stateName => {
-          districtsStatesSelected[stateName] = false;
-        });
-        districtsStatesSelected[this.props.match.params.state] = true;
-      } else {
-        this.props.statesMasterList.forEach(stateName => {
-          districtsStatesSelected[stateName] = true;
-        });
-      }
-    }
-    this.state = {
-      districtsStatesSelected,
-      districtsSeatTypeSelected,
-    };
-    this.updateFilter = this.updateFilter.bind(this);
-  }
-  updateFilter(filterCategory, selectedValue) {
-    selectedValue === 'all'
+  state = {
+    stateSelected: this.props.match.params.state,
+  };
+
+  updateFilter = (filterCategory, selectedValue) => {
+    selectedValue === 'All'
       ? this.props.history.push('/districts')
       : this.props.history.push(`/districts/${selectedValue}`);
-  }
+  };
+
   componentDidMount() {
     this.props.match.params.state
       ? (document.title = `Local Majority | Districts | ${
@@ -47,27 +27,30 @@ class Districts extends Component {
   }
   render() {
     const { seats, statesMasterList } = this.props;
-    const { districtsStatesSelected } = this.state;
-    const seatsMeetingFilters =
-      districtsStatesSelected && seats
-        ? seats.filter(seat => districtsStatesSelected[seat.state.title])
-        : [];
+    const seatsMeetingFilters = this.props.match.params.state
+        ? seats.filter(seat => seat.state.title === this.props.match.params.state)
+        : seats;
 
     return (
       <div className="Districts">
-        {statesMasterList && (
-          <Filters>
-            <SelectFilter
-              filterCategory="districtsStatesSelected"
-              hintText="select state"
-              includeAll={true}
-              passedParam={this.props.match.params.state}
-              masterList={statesMasterList}
-              updateFilter={this.updateFilter}
-            />
-          </Filters>
-        )}
-        <div className="flex">
+        <div className="row">
+          <div className="col">
+            {statesMasterList && (
+              <Aux>
+                <h3>Select Your State</h3>
+                <Filters>
+                  <ButtonlessFilters
+                    filterCategory="stateSelected"
+                    passedParam={this.state.stateSelected}
+                    masterList={statesMasterList}
+                    updateFilter={this.updateFilter}
+                  />
+                </Filters>
+              </Aux>
+            )}
+          </div>
+        </div>
+        <div className="row">
           {seatsMeetingFilters && seatsMeetingFilters.length ? (
             seatsMeetingFilters.map((seat, i) => (
               <GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour key={i}>
@@ -79,7 +62,7 @@ class Districts extends Component {
               </GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour>
             ))
           ) : (
-            <h2>No Districts Meet Your Criteria.</h2>
+            <h2 className="col">No Districts Meet Your Criteria.</h2>
           )}
         </div>
       </div>
