@@ -10,7 +10,7 @@ import { prettifyDate } from '../../utils/functions';
 
 const Home = props => {
   document.title = 'Local Majority';
-  // console.log('from Home', props);
+
   let { articles, candidates } = props;
   const currentStateRaces = [
     {
@@ -38,8 +38,6 @@ const Home = props => {
     },
   ];
 
-  // let { articles, candidates } = props;
-  // let issuePrimers = articles.filter(a => a.type === 'IssuePrimer');
   return (
     <div className="Home">
       <div className="main-and-aside">
@@ -140,24 +138,3 @@ const Home = props => {
 };
 
 export default Home;
-
-// <h3>Featured Articles</h3>
-// <div className="flex">
-//   {issuePrimers.length ? (
-//     issuePrimers.map((issuePrimer, i) => (
-//       <Card
-//         key={`issuePrimer-${i}`}
-//         id={issuePrimer.id}
-//         cardTitle={issuePrimer.title}
-//         cardSubtitle={issuePrimer.author}
-//         cardText={issuePrimer.description}
-//         imgSrc="ImageSourceNeeded"
-//         category="article"
-//         slug={issuePrimer.slug}
-//         imgShape="landscape"
-//       />
-//     ))
-//   ) : (
-//     <h2>Loading</h2>
-//   )}
-// </div>
