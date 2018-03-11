@@ -8,19 +8,25 @@ import CandidateWebsiteButton from './CandidateWebsiteButton';
 
 const CandidateAside = props => {
   const candidate = props.candidate;
-  const anyContactInfo = candidate.facebook || candidate.twitter || candidate.campaignEmail || candidate.homepageUrl || candidate.donateUrl
-    ? true
-    : false;
+  const anyContactInfo =
+    candidate.facebook ||
+    candidate.twitter ||
+    candidate.campaignEmail ||
+    candidate.homepageUrl ||
+    candidate.donateUrl
+      ? true
+      : false;
   return (
     <aside id="Aside">
       <div className="row">
         <div className="col-12 col-sm-6 col-lg-12">
-          { candidate.twitter && (
+          {candidate.twitter && (
             <TwitterTimeline twitterHandle={candidate.twitter} />
           )}
         </div>
         <div className="col-12 col-sm-6 hidden-lg-up text-right">
-          { anyContactInfo && <Aux>
+          {anyContactInfo && (
+            <Aux>
               <h3>Contact the Candidate</h3>
               <div className="social-icons-space">
                 {candidate.facebook && (
@@ -29,7 +35,9 @@ const CandidateAside = props => {
                   />
                 )}
                 {candidate.twitter && (
-                  <SocialIcon url={`https://twitter.com/${candidate.twitter}`} />
+                  <SocialIcon
+                    url={`https://twitter.com/${candidate.twitter}`}
+                  />
                 )}
                 {candidate.campaignEmail && (
                   <SocialIcon
@@ -46,7 +54,7 @@ const CandidateAside = props => {
                 <CandidateDonateButton candidate={props.candidate} />
               )}
             </Aux>
-          }
+          )}
         </div>
       </div>
     </aside>

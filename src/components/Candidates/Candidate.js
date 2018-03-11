@@ -10,7 +10,10 @@ import { SocialIcon } from 'react-social-icons';
 import CandidateDonateButton from './CandidateDonateButton';
 import CandidateWebsiteButton from './CandidateWebsiteButton';
 import CandidateAside from './CandidateAside';
-import { prettifyDate, getMostRecentUpdateTimestamp } from '../../utils/functions';
+import {
+  prettifyDate,
+  getMostRecentUpdateTimestamp,
+} from '../../utils/functions';
 import './Candidate.css';
 
 class Candidate extends Component {
@@ -27,10 +30,15 @@ class Candidate extends Component {
   componentDidUpdate(prevProps, prevState) {
     // only consider updating localStorage if query is resolved and successful
     if (this.props.CandidateDetailBySlug.Candidate) {
-      const mostRecentUpdateToCandidateDetailBySlug = getMostRecentUpdateTimestamp(this.props.CandidateDetailBySlug.Candidate);
+      const mostRecentUpdateToCandidateDetailBySlug = getMostRecentUpdateTimestamp(
+        this.props.CandidateDetailBySlug.Candidate
+      );
       // only update localStorage if no candidateDetail (freeze-dried record passed to component by App) or if the timestamp for CandidateDetailBySlug (grapql query) includes data newer than timestamp in candidateDetail(freeze-dried record)
-      if (!this.props.candidateDetail
-          || this.props.candidateDetail.timestamp < mostRecentUpdateToCandidateDetailBySlug){
+      if (
+        !this.props.candidateDetail ||
+        this.props.candidateDetail.timestamp <
+          mostRecentUpdateToCandidateDetailBySlug
+      ) {
         let now = new Date().getTime();
         let details = { ...this.props.CandidateDetailBySlug.Candidate };
         details.timestamp = now;
@@ -52,7 +60,8 @@ class Candidate extends Component {
 
     const isOffline =
       this.props.CandidateDetailBySlug.error &&
-      this.props.CandidateDetailBySlug.error.message.indexOf('Network error') > -1
+      this.props.CandidateDetailBySlug.error.message.indexOf('Network error') >
+        -1
         ? true
         : false;
 
@@ -64,15 +73,20 @@ class Candidate extends Component {
       return <NoSuchCandidate candidateId={this.props.match.params.slug} />;
     }
 
-    const candidateHeadshot = candidate.headshotId && candidate.headshotId.url
-      ? candidate.headshotId.url
-      : null;
-    const districtTitle = candidate.contestId && candidate.contestId.seatId && candidate.contestId.seatId.title
-      ? candidate.contestId.seatId.title
-      : 'No District Data Available';
-    const electionDate = candidate.contestId && candidate.contestId.electionDate
-      ? prettifyDate(candidate.contestId.electionDate)
-      : null;
+    const candidateHeadshot =
+      candidate.headshotId && candidate.headshotId.url
+        ? candidate.headshotId.url
+        : null;
+    const districtTitle =
+      candidate.contestId &&
+      candidate.contestId.seatId &&
+      candidate.contestId.seatId.title
+        ? candidate.contestId.seatId.title
+        : 'No District Data Available';
+    const electionDate =
+      candidate.contestId && candidate.contestId.electionDate
+        ? prettifyDate(candidate.contestId.electionDate)
+        : null;
 
     return (
       <div className="Candidate">
@@ -89,12 +103,8 @@ class Candidate extends Component {
             <div className="col-12 col-md-6 lg-8 xl-9 text-right">
               <h2>{candidate.title}</h2>
               <h3>
-                { districtTitle
-                  ? districtTitle
-                  : 'No District Data Available'}
-                { electionDate
-                  ? ` on ${electionDate}`
-                  : null}
+                {districtTitle ? districtTitle : 'No District Data Available'}
+                {electionDate ? ` on ${electionDate}` : null}
               </h3>
               <div className="social-icons-space">
                 {candidate.facebook && (

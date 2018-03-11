@@ -22,10 +22,14 @@ class District extends Component {
   componentDidUpdate(prevProps, prevState) {
     // only consider updating localStorage if query is resolved and successful
     if (this.props.SeatDetailBySlug.Seat) {
-      const mostRecentUpdateToSeatDetailBySlug = getMostRecentUpdateTimestamp(this.props.SeatDetailBySlug.Seat);
+      const mostRecentUpdateToSeatDetailBySlug = getMostRecentUpdateTimestamp(
+        this.props.SeatDetailBySlug.Seat
+      );
       // only update localStorage if no seatDetail (freeze-dried record passed to component by App) or if the timestamp for SeatDetailBySlug (grapql query) includes data newer than timestamp in seatDetail(freeze-dried record)
-      if (!this.props.seatDetail
-          || this.props.seatDetail.timestamp < mostRecentUpdateToSeatDetailBySlug){
+      if (
+        !this.props.seatDetail ||
+        this.props.seatDetail.timestamp < mostRecentUpdateToSeatDetailBySlug
+      ) {
         let now = new Date().getTime();
         let details = { ...this.props.SeatDetailBySlug.Seat };
         details.timestamp = now;
@@ -69,12 +73,13 @@ class District extends Component {
       seat.contestIds[0].candidateIds[0]
         ? seat.contestIds[0].candidateIds[0]
         : null;
-    const candidateHeadshot = candidate && candidate.headshotId && candidate.headshotId.url
-      ? candidate.headshotId.url
-      : null;
+    const candidateHeadshot =
+      candidate && candidate.headshotId && candidate.headshotId.url
+        ? candidate.headshotId.url
+        : null;
 
-    console.log('seat', seat)
-    console.log('\ncandidate from seat', candidate)
+    console.log('seat', seat);
+    console.log('\ncandidate from seat', candidate);
 
     return (
       <div className="District">
@@ -85,8 +90,7 @@ class District extends Component {
               <h2>{seat.title}</h2>
             </div>
             <div className="col-4">
-              { candidate && <h2 className="text-right">{candidate.title}</h2>
-              }
+              {candidate && <h2 className="text-right">{candidate.title}</h2>}
             </div>
             <div className="col-4">
               <img
@@ -99,17 +103,20 @@ class District extends Component {
               <img
                 src={seatInState}
                 className="img-fluid"
-                alt={`map of district ${seat.title}'s location in ${seat.state.title}`}
+                alt={`map of district ${seat.title}'s location in ${
+                  seat.state.title
+                }`}
               />
             </div>
-            {candidate && <div className="col-4">
+            {candidate && (
+              <div className="col-4">
                 <img
                   src={candidateHeadshot}
                   className="img-fluid"
                   alt={`headshot of district candidate ${candidate.title}`}
                 />
               </div>
-            }
+            )}
           </div>
         </section>
 
