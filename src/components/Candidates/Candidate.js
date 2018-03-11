@@ -137,7 +137,7 @@ class Candidate extends Component {
               )}
             </div>
           </div>
-          <div className="main-and-aside row">
+          <div className="row">
             <div className="col-12 col-lg-8 col-xl-9">
               <div className="Main">
                 {candidate.summaryText && (
