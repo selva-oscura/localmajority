@@ -36,7 +36,7 @@ class SelectFilter extends Component {
     this.props.updateFilter(this.props.filterCategory, selectedValue);
   }
   render() {
-    const { filterCategory, hintText, includeAll, masterList } = this.props;
+    const { hintText, includeAll, masterList } = this.props;
     const menuItems = (masterList, selectedValues) =>
       masterList.map(item => (
         <MenuItem
