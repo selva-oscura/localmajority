@@ -1,6 +1,6 @@
 import React from 'react';
 import './HomeAside.css';
-import TwitterTimeline from './TwitterTimeline';
+import TwitterTimeline from '../common/TwitterTimeline';
 
 const HomeAside = props => {
   const twitterHandles = props.twitterHandles;
