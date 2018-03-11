@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Filters from '../common/Filters/Filters';
 import SelectFilter from '../common/Filters/SelectFilter';
-import Card from '../common/Cards/Card';
+// import Card from '../common/Cards/Card';
+import GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour from '../common/Grids/GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour';
+import CardHover from '../common/Cards/CardHover';
+import FooterCard from '../common/Cards/FooterCard';
 
 class Districts extends Component {
   constructor(props, context) {
@@ -66,15 +70,13 @@ class Districts extends Component {
         <div className="flex">
           {seatsMeetingFilters && seatsMeetingFilters.length ? (
             seatsMeetingFilters.map((seat, i) => (
-              <Card
-                key={i}
-                id={seat.id}
-                cardTitle={seat.title}
-                imgSrc="missing"
-                category="districts"
-                slug={`${seat.state.title}/${seat.slug}`}
-                imgShape="square"
-              />
+              <GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour key={i}>
+                <CardHover>
+                  <Link to={`districts/${seat.state.title}/${seat.slug}`}>
+                    <FooterCard cardTitle={seat.title} imgSrc="missing" />
+                  </Link>
+                </CardHover>
+              </GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour>
             ))
           ) : (
             <h2>No Districts Meet Your Criteria.</h2>
