@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Aux from '../common/Aux';
+import Primer from '../common/Primers/Primer';
 import Loading from '../common/Loading';
 import NoSuchArticle from './NoSuchArticle';
+import { prettifyDateAndTime } from '../../utils/functions';
 
 class Article extends Component {
   constructor(props) {
@@ -24,9 +25,11 @@ class Article extends Component {
       <div className="Article">
         <article>
           <h2>{article.title}</h2>
+          <p>Last updated: {prettifyDateAndTime(article.updatedAt)}</p>
           <p>Its type is {article.articleType}</p>
           <p>Its slug is {article.slug}</p>
           <p>We really need some data in the database....</p>
+          {article.content && <Primer primer={article.content} />}
         </article>
       </div>
     );
