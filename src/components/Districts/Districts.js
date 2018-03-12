@@ -55,7 +55,7 @@ class Districts extends Component {
             seatsMeetingFilters.map((seat, i) => (
               <GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour key={i}>
                 <CardHover>
-                  <Link to={`districts/${seat.state.title}/${seat.slug}`}>
+                  <Link to={`/districts/${seat.state.title}/${seat.slug}`}>
                     <FooterCard cardTitle={seat.title} imgSrc="missing" />
                   </Link>
                 </CardHover>
