@@ -28,8 +28,8 @@ class Districts extends Component {
   render() {
     const { seats, statesMasterList } = this.props;
     const seatsMeetingFilters = this.props.match.params.state
-        ? seats.filter(seat => seat.state.title === this.props.match.params.state)
-        : seats;
+      ? seats.filter(seat => seat.state.title === this.props.match.params.state)
+      : seats;
 
     return (
       <div className="Districts">
