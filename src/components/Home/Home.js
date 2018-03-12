@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import States from '../States/States';
 import HomeAside from './HomeAside';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour from '../common/Grids/GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour';
@@ -16,25 +17,14 @@ const Home = props => {
     {
       title: 'Florida',
       abbrev: 'FL',
-      districts: [
-        'House District 11',
-        'House District 20',
-        'House District 24',
-      ],
     },
     {
       title: 'Michigan',
       abbrev: 'MI',
-      districts: [
-        'Assembly District 1',
-        'Assembly District 2',
-        'Assembly District 3',
-      ],
     },
     {
       title: 'Minnesota',
       abbrev: 'MN',
-      districts: ['Assembly 1', 'Assembly 12', 'Assembly District 33'],
     },
   ];
 
@@ -59,45 +49,43 @@ const Home = props => {
             Minnesota in 2018.
           </p>
         </section>
-        <section className="col-12">
-          <h2 className="text-center">Our States</h2>
-          <div className="flex">
-            {currentStateRaces.map((state, i) => (
-              <GridXSmallIsOneSmallIsThree key={i}>
-                <CardHover>
-                  <Link to={`districts/${state.title}`}>
-                    <FooterCard
-                      cardTitle={state.title}
-                      imgSrc={`../images/${state.title}.jpg`}
-                      insetImg="insetImg"
-                    />
-                  </Link>
-                </CardHover>
-              </GridXSmallIsOneSmallIsThree>
-            ))}
-          </div>
-        </section>
+
+        <States currentStateRaces={currentStateRaces} />
+
         <section className="col-12">
           <h2 className="text-center">Featured Candidates</h2>
           <div className="flex">
             {candidates && candidates.length ? (
-              candidates.map((candidate, i) => (
-                <GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour key={i}>
-                  <CardHover>
-                    <Link
-                      to={`candidates/${candidate.state.title}/${
-                        candidate.slug
-                      }`}
-                    >
-                      <FooterCard
-                        cardTitle={candidate.title}
-                        cardSubtitle={candidate.contestId.seatId.title}
-                        imgSrc={candidate.headshotId.url}
-                      />
-                    </Link>
-                  </CardHover>
-                </GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour>
-              ))
+              candidates.map((candidate, i) => {
+                const headshotUrl = candidate.headshotId && candidate.headshotId.url
+                  ? candidate.headshotId.url
+                  : null;
+                const seatTitle =
+                  candidate &&
+                  candidate.contestId &&
+                  candidate.contestId.seatId &&
+                  candidate.contestId.seatId.title
+                    ? candidate.contestId.seatId.title
+                    : null;
+
+                return (
+                  <GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour key={i}>
+                    <CardHover>
+                      <Link
+                        to={`candidates/${candidate.state.title}/${
+                          candidate.slug
+                        }`}
+                      >
+                        <FooterCard
+                          cardTitle={candidate.title}
+                          cardSubtitle={seatTitle}
+                          imgSrc={headshotUrl}
+                        />
+                      </Link>
+                    </CardHover>
+                  </GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour>
+                )
+              })
             ) : (
               <h2>Loading</h2>
             )}
