@@ -62,9 +62,10 @@ class Candidates extends Component {
             {candidatesMeetingFilters && candidatesMeetingFilters.length ? (
               <HorizontalCards>
                 {candidatesMeetingFilters.map((candidate, i) => {
-                  const headshotUrl = candidate.headshotId && candidate.headshotId.url
-                    ? candidate.headshotId.url
-                    : null;
+                  const headshotUrl =
+                    candidate.headshotId && candidate.headshotId.url
+                      ? candidate.headshotId.url
+                      : null;
                   const seatTitle =
                     candidate &&
                     candidate.contestId &&

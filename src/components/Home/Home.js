@@ -57,9 +57,10 @@ const Home = props => {
           <div className="flex">
             {candidates && candidates.length ? (
               candidates.map((candidate, i) => {
-                const headshotUrl = candidate.headshotId && candidate.headshotId.url
-                  ? candidate.headshotId.url
-                  : null;
+                const headshotUrl =
+                  candidate.headshotId && candidate.headshotId.url
+                    ? candidate.headshotId.url
+                    : null;
                 const seatTitle =
                   candidate &&
                   candidate.contestId &&
@@ -84,7 +85,7 @@ const Home = props => {
                       </Link>
                     </CardHover>
                   </GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour>
-                )
+                );
               })
             ) : (
               <h2>Loading</h2>

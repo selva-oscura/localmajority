@@ -6,7 +6,10 @@ import Aux from '../common/Aux';
 import Loading from '../common/Loading';
 import Offline from '../common/Offline';
 import NoSuchArticle from './NoSuchArticle';
-import { getMostRecentUpdateTimestamp, prettifyDateAndTime } from '../../utils/functions';
+import {
+  getMostRecentUpdateTimestamp,
+  prettifyDateAndTime,
+} from '../../utils/functions';
 
 class Article extends Component {
   constructor(props) {
@@ -27,7 +30,8 @@ class Article extends Component {
       // only update localStorage if no articleDetail (freeze-dried record passed to component by App) or if the timestamp for ArticleDetailBySlug (grapql query) includes data newer than timestamp in articleDetail(freeze-dried record)
       if (
         !this.props.articleDetail ||
-        this.props.articleDetail.timestamp < mostRecentUpdateToArticleDetailBySlug
+        this.props.articleDetail.timestamp <
+          mostRecentUpdateToArticleDetailBySlug
       ) {
         let now = new Date().getTime();
         let details = { ...this.props.ArticleDetailBySlug.Article };
@@ -80,7 +84,7 @@ export default compose(
   graphql(graphQLAPI.queries.ArticleDetailBySlug, {
     name: 'ArticleDetailBySlug',
     options: props => {
-      return { variables: {slug: props.match.params.slug } };
+      return { variables: { slug: props.match.params.slug } };
     },
   })
 )(Article);

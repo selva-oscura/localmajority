@@ -4,7 +4,7 @@ import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsT
 import CardHover from '../common/Cards/CardHover';
 import FooterCard from '../common/Cards/FooterCard';
 
-const States = ({currentStateRaces}) => (
+const States = ({ currentStateRaces }) => (
   <section className="col-12">
     <h2 className="text-center">Our States</h2>
     <div className="flex">
@@ -23,6 +23,6 @@ const States = ({currentStateRaces}) => (
       ))}
     </div>
   </section>
-)
+);
 
 export default States;

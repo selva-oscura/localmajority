@@ -414,9 +414,7 @@ class App extends Component {
           path="/districts"
           component={props =>
             seats && statesMasterList && statesMasterList.length ? (
-              <States
-                currentStateRaces={currentStateRaces}
-              />
+              <States currentStateRaces={currentStateRaces} />
             ) : (
               <Loading />
             )
