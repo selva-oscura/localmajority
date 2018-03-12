@@ -12,21 +12,7 @@ import './Home.css';
 const Home = props => {
   document.title = 'Local Majority';
 
-  let { articles, candidates } = props;
-  const currentStateRaces = [
-    {
-      title: 'Florida',
-      abbrev: 'FL',
-    },
-    {
-      title: 'Michigan',
-      abbrev: 'MI',
-    },
-    {
-      title: 'Minnesota',
-      abbrev: 'MN',
-    },
-  ];
+  const { articles, candidates, currentStateRaces } = props;
 
   return (
     <div className="Home">
