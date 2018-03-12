@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import graphQLAPI from '../../api/graphQLAPI';
 import Primer from '../common/Primers/Primer';
-import Aux from '../common/Aux';
 import Loading from '../common/Loading';
 import Offline from '../common/Offline';
 import NoSuchArticle from './NoSuchArticle';
@@ -67,8 +66,9 @@ class Article extends Component {
       return <NoSuchArticle articleId={this.props.match.params.slug} />;
     }
     return (
-      <div className="Article">
-        <article>
+      <div className="Article row">
+        {isOffline && <Offline timestamp={article.timestamp} />}
+        <article className="col-12">
           <h2>{article.title}</h2>
           <p>Last updated: {prettifyDateAndTime(article.updatedAt)}</p>
           <p>Its type is {article.articleType}</p>
