@@ -170,6 +170,7 @@ class App extends Component {
       candidate.contestId &&
       candidate.contestId.seatId &&
       candidate.contestId.seatId.title;
+
     const hasFutureElection = candidate => {
       const electionDate =
         candidate.contestId && candidate.contestId.electionDate
@@ -178,20 +179,7 @@ class App extends Component {
       const now = new Date().getTime();
       return electionDate && electionDate > now;
     };
-    const currentStateRaces = [
-      {
-        title: 'Florida',
-        abbrev: 'FL',
-      },
-      {
-        title: 'Michigan',
-        abbrev: 'MI',
-      },
-      {
-        title: 'Minnesota',
-        abbrev: 'MN',
-      },
-    ];
+
     const hasPastElection = candidate => {
       const electionDate =
         candidate.contestId && candidate.contestId.electionDate
@@ -200,6 +188,7 @@ class App extends Component {
       const now = new Date().getTime();
       return electionDate && electionDate < now;
     };
+
     const isMissingCandidateData = candidate => {
       if (!candidate.headshotId || !candidate.headshotId.url) {
         console.log(`${candidate.title} is missing headshot`);
@@ -233,6 +222,15 @@ class App extends Component {
       return false;
     };
 
+    const candidateStatesArray = candidates => {
+      let states = candidates.map(candidate =>
+        candidate.state && candidate.state.title
+          ? candidate.state.title
+          : null
+      );
+      return [...new Set(states)].sort();
+    };
+
     const validCandidates = candidates.filter(hasElectionData);
     console.log('validCandidates', validCandidates);
 
@@ -240,6 +238,11 @@ class App extends Component {
       .filter(hasElectionData)
       .filter(hasFutureElection);
     console.log('validFutureCandidates', validFutureCandidates);
+
+    const validFutureCandidatesStates = candidateStatesArray(
+      validFutureCandidates
+    );
+    console.log('validFutureCandidatesStates', validFutureCandidatesStates);
 
     const validPastCandidates = candidates
       .filter(hasElectionData)
@@ -306,14 +309,18 @@ class App extends Component {
           exact
           path="/"
           component={props => (
-            <Home articles={articles} candidates={validCandidates} />
+            <Home
+              articles={articles}
+              candidates={validFutureCandidates}
+              currentStateRaces={validFutureCandidatesStates}
+            />
           )}
         />
         <Route
           path="/candidates/:state/:slug"
           component={props => {
-            const candidate = validCandidates
-              ? validCandidates.find(
+            const candidate = validFutureCandidates
+              ? validFutureCandidates.find(
                   candidate => props.match.params.slug === candidate.slug
                 )
               : null;
@@ -339,13 +346,11 @@ class App extends Component {
           path="/candidates/:state"
           component={props => (
             <ErrorBoundary>
-              {validCandidates &&
-              statesMasterList &&
-              statesMasterList.length ? (
+              {validFutureCandidates && validFutureCandidatesStates ? (
                 <Candidates
                   {...props}
-                  candidates={validCandidates}
-                  statesMasterList={statesMasterList}
+                  candidates={validFutureCandidates}
+                  statesMasterList={validFutureCandidatesStates}
                 />
               ) : (
                 <Loading />
@@ -357,13 +362,13 @@ class App extends Component {
           path="/candidates"
           component={props => (
             <ErrorBoundary>
-              {validCandidates &&
-              statesMasterList &&
-              statesMasterList.length ? (
+              {validFutureCandidates &&
+              validFutureCandidatesStates &&
+              validFutureCandidatesStates.length ? (
                 <Candidates
                   {...props}
-                  candidates={validCandidates}
-                  statesMasterList={statesMasterList}
+                  candidates={validFutureCandidates}
+                  statesMasterList={validFutureCandidatesStates}
                 />
               ) : (
                 <Loading />
@@ -397,11 +402,13 @@ class App extends Component {
           path="/districts/:state"
           component={props => (
             <ErrorBoundary>
-              {seats && statesMasterList && statesMasterList.length ? (
+              {seats &&
+              validFutureCandidatesStates &&
+              validFutureCandidatesStates.length ? (
                 <Districts
                   {...props}
                   seats={seats}
-                  statesMasterList={statesMasterList}
+                  statesMasterList={validFutureCandidatesStates}
                 />
               ) : (
                 <Loading />
@@ -413,8 +420,10 @@ class App extends Component {
         <Route
           path="/districts"
           component={props =>
-            seats && statesMasterList && statesMasterList.length ? (
-              <States currentStateRaces={currentStateRaces} />
+            seats &&
+            validFutureCandidatesStates &&
+            validFutureCandidatesStates.length ? (
+              <States currentStateRaces={validFutureCandidatesStates} />
             ) : (
               <Loading />
             )
