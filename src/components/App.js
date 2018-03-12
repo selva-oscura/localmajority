@@ -9,6 +9,7 @@ import Home from './Home/Home';
 import Article from './Articles/Article';
 import Candidate from './Candidates/Candidate';
 import Candidates from './Candidates/Candidates';
+import States from './States/States';
 import District from './Districts/District';
 import Districts from './Districts/Districts';
 import Issue from './Issues/Issue';
@@ -177,6 +178,20 @@ class App extends Component {
       const now = new Date().getTime();
       return electionDate && electionDate > now;
     };
+    const currentStateRaces = [
+      {
+        title: 'Florida',
+        abbrev: 'FL',
+      },
+      {
+        title: 'Michigan',
+        abbrev: 'MI',
+      },
+      {
+        title: 'Minnesota',
+        abbrev: 'MN',
+      },
+    ];
     const hasPastElection = candidate => {
       const electionDate =
         candidate.contestId && candidate.contestId.electionDate
@@ -399,10 +414,8 @@ class App extends Component {
           path="/districts"
           component={props =>
             seats && statesMasterList && statesMasterList.length ? (
-              <Districts
-                {...props}
-                seats={seats}
-                statesMasterList={statesMasterList}
+              <States
+                currentStateRaces={currentStateRaces}
               />
             ) : (
               <Loading />
@@ -434,12 +447,6 @@ class App extends Component {
         <Route
           path="/issues/:slug"
           component={props => {
-            console.log(
-              'logging from routing for /issues/:slug -- issues are',
-              issues,
-              'param is',
-              props.match.params.slug
-            );
             const issue = issues.find(
               issue => props.match.params.slug === issue.slug
             );
