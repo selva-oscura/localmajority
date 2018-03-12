@@ -11,10 +11,10 @@ const States = ({ currentStateRaces }) => (
       {currentStateRaces.map((state, i) => (
         <GridXSmallIsOneSmallIsThree key={i}>
           <CardHover>
-            <Link to={`./districts/${state.title}`}>
+            <Link to={`./districts/${state}`}>
               <FooterCard
-                cardTitle={state.title}
-                imgSrc={`../images/${state.title}.jpg`}
+                cardTitle={state}
+                imgSrc={`../images/${state}.jpg`}
                 insetImg="insetImg"
               />
             </Link>
