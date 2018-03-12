@@ -271,7 +271,7 @@ class App extends Component {
           }
           sockPuppetArticles.push({
             id: `${i}_${j}_${k}`,
-            title: `Article blah, blah, blah ${i} - ${j} - ${k}`,
+            title: `Fake Article title blah, blah, blah ${i} - ${j} - ${k}`,
             slug: `filler-article-${i}-${j}-${k}`,
             articleType: type,
             createdAt: date,
@@ -281,8 +281,8 @@ class App extends Component {
         }
         subIssues.push({
           id: `${i}_${j}`,
-          title: `Sock Puppet ${i} - ${j}`,
-          slug: `sock-puppet-${i}-${j}`,
+          title: `Fake Subtopic ${i} - ${j}`,
+          slug: `sub-topic-${i}-${j}`,
           articles: sockPuppetArticles,
         });
         articles = articles.concat(sockPuppetArticles);
@@ -292,8 +292,8 @@ class App extends Component {
       }
       issues.push({
         id: i,
-        title: `Sock Puppet ${i}`,
-        slug: `sock-puppet-${i}`,
+        title: `Fake Topic ${i}`,
+        slug: `fake-topic-${i}`,
         subIssues: subIssues,
       });
     }
@@ -316,7 +316,7 @@ class App extends Component {
               ? validCandidates.find(
                   candidate => props.match.params.slug === candidate.slug
                 )
-              : { id: 'no-cached-data', headshotId: { url: null } };
+              : null;
             const candidateDetail =
               candidatesDetails && candidatesDetails[props.match.params.slug]
                 ? candidatesDetails[props.match.params.slug]
@@ -376,7 +376,7 @@ class App extends Component {
           component={props => {
             const seat = seats
               ? seats.find(seat => props.match.params.slug === seat.slug)
-              : { id: 'no-cached-data', mapSmUrl: { url: null } };
+              : null;
             const seatDetail =
               seatsDetails && seatsDetails[props.match.params.slug]
                 ? seatsDetails[props.match.params.slug]
@@ -435,11 +435,14 @@ class App extends Component {
               ? articlesDetails[props.match.params.slug]
               : null;
             return (
-              <Article
-                {...props}
-                article={article}
-                articleDetail={articleDetail}
-              />
+              <ErrorBoundary>
+                <Article
+                  {...props}
+                  article={article}
+                  articleDetail={articleDetail}
+                  updateStateDetail={this.updateStateDetail}
+                />
+              </ErrorBoundary>
             );
           }}
         />
