@@ -96,7 +96,7 @@ const Home = props => {
           <h2 className="text-center">Featured Articles</h2>
           {articles && articles.length ? (
             articles.slice(0, 8).map(article => (
-              <Link to={`/articles/${article.slug}`}>
+              <Link key={article.id} to={`/articles/${article.slug}`}>
                 <p className="row">
                   <span className="col-sm-4">{article.articleType}</span>
                   <span className="col-sm-8">
