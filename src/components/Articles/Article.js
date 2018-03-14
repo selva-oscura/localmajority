@@ -59,12 +59,13 @@ class Article extends Component {
     const article = this.props.articleDetail
       ? this.props.articleDetail
       : this.props.article;
-    console.log('article at this point', article);
-    console.log('article content at this point', article.content);
+    // console.log('article at this point', article);
+    // console.log('article content at this point', article.content);
 
     if (!article) {
       return <NoSuchArticle articleId={this.props.match.params.slug} />;
     }
+
     return (
       <div className="Article row">
         {isOffline && <Offline timestamp={article.timestamp} />}
