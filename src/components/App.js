@@ -223,10 +223,11 @@ class App extends Component {
     };
 
     const candidateStatesArray = candidates => {
-      let states = candidates.map(candidate =>
-        candidate.state && candidate.state.title
-          ? candidate.state.title
-          : null
+      let states = candidates.map(
+        candidate =>
+          candidate.state && candidate.state.title
+            ? candidate.state.title
+            : null
       );
       return [...new Set(states)].sort();
     };
