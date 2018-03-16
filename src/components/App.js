@@ -312,6 +312,7 @@ class App extends Component {
           component={props => (
             <Home
               articles={articles}
+              pastCandidates={validPastCandidates}
               candidates={validFutureCandidates}
               currentStateRaces={validFutureCandidatesStates}
             />
@@ -485,8 +486,8 @@ class App extends Component {
         <Route
           path="/take-action/:state"
           component={props =>
-            statesMasterList ? (
-              <TakeAction {...props} statesMasterList={statesMasterList} />
+            validFutureCandidatesStates ? (
+              <TakeAction {...props} statesMasterList={validFutureCandidatesStates} />
             ) : (
               <Loading />
             )
@@ -496,8 +497,8 @@ class App extends Component {
         <Route
           path="/take-action"
           component={props =>
-            statesMasterList ? (
-              <TakeAction {...props} statesMasterList={statesMasterList} />
+            validFutureCandidatesStates ? (
+              <TakeAction {...props} statesMasterList={validFutureCandidatesStates} />
             ) : (
               <Loading />
             )
