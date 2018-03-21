@@ -487,7 +487,10 @@ class App extends Component {
           path="/take-action/:state"
           component={props =>
             validFutureCandidatesStates ? (
-              <TakeAction {...props} statesMasterList={validFutureCandidatesStates} />
+              <TakeAction
+                {...props}
+                statesMasterList={validFutureCandidatesStates}
+              />
             ) : (
               <Loading />
             )
@@ -498,7 +501,10 @@ class App extends Component {
           path="/take-action"
           component={props =>
             validFutureCandidatesStates ? (
-              <TakeAction {...props} statesMasterList={validFutureCandidatesStates} />
+              <TakeAction
+                {...props}
+                statesMasterList={validFutureCandidatesStates}
+              />
             ) : (
               <Loading />
             )
