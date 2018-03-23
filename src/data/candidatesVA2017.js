@@ -1,32 +1,32 @@
 const candidatesVA2017 = [
-  // {
-  //   title: 'Jennifer Carroll Foy',
-  //   district: 'Virginia HD 2',
-  //   won: true,
-  //   electionYear: 2017,
-  //   slug: 'jennifer-carroll-foy',
-  // },
-  // {
-  //   title: 'Wendy Gooditis',
-  //   district: 'Virginia HD 10',
-  //   won: true,
-  //   electionYear: 2017,
-  //   slug: 'wendy-gooditis',
-  // },
-  // {
-  //   title: 'Chris Hurst',
-  //   district: 'Virginia HD 12',
-  //   won: true,
-  //   electionYear: 2017,
-  //   slug: 'chris-hurst',
-  // },
-  // {
-  //   title: 'Danica Roem',
-  //   district: 'Virginia HD 13',
-  //   won: true,
-  //   electionYear: 2017,
-  //   slug: 'danica-roem',
-  // },
+  {
+    title: 'Jennifer Carroll Foy',
+    district: 'Virginia HD 2',
+    won: true,
+    electionYear: 2017,
+    slug: 'jennifer-carroll-foy',
+  },
+  {
+    title: 'Wendy Gooditis',
+    district: 'Virginia HD 10',
+    won: true,
+    electionYear: 2017,
+    slug: 'wendy-gooditis',
+  },
+  {
+    title: 'Chris Hurst',
+    district: 'Virginia HD 12',
+    won: true,
+    electionYear: 2017,
+    slug: 'chris-hurst',
+  },
+  {
+    title: 'Danica Roem',
+    district: 'Virginia HD 13',
+    won: true,
+    electionYear: 2017,
+    slug: 'danica-roem',
+  },
   {
     title: 'Elizabeth Guzman',
     district: 'Virginia HD 31',
@@ -44,7 +44,7 @@ const candidatesVA2017 = [
   {
     title: 'Donte Tanner',
     district: 'Virginia HD 40',
-    won: true,
+    won: false,
     electionYear: 2017,
     slug: 'donte-tanner',
   },
@@ -100,7 +100,7 @@ const candidatesVA2017 = [
   {
     title: 'Shelly Simonds',
     district: 'Virginia HD 94',
-    won: true,
+    won: false,
     electionYear: 2017,
     slug: 'shelly-simonds',
   },
