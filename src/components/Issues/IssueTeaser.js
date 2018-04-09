@@ -6,7 +6,7 @@ import './IssueTeaser.css';
 
 const IssueTeaser = ({ id, issueTitle, slug, imgSrc, issueArticles }) => (
   <div className="IssueTeaser flex">
-    <Link to={`/issues/${slug}`}>
+    <Link to={`/research/${slug}`}>
       <div className="image-holder">
         <img
           className="placeholder-image"
@@ -17,7 +17,7 @@ const IssueTeaser = ({ id, issueTitle, slug, imgSrc, issueArticles }) => (
       </div>
     </Link>
     <div>
-      <Link to={`/issues/${slug}`}>
+      <Link to={`/research/${slug}`}>
         <h3>{issueTitle}</h3>
       </Link>
       issueArticles.map((reading, i) => (
