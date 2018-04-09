@@ -5,6 +5,7 @@ import graphQLAPI from '../api/graphQLAPI';
 import { graphql, compose } from 'react-apollo';
 import Header from './Header/Header';
 import ErrorBoundary from './common/ErrorBoundary';
+import Footer from './Footer/Footer';
 import Home from './Home/Home';
 import Article from './Articles/Article';
 import Candidate from './Candidates/Candidate';
@@ -527,6 +528,7 @@ class App extends Component {
         <ErrorBoundary>
           <div className="container">{this.renderPage()}</div>
         </ErrorBoundary>
+        <Footer />
       </div>
     );
   }
