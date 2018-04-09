@@ -457,7 +457,7 @@ class App extends Component {
         />
 
         <Route
-          path="/issues/:slug"
+          path="/research/:slug"
           component={props => {
             const issue = issues.find(
               issue => props.match.params.slug === issue.slug
@@ -467,7 +467,7 @@ class App extends Component {
         />
 
         <Route
-          path="/issues"
+          path="/research"
           component={props => (
             <ErrorBoundary>
               {issues && statesMasterList && statesMasterList.length ? (
