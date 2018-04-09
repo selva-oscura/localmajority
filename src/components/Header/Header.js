@@ -26,7 +26,7 @@ class Header extends Component {
         shortName: 'Districts',
         exact: false,
       },
-      { path: '/issues', name: 'Issues', shortName: 'Issues', exact: false },
+      { path: '/research', name: 'Our Research', shortName: 'Research', exact: false },
       {
         path: '/take-action',
         name: 'Take Action!',
