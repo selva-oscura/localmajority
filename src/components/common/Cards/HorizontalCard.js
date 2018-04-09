@@ -40,8 +40,8 @@ class HorizontalCard extends Component {
             <div className="card-body">
               <h3>{cardTitle}</h3>
               {cardSubtitle && <h4>{cardSubtitle}</h4>}
-              {cardText && <p>{cardText}</p>}
-              {cardTextHtml && <div
+              {cardText && <div className="clamp"><p>{cardText}</p></div>}
+              {cardTextHtml && <div className="clamp"
                 dangerouslySetInnerHTML={{
                   __html: cardTextHtml
                 }}

@@ -46,11 +46,41 @@
 	margin: 0;
 }
 
+.HorizontalCard .card-body .clamp{
+	position: relative;
+	height: 3.9em;
+	overflow: hidden;
+}
+
+.HorizontalCard .card-body .clamp:after{
+	content: "";
+	text-align: right;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 50%;
+	height: 1.3em;
+	background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+}
+
+@supports(-webkit-line-clamp: 2) {
+	.HorizontalCard .card-body .clamp p{
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+	}
+	.HorizontalCard .card-body .clamp p:after {
+		display: none;
+	}
+}
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
 	.HorizontalCard, .HorizontalCard .image-holder, .HorizontalCard .card-body {
 		height: 125px;
 		max-height: 125px;
+		background-color: red;
 	}
 	.HorizontalCard .Paper {
 		max-height: 125px !important; 
@@ -60,5 +90,32 @@
 	}
 	.HorizontalCard .card-body {
 		width: calc(100% - 125px);
+	}
+	.HorizontalCard .card-body .clamp{
+		position: relative;
+		height: 2.6em;
+		overflow: hidden;
+	}
+	.HorizontalCard .card-body .clamp:after{
+		content: "";
+		text-align: right;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		width: 50%;
+		height: 1.3em;
+		background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+	}
+	@supports(-webkit-line-clamp: 3) {
+		.HorizontalCard .card-body .clamp p{
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
+			-webkit-box-orient: vertical;
+		}
+		.HorizontalCard .card-body .clamp p:after {
+			display: none;
+		}
 	}
 }
