@@ -15,41 +15,39 @@ const Home = props => {
   const { articles, candidates, currentStateRaces, pastCandidates } = props;
 
   const facesCandidates = []
-  // pastCandidates
-  //   .map(candidate => {
-  //     return {
-  //       title: candidate['title'],
-  //       district: `${candidate['state']['title']} ${candidate['contestId'][
-  //         'seatId'
-  //       ]['title'].slice(3)}`,
-  //       won: true,
-  //       electionYear: Number(
-  //         candidate['contestId']['electionDate'].slice(0, 4)
-  //       ),
-  //       headshot: candidate['headshotId']['url'],
-  //     };
-  //   })
+    // pastCandidates
+    //   .map(candidate => {
+    //     return {
+    //       title: candidate['title'],
+    //       district: `${candidate['state']['title']} ${candidate['contestId'][
+    //         'seatId'
+    //       ]['title'].slice(3)}`,
+    //       won: true,
+    //       electionYear: Number(
+    //         candidate['contestId']['electionDate'].slice(0, 4)
+    //       ),
+    //       headshot: candidate['headshotId']['url'],
+    //     };
+    //   })
     .concat(candidatesVA2017)
     .concat(
-      candidates
-        .slice(0, 18 - (candidatesVA2017.length))
-        .map(candidate => {
-          return {
-            title: candidate['title'],
-            district: `${candidate['state']['title']} ${candidate['contestId'][
-              'seatId'
-            ]['title'].slice(3)}`,
-            won: false,
-            electionYear: Number(
-              candidate['contestId']['electionDate'].slice(0, 4)
-            ),
-            slug: candidate['title']
-              .split(' ')
-              .join('-')
-              .toLowerCase(),
-            headshot: candidate['headshotId']['url'],
-          };
-        })
+      candidates.slice(0, 18 - candidatesVA2017.length).map(candidate => {
+        return {
+          title: candidate['title'],
+          district: `${candidate['state']['title']} ${candidate['contestId'][
+            'seatId'
+          ]['title'].slice(3)}`,
+          won: false,
+          electionYear: Number(
+            candidate['contestId']['electionDate'].slice(0, 4)
+          ),
+          slug: candidate['title']
+            .split(' ')
+            .join('-')
+            .toLowerCase(),
+          headshot: candidate['headshotId']['url'],
+        };
+      })
     );
 
   const presentationForCandidatesFaces = [];
@@ -85,7 +83,9 @@ const Home = props => {
                 {rowContents.map((candidate, j) => {
                   const imgSrc = candidate.headshot
                     ? candidate.headshot
-                    : `../images/candidates_of_yore/color/${candidate.slug}.png`;
+                    : `../images/candidates_of_yore/color/${
+                        candidate.slug
+                      }.png`;
                   return (
                     <div
                       className="col"
@@ -119,7 +119,7 @@ const Home = props => {
                 })}
               </div>
             ))}
-          </div>  
+          </div>
           <div className="FacesGreyBackground" style={{ padding: '24px 0' }}>
             {presentationForCandidatesFaces.map((rowContents, i) => (
               <div className="row no-gutters" key={i}>
@@ -236,3 +236,62 @@ const Home = props => {
 };
 
 export default Home;
+
+//     const imgSrc = candidate.headshot
+//       ? candidate.headshot
+//       : `../images/candidates_of_yore/color/${
+//           candidate.slug
+//         }.png`;
+//     return (
+//       <div
+//         className="col"
+//         key={j}
+//         style={{
+//           padding: '1px',
+//           background:
+//             "url('images/placeholderImage.svg') no-repeat",
+//           backgroundSize: '100%',
+//           backgroundPosition: 'center 0',
+//           overflow: 'hidden',
+//           position: 'absolute',
+//         }}
+//       >
+//         <img
+//           className="full-width"
+//           src={imgSrc}
+//           alt={`${candidate.title}, Local Majority backed ${
+//             candidate.electionYear
+//           } candidate for ${candidate.district}`}
+//           title={`${candidate.title}, Local Majority backed ${
+//             candidate.electionYear
+//           } candidate for ${candidate.district}`}
+//           style={{
+//             textIndent: '100%',
+//             whiteSpace: 'nowrap',
+//             overflow: 'hidden',
+//             position: 'relative',
+//             top: 0,
+//             right: 0,
+//             zIndex: 1,
+//           }}
+//         />
+//         {candidate.district.slice(0,8)==="Virginia"
+//         ? (<img className="full-width"
+//             src="images/VA17Vote-transparent.png"
+//             alt={`${candidate.district} ${candidate.electionYear} election`}
+//             style={{
+//               textIndent: '100%',
+//               whiteSpace: 'nowrap',
+//               overflow: 'hidden',
+//               position: 'relative',
+//               top:0,
+//               left: 0,
+//               zIndex: 2,
+//             }}
+//           />)
+//           : null
+//         }
+//       </div>
+//     );
+//   })}
+// </div>
