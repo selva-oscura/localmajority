@@ -1,3 +1,6 @@
-/*.Header {
-	text-align: center;
-}*/
+.Header {
+  background-color: #fff;
+  padding-bottom: 12px;
+/*  position: fixed;*/
+/*  z-index: 50;*/
+}
