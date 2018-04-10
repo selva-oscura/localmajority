@@ -1,85 +1,58 @@
-.NavBar{
-  background-color: rgb(26, 35, 126);
-  width: 100%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
-  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-  text-align: center;
+.NavBar {
+  padding-top: 6px;
 }
 
-.NavBar h1{
-  color: rgba(255, 255, 255, 1);
-  padding: 0px;
-  margin: 0;
+.NavBar nav{
+  width: calc(100% - 200px);
+  text-align: right;
 }
 
-.NavBar a{
+.NavBar .logo, .NavBar nav{
   display: inline-block;
-  margin: 0px 10px 10px;
+  height: 48px;
+  vertical-align: bottom;
+}
+
+.NavBar nav a{
+  padding-top: 22px;
+  display: inline-block;
+  margin: 0px 0px 0px 20px;
   text-decoration: none;
-  text-shadow: 0px 0px 8px rgb(13, 18, 63);
-  color: rgba(113, 216, 255, 1);
+  color: #216bb4;
   transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+.NavBar a:first-child{
+  margin-left: 0px;
 }
 
 .NavBar a:hover{
-  color: rgba(184, 235, 255, 1);
+  /*  216bb4's rgb is (33,107,180); */
+  color: rgba(33,107,180, 0.75);
 }
 
-
 .NavBar a.selected{
-  color: rgba(255, 255, 255, 1);
+  color: #18467e;
+  border-bottom: 2px solid #d1212e;
 }
 
 .NavBar a.selected:hover{
-  color: rgba(184, 235, 255, 1);
+  /* 18467e's rgb is (24, 70, 126) */
+  color: rgba(24, 70, 126, 0.75);
 }
 
 
-/*    color: rgb(26, 35, 126);
-    box-sizing: border-box;
-    font-family: Georgia, serif;
-    border-radius: 0px;
-    position: relative;
-    z-index: 1100;
-    display: flex;
-    padding-left: 24px;
-    padding-right: 24px;*/
+@media (min-width: 1200px) {
+  .NavBar nav{
+    width: calc(100% - 267px);
+  }
 
-/*.Nav {
-  display: block;
-  text-align: center;
-  border-top: 1px solid #01369B;
-  border-bottom: 1px solid #01369B;
-  padding: 8px 0;
-  margin: 32px 0;
-}
+  .NavBar .logo, .NavBar nav{
+    height: 64px;
+  }
 
-.Nav a {
-	font-weight: bold;
-	color: #006EED;
-}
-
-.Nav a:hover, .Nav a.selected{
-	color: #003698;
-}
-
-.Nav a.selected:hover{
-	color: #0052C3;
-}
-
-@media(min-width: 641px){
-  .Nav a {
-    margin: 0 10px;
+  .NavBar nav a{
+    padding-top: 38px;
+    margin: 0px 0px 0px 24px;
   }
 }
-
-@media(max-width: 640px){
-  .Nav{
-    margin: 32px 0 8px 0;
-  }
-  .Nav a {
-    max-width: 25%;
-    margin: 0 8px;
-  }
-}*/
