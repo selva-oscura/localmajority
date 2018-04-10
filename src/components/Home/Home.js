@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import States from '../States/States';
 import HomeAside from './HomeAside';
-import GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour from '../common/Grids/GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour';
+import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import CardHover from '../common/Cards/CardHover';
 import FooterCard from '../common/Cards/FooterCard';
 import candidatesVA2017 from '../../data/candidatesVA2017';
@@ -183,7 +183,7 @@ const Home = props => {
                     : null;
 
                 return (
-                  <GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour key={i}>
+                  <GridXSmallIsOneSmallIsThree key={i}>
                     <CardHover>
                       <Link
                         to={`candidates/${candidate.state.title}/${
@@ -197,7 +197,7 @@ const Home = props => {
                         />
                       </Link>
                     </CardHover>
-                  </GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour>
+                  </GridXSmallIsOneSmallIsThree>
                 );
               })
             ) : (
@@ -212,7 +212,10 @@ const Home = props => {
             articles.slice(0, 8).map(article => (
               <Link key={article.id} to={`/articles/${article.slug}`}>
                 <p className="row">
-                  <span className="col-sm-4">{article.articleType}</span>
+                  <span className="col-sm-4">
+                    <img src="./images/candidates_of_yore/chris-hurst.jpg" style={{width:"40px", marginRight:"10px"}}/>
+                    {article.articleType}
+                  </span>
                   <span className="col-sm-8">
                     {article.title}
                     by {article.author}
