@@ -3,7 +3,7 @@
 }
 
 .NavDrawer a div span div div {
-  color: rgb(26, 35, 126);
+  color: #216bb4;
   font-weight: bolder;
 }
 
@@ -13,7 +13,8 @@
 }
 
 .NavDrawer a:hover div span div div {
-  color: rgb(0, 173, 239);
+  /*  216bb4's rgb is (33,107,180); */
+  color: rgba(33,107,180, 0.75);
 }
 
 .NavDrawer a div{
@@ -22,11 +23,16 @@
 }
 
 .NavDrawer a.selected div span div div {
-  color: rgb(0, 173, 239);
+  color: #18467e;
+}
+
+.NavDrawer a.selected:hover div span div div {
+  /* 18467e's rgb is (24, 70, 126) */
+  color: rgba(24, 70, 126, 0.75);
 }
 
 .NavDrawer a.selected div {
-  border-left: 2px solid rgb(0, 173, 239);
-  border-right: 2px solid rgb(0, 173, 239);
+  border-left: 2px solid #d1212e;;
+  border-right: 2px solid #d1212e;;
 }
 
