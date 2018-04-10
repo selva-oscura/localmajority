@@ -80,7 +80,6 @@
 	.HorizontalCard, .HorizontalCard .image-holder, .HorizontalCard .card-body {
 		height: 125px;
 		max-height: 125px;
-		background-color: red;
 	}
 	.HorizontalCard .Paper {
 		max-height: 125px !important; 
