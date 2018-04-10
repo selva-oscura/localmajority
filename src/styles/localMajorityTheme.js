@@ -1,8 +1,8 @@
 import {
-  indigo900, lightBlue500,
+  indigo900, blue800, lightBlue500,
   lightBlueA100,
   red600, red900,
-  cyan500, cyan700,
+  cyan500,
   grey300,
   white, darkBlack, fullBlack,
 } from 'material-ui/styles/colors';
@@ -14,9 +14,9 @@ export default {
   fontFamily: "'Open Sans', Arial, sans-serif",
   palette: {
     primary1Color: indigo900,
-    primary2Color: cyan700,
+    primary2Color: lightBlueA100,
     primary3Color: red600,
-    accent1Color: lightBlueA100,
+    accent1Color: blue800,
     accent2Color: grey300,
     accent3Color: red900,
     textColor: indigo900,
