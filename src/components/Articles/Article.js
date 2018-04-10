@@ -72,8 +72,6 @@ class Article extends Component {
         <article className="col-12">
           <h2>{article.title}</h2>
           <p>Last updated: {prettifyDateAndTime(article.updatedAt)}</p>
-          <p>Its type is {article.articleType}</p>
-          <p>Its slug is {article.slug}</p>
           {article.content && <Primer primer={article} />}
         </article>
       </div>
