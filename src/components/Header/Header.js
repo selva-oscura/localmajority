@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { AppBar, IconButton, FontIcon } from 'material-ui';
 import NavDrawer from './NavDrawer';
 import NavBar from './NavBar';
-// import './Header.css';
+import navLinks from '../../navLinks.js';
+import './Header.css';
 
 class Header extends Component {
   constructor(props) {
@@ -12,40 +13,13 @@ class Header extends Component {
   handleHamburgerClick = () => this.setState({ open: !this.state.open });
   handleDrawerClose = () => this.setState({ open: false });
   render() {
-    const navLinks = [
-      { path: '/', name: 'Home', shortName: 'Home', exact: true },
-      {
-        path: '/candidates',
-        name: 'Our Candidates',
-        shortName: 'Candidates',
-        exact: false,
-      },
-      {
-        path: '/districts',
-        name: 'Our Districts',
-        shortName: 'Districts',
-        exact: false,
-      },
-      { path: '/research', name: 'Our Research', shortName: 'Research', exact: false },
-      {
-        path: '/take-action',
-        name: 'Take Action!',
-        shortName: 'Act!',
-        exact: true,
-      },
-      {
-        path: '/about-us',
-        name: 'About Us',
-        shortName: 'About Us',
-        exact: true,
-      },
-    ];
     return (
-      <header className="Header">
-        <div className="hidden-md-up">
+      <header className="Header full-width">
+        <div className="hidden-md-up ">
           <AppBar
+            className="AppBar"
+            style={{backgroundColor: "#18467e"}}
             position="static"
-            color="primary"
             title={<span>Local Majority</span>}
             iconElementLeft={
               <IconButton>
