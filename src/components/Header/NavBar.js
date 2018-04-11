@@ -6,7 +6,7 @@ const NavBar = ({ navLinks }) => {
   return (
     <div className="NavBar container">
       <img
-        src="./images/local_majority_banner.png"
+        src="../images/local_majority_banner.png"
         alt="Local Majority logo"
         className="logo"
       />
