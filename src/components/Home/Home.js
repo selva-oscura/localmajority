@@ -213,7 +213,10 @@ const Home = props => {
               <Link key={article.id} to={`/articles/${article.slug}`}>
                 <p className="row">
                   <span className="col-sm-4">
-                    <img src="./images/candidates_of_yore/chris-hurst.jpg" style={{width:"40px", marginRight:"10px"}}/>
+                    <img
+                      src="./images/candidates_of_yore/chris-hurst.jpg"
+                      style={{ width: '40px', marginRight: '10px' }}
+                    />
                     {article.articleType}
                   </span>
                   <span className="col-sm-8">

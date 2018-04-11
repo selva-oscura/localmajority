@@ -15,8 +15,8 @@ class Issue extends Component {
   render() {
     const { issue } = this.props;
 
-    if(!issue){
-      return <NoSuchIssue issueParam={this.props.match.params.slug}/>
+    if (!issue) {
+      return <NoSuchIssue issueParam={this.props.match.params.slug} />;
     }
 
     const { subIssues } = issue;

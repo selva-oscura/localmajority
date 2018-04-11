@@ -18,7 +18,7 @@ class Header extends Component {
         <div className="hidden-md-up ">
           <AppBar
             className="AppBar"
-            style={{backgroundColor: "#18467e"}}
+            style={{ backgroundColor: '#18467e' }}
             position="static"
             title={<span>Local Majority</span>}
             iconElementLeft={
