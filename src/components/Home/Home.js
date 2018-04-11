@@ -120,47 +120,6 @@ const Home = props => {
               </div>
             ))}
           </div>
-          <div className="FacesGreyBackground" style={{ padding: '24px 0' }}>
-            {presentationForCandidatesFaces.map((rowContents, i) => (
-              <div className="row no-gutters" key={i}>
-                {rowContents.map((candidate, j) => {
-                  const imgSrc = candidate.headshot
-                    ? candidate.headshot
-                    : `../images/candidates_of_yore/${candidate.slug}.jpg`;
-                  return (
-                    <div
-                      className="col"
-                      key={j}
-                      style={{
-                        padding: '1px',
-                        background:
-                          "url('images/placeholderImage.svg') no-repeat",
-                        backgroundSize: '100%',
-                        backgroundPosition: 'center 0',
-                        overflow: 'hidden',
-                      }}
-                    >
-                      <img
-                        className="full-width"
-                        src={imgSrc}
-                        alt={`${candidate.title}, Local Majority backed ${
-                          candidate.electionYear
-                        } candidate for ${candidate.district}`}
-                        title={`${candidate.title}, Local Majority backed ${
-                          candidate.electionYear
-                        } candidate for ${candidate.district}`}
-                        style={{
-                          textIndent: '100%',
-                          whiteSpace: 'nowrap',
-                          overflow: 'hidden',
-                        }}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
-          </div>
         </section>
 
         <States currentStateRaces={currentStateRaces} />
