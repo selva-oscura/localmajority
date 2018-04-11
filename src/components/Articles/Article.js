@@ -68,8 +68,8 @@ class Article extends Component {
 
     return (
       <div className="Article row">
-        {isOffline && <Offline timestamp={article.timestamp} />}
         <article className="col-12">
+          {isOffline && <Offline timestamp={article.timestamp} />}
           <h2>{article.title}</h2>
           <p>Last updated: {prettifyDateAndTime(article.updatedAt)}</p>
           {article.content && <Primer primer={article} />}
