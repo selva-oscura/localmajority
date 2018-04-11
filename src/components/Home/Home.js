@@ -173,7 +173,7 @@ const Home = props => {
                 <p className="row">
                   <span className="col-sm-4">
                     <img
-                      src="./images/candidates_of_yore/chris-hurst.jpg"
+                      src="../images/candidates_of_yore/chris-hurst.jpg"
                       style={{ width: '40px', marginRight: '10px' }}
                     />
                     {article.articleType}
