@@ -2,3 +2,7 @@
   display: inline-block;
   margin: 0 12px 6px 0;
 }
+
+.ButtonlessFilters .selected{
+  border-bottom: 2px solid #d1212e;
+}
