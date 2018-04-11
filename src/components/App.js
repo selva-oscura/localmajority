@@ -319,6 +319,58 @@ class App extends Component {
             />
           )}
         />
+
+        <Route
+          path="/research/:slug"
+          component={props => {
+            const issue = issues.find(
+              issue => props.match.params.slug === issue.slug
+            );
+            return <Issue {...props} issue={issue} />;
+          }}
+        />
+
+        <Route
+          path="/research"
+          component={props => (
+            <ErrorBoundary>
+              {issues && statesMasterList && statesMasterList.length ? (
+                <Issues
+                  {...props}
+                  issues={issues}
+                  statesMasterList={statesMasterList}
+                />
+              ) : (
+                <Loading />
+              )}
+            </ErrorBoundary>
+          )}
+        />
+
+        <Route
+          path="/articles/:slug"
+          component={props => {
+            const article = articles
+              ? articles.find(
+                  article => props.match.params.slug === article.slug
+                )
+              : null;
+            const articleDetail = articlesDetails[props.match.params.slug]
+              ? articlesDetails[props.match.params.slug]
+              : null;
+            return (
+              <ErrorBoundary>
+                <Article
+                  {...props}
+                  article={article}
+                  articleDetail={articleDetail}
+                  updateStateDetail={this.updateStateDetail}
+                />
+              </ErrorBoundary>
+            );
+          }}
+        />
+
         <Route
           path="/candidates/:state/:slug"
           component={props => {
@@ -361,6 +413,7 @@ class App extends Component {
             </ErrorBoundary>
           )}
         />
+
         <Route
           path="/candidates"
           component={props => (
@@ -379,6 +432,7 @@ class App extends Component {
             </ErrorBoundary>
           )}
         />
+
         <Route
           path="/districts/:state/:slug"
           component={props => {
@@ -434,57 +488,6 @@ class App extends Component {
         />
 
         <Route
-          path="/articles/:slug"
-          component={props => {
-            const article = articles
-              ? articles.find(
-                  article => props.match.params.slug === article.slug
-                )
-              : null;
-            const articleDetail = articlesDetails[props.match.params.slug]
-              ? articlesDetails[props.match.params.slug]
-              : null;
-            return (
-              <ErrorBoundary>
-                <Article
-                  {...props}
-                  article={article}
-                  articleDetail={articleDetail}
-                  updateStateDetail={this.updateStateDetail}
-                />
-              </ErrorBoundary>
-            );
-          }}
-        />
-
-        <Route
-          path="/research/:slug"
-          component={props => {
-            const issue = issues.find(
-              issue => props.match.params.slug === issue.slug
-            );
-            return <Issue {...props} issue={issue} />;
-          }}
-        />
-
-        <Route
-          path="/research"
-          component={props => (
-            <ErrorBoundary>
-              {issues && statesMasterList && statesMasterList.length ? (
-                <Issues
-                  {...props}
-                  issues={issues}
-                  statesMasterList={statesMasterList}
-                />
-              ) : (
-                <Loading />
-              )}
-            </ErrorBoundary>
-          )}
-        />
-
-        <Route
           path="/take-action/:state"
           component={props =>
             validFutureCandidatesStates ? (
@@ -526,7 +529,7 @@ class App extends Component {
       <div className="App">
         <Header props={this.props.children} />
         <ErrorBoundary>
-          <div className="container">{this.renderPage()}</div>
+          <main className="container">{this.renderPage()}</main>
         </ErrorBoundary>
         <Footer />
       </div>
