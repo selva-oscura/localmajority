@@ -3,6 +3,7 @@ import { graphql, compose } from 'react-apollo';
 import graphQLAPI from '../../api/graphQLAPI';
 import Primer from '../common/Primers/Primer';
 import Aux from '../common/Aux';
+import ImageWithBackgroundPlaceholderImage from '../common/ImageWithBackgroundPlaceholderImage';
 import Loading from '../common/Loading';
 import Offline from '../common/Offline';
 import NoSuchCandidate from './NoSuchCandidate';
@@ -83,6 +84,21 @@ class Candidate extends Component {
       candidate.contestId.seatId.title
         ? candidate.contestId.seatId.title
         : 'No District Data Available';
+    const districtImg =
+      candidate.contestId &&
+      candidate.contestId.seatId &&
+      candidate.contestId.seatId.seatImg &&
+      candidate.contestId.seatId.seatImg.url
+        ? candidate.contestId.seatId.seatImg.url
+        : 'Need image of district';
+    const districtInStateImg =
+      candidate.contestId &&
+      candidate.contestId.seatId &&
+      candidate.contestId.seatId.seatInStateImg &&
+      candidate.contestId.seatId.seatInStateImg.url
+        ? candidate.contestId.seatId.seatInStateImg.url
+        : 'Need image of district in state';
+
     const electionDate =
       candidate.contestId && candidate.contestId.electionDate
         ? prettifyDate(candidate.contestId.electionDate)
@@ -93,14 +109,59 @@ class Candidate extends Component {
         {isOffline && <Offline timestamp={candidate.timestamp} />}
         <article>
           <div className="row">
-            <div className="col-12 col-md-6 lg-4 xl-3">
-              <img
-                src={candidateHeadshot}
-                className="img-fluid"
-                alt={candidate.title}
+            <div className="col-12 col-sm-8 col-md-4 col-lg-4 col-xl-3">
+              <ImageWithBackgroundPlaceholderImage
+                imageURL={candidateHeadshot}
+                imageAlt={candidate.title}
               />
             </div>
-            <div className="col-12 col-md-6 lg-8 xl-9 text-right">
+            <div
+              className="hidden-xs-down hidden-xl-up col-sm-4 col-md-2 col-lg-2"
+            >
+              <ImageWithBackgroundPlaceholderImage
+                imageURL={districtImg}
+                imageAlt={`${candidate.title}'s district map`}
+              />
+              <ImageWithBackgroundPlaceholderImage
+                imageURL={districtInStateImg}
+                imageAlt={`location of ${candidate.title}'s district within ${
+                    candidate.state.title}`}
+              />
+            </div>
+
+            <div className="hidden-lg-down col-xl-3">
+              <ImageWithBackgroundPlaceholderImage
+                imageURL={districtImg}
+                imageAlt={`${candidate.title}'s district map`}
+              />
+            </div>
+            <div className="hidden-lg-down col-xl-3">
+              <ImageWithBackgroundPlaceholderImage
+                imageURL={districtInStateImg}
+                imageAlt={`location of ${candidate.title}'s district within ${
+                    candidate.state.title}`}
+              />
+            </div>
+
+            <div className="hidden-sm-up col-12">
+              <div className="row">
+                <div className="col-6">
+                  <ImageWithBackgroundPlaceholderImage
+                    imageURL={districtImg}
+                    imageAlt={`${candidate.title}'s district map`}
+                  />
+                </div>
+                <div className="col-6">
+                  <ImageWithBackgroundPlaceholderImage
+                    imageURL={districtInStateImg}
+                    imageAlt={`location of ${candidate.title}'s district within ${
+                        candidate.state.title}`}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="col-12 col-md-6 col-lg-6 col-xl-3 text-right">
               <h2>{candidate.title}</h2>
               <h3>
                 {districtTitle ? districtTitle : 'No District Data Available'}
@@ -125,6 +186,7 @@ class Candidate extends Component {
                   />
                 )}
               </div>
+
               {candidate.homepageUrl && (
                 <div className="hidden-sm-down">
                   <CandidateWebsiteButton candidate={candidate} />
