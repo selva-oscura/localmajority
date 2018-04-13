@@ -7,8 +7,9 @@ const Footer = () => (
   <footer className="Footer full-width">
     <div className="container">
       <p className="text-center">
-      	<small>
-          PAID FOR BY LOCAL MAJORITY AND NOT AUTHORIZED BY ANY CANDIDATES OR CANDIDATE’S COMMITTEE.<br />
+        <small>
+          PAID FOR BY LOCAL MAJORITY AND NOT AUTHORIZED BY ANY CANDIDATES OR
+          CANDIDATE’S COMMITTEE.<br />
           &copy;2018 LOCAL MAJORITY. ALL RIGHTS RESERVED. LOCALMAJORITY.ORG
         </small>
       </p>
