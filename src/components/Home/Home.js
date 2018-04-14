@@ -5,6 +5,7 @@ import HomeAside from './HomeAside';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import CardHover from '../common/Cards/CardHover';
 import FooterCard from '../common/Cards/FooterCard';
+import ImageWithBackgroundPlaceholderImage from '../common/ImageWithBackgroundPlaceholderImage';
 import candidatesVA2017 from '../../data/candidatesVA2017';
 import { prettifyDate } from '../../utils/functions';
 import './Home.css';
@@ -165,31 +166,48 @@ const Home = props => {
           </div>
         </section>
 
-        <section className="col-12 col-lg-8 col-xl-9">
+        <section className="col-12">
           <h2 className="text-center">Featured Articles</h2>
-          {articles && articles.length ? (
-            articles.slice(0, 8).map(article => (
-              <Link key={article.id} to={`/articles/${article.slug}`}>
-                <p className="row">
-                  <span className="col-sm-4">
-                    <img
-                      src="../images/candidates_of_yore/chris-hurst.jpg"
-                      style={{ width: '40px', marginRight: '10px' }}
-                    />
-                    {article.articleType}
-                  </span>
-                  <span className="col-sm-8">
-                    {article.title}
-                    by {article.author}
-                    <br />
-                    {prettifyDate(article.updatedAt)}
-                  </span>
-                </p>
-              </Link>
-            ))
-          ) : (
-            <h2>Loading</h2>
-          )}
+          <div className="row">
+            {articles && articles.length ? (
+              articles.slice(0, 8).map(article => {
+                let cardTags = article && article.tags 
+                  ? article.tags 
+                  : [];
+                if (article && article.states) {
+                  cardTags = cardTags.concat(article.states);
+                }
+                let articleThumbnail = article.thumbnail ? article.thumbnail : "../images/economy.jpg";
+
+                console.log('cardTags', typeof cardTags, Array.isArray(cardTags), cardTags);
+                if(cardTags.length){
+                  cardTags = cardTags.join(', ');
+                }
+                return (
+                  <GridXSmallIsOneSmallIsThree key={article.slug}>
+                    <CardHover>
+                      <Link
+                        to={`articles/${article.slug}`}
+                      >
+                        <ImageWithBackgroundPlaceholderImage
+                          imageURL={articleThumbnail}
+                          imageAlt=""
+                          AspectRatioInPercent="75"
+                        />
+                        <h2>
+                          <span className="title">{article.title}</span>
+                          <span className="author">{` by ${article.author}`}</span></h2>
+                        <h4 className="text">{prettifyDate(article.updatedAt)}</h4>
+                        <h4 className="tags">{cardTags}</h4>
+                      </Link>
+                    </CardHover>
+                  </GridXSmallIsOneSmallIsThree>
+                )
+              })
+            ) : (
+              <h2>Loading</h2>
+            )}
+          </div>
         </section>
 
         <div className="col-12 col-lg-4 col-xl-3">
