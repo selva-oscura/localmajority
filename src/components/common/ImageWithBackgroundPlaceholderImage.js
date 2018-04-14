@@ -7,7 +7,12 @@ import React from 'react';
 	4 (width) by 3(height) is 75
 */
 
-const ImageWithBackgroundPlaceholderImage = ({ imageURL, imageAlt, backgroundImageURL="/images/placeholderImage.svg", AspectRatioInPercent=100 }) => (
+const ImageWithBackgroundPlaceholderImage = ({
+  imageURL,
+  imageAlt,
+  backgroundImageURL = '/images/placeholderImage.svg',
+  AspectRatioInPercent = 100,
+}) => (
   <div
     style={{
       paddingBottom: '0',
@@ -15,14 +20,15 @@ const ImageWithBackgroundPlaceholderImage = ({ imageURL, imageAlt, backgroundIma
       paddingTop: `${AspectRatioInPercent}%`,
       background: `url(${backgroundImageURL}) no-repeat`,
       backgroundSize: `${AspectRatioInPercent}%`,
-      backgroundPosition: 'center 0',
+      backgroundPosition: 'center center',
+      overflow: 'hidden'
     }}
   >
     <img
       src={imageURL}
-      style={{ marginTop: `-${AspectRatioInPercent}%`}}
-      className="img-fluid"
+      style={{ marginTop: `-${AspectRatioInPercent}%`, width: '100%', maxWidth: '100%', textIndent: '100%', whiteSpace: 'nowrap', overflow: 'hidden'}}
       alt={imageAlt}
+      title={imageAlt}
     />
   </div>
 );
