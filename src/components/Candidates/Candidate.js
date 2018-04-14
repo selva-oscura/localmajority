@@ -78,20 +78,20 @@ class Candidate extends Component {
       candidate.headshotId && candidate.headshotId.url
         ? candidate.headshotId.url
         : null;
-    const districtTitle =
+    const seatTitle =
       candidate.contestId &&
       candidate.contestId.seatId &&
       candidate.contestId.seatId.title
         ? candidate.contestId.seatId.title
         : 'No District Data Available';
-    const districtImg =
+    const seatMap =
       candidate.contestId &&
       candidate.contestId.seatId &&
       candidate.contestId.seatId.seatImg &&
       candidate.contestId.seatId.seatImg.url
         ? candidate.contestId.seatId.seatImg.url
         : 'Need image of district';
-    const districtInStateImg =
+    const seatInStateMap =
       candidate.contestId &&
       candidate.contestId.seatId &&
       candidate.contestId.seatId.seatInStateImg &&
@@ -115,31 +115,31 @@ class Candidate extends Component {
                 imageAlt={candidate.title}
               />
             </div>
-            <div
-              className="hidden-xs-down hidden-xl-up col-sm-4 col-md-2 col-lg-2"
-            >
+            <div className="hidden-xs-down hidden-xl-up col-sm-4 col-md-2 col-lg-2">
               <ImageWithBackgroundPlaceholderImage
-                imageURL={districtImg}
+                imageURL={seatMap}
                 imageAlt={`${candidate.title}'s district map`}
               />
               <ImageWithBackgroundPlaceholderImage
-                imageURL={districtInStateImg}
+                imageURL={seatInStateMap}
                 imageAlt={`location of ${candidate.title}'s district within ${
-                    candidate.state.title}`}
+                  candidate.state.title
+                }`}
               />
             </div>
 
             <div className="hidden-lg-down col-xl-3">
               <ImageWithBackgroundPlaceholderImage
-                imageURL={districtImg}
+                imageURL={seatMap}
                 imageAlt={`${candidate.title}'s district map`}
               />
             </div>
             <div className="hidden-lg-down col-xl-3">
               <ImageWithBackgroundPlaceholderImage
-                imageURL={districtInStateImg}
+                imageURL={seatInStateMap}
                 imageAlt={`location of ${candidate.title}'s district within ${
-                    candidate.state.title}`}
+                  candidate.state.title
+                }`}
               />
             </div>
 
@@ -147,15 +147,16 @@ class Candidate extends Component {
               <div className="row">
                 <div className="col-6">
                   <ImageWithBackgroundPlaceholderImage
-                    imageURL={districtImg}
+                    imageURL={seatMap}
                     imageAlt={`${candidate.title}'s district map`}
                   />
                 </div>
                 <div className="col-6">
                   <ImageWithBackgroundPlaceholderImage
-                    imageURL={districtInStateImg}
-                    imageAlt={`location of ${candidate.title}'s district within ${
-                        candidate.state.title}`}
+                    imageURL={seatInStateMap}
+                    imageAlt={`location of ${
+                      candidate.title
+                    }'s district within ${candidate.state.title}`}
                   />
                 </div>
               </div>
@@ -164,7 +165,7 @@ class Candidate extends Component {
             <div className="col-12 col-md-6 col-lg-6 col-xl-3 text-right">
               <h2>{candidate.title}</h2>
               <h3>
-                {districtTitle ? districtTitle : 'No District Data Available'}
+                {seatTitle ? seatTitle : 'No District Data Available'}
                 {electionDate ? ` on ${electionDate}` : null}
               </h3>
               <div className="social-icons-space">
