@@ -260,8 +260,19 @@ class App extends Component {
 
     // RETURN HERE
     // delete next next section once we have real issues and articles
+    const issueTitles = [
+      'Economy',
+      'Justice',
+      'Environment',
+      'Health Care',
+      'Foreign Policy & Defense',
+      'Education',
+      'Technology',
+      'Governance',
+    ];
+    const statesForIssues = ['Michigan', 'Florida', 'Minnesota'];
     const issues = [];
-    for (let i = 1; i < 10; i++) {
+    issueTitles.forEach((title, i)=> {
       let subIssues = [];
       let date = new Date().toISOString();
       let author = 'somebody or other';
@@ -274,20 +285,35 @@ class App extends Component {
           } else {
             type = 'Research Article';
           }
+          let articleTitle = `Fake Article title blah, blah, blah ${title} - ${j} - ${k}`;
+          let numStates = Math.floor(Math.random()*3);
+          let stateChoice = Math.floor(Math.random()*3);
+          let statesForArticle = [];
+          if(numStates === 1){
+            statesForArticle.push(statesForIssues[stateChoice]);
+          } else if(numStates ===2){
+            statesForArticle = statesForIssues.slice(0, stateChoice).concat(statesForIssues.slice(stateChoice+1))
+          }
           sockPuppetArticles.push({
-            id: `${i}_${j}_${k}`,
-            title: `Fake Article title blah, blah, blah ${i} - ${j} - ${k}`,
-            slug: `filler-article-${i}-${j}-${k}`,
+            id: `${title}_${j}_${k}`,
+            title: articleTitle,
+            slug: articleTitle
+              .split(' ')
+              .join('-')
+              .toLowerCase(),
+            tags: [title, `sub-topic-${title}-${j}`],
+            states: statesForArticle,
             articleType: type,
             createdAt: date,
             updatedAt: date,
             author: author,
           });
         }
+
         subIssues.push({
-          id: `${i}_${j}`,
-          title: `Fake Subtopic ${i} - ${j}`,
-          slug: `sub-topic-${i}-${j}`,
+          id: `${title}_${j}`,
+          title: `Fake Subtopic ${title} - ${j}`,
+          slug: `sub-topic-${title}-${j}`,
           articles: sockPuppetArticles,
         });
         articles = articles.concat(sockPuppetArticles);
@@ -297,11 +323,11 @@ class App extends Component {
       }
       issues.push({
         id: i,
-        title: `Fake Topic ${i}`,
-        slug: `fake-topic-${i}`,
+        title: title,
+        slug: title.split(' ').join('-').toLowerCase(),
         subIssues: subIssues,
       });
-    }
+    });
     // RETURN HERE -- END
     // END -- delete next next section once we have real issues and articles
 
