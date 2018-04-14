@@ -15,7 +15,7 @@ const FooterCard = ({ cardTitle="title missing", cardSubtitle='', cardText='', i
 	return (
 		<Card
 			className="FooterCard"
-			containerStyle={{paddingBottom: "0", width: "100%", paddingTop:"100%", background: "url('images/placeholderImage.svg') no-repeat", backgroundSize: "100%", backgroundPosition: "center 0"}}
+			containerStyle={{paddingBottom: "0", width: "100%", paddingTop:"100%", background: "url('/images/placeholderImage.svg') no-repeat", backgroundSize: "100%", backgroundPosition: "center 0"}}
 		>
 			<CardMedia>
 				<img src={imgSrc} alt={cardTitle} style={inset} />

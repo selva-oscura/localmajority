@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import graphQLAPI from '../../api/graphQLAPI';
+import ImageWithBackgroundPlaceholderImage from '../common/ImageWithBackgroundPlaceholderImage';
 import Primer from '../common/Primers/Primer';
 import Aux from '../common/Aux';
 import Loading from '../common/Loading';
@@ -63,8 +64,8 @@ class District extends Component {
       return <NoSuchDistrict seatId={this.props.match.params.slug} />;
     }
 
-    const seatMap = seat.mapSmUrl ? seat.mapSmUrl : null;
-    const seatInState = seat.whatever ? seat.whatever : null;
+    const seatMap = seat.seatImg && seat.seatImg.url ? seat.seatImg.url : null;
+    const seatInStateMap = seat.seatInStateImg && seat.seatInStateImg.url ? seat.seatInStateImg.url : null;
     const candidate =
       seat &&
       seat.contestIds &&
@@ -93,27 +94,24 @@ class District extends Component {
               {candidate && <h2 className="text-right">{candidate.title}</h2>}
             </div>
             <div className="col-4">
-              <img
-                src={seatMap}
-                className="img-fluid"
-                alt={`map of district ${seat.title}`}
+              <ImageWithBackgroundPlaceholderImage
+                imageURL={seatMap}
+                imageAlt="district map"
               />
             </div>
             <div className="col-4">
-              <img
-                src={seatInState}
-                className="img-fluid"
-                alt={`map of district ${seat.title}'s location in ${
+              <ImageWithBackgroundPlaceholderImage
+                imageURL={seatInStateMap}
+                imageAlt={`map of ${seat.title}'s location within ${
                   seat.state.title
                 }`}
               />
             </div>
             {candidate && (
               <div className="col-4">
-                <img
-                  src={candidateHeadshot}
-                  className="img-fluid"
-                  alt={`headshot of district candidate ${candidate.title}`}
+                <ImageWithBackgroundPlaceholderImage
+                  imageURL={candidateHeadshot}
+                  imageAlt={`headshot of district candidate ${candidate.title}`}
                 />
               </div>
             )}
