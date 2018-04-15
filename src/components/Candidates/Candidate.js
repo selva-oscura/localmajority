@@ -111,17 +111,17 @@ class Candidate extends Component {
           <div className="row">
             <div className="col-12 col-sm-8 col-md-4 col-lg-4 col-xl-3">
               <ImageWithBackgroundPlaceholderImage
-                imageURL={candidateHeadshot}
+                imageSrc={candidateHeadshot}
                 imageAlt={candidate.title}
               />
             </div>
             <div className="hidden-xs-down hidden-xl-up col-sm-4 col-md-2 col-lg-2">
               <ImageWithBackgroundPlaceholderImage
-                imageURL={seatMap}
+                imageSrc={seatMap}
                 imageAlt={`${candidate.title}'s district map`}
               />
               <ImageWithBackgroundPlaceholderImage
-                imageURL={seatInStateMap}
+                imageSrc={seatInStateMap}
                 imageAlt={`location of ${candidate.title}'s district within ${
                   candidate.state.title
                 }`}
@@ -130,13 +130,13 @@ class Candidate extends Component {
 
             <div className="hidden-lg-down col-xl-3">
               <ImageWithBackgroundPlaceholderImage
-                imageURL={seatMap}
+                imageSrc={seatMap}
                 imageAlt={`${candidate.title}'s district map`}
               />
             </div>
             <div className="hidden-lg-down col-xl-3">
               <ImageWithBackgroundPlaceholderImage
-                imageURL={seatInStateMap}
+                imageSrc={seatInStateMap}
                 imageAlt={`location of ${candidate.title}'s district within ${
                   candidate.state.title
                 }`}
@@ -147,13 +147,13 @@ class Candidate extends Component {
               <div className="row">
                 <div className="col-6">
                   <ImageWithBackgroundPlaceholderImage
-                    imageURL={seatMap}
+                    imageSrc={seatMap}
                     imageAlt={`${candidate.title}'s district map`}
                   />
                 </div>
                 <div className="col-6">
                   <ImageWithBackgroundPlaceholderImage
-                    imageURL={seatInStateMap}
+                    imageSrc={seatInStateMap}
                     imageAlt={`location of ${
                       candidate.title
                     }'s district within ${candidate.state.title}`}

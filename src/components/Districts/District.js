@@ -98,13 +98,13 @@ class District extends Component {
             </div>
             <div className="col-4">
               <ImageWithBackgroundPlaceholderImage
-                imageURL={seatMap}
+                imageSrc={seatMap}
                 imageAlt="district map"
               />
             </div>
             <div className="col-4">
               <ImageWithBackgroundPlaceholderImage
-                imageURL={seatInStateMap}
+                imageSrc={seatInStateMap}
                 imageAlt={`map of ${seat.title}'s location within ${
                   seat.state.title
                 }`}
@@ -113,7 +113,7 @@ class District extends Component {
             {candidate && (
               <div className="col-4">
                 <ImageWithBackgroundPlaceholderImage
-                  imageURL={candidateHeadshot}
+                  imageSrc={candidateHeadshot}
                   imageAlt={`headshot of district candidate ${candidate.title}`}
                 />
               </div>
