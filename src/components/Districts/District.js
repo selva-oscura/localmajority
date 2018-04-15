@@ -65,7 +65,10 @@ class District extends Component {
     }
 
     const seatMap = seat.seatImg && seat.seatImg.url ? seat.seatImg.url : null;
-    const seatInStateMap = seat.seatInStateImg && seat.seatInStateImg.url ? seat.seatInStateImg.url : null;
+    const seatInStateMap =
+      seat.seatInStateImg && seat.seatInStateImg.url
+        ? seat.seatInStateImg.url
+        : null;
     const candidate =
       seat &&
       seat.contestIds &&
