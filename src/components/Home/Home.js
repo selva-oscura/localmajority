@@ -5,6 +5,7 @@ import HomeAside from './HomeAside';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import CardHover from '../common/Cards/CardHover';
 import FooterCard from '../common/Cards/FooterCard';
+import ArticleCard from '../common/Cards/ArticleCard';
 import ImageWithBackgroundPlaceholderImage from '../common/ImageWithBackgroundPlaceholderImage';
 import candidatesVA2017 from '../../data/candidatesVA2017';
 import { prettifyDate } from '../../utils/functions';
@@ -179,28 +180,17 @@ const Home = props => {
                 }
                 let articleThumbnail = article.thumbnail ? article.thumbnail : "../images/economy.jpg";
 
-                console.log('cardTags', typeof cardTags, Array.isArray(cardTags), cardTags);
-                if(cardTags.length){
-                  cardTags = cardTags.join(', ');
-                }
                 return (
                   <GridXSmallIsOneSmallIsThree key={article.slug}>
-                    <CardHover>
-                      <Link
-                        to={`articles/${article.slug}`}
-                      >
-                        <ImageWithBackgroundPlaceholderImage
-                          imageURL={articleThumbnail}
-                          imageAlt=""
-                          AspectRatioInPercent="75"
-                        />
-                        <h2>
-                          <span className="title">{article.title}</span>
-                          <span className="author">{` by ${article.author}`}</span></h2>
-                        <h4 className="text">{prettifyDate(article.updatedAt)}</h4>
-                        <h4 className="tags">{cardTags}</h4>
-                      </Link>
-                    </CardHover>
+                    <ArticleCard
+                      slug={article.slug}
+                      imageSrc={articleThumbnail}
+                      title={article.title}
+                      author={article.author}
+                      updatedAt={article.updatedAt}
+                      tagRoute="issues"
+                      tags={cardTags}
+                    />
                   </GridXSmallIsOneSmallIsThree>
                 )
               })
