@@ -1,34 +1,36 @@
 import React from 'react';
 
 /*
-	NOTE: AspectRatioInPercent
+	NOTE: aspectRatioInPercent: (width/height)*100
 	Square is 100
 	16 (width) by 9 (height) is 56.25
 	4 (width) by 3(height) is 75
+  quick tip to check for eyeballing it is right:
+    horizontal < 100, vertical > 100
 */
 
 const ImageWithBackgroundPlaceholderImage = ({
-  imageURL,
+  imageSrc,
   imageAlt,
   backgroundImageURL = '/images/placeholderImage.svg',
-  AspectRatioInPercent = 100,
+  aspectRatioInPercent = 100,
 }) => (
   <div
     style={{
       paddingBottom: '0',
       width: '100%',
-      paddingTop: `${AspectRatioInPercent}%`,
+      paddingTop: `${aspectRatioInPercent}%`,
       background: `url(${backgroundImageURL}) no-repeat`,
-      backgroundSize: `${AspectRatioInPercent}%`,
+      backgroundSize: `${aspectRatioInPercent}%`,
       backgroundPosition: 'center center',
       overflow: 'hidden',
       lineHeight:0,
     }}
   >
     <img
-      src={imageURL}
+      src={imageSrc}
       style={{
-        marginTop: `-${AspectRatioInPercent}%`,
+        marginTop: `-${aspectRatioInPercent}%`,
         width: '100%',
         maxWidth: '100%',
         textIndent: '100%',
