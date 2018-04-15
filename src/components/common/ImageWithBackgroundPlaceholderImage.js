@@ -21,12 +21,20 @@ const ImageWithBackgroundPlaceholderImage = ({
       background: `url(${backgroundImageURL}) no-repeat`,
       backgroundSize: `${AspectRatioInPercent}%`,
       backgroundPosition: 'center center',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      lineHeight:0,
     }}
   >
     <img
       src={imageURL}
-      style={{ marginTop: `-${AspectRatioInPercent}%`, width: '100%', maxWidth: '100%', textIndent: '100%', whiteSpace: 'nowrap', overflow: 'hidden'}}
+      style={{
+        marginTop: `-${AspectRatioInPercent}%`,
+        width: '100%',
+        maxWidth: '100%',
+        textIndent: '100%',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+      }}
       alt={imageAlt}
       title={imageAlt}
     />
