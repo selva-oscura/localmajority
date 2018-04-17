@@ -28,7 +28,14 @@ h1, h2, h3, h4, h5, h6, svg text, .primary-text-color {
 
 .tertiary-text-color {
   color: #d1212e;
+  transition: color 0.5s ease-out;
 }
+
+a .tertiary-text-color:hover {
+  /*  d1212e's rgb is (209, 33, 46); */
+  color: rgba(209, 33, 46, 0.75);
+}
+
 
 p, li, .default-text-color {
   color: #444;
@@ -68,14 +75,28 @@ a:hover, a:hover, a:hover h1, a:hover h2, a:hover h3, a:hover h4, a:hover h5, a:
   width: 100%;
 }
 
-.flex {
+.flex-container {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+}
+
+.flex-wrap {
   -webkit-flex-flow: wrap;
   flex-flow: wrap;
+}
+
+.flex-start {
+  justify-content: flex-start;
+}
+
+.flex-end {
+  justify-content: flex-end;
+}
+
+.flex-space-between{
   justify-content: space-between;
 }
 
