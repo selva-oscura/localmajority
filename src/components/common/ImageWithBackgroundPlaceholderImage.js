@@ -24,7 +24,7 @@ const ImageWithBackgroundPlaceholderImage = ({
       backgroundSize: `${aspectRatioInPercent}%`,
       backgroundPosition: 'center center',
       overflow: 'hidden',
-      lineHeight:0,
+      lineHeight: 0,
     }}
   >
     <img
