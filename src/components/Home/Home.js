@@ -172,10 +172,10 @@ const Home = props => {
           <div className="row">
             {articles && articles.length ? (
               articles.slice(0, 8).map(article => {
-                let cardTags = article && article.tags 
-                  ? article.tags 
-                  : [];
-                let articleThumbnail = article.thumbnail ? article.thumbnail : "../images/economy.jpg";
+                let cardTags = article && article.tags ? article.tags : [];
+                let articleThumbnail = article.thumbnail
+                  ? article.thumbnail
+                  : '../images/economy.jpg';
 
                 return (
                   <GridXSmallIsOneSmallIsThree key={article.slug}>
@@ -189,7 +189,7 @@ const Home = props => {
                       tags={cardTags}
                     />
                   </GridXSmallIsOneSmallIsThree>
-                )
+                );
               })
             ) : (
               <h2>Loading</h2>
