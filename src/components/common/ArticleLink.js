@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ImageWithBackgroundPlaceholderImage from './ImageWithBackgroundPlaceholderImage';
 import { prettifyDate } from '../../utils/functions';
+import './ArticleLink.css';
 
 const ArticleLink = ({slug, imageSrc, imageAlt="", title, articleType, author, updatedAt, tagRoute="", tags=[]}) => (
 	<div className="ArticleLink flex-container flex-space-between">
