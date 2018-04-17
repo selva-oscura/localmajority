@@ -175,9 +175,6 @@ const Home = props => {
                 let cardTags = article && article.tags 
                   ? article.tags 
                   : [];
-                if (article && article.states) {
-                  cardTags = cardTags.concat(article.states);
-                }
                 let articleThumbnail = article.thumbnail ? article.thumbnail : "../images/economy.jpg";
 
                 return (
@@ -188,7 +185,7 @@ const Home = props => {
                       title={article.title}
                       author={article.author}
                       updatedAt={article.updatedAt}
-                      tagRoute="issues"
+                      tagRoute="research"
                       tags={cardTags}
                     />
                   </GridXSmallIsOneSmallIsThree>
