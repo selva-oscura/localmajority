@@ -234,29 +234,27 @@ class App extends Component {
     };
 
     const validCandidates = candidates.filter(hasElectionData);
-    console.log('validCandidates', validCandidates);
+    // console.log('validCandidates', validCandidates);
 
     const validFutureCandidates = candidates
       .filter(hasElectionData)
       .filter(hasFutureElection);
-    console.log('validFutureCandidates', validFutureCandidates);
+    // console.log('validFutureCandidates', validFutureCandidates);
 
     const validFutureCandidatesStates = candidateStatesArray(
       validFutureCandidates
     );
-    console.log('validFutureCandidatesStates', validFutureCandidatesStates);
+    // console.log('validFutureCandidatesStates', validFutureCandidatesStates);
 
     const validPastCandidates = candidates
       .filter(hasElectionData)
       .filter(hasPastElection);
-    console.log('validPastCandidates', validPastCandidates);
+    // console.log('validPastCandidates', validPastCandidates);
 
     const candidatesWithProblematicData = candidates.filter(
       isMissingCandidateData
     );
-    console.log('candidatesWithProblematicData', candidatesWithProblematicData);
-
-    console.log('article', articles);
+    // console.log('candidatesWithProblematicData', candidatesWithProblematicData);
 
     // RETURN HERE
     // delete next next section once we have real issues and articles
@@ -272,7 +270,7 @@ class App extends Component {
     ];
     const statesForIssues = ['Michigan', 'Florida', 'Minnesota'];
     const issues = [];
-    issueTitles.forEach((title, i)=> {
+    issueTitles.forEach((title, i) => {
       let subIssues = [];
       let date = new Date().toISOString();
       let author = 'somebody or other';
@@ -281,18 +279,20 @@ class App extends Component {
         for (let k = 1; k < 4; k++) {
           let type = '';
           if (k === 1) {
-            type = 'TalkingPoints';
+            type = 'Talking Points';
           } else {
             type = 'Research Article';
           }
           let articleTitle = `Fake Article title blah, blah, blah ${title} - ${j} - ${k}`;
-          let numStates = Math.floor(Math.random()*3);
-          let stateChoice = Math.floor(Math.random()*3);
+          let numStates = Math.floor(Math.random() * 3);
+          let stateChoice = Math.floor(Math.random() * 3);
           let statesForArticle = [];
-          if(numStates === 1){
+          if (numStates === 1) {
             statesForArticle.push(statesForIssues[stateChoice]);
-          } else if(numStates ===2){
-            statesForArticle = statesForIssues.slice(0, stateChoice).concat(statesForIssues.slice(stateChoice+1))
+          } else if (numStates === 2) {
+            statesForArticle = statesForIssues
+              .slice(0, stateChoice)
+              .concat(statesForIssues.slice(stateChoice + 1));
           }
           sockPuppetArticles.push({
             id: `${title}_${j}_${k}`,
@@ -301,8 +301,7 @@ class App extends Component {
               .split(' ')
               .join('-')
               .toLowerCase(),
-            tags: [title, `sub-topic-${title}-${j}`],
-            states: statesForArticle,
+            tags: [title, `sub-topic-${title}-${j}`].concat(statesForArticle),
             articleType: type,
             createdAt: date,
             updatedAt: date,
@@ -314,17 +313,16 @@ class App extends Component {
           id: `${title}_${j}`,
           title: `Fake Subtopic ${title} - ${j}`,
           slug: `sub-topic-${title}-${j}`,
-          articles: sockPuppetArticles,
         });
         articles = articles.concat(sockPuppetArticles);
-        // sockPuppetArticles.forEach((article => {
-        //   articles.push(article);
-        // }))
       }
       issues.push({
         id: i,
         title: title,
-        slug: title.split(' ').join('-').toLowerCase(),
+        slug: title
+          .split(' ')
+          .join('-')
+          .toLowerCase(),
         subIssues: subIssues,
       });
     });
@@ -350,9 +348,23 @@ class App extends Component {
           path="/research/:slug"
           component={props => {
             const issue = issues.find(
-              issue => props.match.params.slug === issue.slug
+              issue =>
+                props.match.params.slug.toLowerCase() ===
+                issue.slug.toLowerCase()
             );
-            return <Issue {...props} issue={issue} />;
+            const filteredArticles = articles.filter(
+              article =>
+                (article.tags &&
+                  article.tags.includes(props.match.params.slug)) ||
+                (article.tags &&
+                  article.tags.includes(
+                    props.match.params.slug.slice(0, 1).toUpperCase() +
+                      props.match.params.slug.slice(1).toLowerCase()
+                  ))
+            );
+            return (
+              <Issue {...props} issue={issue} articles={filteredArticles} />
+            );
           }}
         />
 
@@ -364,6 +376,7 @@ class App extends Component {
                 <Issues
                   {...props}
                   issues={issues}
+                  articles={articles}
                   statesMasterList={statesMasterList}
                 />
               ) : (
