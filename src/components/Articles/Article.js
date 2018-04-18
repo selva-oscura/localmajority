@@ -5,6 +5,7 @@ import Primer from '../common/Primers/Primer';
 import Loading from '../common/Loading';
 import Offline from '../common/Offline';
 import NoSuchArticle from './NoSuchArticle';
+import ArticleLink from '../common/ArticleLink';
 import {
   getMostRecentUpdateTimestamp,
   prettifyDateAndTime,
@@ -13,6 +14,7 @@ import {
 class Article extends Component {
   constructor(props) {
     super(props);
+    console.log('this.props', this.props);
     const { article } = this.props;
     console.log('article from Article', article);
     document.title = article
@@ -59,6 +61,7 @@ class Article extends Component {
     const article = this.props.articleDetail
       ? this.props.articleDetail
       : this.props.article;
+    const relatedArticles = this.props.relatedArticles;
     // console.log('article at this point', article);
     // console.log('article content at this point', article.content);
 
@@ -72,7 +75,31 @@ class Article extends Component {
           {isOffline && <Offline timestamp={article.timestamp} />}
           <h2>{article.title}</h2>
           <p>Last updated: {prettifyDateAndTime(article.updatedAt)}</p>
+          <p>Article tags: {article.tags.join(', ')}</p>
+
           {article.content && <Primer primer={article} />}
+          
+          {relatedArticles && <h3>Related Articles</h3>}
+          {relatedArticles && relatedArticles.map(article => {
+            let articleThumbnail = article.thumbnail
+              ? article.thumbnail
+              : '../images/economy.jpg';
+            return (
+              <ArticleLink
+                key={article.slug}
+                article={article}
+                slug={article.slug}
+                imageSrc={articleThumbnail}
+                title={article.title}
+                articleType={article.articleType}
+                author={article.author}
+                updatedAt={article.updatedAt}
+                tagRoute="research"
+                tags={article.tags}
+              />
+            );
+          })}
+
         </article>
       </div>
     );
