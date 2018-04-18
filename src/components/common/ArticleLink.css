@@ -4,9 +4,6 @@
 	padding-bottom: 16px;
 }
 
-.ArticleLink .thumbnail, .Article .contents {
-	display: inline-block;
-}
 .ArticleLink .thumbnail {
 	width: 100px;
 }
