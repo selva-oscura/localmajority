@@ -165,6 +165,7 @@ class App extends Component {
       candidatesDetails,
       statesMasterList,
     } = this.state;
+
     let { articles } = this.state;
 
     const hasElectionData = candidate =>
@@ -397,12 +398,43 @@ class App extends Component {
             const articleDetail = articlesDetails[props.match.params.slug]
               ? articlesDetails[props.match.params.slug]
               : null;
+            const articleTags = article.tags;
+            console.log('articleTags', articleTags, article);
+            let relatedArticles = [];
+            articles.forEach(possiblyRelatedArticle => {
+              let relationshipDegree = 0;
+              if(possiblyRelatedArticle.tags){
+                possiblyRelatedArticle.tags.forEach(tag => {
+                  if(articleTags.includes(tag)
+                    && article.slug !== possiblyRelatedArticle.slug
+                    && !statesMasterList.includes(tag)
+                  ){
+                    relationshipDegree ++;
+                  }
+                });
+              }
+              if(relationshipDegree){
+                let relatedArticle = { ...possiblyRelatedArticle, relationshipDegree};
+                relatedArticles.push(relatedArticle);
+              }
+            });
+            relatedArticles = relatedArticles.sort((a, b) => {
+              if(a.relationshipDegree<b.relationshipDegree){
+                return 1;
+              } else if (a.relationshipDegree>b.relationshipDegree) {
+                return -1;
+              } else {
+                return 0;
+              }
+            }).slice(0,4);
+            console.log('relatedArticles', relatedArticles);
             return (
               <ErrorBoundary>
                 <Article
                   {...props}
                   article={article}
                   articleDetail={articleDetail}
+                  relatedArticles={relatedArticles}
                   updateStateDetail={this.updateStateDetail}
                 />
               </ErrorBoundary>
