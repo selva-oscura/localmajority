@@ -13,11 +13,12 @@ const ReadingLink = ({ slug, title, type }) => {
   const readingTypesRoute = {};
   const readingTypeText = readingTypesText[type];
   return (
-    <Link className="ReadingLink" key={i} to={`/${type}/${slug}`}>
-      <h4>
+    <Link className="ReadingLink" key={slug} to={`/articles/${slug}`}>
+      <div style={{ width: '100px' }} />
+      <div style={{ width: 'calc(100% - 100px)' }}>
         <span className="reading-type">{readingTypeText}</span>
         <span className="reading-title">{title}</span>
-      </h4>
+      </div>
     </Link>
   );
 };
