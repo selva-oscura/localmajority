@@ -18,7 +18,7 @@ const Issues = props => {
             <Link to={`/research/${issue.slug}`}>
               <ImageOverlayCard
                 cardTitle={issue.title}
-                imgSrc={`../images/District_1_map.png`}
+                imgSrc="https://placekitten.com/g/200/150"
               />
             </Link>
           </CardHover>
