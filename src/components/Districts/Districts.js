@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Filters from '../common/Filters/Filters';
 import ButtonlessFilters from '../common/Filters/ButtonlessFilters';
-import GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour from '../common/Grids/GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour';
+import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import CardHover from '../common/Cards/CardHover';
 import FooterCard from '../common/Cards/FooterCard';
 import Aux from '../common/Aux';
@@ -53,13 +53,13 @@ class Districts extends Component {
         <div className="row">
           {seatsMeetingFilters && seatsMeetingFilters.length ? (
             seatsMeetingFilters.map((seat, i) => (
-              <GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour key={i}>
+              <GridXSmallIsOneSmallIsThree key={i}>
                 <CardHover>
                   <Link to={`/districts/${seat.state.title}/${seat.slug}`}>
                     <FooterCard cardTitle={seat.title} imgSrc="missing" />
                   </Link>
                 </CardHover>
-              </GridXSmallIsOneSmIsTwoMedIsThreeLargeIsFour>
+              </GridXSmallIsOneSmallIsThree>
             ))
           ) : (
             <h2 className="col">No Districts Meet Your Criteria.</h2>
