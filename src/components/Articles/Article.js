@@ -12,6 +12,7 @@ import {
   getMostRecentUpdateTimestamp,
   prettifyDateAndTime,
 } from '../../utils/functions';
+import loremIpsum from '../../data/loremIpsum';
 
 class Article extends Component {
   constructor(props) {
@@ -53,7 +54,14 @@ class Article extends Component {
     if (isLoading) {
       return <Loading />;
     }
-
+    const formatLoremIpsum = (p) => {
+      if(p.format === "title"){
+        return <h3>{p.content}</h3>;
+      } else if (p.format === "subtitle"){
+        return <h4><i>{p.content}</i></h4>;
+      }
+      return <p>{p.content}</p>;
+    }
     const isOffline =
       this.props.ArticleDetailBySlug.error &&
       this.props.ArticleDetailBySlug.error.message.indexOf('Network error') > -1
@@ -64,8 +72,6 @@ class Article extends Component {
       ? this.props.articleDetail
       : this.props.article;
     const relatedArticles = this.props.relatedArticles;
-    // console.log('article at this point', article);
-    // console.log('article content at this point', article.content);
 
     if (!article) {
       return <NoSuchArticle articleId={this.props.match.params.slug} />;
@@ -77,58 +83,71 @@ class Article extends Component {
           {isOffline && <Offline timestamp={article.timestamp} />}
           <h2>{article.title}</h2>
           <p>Last updated: {prettifyDateAndTime(article.updatedAt)}</p>
-          <p>Article tags: {article.tags.join(', ')}</p>
+          <p>{`Article tags: `}
+            {article.tags
+              ? article.tags.join(', ')
+              : "No Tags"
+            }</p>
 
-          {article.content && <Primer primer={article} />}
+          {article.content
+            ? <Primer primer={article} />
+            : loremIpsum.map((p, i) => (formatLoremIpsum(p)))
+          }
         </article>
-
-        <aside className="col-12">
-          {relatedArticles && <h3>Related Articles &lt;-- here's one possible layout</h3>}
-          {relatedArticles && relatedArticles.map(article => {
-            let articleThumbnail = article.thumbnail
-              ? article.thumbnail
-              : '../images/economy.jpg';
-            return (
-              <ArticleLink
-                key={article.slug}
-                article={article}
-                slug={article.slug}
-                imageSrc={articleThumbnail}
-                title={article.title}
-                articleType={article.articleType}
-                author={article.author}
-                updatedAt={article.updatedAt}
-                tagRoute="research"
-                tags={article.tags}
-              />
-            );
-          })}
-        </aside>
-
-        <aside className="col-12">
-          <h3>Featured Articles &lt;-- hey look!  another possible layout</h3>
-          <div className="row">
-            {relatedArticles && relatedArticles .map(article => {
-              let cardTags = article && article.tags ? article.tags : [];
-              let articleThumbnail = article.thumbnail
-                ? article.thumbnail
-                : '../images/economy.jpg';
-              return (
-                <GridXSmallIsOneSmallIsThree key={article.slug}>
-                  <ArticleCard
+        { relatedArticles && relatedArticles.length
+          ? (
+            <aside className="col-12">
+              {relatedArticles && <h3>Related Articles &lt;-- here's one possible layout</h3>}
+              {relatedArticles && relatedArticles.map(article => {
+                let articleThumbnail = article.thumbnail
+                  ? article.thumbnail
+                  : "https://placekitten.com/g/200/150";
+                return (
+                  <ArticleLink
+                    key={article.slug}
+                    article={article}
                     slug={article.slug}
                     imageSrc={articleThumbnail}
                     title={article.title}
+                    articleType={article.articleType}
                     author={article.author}
                     updatedAt={article.updatedAt}
                     tagRoute="research"
-                    tags={cardTags}
+                    tags={article.tags}
                   />
-                </GridXSmallIsOneSmallIsThree>
-              );
-            })}
-          </div>
-        </aside>
+                );
+              })}
+            </aside>
+          ) : null
+        }
+
+        { relatedArticles && relatedArticles.length
+          ?( <aside className="col-12">
+              <h3>Featured Articles &lt;-- hey look!  another possible layout</h3>
+              <div className="row">
+                {relatedArticles && relatedArticles .map(article => {
+                  let cardTags = article && article.tags ? article.tags : [];
+                  let articleThumbnail = article.thumbnail
+                    ? article.thumbnail
+                    : "https://placekitten.com/g/200/150";
+                  return (
+                    <GridXSmallIsOneSmallIsThree key={article.slug}>
+                      <ArticleCard
+                        slug={article.slug}
+                        imageSrc={articleThumbnail}
+                        title={article.title}
+                        author={article.author}
+                        updatedAt={article.updatedAt}
+                        tagRoute="research"
+                        tags={cardTags}
+                      />
+                    </GridXSmallIsOneSmallIsThree>
+                  );
+                })}
+              </div>
+            </aside>
+          ) : nullq
+        }
       </div>
     );
   }
