@@ -5,6 +5,8 @@ import Primer from '../common/Primers/Primer';
 import Loading from '../common/Loading';
 import Offline from '../common/Offline';
 import NoSuchArticle from './NoSuchArticle';
+import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
+import ArticleCard from '../common/Cards/ArticleCard';
 import ArticleLink from '../common/ArticleLink';
 import {
   getMostRecentUpdateTimestamp,
@@ -78,8 +80,10 @@ class Article extends Component {
           <p>Article tags: {article.tags.join(', ')}</p>
 
           {article.content && <Primer primer={article} />}
-          
-          {relatedArticles && <h3>Related Articles</h3>}
+        </article>
+
+        <aside className="col-12">
+          {relatedArticles && <h3>Related Articles &lt;-- here's one possible layout</h3>}
           {relatedArticles && relatedArticles.map(article => {
             let articleThumbnail = article.thumbnail
               ? article.thumbnail
@@ -99,8 +103,32 @@ class Article extends Component {
               />
             );
           })}
+        </aside>
 
-        </article>
+        <aside className="col-12">
+          <h3>Featured Articles &lt;-- hey look!  another possible layout</h3>
+          <div className="row">
+            {relatedArticles && relatedArticles .map(article => {
+              let cardTags = article && article.tags ? article.tags : [];
+              let articleThumbnail = article.thumbnail
+                ? article.thumbnail
+                : '../images/economy.jpg';
+              return (
+                <GridXSmallIsOneSmallIsThree key={article.slug}>
+                  <ArticleCard
+                    slug={article.slug}
+                    imageSrc={articleThumbnail}
+                    title={article.title}
+                    author={article.author}
+                    updatedAt={article.updatedAt}
+                    tagRoute="research"
+                    tags={cardTags}
+                  />
+                </GridXSmallIsOneSmallIsThree>
+              );
+            })}
+          </div>
+        </aside>
       </div>
     );
   }
