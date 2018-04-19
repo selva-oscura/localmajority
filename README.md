@@ -10,12 +10,16 @@ To run locally (directions assume that you have already installed node (v.6+), n
 * run project (in terminal, type <code>yarn start</code> or <code>npm start</code>),
 * view in browser at localhost:3000
 
-Material-UI used for some theming and UI, particularly the mobile nav drawer. Repo at [https://github.com/mui-org/material-ui](https://github.com/mui-org/material-ui). Documentation at [http://www.material-ui.com/](http://www.material-ui.com/)
+Material-UI -- used for some theming and UI, particularly the mobile nav drawer. 
+Repo at [https://github.com/mui-org/material-ui](https://github.com/mui-org/material-ui). 
+Documentation at [http://www.material-ui.com/](http://www.material-ui.com/)
 
-ReactTwitterWidgets -- repo/documentation can be found at [https://github.com/andrewsuzuki/react-twitter-widgets](https://github.com/andrewsuzuki/react-twitter-widgets)
-screenshots of widgets can be found at [https://github.com/andrewsuzuki/react-twitter-widgets/blob/HEAD/site/screenshot.png](https://github.com/andrewsuzuki/react-twitter-widgets/blob/HEAD/site/screenshot.png)
+ReactTwitterWidgets -- used for displaying twitter profile
+Repo/documentation can be found at [https://github.com/andrewsuzuki/react-twitter-widgets](https://github.com/andrewsuzuki/react-twitter-widgets)
+Screenshots of available widgets and code can be found at [https://github.com/andrewsuzuki/react-twitter-widgets/blob/HEAD/site/screenshot.png](https://github.com/andrewsuzuki/react-twitter-widgets/blob/HEAD/site/screenshot.png)
 
-ReactSocialIcons -- details can be found at [http://jaketrent.github.io/react-social-icons/](http://jaketrent.github.io/react-social-icons/)
+ReactSocialIcons -- used for the social icons (colored circles with twitter, email, facebook logos)
+Documentation can be found at [http://jaketrent.github.io/react-social-icons/](http://jaketrent.github.io/react-social-icons/)
 
 Create-React-App -- information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
