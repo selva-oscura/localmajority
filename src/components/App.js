@@ -399,7 +399,6 @@ class App extends Component {
               ? articlesDetails[props.match.params.slug]
               : null;
             const articleTags = article.tags;
-            console.log('articleTags', articleTags, article);
             let relatedArticles = [];
             articles.forEach(possiblyRelatedArticle => {
               let relationshipDegree = 0;
@@ -426,8 +425,7 @@ class App extends Component {
               } else {
                 return 0;
               }
-            }).slice(0,4);
-            console.log('relatedArticles', relatedArticles);
+            }).slice(0,6);
             return (
               <ErrorBoundary>
                 <Article
