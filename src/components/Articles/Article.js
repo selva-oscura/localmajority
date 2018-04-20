@@ -146,7 +146,7 @@ class Article extends Component {
                 })}
               </div>
             </aside>
-          ) : nullq
+          ) : null
         }
       </div>
     );
