@@ -7,10 +7,10 @@ import Aux from '../common/Aux';
 class Issue extends Component {
   componentDidMount() {
     this.props.issue && this.props.issue.title
-      ? (document.title = `Local Majority | Research | ${
+      ? (document.title = `Local Majority | Reports | ${
           this.props.issue.title
         }`)
-      : (document.title = 'Local Majority | Research');
+      : (document.title = 'Local Majority | Reports');
   }
 
   render() {
