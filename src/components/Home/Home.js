@@ -67,15 +67,10 @@ const Home = props => {
       <div className="row">
         <section className="col-12">
           <h2 className="text-center">
-            Working Locally to Take Back State Legislatures
+            State Legislatures are <span className="tertiary-text-color">Key</span>
           </h2>
           <p className="text-center">
-            Local Majority provides research and other support for small state
-            legislative campaigns who may not have many resources. Our goal is
-            to build from the grassroots the local support that will help
-            Democrats take back state legislatures across the country, beginning
-            with Virginia in 2017, and continuing with Florida, Michigan and
-            Minnesota in 2018.
+            State legislatures not only create the laws that affect the everyday lives of their constituents, they also play a critical role in determining the districts for the U.S. House of Representatives and thus the fate of the entire country. Local Majority provides research that is practical and accessible to support progressive campaigns for state legislature. Join us or support our efforts!
           </p>
 
           <div className="FacesColourBackground" style={{ padding: '24px 0' }}>
