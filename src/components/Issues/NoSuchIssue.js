@@ -6,7 +6,7 @@ const NoSuchIssue = ({ issueParam }) => {
   return (
     <div className="NoSuchIssue">
       <h2>We're sorry. No articles match the term '{issueParam}'.</h2>
-      <Link to="/research">Return to List of Issues</Link>
+      <Link to="/reports">Return to List of Issues</Link>
     </div>
   );
 };

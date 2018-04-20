@@ -346,7 +346,7 @@ class App extends Component {
         />
 
         <Route
-          path="/research/:slug"
+          path="/reports/:slug"
           component={props => {
             const issue = issues.find(
               issue =>
@@ -370,7 +370,7 @@ class App extends Component {
         />
 
         <Route
-          path="/research"
+          path="/reports"
           component={props => (
             <ErrorBoundary>
               {issues && statesMasterList && statesMasterList.length ? (

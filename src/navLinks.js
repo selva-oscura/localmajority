@@ -1,6 +1,6 @@
 export default [
   { path: '/', name: 'Home', shortName: 'Home', exact: true },
-  { path: '/research', name: 'Issues', shortName: 'Issues', exact: false },
+  { path: '/reports', name: 'Reports', shortName: 'Reports', exact: false },
   {
     path: '/districts',
     name: 'States',

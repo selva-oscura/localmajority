@@ -36,7 +36,7 @@ class Issue extends Component {
                   articleType={article.articleType}
                   author={article.author}
                   updatedAt={article.updatedAt}
-                  tagRoute="research"
+                  tagRoute="reports"
                   tags={article.tags}
                 />
               ) : null;
@@ -61,7 +61,7 @@ class Issue extends Component {
               articleType={article.articleType}
               author={article.author}
               updatedAt={article.updatedAt}
-              tagRoute="research"
+              tagRoute="reports"
               tags={article.tags}
             />
           );

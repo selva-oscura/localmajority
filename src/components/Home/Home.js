@@ -179,7 +179,7 @@ const Home = props => {
                       title={article.title}
                       author={article.author}
                       updatedAt={article.updatedAt}
-                      tagRoute="research"
+                      tagRoute="reports"
                       tags={cardTags}
                     />
                   </GridXSmallIsOneSmallIsThree>
