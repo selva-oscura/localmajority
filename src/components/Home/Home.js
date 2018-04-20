@@ -6,9 +6,7 @@ import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsT
 import CardHover from '../common/Cards/CardHover';
 import FooterCard from '../common/Cards/FooterCard';
 import ArticleCard from '../common/Cards/ArticleCard';
-import ImageWithBackgroundPlaceholderImage from '../common/ImageWithBackgroundPlaceholderImage';
 import candidatesVA2017 from '../../data/candidatesVA2017';
-import { prettifyDate } from '../../utils/functions';
 import './Home.css';
 
 const Home = props => {
