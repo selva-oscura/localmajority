@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import States from '../States/States';
-import HomeAside from './HomeAside';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import CardHover from '../common/Cards/CardHover';
 import FooterCard from '../common/Cards/FooterCard';
@@ -169,11 +168,11 @@ const Home = props => {
           <h2 className="text-center">Featured Articles</h2>
           <div className="row">
             {articles && articles.length ? (
-              articles.slice(0, 8).map(article => {
+              articles.slice(0, 6).map(article => {
                 let cardTags = article && article.tags ? article.tags : [];
                 let articleThumbnail = article.thumbnail
                   ? article.thumbnail
-                  : '../images/economy.jpg';
+                  : 'https://placekitten.com/200/150';
 
                 return (
                   <GridXSmallIsOneSmallIsThree key={article.slug}>
@@ -194,10 +193,6 @@ const Home = props => {
             )}
           </div>
         </section>
-
-        <div className="col-12 col-lg-4 col-xl-3">
-          <HomeAside twitterHandles={['local_majority']} />
-        </div>
       </div>
     </div>
   );
