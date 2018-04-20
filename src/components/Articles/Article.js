@@ -54,14 +54,18 @@ class Article extends Component {
     if (isLoading) {
       return <Loading />;
     }
-    const formatLoremIpsum = (p) => {
-      if(p.format === "title"){
+    const formatLoremIpsum = p => {
+      if (p.format === 'title') {
         return <h3>{p.content}</h3>;
-      } else if (p.format === "subtitle"){
-        return <h4><i>{p.content}</i></h4>;
+      } else if (p.format === 'subtitle') {
+        return (
+          <h4>
+            <i>{p.content}</i>
+          </h4>
+        );
       }
       return <p>{p.content}</p>;
-    }
+    };
     const isOffline =
       this.props.ArticleDetailBySlug.error &&
       this.props.ArticleDetailBySlug.error.message.indexOf('Network error') > -1
@@ -83,25 +87,27 @@ class Article extends Component {
           {isOffline && <Offline timestamp={article.timestamp} />}
           <h2>{article.title}</h2>
           <p>Last updated: {prettifyDateAndTime(article.updatedAt)}</p>
-          <p>{`Article tags: `}
-            {article.tags
-              ? article.tags.join(', ')
-              : "No Tags"
-            }</p>
+          <p>
+            {`Article tags: `}
+            {article.tags ? article.tags.join(', ') : 'No Tags'}
+          </p>
 
-          {article.content
-            ? <Primer primer={article} />
-            : loremIpsum.map((p, i) => (formatLoremIpsum(p)))
-          }
+          {article.content ? (
+            <Primer primer={article} />
+          ) : (
+            loremIpsum.map((p, i) => formatLoremIpsum(p))
+          )}
         </article>
-        { relatedArticles && relatedArticles.length
-          ? (
-            <aside className="col-12">
-              {relatedArticles && <h3>Related Articles &lt;-- here's one possible layout</h3>}
-              {relatedArticles && relatedArticles.map(article => {
+        {relatedArticles && relatedArticles.length ? (
+          <aside className="col-12">
+            {relatedArticles && (
+              <h3>Related Articles &lt;-- here's one possible layout</h3>
+            )}
+            {relatedArticles &&
+              relatedArticles.map(article => {
                 let articleThumbnail = article.thumbnail
                   ? article.thumbnail
-                  : "https://placekitten.com/g/200/150";
+                  : 'https://placekitten.com/g/200/150';
                 return (
                   <ArticleLink
                     key={article.slug}
@@ -117,19 +123,19 @@ class Article extends Component {
                   />
                 );
               })}
-            </aside>
-          ) : null
-        }
+          </aside>
+        ) : null}
 
-        { relatedArticles && relatedArticles.length
-          ?( <aside className="col-12">
-              <h3>Featured Articles &lt;-- hey look!  another possible layout</h3>
-              <div className="row">
-                {relatedArticles && relatedArticles .map(article => {
+        {relatedArticles && relatedArticles.length ? (
+          <aside className="col-12">
+            <h3>Featured Articles &lt;-- hey look! another possible layout</h3>
+            <div className="row">
+              {relatedArticles &&
+                relatedArticles.map(article => {
                   let cardTags = article && article.tags ? article.tags : [];
                   let articleThumbnail = article.thumbnail
                     ? article.thumbnail
-                    : "https://placekitten.com/g/200/150";
+                    : 'https://placekitten.com/g/200/150';
                   return (
                     <GridXSmallIsOneSmallIsThree key={article.slug}>
                       <ArticleCard
@@ -144,10 +150,9 @@ class Article extends Component {
                     </GridXSmallIsOneSmallIsThree>
                   );
                 })}
-              </div>
-            </aside>
-          ) : null
-        }
+            </div>
+          </aside>
+        ) : null}
       </div>
     );
   }

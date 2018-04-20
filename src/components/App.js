@@ -400,33 +400,39 @@ class App extends Component {
               : null;
             const articleTags = article.tags;
             let relatedArticles = [];
-            if(articleTags){
+            if (articleTags) {
               articles.forEach(possiblyRelatedArticle => {
                 let relationshipDegree = 0;
-                if(possiblyRelatedArticle.tags){
+                if (possiblyRelatedArticle.tags) {
                   possiblyRelatedArticle.tags.forEach(tag => {
-                    if(articleTags.includes(tag)
-                      && article.slug !== possiblyRelatedArticle.slug
-                      && !statesMasterList.includes(tag)
-                    ){
-                      relationshipDegree ++;
+                    if (
+                      articleTags.includes(tag) &&
+                      article.slug !== possiblyRelatedArticle.slug &&
+                      !statesMasterList.includes(tag)
+                    ) {
+                      relationshipDegree++;
                     }
                   });
                 }
-                if(relationshipDegree){
-                  let relatedArticle = { ...possiblyRelatedArticle, relationshipDegree};
+                if (relationshipDegree) {
+                  let relatedArticle = {
+                    ...possiblyRelatedArticle,
+                    relationshipDegree,
+                  };
                   relatedArticles.push(relatedArticle);
                 }
               });
-              relatedArticles = relatedArticles.sort((a, b) => {
-                if(a.relationshipDegree<b.relationshipDegree){
-                  return 1;
-                } else if (a.relationshipDegree>b.relationshipDegree) {
-                  return -1;
-                } else {
-                  return 0;
-                }
-              }).slice(0,6);
+              relatedArticles = relatedArticles
+                .sort((a, b) => {
+                  if (a.relationshipDegree < b.relationshipDegree) {
+                    return 1;
+                  } else if (a.relationshipDegree > b.relationshipDegree) {
+                    return -1;
+                  } else {
+                    return 0;
+                  }
+                })
+                .slice(0, 6);
             }
             return (
               <ErrorBoundary>
