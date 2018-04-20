@@ -7,7 +7,6 @@ import Offline from '../common/Offline';
 import NoSuchArticle from './NoSuchArticle';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import ArticleCard from '../common/Cards/ArticleCard';
-import ArticleLink from '../common/ArticleLink';
 import {
   getMostRecentUpdateTimestamp,
   prettifyDateAndTime,
@@ -98,37 +97,10 @@ class Article extends Component {
             loremIpsum.map((p, i) => formatLoremIpsum(p))
           )}
         </article>
-        {relatedArticles && relatedArticles.length ? (
-          <aside className="col-12">
-            {relatedArticles && (
-              <h3>Related Articles &lt;-- here's one possible layout</h3>
-            )}
-            {relatedArticles &&
-              relatedArticles.map(article => {
-                let articleThumbnail = article.thumbnail
-                  ? article.thumbnail
-                  : 'https://placekitten.com/g/200/150';
-                return (
-                  <ArticleLink
-                    key={article.slug}
-                    article={article}
-                    slug={article.slug}
-                    imageSrc={articleThumbnail}
-                    title={article.title}
-                    articleType={article.articleType}
-                    author={article.author}
-                    updatedAt={article.updatedAt}
-                    tagRoute="research"
-                    tags={article.tags}
-                  />
-                );
-              })}
-          </aside>
-        ) : null}
 
         {relatedArticles && relatedArticles.length ? (
           <aside className="col-12">
-            <h3>Featured Articles &lt;-- hey look! another possible layout</h3>
+            <h3>Featured Articles</h3>
             <div className="row">
               {relatedArticles &&
                 relatedArticles.map(article => {
