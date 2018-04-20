@@ -15,7 +15,7 @@ const Issues = props => {
       {issues.map((issue, i) => (
         <GridXSmallIsOneMedIsTwoLargeIsThree key={i}>
           <CardHover>
-            <Link to={`/research/${issue.slug}`}>
+            <Link to={`/reports/${issue.slug}`}>
               <ImageOverlayCard
                 cardTitle={issue.title}
                 imgSrc="https://placekitten.com/g/200/150"
