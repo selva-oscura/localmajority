@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import NoSuchIssue from './NoSuchIssue';
 import ArticleLink from '../common/ArticleLink';
 import Aux from '../common/Aux';
@@ -48,7 +47,7 @@ class Issue extends Component {
     ) : (
       <div className="Issue">
         <h2>{this.props.match.params.slug}</h2>
-        {articles.map((article, i) => {          
+        {articles.map((article, i) => {
           let articleThumbnail = article.thumbnail
             ? article.thumbnail
             : 'https://placekitten.com/400/300';
