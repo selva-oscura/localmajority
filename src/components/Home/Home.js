@@ -28,11 +28,41 @@ const Home = props => {
           </p>
         </section>
 
-        <CandidatesFaces
-          candidatesVA2017={candidatesVA2017}
-          candidates={candidates}
-        />
-        
+        <section className="col-12">
+          <h2 className="text-center">
+            Our Latest <span className="tertiary-text-color">Reports</span>
+          </h2>
+          <p className="text-center">
+            Read <Link to="./reports">here</Link> for our latest in-depth research reports supporting progressive state district campaigns.
+          </p>
+          <div className="row">
+            {articles && articles.length ? (
+              articles.slice(0, 3).map(article => {
+                let cardTags = article && article.tags ? article.tags : [];
+                let articleThumbnail = article.thumbnail
+                  ? article.thumbnail
+                  : 'https://placekitten.com/200/150';
+
+                return (
+                  <GridXSmallIsOneSmallIsThree key={article.slug}>
+                    <ArticleCard
+                      slug={article.slug}
+                      imageSrc={articleThumbnail}
+                      title={article.title}
+                      author={article.author}
+                      updatedAt={article.updatedAt}
+                      tagRoute="reports"
+                      tags={cardTags}
+                    />
+                  </GridXSmallIsOneSmallIsThree>
+                );
+              })
+            ) : (
+              <h2>Loading</h2>
+            )}
+          </div>
+        </section>
+
         <States currentStateRaces={currentStateRaces} />
 
         <section className="col-12">
@@ -76,35 +106,11 @@ const Home = props => {
           </div>
         </section>
 
-        <section className="col-12">
-          <h2 className="text-center">Featured Articles</h2>
-          <div className="row">
-            {articles && articles.length ? (
-              articles.slice(0, 6).map(article => {
-                let cardTags = article && article.tags ? article.tags : [];
-                let articleThumbnail = article.thumbnail
-                  ? article.thumbnail
-                  : 'https://placekitten.com/200/150';
-
-                return (
-                  <GridXSmallIsOneSmallIsThree key={article.slug}>
-                    <ArticleCard
-                      slug={article.slug}
-                      imageSrc={articleThumbnail}
-                      title={article.title}
-                      author={article.author}
-                      updatedAt={article.updatedAt}
-                      tagRoute="reports"
-                      tags={cardTags}
-                    />
-                  </GridXSmallIsOneSmallIsThree>
-                );
-              })
-            ) : (
-              <h2>Loading</h2>
-            )}
-          </div>
-        </section>
+        <CandidatesFaces
+          candidatesVA2017={candidatesVA2017}
+          candidates={candidates}
+        />
+        
       </div>
     </div>
   );
