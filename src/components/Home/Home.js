@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import States from '../States/States';
+import Slider from '../Slider/Slider';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import CardHover from '../common/Cards/CardHover';
 import FooterCard from '../common/Cards/FooterCard';
@@ -62,6 +63,7 @@ const Home = props => {
 
   return (
     <div className="Home">
+      <Slider />
       <div className="row">
         <section className="col-12">
           <h2 className="text-center">
