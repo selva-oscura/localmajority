@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NoSuchIssue from './NoSuchIssue';
-import ArticleLink from '../common/ArticleLink';
+import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
+import ArticleCard from '../common/Cards/ArticleCard';
 import Aux from '../common/Aux';
 
 class Issue extends Component {
@@ -26,19 +27,21 @@ class Issue extends Component {
               let articleThumbnail = article.thumbnail
                 ? article.thumbnail
                 : 'https://placekitten.com/400/300';
+              let cardTags = article && article.tags ? article.tags : [];
               return article.tags.includes(subIssue.slug) ? (
-                <ArticleLink
-                  key={`${subIssue.title}-${article.slug}`}
-                  article={article}
-                  slug={article.slug}
-                  imageSrc={articleThumbnail}
-                  title={article.title}
-                  articleType={article.articleType}
-                  author={article.author}
-                  updatedAt={article.updatedAt}
-                  tagRoute="reports"
-                  tags={article.tags}
-                />
+                <GridXSmallIsOneSmallIsThree key={article.slug}>
+                  <ArticleCard
+                    article={article}
+                    slug={article.slug}
+                    imageSrc={articleThumbnail}
+                    title={article.title}
+                    author={article.author}
+                    articleType={article.articleType}
+                    updatedAt={article.updatedAt}
+                    tagRoute="reports"
+                    tags={cardTags}
+                  />
+                </GridXSmallIsOneSmallIsThree>
               ) : null;
             })}
           </Aux>
@@ -51,19 +54,21 @@ class Issue extends Component {
           let articleThumbnail = article.thumbnail
             ? article.thumbnail
             : 'https://placekitten.com/400/300';
+          let cardTags = article && article.tags ? article.tags : [];
           return (
-            <ArticleLink
-              key={`${article.slug}`}
-              article={article}
-              slug={article.slug}
-              imageSrc={articleThumbnail}
-              title={article.title}
-              articleType={article.articleType}
-              author={article.author}
-              updatedAt={article.updatedAt}
-              tagRoute="reports"
-              tags={article.tags}
-            />
+            <GridXSmallIsOneSmallIsThree key={article.slug}>
+              <ArticleCard
+                article={article}
+                slug={article.slug}
+                imageSrc={articleThumbnail}
+                title={article.title}
+                author={article.author}
+                articleType={article.articleType}
+                updatedAt={article.updatedAt}
+                tagRoute="reports"
+                tags={cardTags}
+              />
+            </GridXSmallIsOneSmallIsThree>
           );
         })}
       </div>
