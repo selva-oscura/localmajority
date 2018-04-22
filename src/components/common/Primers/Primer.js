@@ -1,5 +1,5 @@
 import React from 'react';
-import Styling from '../Styling';
+import PrimerStyling from './PrimerStyling';
 import Aux from '../Aux';
 
 const Primer = ({ primer, i }) => (
@@ -24,7 +24,7 @@ const Primer = ({ primer, i }) => (
           <div className={section.tag} key={section.tag}>
             {title && (
               <h3 className="section-head">
-                <Styling styling={specialStyling}>{title}</Styling>
+                <PrimerStyling styling={specialStyling}>{title}</PrimerStyling>
               </h3>
             )}
 

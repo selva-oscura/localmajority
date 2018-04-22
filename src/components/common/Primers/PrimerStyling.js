@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Styling = props => {
+const PrimerStyling = props => {
   if (props.styling === 'font-size: +2') {
     return <font size="+2">{props.children}</font>;
   }
@@ -10,4 +10,4 @@ const Styling = props => {
   return props.children;
 };
 
-export default Styling;
+export default PrimerStyling;
