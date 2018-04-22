@@ -4,6 +4,7 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/main.css';
 // carousel styles
 import 'react-responsive-carousel/lib/styles/carousel.css';
+import './Slider.css';
 
 const Slider = ({showArrows=true, showThumbs=false, showStatus=false, showIndicators=false, interval=2000, transitionTime=500, infiniteLoop=true, autoPlay=true, emulateTouch=true, useKeyboardArrows=false, slides=[]}) => (slides && slides.length
   ? (

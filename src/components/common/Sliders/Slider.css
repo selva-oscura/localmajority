@@ -1,0 +1,19 @@
+.slide, .slide-selected {
+	background-color: white !important;
+}
+
+.control-arrow {
+	background-color: rgba(0,0,0,.3) !important;
+}
+
+.control-arrow:hover {
+	background-color: rgba(0,0,0,.5) !important
+}
+
+/*.control-prev:before {
+	border-right: 8px solid red !important;
+}
+
+.control-next:before {
+	border-left: 8px solid red !important;
+}*/
