@@ -14,6 +14,12 @@ Material-UI -- used for some theming and UI, particularly the mobile nav drawer.
 Repo at [https://github.com/mui-org/material-ui](https://github.com/mui-org/material-ui). 
 Documentation at [http://www.material-ui.com/](http://www.material-ui.com/)
 
+Carousel -- used react-responsive-carousel
+Repo at [https://github.com/leandrowd/react-responsive-carousel](https://github.com/leandrowd/react-responsive-carousel)
+Documentation at [http://react-responsive-carousel.js.org/](http://react-responsive-carousel.js.org/)
+Storybook at [http://react-responsive-carousel.js.org/storybook/?selectedKind=Carousel&selectedStory=defaults&full=0&down=1&left=1&panelRight=0&downPanel=kadirahq%2Fstorybook-addon-actions%2Factions-panel](http://react-responsive-carousel.js.org/storybook/?selectedKind=Carousel&selectedStory=defaults&full=0&down=1&left=1&panelRight=0&downPanel=kadirahq%2Fstorybook-addon-actions%2Factions-panel)
+ES6 code at [https://github.com/leandrowd/demo-react-responsive-carousel-es6](https://github.com/leandrowd/demo-react-responsive-carousel-es6)
+
 ReactTwitterWidgets -- used for displaying twitter profile
 Repo/documentation can be found at [https://github.com/andrewsuzuki/react-twitter-widgets](https://github.com/andrewsuzuki/react-twitter-widgets)
 Screenshots of available widgets and code can be found at [https://github.com/andrewsuzuki/react-twitter-widgets/blob/HEAD/site/screenshot.png](https://github.com/andrewsuzuki/react-twitter-widgets/blob/HEAD/site/screenshot.png)
