@@ -6,7 +6,9 @@ import FooterCard from '../common/Cards/FooterCard';
 
 const States = ({ currentStateRaces }) => (
   <section className="row">
-    <h2 className="text-center col-12">Our States</h2>
+    <h2 className="text-center col-12">
+      Our <span className="tertiary-text-color">States</span>
+    </h2>
     {currentStateRaces.map((state, i) => (
       <GridXSmallIsOneSmallIsThree key={i}>
         <CardHover>
