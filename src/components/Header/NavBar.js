@@ -18,7 +18,8 @@ const NavBar = ({ navLinks }) => {
             exact={link.exact}
             activeClassName="selected"
           >
-            {link.name}
+            <span className="hidden-md-down">{link.name}</span>
+            <span className="hidden-lg-up">{link.shortName}</span>
           </NavLink>
         ))}
       </nav>
