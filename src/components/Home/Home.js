@@ -7,6 +7,7 @@ import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsT
 import CardHover from '../common/Cards/CardHover';
 import FooterCard from '../common/Cards/FooterCard';
 import ArticleCard from '../common/Cards/ArticleCard';
+import VideoResponsive from '../common/Videos/VideoResponsive';
 import candidatesVA2017 from '../../data/candidatesVA2017';
 import './Home.css';
 
@@ -127,17 +128,11 @@ const Home = props => {
       <section>
         <div className="row">
           <div className="col-12 order-2 col-md-6 order-md-1">
-            <div className="video-responsive">
-              <iframe
-                key="vimeo-220517251"
-                title="Local Majority"
-                src="https://player.vimeo.com/video/220517251"
-                width="640"
-                height="360"
-                frameBorder="0"
-                allowFullScreen=""
-              />
-            </div>
+            <VideoResponsive
+              key="vimeo-220517251"
+              title="Local Majority"
+              src="https://player.vimeo.com/video/220517251"
+            />
           </div>
           <div className="col-12 order-1 col-md-6 order-md-2">
             <h4 className="text-center">It's all about</h4>
