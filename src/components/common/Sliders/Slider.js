@@ -5,37 +5,23 @@ import 'react-responsive-carousel/lib/styles/main.css';
 // carousel styles
 import 'react-responsive-carousel/lib/styles/carousel.css';
 
-const Slider = () => (
-  <div className="row">
-    <section className="col-12">
-      <Carousel showArrows={true}>
-        <div>
-          <img src="assets/1.jpeg" />
-          <p className="legend">Legend 1</p>
-        </div>
-        <div>
-          <img src="assets/2.jpeg" />
-          <p className="legend">Legend 2</p>
-        </div>
-        <div>
-          <img src="assets/3.jpeg" />
-          <p className="legend">Legend 3</p>
-        </div>
-        <div>
-          <img src="assets/4.jpeg" />
-          <p className="legend">Legend 4</p>
-        </div>
-        <div>
-          <img src="assets/5.jpeg" />
-          <p className="legend">Legend 5</p>
-        </div>
-        <div>
-          <img src="assets/6.jpeg" />
-          <p className="legend">Legend 6</p>
-        </div>
-      </Carousel>
-    </section>
-  </div>
+const Slider = ({showArrows=true, showThumbs=false, showStatus=false, showIndicators=false, interval=2000, transitionTime=500, infiniteLoop=true, autoPlay=true, emulateTouch=true, useKeyboardArrows=false, slides=[]}) => (slides && slides.length
+  ? (
+    <div className="row">
+      <section className="col-12">
+        <Carousel showArrows={showArrows} showThumbs={showThumbs} showStatus={showStatus} showIndicators={showIndicators} interval={interval} transitionTime={transitionTime} infiniteLoop={infiniteLoop} autoPlay={autoPlay} emulateTouch={emulateTouch} useKeyboardArrows={emulateTouch}>
+          {
+            slides.map((slide, i)=>(
+              <div key={i}>
+                <img src={slide.src} alt={slide.alt} />
+              </div>
+            ))
+          }
+        </Carousel>
+      </section>
+    </div>
+  ): null
 );
 
 export default Slider;
+
