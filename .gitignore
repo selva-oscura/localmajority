@@ -24,5 +24,6 @@ yarn-debug.log*
 yarn-error.log*
 
 notes.txt
+changes.txt
 localMajority_pre-graphql_cachedData.txt
 /deprecated_components
