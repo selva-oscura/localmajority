@@ -125,43 +125,21 @@ const Home = props => {
       />
 
       <section>
-
-        <div className="row hidden-md-up">
-          <div className="col-12">
-            <h4 className="text-center">It's all about</h4>
-            <h2 className="text-center">
-              Saving our <span className="tertiary-text-color">Democracy</span>
-            </h2>
-            <p className="text-center">It's time to flip the country blue</p>
-            <p className="text-center">Help us take back state legislatures in November.</p>
-            <p className="text-center">BLUE IN 2018!</p>
+        <div className="row">
+          <div className="col-12 order-2 col-md-6 order-md-1">
+            <div className="video-responsive">
+              <iframe
+                key="vimeo-220517251"
+                title="Local Majority"
+                src="https://player.vimeo.com/video/220517251"
+                width="640"
+                height="360"
+                frameBorder="0"
+                allowFullScreen=""
+              />
+            </div>
           </div>
-          <div className="col-12">
-            <iframe
-              key="vimeo-220517251"
-              title="Local Majority"
-              src="https://player.vimeo.com/video/220517251"
-              width="640"
-              height="360"
-              frameBorder="0"
-              allowFullScreen=""
-            />
-          </div>
-        </div>
-
-        <div className="row hidden-sm-down">
-          <div className="col-6">
-            <iframe
-              key="vimeo-220517251"
-              title="Local Majority"
-              src="https://player.vimeo.com/video/220517251"
-              width="640"
-              height="360"
-              frameBorder="0"
-              allowFullScreen=""
-            />
-          </div>
-          <div className="col-6">
+          <div className="col-12 order-1 col-md-6 order-md-2">
             <h4 className="text-center">It's all about</h4>
             <h2 className="text-center">
               Saving our <span className="tertiary-text-color">Democracy</span>
@@ -171,7 +149,6 @@ const Home = props => {
             <p className="text-center">BLUE IN 2018!</p>
           </div>
         </div>
-
       </section>
 
       <section className="row">
