@@ -606,7 +606,7 @@ class App extends Component {
       <div className="App">
         <Header props={this.props.children} />
         <ErrorBoundary>
-          <main className="container">{this.renderPage()}</main>
+          <main>{this.renderPage()}</main>
         </ErrorBoundary>
         <Footer />
       </div>
