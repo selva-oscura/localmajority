@@ -125,7 +125,11 @@ const Home = props => {
       />
 
       <section className="row">
-        <div className="col-12">
+
+        <div className="col-12 col-md-6">
+          <h2 className="text-center">Video here</h2>
+        </div>
+        <div className="col-12 col-md-6">
           <h4 className="text-center">It's all about</h4>
           <h2 className="text-center">
             Saving our <span className="tertiary-text-color">Democracy</span>
