@@ -8,7 +8,7 @@ import 'react-responsive-carousel/lib/styles/carousel.css';
 const Slider = () => (
   <div className="row">
     <section className="col-12">
-      <Carousel showArrows={true} onChange={onChange} onClickItem={onClickItem} onClickThumb={onClickThumb}>
+      <Carousel showArrows={true}>
         <div>
           <img src="assets/1.jpeg" />
           <p className="legend">Legend 1</p>
