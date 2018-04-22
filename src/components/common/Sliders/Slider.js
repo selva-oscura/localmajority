@@ -1,7 +1,5 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
-// general styles
-import 'react-responsive-carousel/lib/styles/main.css';
 // carousel styles
 import 'react-responsive-carousel/lib/styles/carousel.css';
 import './Slider.css';
