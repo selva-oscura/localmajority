@@ -9,7 +9,7 @@ const ArticleCard = ({slug, imageSrc, imageAlt="", title, author, updatedAt, tag
   <CardHover>
   	<div className="ArticleCard">
 	    <Link
-	      to={`articles/${slug}`}
+	      to={`/articles/${slug}`}
 	    >
 	      <ImageWithBackgroundPlaceholderImage
 	        imageSrc={imageSrc}
