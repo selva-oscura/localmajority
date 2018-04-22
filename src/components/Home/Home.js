@@ -126,6 +126,18 @@ const Home = props => {
 
       <section className="row">
         <div className="col-12">
+          <h4 className="text-center">It's all about</h4>
+          <h2 className="text-center">
+            Saving our <span className="tertiary-text-color">Demcracy</span>
+          </h2>
+          <p className="text-center">It's time to flip the country blue</p>
+          <p className="text-center">Help us take back state legislatures in November.</p>
+          <p className="text-center">BLUE IN 2018!</p>
+        </div>
+      </section>
+
+      <section className="row">
+        <div className="col-12">
           <h2 className="text-center">
             Take Action <span className="tertiary-text-color">Now!</span>
           </h2>
