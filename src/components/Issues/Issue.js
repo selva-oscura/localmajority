@@ -22,7 +22,8 @@ class Issue extends Component {
         <h2>{issue.title}</h2>
         {subIssues.map(subIssue => (
           <Aux key={subIssue.title}>
-            <h4>{subIssue.title}</h4>
+            <h4>{subIssue.title} is here</h4>
+            <div className="row">
             {articles.map(article => {
               let articleThumbnail = article.thumbnail
                 ? article.thumbnail
@@ -44,33 +45,36 @@ class Issue extends Component {
                 </GridXSmallIsOneSmallIsThree>
               ) : null;
             })}
+            </div>
           </Aux>
         ))}
       </div>
     ) : (
       <div className="Issue">
         <h2>{this.props.match.params.slug}</h2>
-        {articles.map((article, i) => {
-          let articleThumbnail = article.thumbnail
-            ? article.thumbnail
-            : 'https://placekitten.com/400/300';
-          let cardTags = article && article.tags ? article.tags : [];
-          return (
-            <GridXSmallIsOneSmallIsThree key={article.slug}>
-              <ArticleCard
-                article={article}
-                slug={article.slug}
-                imageSrc={articleThumbnail}
-                title={article.title}
-                author={article.author}
-                articleType={article.articleType}
-                updatedAt={article.updatedAt}
-                tagRoute="reports"
-                tags={cardTags}
-              />
-            </GridXSmallIsOneSmallIsThree>
-          );
-        })}
+        <div className="row">
+          {articles.map((article, i) => {
+            let articleThumbnail = article.thumbnail
+              ? article.thumbnail
+              : 'https://placekitten.com/400/300';
+            let cardTags = article && article.tags ? article.tags : [];
+            return (
+              <GridXSmallIsOneSmallIsThree key={article.slug}>
+                <ArticleCard
+                  article={article}
+                  slug={article.slug}
+                  imageSrc={articleThumbnail}
+                  title={article.title}
+                  author={article.author}
+                  articleType={article.articleType}
+                  updatedAt={article.updatedAt}
+                  tagRoute="reports"
+                  tags={cardTags}
+                />
+              </GridXSmallIsOneSmallIsThree>
+            );
+          })}
+        </div>
       </div>
     );
   }
