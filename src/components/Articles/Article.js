@@ -53,17 +53,17 @@ class Article extends Component {
     if (isLoading) {
       return <Loading />;
     }
-    const formatLoremIpsum = p => {
+    const formatLoremIpsum = (p, i) => {
       if (p.format === 'title') {
-        return <h3>{p.content}</h3>;
+        return <h3 key={i}>{p.content}</h3>;
       } else if (p.format === 'subtitle') {
         return (
-          <h4>
+          <h4 key={i}>
             <i>{p.content}</i>
           </h4>
         );
       }
-      return <p>{p.content}</p>;
+      return <p key={i}>{p.content}</p>;
     };
     const isOffline =
       this.props.ArticleDetailBySlug.error &&
@@ -94,7 +94,7 @@ class Article extends Component {
           {article.content ? (
             <Primer primer={article} />
           ) : (
-            loremIpsum.map((p, i) => formatLoremIpsum(p))
+            loremIpsum.map((p, i) => formatLoremIpsum(p, i))
           )}
         </article>
 
