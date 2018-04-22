@@ -19,7 +19,6 @@ const Home = props => {
 
   return (
     <div className="Home">
-
       <Slider
         slides={[
           {
