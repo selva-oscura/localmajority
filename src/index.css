@@ -89,6 +89,7 @@ a:hover, a:hover, a:hover h1, a:hover h2, a:hover h3, a:hover h4, a:hover h5, a:
   flex-flow: wrap;
 }
 
+/*NOTE: flex-start, flex-end, flex-space-between are parent properties and are applied to the container, defining location of all items in the container*/
 .flex-start {
   justify-content: flex-start;
 }
@@ -100,6 +101,17 @@ a:hover, a:hover, a:hover h1, a:hover h2, a:hover h3, a:hover h4, a:hover h5, a:
 .flex-space-between{
   justify-content: space-between;
 }
+
+
+/*NOTE: align-start and align-end are child properties: they are applied to items individually, defining the location of the particular item in the container*/
+.align-start {
+  align-self: flex-start;
+}
+
+.align-end {
+  align-self: flex-start;
+}
+
 
 .social-icons-space {
   margin: 4vw 0 2vw;
