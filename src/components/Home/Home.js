@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import States from '../States/States';
-import Slider from '../Slider/Slider';
+import Slider from '../common/Sliders/Slider';
 import CandidatesFaces from '../common/CandidatesFaces';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import CardHover from '../common/Cards/CardHover';
