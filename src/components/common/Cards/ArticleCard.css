@@ -3,7 +3,7 @@
 }
 
 .ArticleCard .contents{
-	padding: 12px;
+	padding: 6px 18px 18px;
 }
 
 .ArticleCard h2, .ArticleCard p{
@@ -11,26 +11,30 @@
 	vertical-align: text-bottom;
 }
 
-.ArticleCard h2 .title {
-	font-size: 1.17em;
+.ArticleCard h2.title {
+	line-height: 1em;
 } 
 
-.ArticleCard h2 .details {
-	font-size: 1em;
+.ArticleCard p.details {
+	font-size: 1.17em;
+	line-height: 1em;
+	margin-bottom: 0;
+	padding-bottom: 0;
 }
 
 .ArticleCard .tags {
-	font-size: .83em;
 	padding: 0px 12px 12px 12px;
 }
 
 .ArticleCard .tag {
+	font-size: 1em;
+	font-weight: bold;
 	/* tertiary-color */
 	border: 1px solid #d1212e;
 	background-color: #d1212e;
 	color: white;
 	font-weight: bold;
-	padding: 0px 4px;
+	padding: 1px 4px;
 	margin: 0 8px 8px 0;
 	transition: background-color 0.5s ease-out;
 }

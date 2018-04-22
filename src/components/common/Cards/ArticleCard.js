@@ -18,18 +18,21 @@ const ArticleCard = ({slug, imageSrc, imageAlt="", title, author, updatedAt, tag
 	      />
 	      <div className="contents">
 		      <h2 className="title">{title}</h2>
-		      <p className="details flex-container flex-wrap flex-space-between">
-		      	<span>{`${author}`}</span>
-		      	<span>updated {prettifyDate(updatedAt)}</span>
-		      </p>
+		      <p className="details">{author}</p>
+		      <p className="details text-right">updated {prettifyDate(updatedAt)}</p>
 	      </div>
 	    </Link>
-      <div className="tags flex-container flex-wrap flex-start">
-      	{tags.map(tag => (
-      		<Link key={tag} to={`/${tagRoute}/${tag}`} className="tag">{tag}
-      		</Link>
-      	))}
-      </div>
+	    {tags && tags.length
+				? (
+						<div className="tags flex-container flex-wrap flex-start">
+							{tags.map(tag => (
+								<Link key={tag} to={`/${tagRoute}/${tag}`} className="tag">{tag}
+								</Link>
+							))}
+						</div>
+				)
+	    	: null
+	    }
 	   </div>
   </CardHover>
 );
