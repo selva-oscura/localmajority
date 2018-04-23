@@ -18,7 +18,7 @@ const Home = props => {
   const { articles, candidates, currentStateRaces, pastCandidates } = props;
 
   return (
-    <div className="Home">
+    <main className="Home">
       <Slider
         slides={[
           {
@@ -40,108 +40,114 @@ const Home = props => {
         ]}
       />
 
-      <section className="row">
-        <div className="col-12">
-          <h2 className="text-center">
-            State Legislatures are{' '}
-            <span className="tertiary-text-color">Key</span>
-          </h2>
-          <p className="text-center">
-            State legislatures not only create the laws that affect the everyday
-            lives of their constituents, they also play a critical role in
-            determining the districts for the U.S. House of Representatives and
-            thus the fate of the entire country. Local Majority provides
-            research that is practical and accessible to support progressive
-            campaigns for state legislature. Join us or support our efforts!
-          </p>
+      <section className="container">
+        <div className="row">
+          <div className="col-12">
+            <h2 className="text-center">
+              State Legislatures are{' '}
+              <span className="tertiary-text-color">Key</span>
+            </h2>
+            <p className="text-center">
+              State legislatures not only create the laws that affect the everyday
+              lives of their constituents, they also play a critical role in
+              determining the districts for the U.S. House of Representatives and
+              thus the fate of the entire country. Local Majority provides
+              research that is practical and accessible to support progressive
+              campaigns for state legislature. Join us or support our efforts!
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="row">
-        <div className="col-12">
-          <h2 className="text-center">
-            Our Latest <span className="tertiary-text-color">Reports</span>
-          </h2>
-          <p className="text-center">
-            Read <Link to="./reports">here</Link> for our latest in-depth
-            research reports supporting progressive state district campaigns.
-          </p>
-          <div className="row">
-            {articles && articles.length ? (
-              articles.slice(0, 3).map(article => {
-                let cardTags = article && article.tags ? article.tags : [];
-                let articleThumbnail = article.thumbnail
-                  ? article.thumbnail
-                  : 'https://placekitten.com/200/150';
+      <section className="container">
+        <div className="row">
+          <div className="col-12">
+            <h2 className="text-center">
+              Our Latest <span className="tertiary-text-color">Reports</span>
+            </h2>
+            <p className="text-center">
+              Read <Link to="./reports">here</Link> for our latest in-depth
+              research reports supporting progressive state district campaigns.
+            </p>
+            <div className="row">
+              {articles && articles.length ? (
+                articles.slice(0, 3).map(article => {
+                  let cardTags = article && article.tags ? article.tags : [];
+                  let articleThumbnail = article.thumbnail
+                    ? article.thumbnail
+                    : 'https://placekitten.com/200/150';
 
-                return (
-                  <GridXSmallIsOneSmallIsThree key={article.slug}>
-                    <ArticleCard
-                      slug={article.slug}
-                      imageSrc={articleThumbnail}
-                      title={article.title}
-                      author={article.author}
-                      updatedAt={article.updatedAt}
-                      tagRoute="reports"
-                      tags={cardTags}
-                    />
-                  </GridXSmallIsOneSmallIsThree>
-                );
-              })
-            ) : (
-              <h2>Loading</h2>
-            )}
+                  return (
+                    <GridXSmallIsOneSmallIsThree key={article.slug}>
+                      <ArticleCard
+                        slug={article.slug}
+                        imageSrc={articleThumbnail}
+                        title={article.title}
+                        author={article.author}
+                        updatedAt={article.updatedAt}
+                        tagRoute="reports"
+                        tags={cardTags}
+                      />
+                    </GridXSmallIsOneSmallIsThree>
+                  );
+                })
+              ) : (
+                <h2>Loading</h2>
+              )}
+            </div>
           </div>
         </div>
       </section>
 
       <States currentStateRaces={currentStateRaces} />
 
-      <section className="row">
-        <div className="col-12">
-          <h2 className="text-center">
-            Our Featured <span className="tertiary-text-color">Candidates</span>
-          </h2>
-          <p className="text-center">
-            Click <Link to="./candidates">here</Link> for all the progressive
-            state district campaigns we are supporting with our research.
-          </p>
-          <div className="row">
-            {candidates && candidates.length ? (
-              candidates.map((candidate, i) => {
-                const headshotUrl =
-                  candidate.headshotId && candidate.headshotId.url
-                    ? candidate.headshotId.url
-                    : null;
-                const seatTitle =
-                  candidate &&
-                  candidate.contestId &&
-                  candidate.contestId.seatId &&
-                  candidate.contestId.seatId.title
-                    ? candidate.contestId.seatId.title
-                    : null;
+      <section className="container">
+        <div className="row">
+          <div className="col-12">
+            <h2 className="text-center">
+              Our Featured <span className="tertiary-text-color">Candidates</span>
+            </h2>
+            <p className="text-center">
+              Click <Link to="./candidates">here</Link> for all the progressive
+              state district campaigns we are supporting with our research.
+            </p>
+            <div className="row">
+              {candidates && candidates.length ? (
+                candidates.map((candidate, i) => {
+                  const headshotUrl =
+                    candidate.headshotId && candidate.headshotId.url
+                      ? candidate.headshotId.url
+                      : null;
+                  const seatTitle =
+                    candidate &&
+                    candidate.contestId &&
+                    candidate.contestId.seatId &&
+                    candidate.contestId.seatId.title
+                      ? candidate.contestId.seatId.title
+                      : null;
 
-                return (
-                  <GridXSmallIsOneSmallIsThree key={i}>
-                    <CardHover>
-                      <Link
-                        to={`candidates/${candidate.state.title}/${
-                          candidate.slug
-                        }`}
-                      >
-                        <FooterCard
-                          cardTitle={candidate.title}
-                          cardSubtitle={seatTitle}
-                          imgSrc={headshotUrl}
-                        />
-                      </Link>
-                    </CardHover>
-                  </GridXSmallIsOneSmallIsThree>
-                );
-              })
-            ) : (
-              <h2>Loading</h2>
-            )}
+                  return (
+                    <GridXSmallIsOneSmallIsThree key={i}>
+                      <CardHover>
+                        <Link
+                          to={`candidates/${candidate.state.title}/${
+                            candidate.slug
+                          }`}
+                        >
+                          <FooterCard
+                            cardTitle={candidate.title}
+                            cardSubtitle={seatTitle}
+                            imgSrc={headshotUrl}
+                          />
+                        </Link>
+                      </CardHover>
+                    </GridXSmallIsOneSmallIsThree>
+                  );
+                })
+              ) : (
+                <h2>Loading</h2>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -182,7 +188,7 @@ const Home = props => {
 
       <Parallax />
 
-      <section>
+      <section className="container">
         <div className="row">
           <div className="col-12 order-2 col-md-6 order-md-1">
             <VideoResponsive
@@ -205,26 +211,28 @@ const Home = props => {
         </div>
       </section>
 
-      <section className="row">
-        <div className="col-12">
-          <h2 className="text-center">
-            Take Action <span className="tertiary-text-color">Now!</span>
-          </h2>
-          <p className="text-center">Register to Vote</p>
-          <p className="text-center">
-            Check your Voter Registration is Current
-          </p>
-          <p className="text-center">Register to Vote by Mail</p>
-          <p className="text-center">Reach out to People from your State</p>
-          <p className="text-center">Volunteer to Get out the Vote</p>
-          <p className="text-center">Donate to Progressive Candidates</p>
-          <p className="text-center">
-            Click <Link to="./take-action">here</Link> to make a difference in
-            2018.
-          </p>
+      <section className="container">
+        <div className="row">
+          <div className="col-12">
+            <h2 className="text-center">
+              Take Action <span className="tertiary-text-color">Now!</span>
+            </h2>
+            <p className="text-center">Register to Vote</p>
+            <p className="text-center">
+              Check your Voter Registration is Current
+            </p>
+            <p className="text-center">Register to Vote by Mail</p>
+            <p className="text-center">Reach out to People from your State</p>
+            <p className="text-center">Volunteer to Get out the Vote</p>
+            <p className="text-center">Donate to Progressive Candidates</p>
+            <p className="text-center">
+              Click <Link to="./take-action">here</Link> to make a difference in
+              2018.
+            </p>
+          </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 };
 
