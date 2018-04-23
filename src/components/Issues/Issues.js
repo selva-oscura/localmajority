@@ -11,20 +11,24 @@ const Issues = props => {
   document.title = 'Local Majority | Issues';
 
   return (
-    <div className="Issues row">
-      {issues.map((issue, i) => (
-        <GridXSmallIsOneMedIsTwoLargeIsThree key={i}>
-          <CardHover>
-            <Link to={`/reports/${issue.slug}`}>
-              <ImageOverlayCard
-                cardTitle={issue.title}
-                imgSrc="https://placekitten.com/g/200/150"
-              />
-            </Link>
-          </CardHover>
-        </GridXSmallIsOneMedIsTwoLargeIsThree>
-      ))}
-    </div>
+    <main className="Issues">
+      <article className="container">
+        <div className="row">
+          {issues.map((issue, i) => (
+            <GridXSmallIsOneMedIsTwoLargeIsThree key={i}>
+              <CardHover>
+                <Link to={`/reports/${issue.slug}`}>
+                  <ImageOverlayCard
+                    cardTitle={issue.title}
+                    imgSrc="https://placekitten.com/g/200/150"
+                  />
+                </Link>
+              </CardHover>
+            </GridXSmallIsOneMedIsTwoLargeIsThree>
+          ))}
+        </div>
+      </article>
+    </main>
   );
 };
 

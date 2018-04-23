@@ -18,7 +18,7 @@ class Issue extends Component {
     const subIssues = issue ? issue.subIssues : [];
 
     return issue ? (
-      <div className="Issue">
+      <main className="Issue">
         <h2>{issue.title}</h2>
         {subIssues.map(subIssue => (
           <Aux key={subIssue.title}>
@@ -48,9 +48,9 @@ class Issue extends Component {
             </div>
           </Aux>
         ))}
-      </div>
+      </main>
     ) : (
-      <div className="Issue">
+      <main className="Issue">
         <h2>{this.props.match.params.slug}</h2>
         <div className="row">
           {articles.map((article, i) => {
@@ -75,7 +75,7 @@ class Issue extends Component {
             );
           })}
         </div>
-      </div>
+      </main>
     );
   }
 }

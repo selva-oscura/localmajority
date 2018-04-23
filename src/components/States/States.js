@@ -5,23 +5,27 @@ import CardHover from '../common/Cards/CardHover';
 import FooterCard from '../common/Cards/FooterCard';
 
 const States = ({ currentStateRaces }) => (
-  <section className="row">
-    <h2 className="text-center col-12">
-      Our <span className="tertiary-text-color">States</span>
-    </h2>
-    {currentStateRaces.map((state, i) => (
-      <GridXSmallIsOneSmallIsThree key={i}>
-        <CardHover>
-          <Link to={`./districts/${state}`}>
-            <FooterCard
-              cardTitle={state}
-              imgSrc={`../images/${state}.jpg`}
-              insetImg="insetImg"
-            />
-          </Link>
-        </CardHover>
-      </GridXSmallIsOneSmallIsThree>
-    ))}
+  <section className="States">
+    <div className="container">
+      <div className="row">
+        <h2 className="text-center col-12">
+          Our <span className="tertiary-text-color">States</span>
+        </h2>
+        {currentStateRaces.map((state, i) => (
+          <GridXSmallIsOneSmallIsThree key={i}>
+            <CardHover>
+              <Link to={`./districts/${state}`}>
+                <FooterCard
+                  cardTitle={state}
+                  imgSrc={`../images/${state}.jpg`}
+                  insetImg="insetImg"
+                />
+              </Link>
+            </CardHover>
+          </GridXSmallIsOneSmallIsThree>
+        ))}
+      </div>
+    </div>
   </section>
 );
 

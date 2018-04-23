@@ -39,61 +39,63 @@ class Candidates extends Component {
     }
 
     return (
-      <div className="Candidates">
-        <div className="row">
-          <div className="col">
-            {statesMasterList && (
-              <Aux>
-                <h3>Select Your State</h3>
-                <Filters>
-                  <ButtonlessFilters
-                    filterCategory="stateSelected"
-                    passedParam={this.state.stateSelected}
-                    masterList={statesMasterList}
-                    updateFilter={this.updateFilter}
-                  />
-                </Filters>
-              </Aux>
-            )}
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            {candidatesMeetingFilters && candidatesMeetingFilters.length ? (
-              <HorizontalCards>
-                {candidatesMeetingFilters.map((candidate, i) => {
-                  const headshotUrl =
-                    candidate.headshotId && candidate.headshotId.url
-                      ? candidate.headshotId.url
-                      : null;
-                  const seatTitle =
-                    candidate &&
-                    candidate.contestId &&
-                    candidate.contestId.seatId &&
-                    candidate.contestId.seatId.title
-                      ? candidate.contestId.seatId.title
-                      : null;
-                  return (
-                    <HorizontalCard
-                      key={i}
-                      id={candidate.id}
-                      cardTitle={candidate.title}
-                      cardSubtitle={seatTitle}
-                      cardTextHtml={candidate.summaryText}
-                      category="candidates"
-                      imgSrc={headshotUrl}
-                      slug={`${candidate.state.title}/${candidate.slug}`}
-                      imgShape="square"
+      <main className="Candidates">
+        <div className="container">
+          <div className="row">
+            <div className="col">
+              {statesMasterList && (
+                <Aux>
+                  <h3>Select Your State</h3>
+                  <Filters>
+                    <ButtonlessFilters
+                      filterCategory="stateSelected"
+                      passedParam={this.state.stateSelected}
+                      masterList={statesMasterList}
+                      updateFilter={this.updateFilter}
                     />
-                  );
-                })}
-              </HorizontalCards>
-            ) : (
-              <h2>No Candidates Meet Your Criteria.</h2>
-            )}
+                  </Filters>
+                </Aux>
+              )}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              {candidatesMeetingFilters && candidatesMeetingFilters.length ? (
+                <HorizontalCards>
+                  {candidatesMeetingFilters.map((candidate, i) => {
+                    const headshotUrl =
+                      candidate.headshotId && candidate.headshotId.url
+                        ? candidate.headshotId.url
+                        : null;
+                    const seatTitle =
+                      candidate &&
+                      candidate.contestId &&
+                      candidate.contestId.seatId &&
+                      candidate.contestId.seatId.title
+                        ? candidate.contestId.seatId.title
+                        : null;
+                    return (
+                      <HorizontalCard
+                        key={i}
+                        id={candidate.id}
+                        cardTitle={candidate.title}
+                        cardSubtitle={seatTitle}
+                        cardTextHtml={candidate.summaryText}
+                        category="candidates"
+                        imgSrc={headshotUrl}
+                        slug={`${candidate.state.title}/${candidate.slug}`}
+                        imgShape="square"
+                      />
+                    );
+                  })}
+                </HorizontalCards>
+              ) : (
+                <h2>No Candidates Meet Your Criteria.</h2>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      </main>
     );
   }
 }
