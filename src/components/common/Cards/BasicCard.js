@@ -4,7 +4,7 @@ import ImageWithBackgroundPlaceholderImage from '../ImageWithBackgroundPlacehold
 import CardHover from './CardHover';
 import './BasicCard.css';
 
-const BasicCard = ({title="", text="", route="", slug="", imageSrc="", aspectRatio="100", imageAlt="",}) => (
+const BasicCard = ({title="", subtitle, text="", route="", slug="", imageSrc="", aspectRatio="100", }) => (
   <Link
     to={`/${route}/${slug}`}
   >
@@ -17,7 +17,8 @@ const BasicCard = ({title="", text="", route="", slug="", imageSrc="", aspectRat
 	      />
 	      <div className="contents">
 		      <h3 className="title">{title}</h3>
-		      <p>{text}</p>
+		      {subtitle && <h4>{subtitle}</h4>}
+		      {text && <p>{text}</p>}
 	      </div>
 	   </div>
   	</CardHover>
