@@ -6,7 +6,7 @@ import Parallax from '../common/Parallax/Parallax';
 import CandidatesFaces from '../common/CandidatesFaces';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import CardHover from '../common/Cards/CardHover';
-import FooterCard from '../common/Cards/FooterCard';
+import BasicCard from '../common/Cards/BasicCard';
 import ArticleCard from '../common/Cards/ArticleCard';
 import VideoResponsive from '../common/Videos/VideoResponsive';
 import candidatesVA2017 from '../../data/candidatesVA2017';
@@ -128,19 +128,13 @@ const Home = props => {
 
                   return (
                     <GridXSmallIsOneSmallIsThree key={i}>
-                      <CardHover>
-                        <Link
-                          to={`candidates/${candidate.state.title}/${
-                            candidate.slug
-                          }`}
-                        >
-                          <FooterCard
-                            cardTitle={candidate.title}
-                            cardSubtitle={seatTitle}
-                            imgSrc={headshotUrl}
-                          />
-                        </Link>
-                      </CardHover>
+                      <BasicCard
+                        title={candidate.title}
+                        subtitle={seatTitle}
+                        route={`candidates/${candidate.state.title}`}
+                        slug={candidate.slug}
+                        imageSrc={headshotUrl}
+                      />
                     </GridXSmallIsOneSmallIsThree>
                   );
                 })
