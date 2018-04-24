@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
-import CardHover from '../common/Cards/CardHover';
-import FooterCard from '../common/Cards/FooterCard';
+import BasicCard from '../common/Cards/BasicCard';
 
 const States = ({ currentStateRaces }) => (
   <section className="States">
@@ -13,15 +12,14 @@ const States = ({ currentStateRaces }) => (
         </h2>
         {currentStateRaces.map((state, i) => (
           <GridXSmallIsOneSmallIsThree key={i}>
-            <CardHover>
-              <Link to={`./districts/${state}`}>
-                <FooterCard
-                  cardTitle={state}
-                  imgSrc={`../images/${state}.jpg`}
-                  insetImg="insetImg"
-                />
-              </Link>
-            </CardHover>
+            <BasicCard
+              title={state}
+              text=""
+              route="states"
+              slug={state}
+              imageSrc={`../images/${state}.jpg`}
+              imageAlt={state}
+            />
           </GridXSmallIsOneSmallIsThree>
         ))}
       </div>
