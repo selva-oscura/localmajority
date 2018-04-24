@@ -11,8 +11,7 @@ import Article from './Articles/Article';
 import Candidate from './Candidates/Candidate';
 import Candidates from './Candidates/Candidates';
 import States from './States/States';
-import District from './Districts/District';
-import Districts from './Districts/Districts';
+import State from './States/State';
 import Issue from './Issues/Issue';
 import Issues from './Issues/Issues';
 import AboutUs from './AboutUs/AboutUs';
@@ -258,6 +257,27 @@ class App extends Component {
     // console.log('candidatesWithProblematicData', candidatesWithProblematicData);
 
     // RETURN HERE
+    // delete next section once we have state data in database
+
+    const stateFakeData = [
+      {
+        title:  "Florida",
+        text:   "Democrats make up nearly 50% in this heavily-gerrymandered state but have little representation in state government. Only 40% in the Senate and 33% in the House. It's time to turn the state Blue!",
+      },{
+        title:  "Michigan",
+        text:   "Democrats make up 49.8% of the electorate but are not represented in this heavily-gerrymandered and voter- suppressed state. The Dems only have 43% of the Senate and only 29% of the Senate! With all the term limits, it's time to turn this state back to BLUE!",
+      },{
+        title:  "Minnesota",
+        text:   "Hillary carried Minnesota by 1.4% in the General Election after losing to Sanders in the Democratic primary 62% to 38%. Elections in November 2018 are for all 134 members of the State House. Democrats need to flip 11 seats to regain control. Hillary won 12 of the districts in 2016 that are currently occupied by a nervous Republican. The State Senate is not up for reelection in November 2018."
+      }
+    ];
+
+    // RETURN HERE -- END
+    // END -- delete previous section once we have state info in the database
+
+
+
+    // RETURN HERE
     // delete next next section once we have real issues and articles
     const issueTitles = [
       'Economy',
@@ -328,7 +348,7 @@ class App extends Component {
       });
     });
     // RETURN HERE -- END
-    // END -- delete next next section once we have real issues and articles
+    // END -- delete previous section once we have real issues and articles
 
     return (
       <Switch>
@@ -511,48 +531,34 @@ class App extends Component {
         />
 
         <Route
-          path="/districts/:state/:slug"
+          path="/states/:state"
           component={props => {
-            const seat = seats
-              ? seats.find(seat => props.match.params.slug === seat.slug)
-              : null;
-            const seatDetail =
-              seatsDetails && seatsDetails[props.match.params.slug]
-                ? seatsDetails[props.match.params.slug]
-                : null;
+            const stateData = stateFakeData.find(state => props.match.params.state.toLowerCase() === state.title.toLowerCase());
+
+            const stateCandidates = validFutureCandidates.filter(candidate => props.match.params.state.toLowerCase() === candidate.state.title.toLowerCase())
+            const stateReports = articles.filter(article => article.tags && article.tags.includes(props.match.params.state));
+
             return (
               <ErrorBoundary>
-                <District
-                  {...props}
-                  seat={seat}
-                  seatDetail={seatDetail}
-                  updateStateDetail={this.updateStateDetail}
-                />
+                {validFutureCandidatesStates &&
+                validFutureCandidatesStates.length ? (
+                  <State
+                    {...props}
+
+                    state={stateData}
+                    candidates={stateCandidates}
+                    reports={stateReports}
+                  />
+                ) : (
+                  <Loading />
+                )}
               </ErrorBoundary>
-            );
-          }}
-        />
-        <Route
-          path="/districts/:state"
-          component={props => (
-            <ErrorBoundary>
-              {seats &&
-              validFutureCandidatesStates &&
-              validFutureCandidatesStates.length ? (
-                <Districts
-                  {...props}
-                  seats={seats}
-                  statesMasterList={validFutureCandidatesStates}
-                />
-              ) : (
-                <Loading />
-              )}
-            </ErrorBoundary>
-          )}
+              )
+            }}
         />
 
         <Route
-          path="/districts"
+          path="/states"
           component={props =>
             seats &&
             validFutureCandidatesStates &&
