@@ -2,7 +2,7 @@ export default [
   { path: '/', name: 'Home', shortName: 'Home', exact: true },
   { path: '/reports', name: 'Reports', shortName: 'Reports', exact: false },
   {
-    path: '/districts',
+    path: '/states',
     name: 'States',
     shortName: 'States',
     exact: false,
