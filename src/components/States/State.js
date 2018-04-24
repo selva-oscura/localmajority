@@ -5,6 +5,14 @@ import BasicCard from '../common/Cards/BasicCard';
 
 class State extends Component {
 
+  componentDidMount() {
+    this.props.match.params.state
+      ? (document.title = `Local Majority | States | ${
+          this.props.match.params.state
+        }`)
+      : (document.title = 'Local Majority | States');
+  }
+
   render(){
     const { state, candidates, reports } = this.props;
     console.log('state', state);
