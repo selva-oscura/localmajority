@@ -1,24 +1,23 @@
-.BasicCard {
-/*	font-size: .67em;*/
-}
-
 .BasicCard .contents{
-	padding: 0px 12px 12px;
+	padding: 0px 9px 6px;
 }
 
-.BasicCard h3, .BasicCard p{
+.BasicCard h3, .BasicCard h4, .BasicCard p {
 	vertical-align: text-bottom;
 }
 
 .BasicCard h3.title {
 	font-weight: bold;
+}
+
+.BasicCard h3.title, .BasicCard h4 {
 	line-height: 1em;
 	text-align: center;
 } 
 
 .BasicCard p {
 	font-weight: normal;
-	font-size: 1.17em;
+	font-size: 1em;
 	line-height: 1em;
 	margin-bottom: 0;
 	padding-bottom: 0;
