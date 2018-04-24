@@ -17,7 +17,7 @@ const ArticleCard = ({slug, imageSrc, imageAlt="", title, author, updatedAt, tag
 	        aspectRatioInPercent="75"
 	      />
 	      <div className="contents">
-		      <h2 className="title">{title}</h2>
+		      <h3 className="title">{title}</h3>
 		      <p className="details">{author}</p>
 		      <p className="details text-right">updated {prettifyDate(updatedAt)}</p>
 	      </div>
