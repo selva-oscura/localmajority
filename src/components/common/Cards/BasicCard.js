@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ImageWithBackgroundPlaceholderImage from '../ImageWithBackgroundPlaceholderImage';
 import CardHover from './CardHover';
+import './BasicCard.css';
 
 const BasicCard = ({title="", text="", route="", slug="", imageSrc="", aspectRatio="100", imageAlt="",}) => (
   <Link
