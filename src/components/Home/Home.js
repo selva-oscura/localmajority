@@ -69,33 +69,31 @@ const Home = props => {
               Read <Link to="./reports">here</Link> for our latest in-depth
               research reports supporting progressive state district campaigns.
             </p>
-            <div className="row">
-              {articles && articles.length ? (
-                articles.slice(0, 3).map(article => {
-                  let cardTags = article && article.tags ? article.tags : [];
-                  let articleThumbnail = article.thumbnail
-                    ? article.thumbnail
-                    : 'https://placekitten.com/200/150';
-
-                  return (
-                    <GridXSmallIsOneSmallIsThree key={article.slug}>
-                      <ArticleCard
-                        slug={article.slug}
-                        imageSrc={articleThumbnail}
-                        title={article.title}
-                        author={article.author}
-                        updatedAt={article.updatedAt}
-                        tagRoute="reports"
-                        tags={cardTags}
-                      />
-                    </GridXSmallIsOneSmallIsThree>
-                  );
-                })
-              ) : (
-                <h2>Loading</h2>
-              )}
-            </div>
           </div>
+          {articles && articles.length ? (
+            articles.slice(0, 3).map(article => {
+              let cardTags = article && article.tags ? article.tags : [];
+              let articleThumbnail = article.thumbnail
+                ? article.thumbnail
+                : 'https://placekitten.com/200/150';
+
+              return (
+                <GridXSmallIsOneSmallIsThree key={article.slug}>
+                  <ArticleCard
+                    slug={article.slug}
+                    imageSrc={articleThumbnail}
+                    title={article.title}
+                    author={article.author}
+                    updatedAt={article.updatedAt}
+                    tagRoute="reports"
+                    tags={cardTags}
+                  />
+                </GridXSmallIsOneSmallIsThree>
+              );
+            })
+          ) : (
+            <h2 className="col-12">Loading</h2>
+          )}
         </div>
       </section>
 
@@ -111,38 +109,36 @@ const Home = props => {
               Click <Link to="./candidates">here</Link> for all the progressive
               state district campaigns we are supporting with our research.
             </p>
-            <div className="row">
-              {candidates && candidates.length ? (
-                candidates.map((candidate, i) => {
-                  const headshotUrl =
-                    candidate.headshotId && candidate.headshotId.url
-                      ? candidate.headshotId.url
-                      : null;
-                  const seatTitle =
-                    candidate &&
-                    candidate.contestId &&
-                    candidate.contestId.seatId &&
-                    candidate.contestId.seatId.title
-                      ? candidate.contestId.seatId.title
-                      : null;
-
-                  return (
-                    <GridXSmallIsOneSmallIsThree key={i}>
-                      <BasicCard
-                        title={candidate.title}
-                        subtitle={seatTitle}
-                        route={`candidates/${candidate.state.title}`}
-                        slug={candidate.slug}
-                        imageSrc={headshotUrl}
-                      />
-                    </GridXSmallIsOneSmallIsThree>
-                  );
-                })
-              ) : (
-                <h2>Loading</h2>
-              )}
-            </div>
           </div>
+          {candidates && candidates.length ? (
+            candidates.map((candidate, i) => {
+              const headshotUrl =
+                candidate.headshotId && candidate.headshotId.url
+                  ? candidate.headshotId.url
+                  : null;
+              const seatTitle =
+                candidate &&
+                candidate.contestId &&
+                candidate.contestId.seatId &&
+                candidate.contestId.seatId.title
+                  ? candidate.contestId.seatId.title
+                  : null;
+
+              return (
+                <GridXSmallIsOneSmallIsThree key={i}>
+                  <BasicCard
+                    title={candidate.title}
+                    subtitle={seatTitle}
+                    route={`candidates/${candidate.state.title}`}
+                    slug={candidate.slug}
+                    imageSrc={headshotUrl}
+                  />
+                </GridXSmallIsOneSmallIsThree>
+              );
+            })
+          ) : (
+            <h2 className="col-12">Loading</h2>
+          )}
         </div>
       </section>
 
