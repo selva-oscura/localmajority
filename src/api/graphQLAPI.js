@@ -293,6 +293,35 @@ const queries = {
       }
     }
   `,
+  StateDetailBySlug: gql`
+    query StateDetail($slug: String!) {
+      State(slug: $slug) {
+        id
+        slug
+        title
+        updatedAt
+        contestIds {
+          id
+          electionDate
+          seatId {
+            id
+            slug
+            title
+          }
+          candidateIds {
+            id
+            slug
+            title
+            headshotId {
+              id
+              url
+            }
+            summaryText
+          }
+        }
+      }
+    }
+  `,
   Parties: gql`
     query Parties {
       allParties {
