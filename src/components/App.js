@@ -13,7 +13,6 @@ import Candidates from './Candidates/Candidates';
 import States from './States/States';
 import State from './States/State';
 import Issue from './Issues/Issue';
-import Issues from './Issues/Issues';
 import AboutUs from './AboutUs/AboutUs';
 import TakeAction from './TakeAction/TakeAction';
 import Elements from './common/Elements';
@@ -45,10 +44,9 @@ class App extends Component {
         candidates: [],
         candidatesDetails: {},
         issues: [],
-        seats: [],
-        seatsDetails: {},
         parties: {},
         states: [],
+        statesDetails: {},
         statesMasterList: [],
         timestamp: -Infinity,
       };
@@ -70,8 +68,8 @@ class App extends Component {
   }
 
   updateStateDetail(detail, key, value) {
-    // this is for seatsDetails and candidatesDetails
-    // detail specifies whether it is seatsDetails or candidatesDetails
+    // this is for statesDetails and candidatesDetails
+    // detail specifies whether it is statesDetails or candidatesDetails
     // key is the slug that is used in routing
     // value is the data returned from the detailed query
     console.log('updatingStateDetail', detail, key, value);
@@ -108,8 +106,6 @@ class App extends Component {
             state.articles = this.props[query].allArticles;
           } else if (query === 'CandidatesBasics') {
             state.candidates = this.props[query].allCandidates;
-          } else if (query === 'SeatsBasics') {
-            state.seats = this.props[query].allSeats;
           } else if (query === 'States') {
             state.states = this.props[query].allStates
               .map(item => {
@@ -163,6 +159,7 @@ class App extends Component {
       seatsDetails,
       candidatesDetails,
       statesMasterList,
+      statesDetails,
     } = this.state;
 
     let { articles } = this.state;
@@ -265,10 +262,10 @@ class App extends Component {
         text:   "Democrats make up nearly 50% in this heavily-gerrymandered state but have little representation in state government. Only 40% in the Senate and 33% in the House. It's time to turn the state Blue!",
       },{
         title:  "Michigan",
-        text:   "Democrats make up 49.8% of the electorate but are not represented in this heavily-gerrymandered and voter- suppressed state. The Dems only have 43% of the Senate and only 29% of the Senate! With all the term limits, it's time to turn this state back to BLUE!",
+        text:   "Democrats make up 49.8% of the electorate but are not represented in this heavily-gerrymandered and voter-suppressed state. The Dems only have 43% of the Senate and only 29% of the Senate! With all the term limits, it's time to turn this state back to BLUE!",
       },{
         title:  "Minnesota",
-        text:   "Hillary carried Minnesota by 1.4% in the General Election after losing to Sanders in the Democratic primary 62% to 38%. Elections in November 2018 are for all 134 members of the State House. Democrats need to flip 11 seats to regain control. Hillary won 12 of the districts in 2016 that are currently occupied by a nervous Republican. The State Senate is not up for reelection in November 2018."
+        text:   "All 134 members of the State House are up for election in November 2018, and Democrats only need to flip 11 seats to regain control. In 2016 Hillary carried Minnesota by 1.4%, winning 12 of the districts that are currently occupied by nervous Republicans."
       }
     ];
 
@@ -360,7 +357,9 @@ class App extends Component {
               articles={articles}
               pastCandidates={validPastCandidates}
               candidates={validFutureCandidates}
-              currentStateRaces={validFutureCandidatesStates}
+              // should be restored once we have a database that will support this
+              // currentStateRaces={validFutureCandidatesStates}
+              currentStateRaces={stateFakeData}
             />
           )}
         />
@@ -394,9 +393,8 @@ class App extends Component {
           component={props => (
             <ErrorBoundary>
               {issues && statesMasterList && statesMasterList.length ? (
-                <Issues
+                <Issue
                   {...props}
-                  issues={issues}
                   articles={articles}
                   statesMasterList={statesMasterList}
                 />
@@ -531,12 +529,16 @@ class App extends Component {
         />
 
         <Route
-          path="/states/:state"
+          path="/states/:slug"
           component={props => {
-            const stateData = stateFakeData.find(state => props.match.params.state.toLowerCase() === state.title.toLowerCase());
+            const stateData = stateFakeData.find(state => props.match.params.slug.toLowerCase() === state.title.toLowerCase());
+            const stateDetail =
+              statesDetails && statesDetails[props.match.params.slug]
+                ? statesDetails[props.match.params.slug]
+                : null;
 
-            const stateCandidates = validFutureCandidates.filter(candidate => props.match.params.state.toLowerCase() === candidate.state.title.toLowerCase())
-            const stateReports = articles.filter(article => article.tags && article.tags.includes(props.match.params.state));
+            const stateCandidates = validFutureCandidates.filter(candidate => props.match.params.slug.toLowerCase() === candidate.state.title.toLowerCase())
+            const stateArticles = articles.filter(article => article.tags && article.tags.includes(props.match.params.slug));
 
             return (
               <ErrorBoundary>
@@ -544,10 +546,12 @@ class App extends Component {
                 validFutureCandidatesStates.length ? (
                   <State
                     {...props}
-
                     state={stateData}
+                    stateDetail={stateDetail}
                     candidates={stateCandidates}
-                    reports={stateReports}
+                    articles={stateArticles}
+                    statesMasterList={validFutureCandidatesStates}
+                    updateStateDetail={this.updateStateDetail}
                   />
                 ) : (
                   <Loading />
@@ -563,7 +567,11 @@ class App extends Component {
             seats &&
             validFutureCandidatesStates &&
             validFutureCandidatesStates.length ? (
-              <States currentStateRaces={validFutureCandidatesStates} />
+              <States
+                // should be restored once we have a database that will support this
+                // currentStateRaces={validFutureCandidatesStates}
+                currentStateRaces={stateFakeData}
+              />
             ) : (
               <Loading />
             )
@@ -623,7 +631,6 @@ class App extends Component {
 export default compose(
   graphql(graphQLAPI.queries.ArticlesBasics, { name: 'ArticlesBasics' }),
   graphql(graphQLAPI.queries.CandidatesBasics, { name: 'CandidatesBasics' }),
-  graphql(graphQLAPI.queries.SeatsBasics, { name: 'SeatsBasics' }),
   graphql(graphQLAPI.queries.Parties, { name: 'Parties' }),
   graphql(graphQLAPI.queries.States, { name: 'States' })
 )(App);
