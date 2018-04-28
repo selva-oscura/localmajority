@@ -1,17 +1,21 @@
 import React from 'react';
 import { prettifyTimestamp } from '../../utils/functions';
 
-const Offline = ({ timestamp }) => {
-  return timestamp ? (
-    <p className="error">
-      Currently offline. Showing stored data.<br />Last updated:{' '}
-      {prettifyTimestamp(timestamp)}.
-    </p>
-  ) : (
-    <p className="error">
-      Currently offline. Please reconnect to get full information.
-    </p>
-  );
-};
+const Offline = ({ timestamp }) => (
+  <section className="container">
+    <div className="row">
+      {timestamp ? (
+        <h2 className="col-12">
+          Currently offline. Showing stored data.<br />Last updated:{' '}
+          {prettifyTimestamp(timestamp)}.
+        </h2>
+      ) : (
+        <h2 className="col-12">
+          Currently offline. Please reconnect to get full information.
+        </h2>
+      )}
+    </div>
+  </section>
+);
 
 export default Offline;
