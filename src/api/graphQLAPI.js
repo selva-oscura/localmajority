@@ -35,65 +35,6 @@ const queries = {
       }
     }
   `,
-  CandidateDetail: gql`
-    query CandidateDetail($id: ID!) {
-      Candidate(id: $id) {
-        id
-        title
-        bioText
-        campaignEmail
-        contestId {
-          id
-          electionDate
-          seatId {
-            id
-            lat
-            lng
-            regionKind
-            regionName
-            slug
-            title
-            primers {
-              id
-              articleType
-              author
-              content
-              title
-              updatedAt
-            }
-          }
-        }
-        donateUrl
-        facebook
-        firstName
-        lastName
-        headshotId {
-          id
-          url
-        }
-        homepageUrl
-        partyId {
-          id
-          title
-        }
-        primers {
-          id
-          articleType
-          author
-          updatedAt
-          content
-          title
-        }
-        summaryText
-        state {
-          id
-          abbrev
-          title
-        }
-        twitter
-      }
-    }
-  `,
   CandidatesBasics: gql`
     query CandidatesBasics {
       allCandidates {
@@ -129,14 +70,6 @@ const queries = {
         title
         bioText
         campaignEmail
-        donateUrl
-        facebook
-        firstName
-        lastName
-        homepageUrl
-        summaryText
-        twitter
-        updatedAt
         contestId {
           id
           electionDate
@@ -159,11 +92,16 @@ const queries = {
           }
           updatedAt
         }
+        donateUrl
+        facebook
+        firstName
+        lastName
         headshotId {
           id
           url
           updatedAt
         }
+        homepageUrl
         partyId {
           id
           title
@@ -183,6 +121,9 @@ const queries = {
           title
           updatedAt
         }
+        summaryText
+        twitter
+        updatedAt
       }
     }
   `,
@@ -213,6 +154,26 @@ const queries = {
       }
     }
   `,
+  Parties: gql`
+    query Parties {
+      allParties {
+        id
+        title
+        color
+        homepageUrl
+        iconUrl
+      }
+    }
+  `,
+  States: gql`
+    query States {
+      allStates {
+        id
+        abbrev
+        title
+      }
+    }
+  `,
   StateDetailBySlug: gql`
     query StateDetail($slug: String!) {
       State(slug: $slug) {
@@ -239,26 +200,6 @@ const queries = {
             summaryText
           }
         }
-      }
-    }
-  `,
-  Parties: gql`
-    query Parties {
-      allParties {
-        id
-        title
-        color
-        homepageUrl
-        iconUrl
-      }
-    }
-  `,
-  States: gql`
-    query States {
-      allStates {
-        id
-        abbrev
-        title
       }
     }
   `,
