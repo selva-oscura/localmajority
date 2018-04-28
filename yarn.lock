@@ -5658,6 +5658,10 @@ react-event-listener@^0.5.1:
     prop-types "^15.6.0"
     warning "^3.0.0"
 
+react-parallax@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/react-parallax/-/react-parallax-1.7.0.tgz#0f7e1a997cd78e517bda45536cbefea48891c5bf"
+
 react-responsive-carousel@^3.1.36:
   version "3.1.36"
   resolved "https://registry.yarnpkg.com/react-responsive-carousel/-/react-responsive-carousel-3.1.36.tgz#e50abd6113627ebc9326f67d6c68e82509feddd9"
