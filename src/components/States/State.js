@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { graphql, compose } from 'react-apollo';
 import graphQLAPI from '../../api/graphQLAPI';
-import { Link } from 'react-router-dom';
 import ArticleCard from '../common/Cards/ArticleCard';
 import BasicCard from '../common/Cards/BasicCard';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
@@ -12,8 +12,17 @@ import { getMostRecentUpdateTimestamp } from '../../utils/functions';
 import loremIpsum from '../../data/loremIpsum';
 
 class State extends Component {
-
+  // redirect to /states if /states/:slug is not a state for which we have information
+  // (shouldn't be called if picking state from selector on page, but if directly typing in url or following faulty link this will redirect to the default page)\
   componentDidMount() {
+    const state = this.props.stateDetail
+      ? this.props.stateDetail
+      : this.props.state;
+
+    if (!state) {
+      return this.props.history.push('/states');
+    }
+
     this.props.match.params.slug
       ? (document.title = `Local Majority | States | ${
           this.props.match.params.slug
@@ -45,7 +54,28 @@ class State extends Component {
   }
 
   render(){
+
+
+    // isLoading and isOffline are checking on the data coming from Apollo (graphql)
+    // when the query resolves, it is intercepted in componentDidUpdate and used to
+    // update state in App
+    const isLoading = this.props.StateDetailBySlug.loading;
+    if (isLoading) {
+      return <Loading />;
+    }
+    const isOffline =
+      this.props.StateDetailBySlug.error &&
+      this.props.StateDetailBySlug.error.message.indexOf('Network error') > -1
+        ? true
+        : false;
+
+
     const { candidates, articles } = this.props;
+
+    // stateDetail and state (federal state, not app's state) are params passed by router
+    // in App -- stateDetail gets populated / updated when this.props.StateDetailBySlug
+    // is provided by Apollo and updates this.state (app's state) when it is intercepted
+    // by componentDidUpdate
     const state = this.props.stateDetail
       ? this.props.stateDetail
       : this.props.state;
@@ -58,6 +88,7 @@ class State extends Component {
       }
       return <p key={i}>{p.content}</p>;
     };
+
     return (
       <section className="State">
         <div className="container">
