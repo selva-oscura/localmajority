@@ -53,6 +53,14 @@ const queries = {
             regionName
             slug
             title
+            primers {
+              id
+              articleType
+              author
+              content
+              title
+              updatedAt
+            }
           }
         }
         donateUrl
@@ -104,6 +112,7 @@ const queries = {
           seatId {
             id
             title
+            slug
           }
         }
         headshotId {
@@ -139,6 +148,14 @@ const queries = {
             regionName
             slug
             title
+            primers {
+              id
+              articleType
+              author
+              content
+              title
+              updatedAt
+            }
           }
           updatedAt
         }
@@ -193,103 +210,6 @@ const queries = {
         id
         title
         slug
-      }
-    }
-  `,
-  SeatsBasics: gql`
-    query SeatsBasics {
-      allSeats {
-        id
-        title
-        slug
-        regionKind
-        contestIds {
-          title
-          electionDate
-          candidateIds {
-            id
-            title
-            slug
-          }
-        }
-        state {
-          id
-          title
-        }
-      }
-    }
-  `,
-  SeatDetail: gql`
-    query SeatDetail($id: ID!) {
-      Seat(id: $id) {
-        id
-        regionKind
-        slug
-        title
-        contestIds {
-          id
-          title
-          electionDate
-          updatedAt
-          candidateIds {
-            id
-            title
-            slug
-            updatedAt
-          }
-        }
-        primers {
-          articleType
-          author
-          author
-          content
-          title
-          updatedAt
-        }
-        state {
-          title
-          updatedAt
-        }
-      }
-    }
-  `,
-  SeatDetailBySlug: gql`
-    query SeatDetail($slug: String!) {
-      Seat(slug: $slug) {
-        id
-        title
-        regionKind
-        slug
-        state {
-          id
-          title
-          updatedAt
-        }
-        primers {
-          id
-          articleType
-          author
-          content
-          title
-          updatedAt
-        }
-        contestIds {
-          id
-          title
-          electionDate
-          updatedAt
-          candidateIds {
-            id
-            title
-            slug
-            updatedAt
-            headshotId {
-              id
-              url
-              updatedAt
-            }
-          }
-        }
       }
     }
   `,
