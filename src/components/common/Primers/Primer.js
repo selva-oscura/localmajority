@@ -16,13 +16,14 @@ const Primer = ({ primer, i }) => (
           : '';
       const body = section.body;
       const btype = body && body.type;
+      const titleAndContent = (title && body.text) || (title && body.url) || (title && !body);
       if (!body && !title) {
         return null;
       }
       return (
         <Aux key={`primer-${i}-section-${s}`}>
           <div className={section.tag} key={section.tag}>
-            {title && (
+            {titleAndContent && (
               <h3 className="section-head">
                 <PrimerStyling styling={specialStyling}>{title}</PrimerStyling>
               </h3>
