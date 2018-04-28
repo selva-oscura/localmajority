@@ -8,7 +8,7 @@ class CardHover extends Component {
     super(props);
     this.state = { depth: 0 };
   }
-  onMouseOver = () => this.setState({ depth: 2 });
+  onMouseOver = () => this.setState({ depth: 0 });
   onMouseOut = () => this.setState({ depth: 0 });
   render() {
     let {
