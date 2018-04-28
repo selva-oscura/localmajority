@@ -28,12 +28,12 @@ class Candidate extends Component {
     }
     this.state = {
       showDistrictDetail: false,
-    }
-    this.showDistrictDetail = this.showDistrictDetail.bind(this)
+    };
+    this.showDistrictDetail = this.showDistrictDetail.bind(this);
   }
 
-  showDistrictDetail(){
-    this.setState({showDistrictDetail: true});
+  showDistrictDetail() {
+    this.setState({ showDistrictDetail: true });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -86,11 +86,10 @@ class Candidate extends Component {
       candidate.headshotId && candidate.headshotId.url
         ? candidate.headshotId.url
         : null;
-    const stateName = 
-      candidate.state &&
-      candidate.state.title
+    const stateName =
+      candidate.state && candidate.state.title
         ? candidate.state.title
-        : "State Name Missing";
+        : 'State Name Missing';
     const seatTitle =
       candidate.contestId &&
       candidate.contestId.seatId &&
@@ -111,7 +110,7 @@ class Candidate extends Component {
       candidate.contestId.seatId.seatInStateImg.url
         ? candidate.contestId.seatId.seatInStateImg.url
         : 'Need image of district in state';
-    const seatPrimer = 
+    const seatPrimer =
       candidate.contestId &&
       candidate.contestId.seatId &&
       candidate.contestId.seatId.primers &&
@@ -254,7 +253,14 @@ class Candidate extends Component {
                   )}
                   {seatPrimer && (
                     <div>
-                      {!this.state.showDistrictDetail && <h2 className="tertiary-text-color" onClick={this.showDistrictDetail}>&raquo; Learn More About the District</h2>}
+                      {!this.state.showDistrictDetail && (
+                        <h2
+                          className="tertiary-text-color"
+                          onClick={this.showDistrictDetail}
+                        >
+                          &raquo; Learn More About the District
+                        </h2>
+                      )}
 
                       {this.state.showDistrictDetail && (
                         <div className="row">
@@ -272,7 +278,7 @@ class Candidate extends Component {
                             />
                           </div>
                           <div className="col-12">
-                            <Primer primer={seatPrimer}/>
+                            <Primer primer={seatPrimer} />
                           </div>
                         </div>
                       )}
@@ -285,7 +291,6 @@ class Candidate extends Component {
               </div>
             </div>
           </section>
-
         </article>
       </main>
     );

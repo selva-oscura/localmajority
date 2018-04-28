@@ -48,12 +48,13 @@ const Home = props => {
               <span className="tertiary-text-color">Key</span>
             </h2>
             <p className="text-center">
-              State legislatures not only create the laws that affect the everyday
-              lives of their constituents, they also play a critical role in
-              determining the districts for the U.S. House of Representatives and
-              thus the fate of the entire country. Local Majority provides
-              research that is practical and accessible to support progressive
-              campaigns for state legislature. Join us or support our efforts!
+              State legislatures not only create the laws that affect the
+              everyday lives of their constituents, they also play a critical
+              role in determining the districts for the U.S. House of
+              Representatives and thus the fate of the entire country. Local
+              Majority provides research that is practical and accessible to
+              support progressive campaigns for state legislature. Join us or
+              support our efforts!
             </p>
           </div>
         </div>
@@ -103,7 +104,8 @@ const Home = props => {
         <div className="row">
           <div className="col-12">
             <h2 className="text-center">
-              Our Featured <span className="tertiary-text-color">Candidates</span>
+              Our Featured{' '}
+              <span className="tertiary-text-color">Candidates</span>
             </h2>
             <p className="text-center">
               Click <Link to="./candidates">here</Link> for all the progressive

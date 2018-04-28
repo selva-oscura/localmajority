@@ -258,21 +258,24 @@ class App extends Component {
 
     const stateFakeData = [
       {
-        title:  "Florida",
-        text:   "Democrats make up nearly 50% in this heavily-gerrymandered state but have little representation in state government. Only 40% in the Senate and 33% in the House. It's time to turn the state Blue!",
-      },{
-        title:  "Michigan",
-        text:   "Democrats make up 49.8% of the electorate but are not represented in this heavily-gerrymandered and voter-suppressed state. The Dems only have 43% of the Senate and only 29% of the Senate! With all the term limits, it's time to turn this state back to BLUE!",
-      },{
-        title:  "Minnesota",
-        text:   "All 134 members of the State House are up for election in November 2018, and Democrats only need to flip 11 seats to regain control. In 2016 Hillary carried Minnesota by 1.4%, winning 12 of the districts that are currently occupied by nervous Republicans."
-      }
+        title: 'Florida',
+        text:
+          "Democrats make up nearly 50% in this heavily-gerrymandered state but have little representation in state government. Only 40% in the Senate and 33% in the House. It's time to turn the state Blue!",
+      },
+      {
+        title: 'Michigan',
+        text:
+          "Democrats make up 49.8% of the electorate but are not represented in this heavily-gerrymandered and voter-suppressed state. The Dems only have 43% of the Senate and only 29% of the Senate! With all the term limits, it's time to turn this state back to BLUE!",
+      },
+      {
+        title: 'Minnesota',
+        text:
+          'All 134 members of the State House are up for election in November 2018, and Democrats only need to flip 11 seats to regain control. In 2016 Hillary carried Minnesota by 1.4%, winning 12 of the districts that are currently occupied by nervous Republicans.',
+      },
     ];
 
     // RETURN HERE -- END
     // END -- delete previous section once we have state info in the database
-
-
 
     // RETURN HERE
     // delete next next section once we have real issues and articles
@@ -531,14 +534,25 @@ class App extends Component {
         <Route
           path="/states/:slug"
           component={props => {
-            const stateData = stateFakeData.find(state => props.match.params.slug.toLowerCase() === state.title.toLowerCase());
+            const stateData = stateFakeData.find(
+              state =>
+                props.match.params.slug.toLowerCase() ===
+                state.title.toLowerCase()
+            );
             const stateDetail =
               statesDetails && statesDetails[props.match.params.slug]
                 ? statesDetails[props.match.params.slug]
                 : null;
 
-            const stateCandidates = validFutureCandidates.filter(candidate => props.match.params.slug.toLowerCase() === candidate.state.title.toLowerCase())
-            const stateArticles = articles.filter(article => article.tags && article.tags.includes(props.match.params.slug));
+            const stateCandidates = validFutureCandidates.filter(
+              candidate =>
+                props.match.params.slug.toLowerCase() ===
+                candidate.state.title.toLowerCase()
+            );
+            const stateArticles = articles.filter(
+              article =>
+                article.tags && article.tags.includes(props.match.params.slug)
+            );
 
             return (
               <ErrorBoundary>
@@ -557,8 +571,8 @@ class App extends Component {
                   <Loading />
                 )}
               </ErrorBoundary>
-              )
-            }}
+            );
+          }}
         />
 
         <Route

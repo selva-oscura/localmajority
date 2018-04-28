@@ -53,9 +53,7 @@ class State extends Component {
     }
   }
 
-  render(){
-
-
+  render() {
     // isLoading and isOffline are checking on the data coming from Apollo (graphql)
     // when the query resolves, it is intercepted in componentDidUpdate and used to
     // update state in App
@@ -68,7 +66,6 @@ class State extends Component {
       this.props.StateDetailBySlug.error.message.indexOf('Network error') > -1
         ? true
         : false;
-
 
     const { candidates, articles } = this.props;
 
@@ -84,18 +81,21 @@ class State extends Component {
       if (p.format === 'title') {
         return <h3 key={i}>{p.content}</h3>;
       } else if (p.format === 'subtitle') {
-        return <h4 key={i}><i>{p.content}</i></h4>;
+        return (
+          <h4 key={i}>
+            <i>{p.content}</i>
+          </h4>
+        );
       }
       return <p key={i}>{p.content}</p>;
     };
 
     return (
       <section className="State">
+        {isOffline && <Offline timestamp={state.timestamp} />}
         <div className="container">
           <div className="row">
-            <h2 className="text-center col-12">
-              {state.title}
-            </h2>
+            <h2 className="text-center col-12">{state.title}</h2>
             {state.content ? (
               <Primer primer={state} />
             ) : (
@@ -106,69 +106,77 @@ class State extends Component {
         <div className="container">
           <div className="row">
             <h2 className="text-center col-12">
-              Our Latest {state.title} Research <span className="tertiary-text-color">Reports</span>
+              Our Latest {state.title} Research{' '}
+              <span className="tertiary-text-color">Reports</span>
             </h2>
             <p className="text-center">
-              See <Link to="/reports">here</Link> for our latest in-depth research reports supporting progressive state district campaigns.
+              See <Link to="/reports">here</Link> for our latest in-depth
+              research reports supporting progressive state district campaigns.
             </p>
-            {articles && articles.length && articles.slice(0, 3).map(article => {
-              let cardTags = article && article.tags ? article.tags : [];
-              let articleThumbnail = article.thumbnail
-                ? article.thumbnail
-                : 'https://placekitten.com/200/150';
+            {articles &&
+              articles.length &&
+              articles.slice(0, 3).map(article => {
+                let cardTags = article && article.tags ? article.tags : [];
+                let articleThumbnail = article.thumbnail
+                  ? article.thumbnail
+                  : 'https://placekitten.com/200/150';
 
-              return (
-                <GridXSmallIsOneSmallIsThree key={article.slug}>
-                  <ArticleCard
-                    slug={article.slug}
-                    imageSrc={articleThumbnail}
-                    title={article.title}
-                    author={article.author}
-                    updatedAt={article.updatedAt}
-                    tagRoute="reports"
-                    tags={cardTags}
-                  />
-                </GridXSmallIsOneSmallIsThree>
-              );
-            })}
-
+                return (
+                  <GridXSmallIsOneSmallIsThree key={article.slug}>
+                    <ArticleCard
+                      slug={article.slug}
+                      imageSrc={articleThumbnail}
+                      title={article.title}
+                      author={article.author}
+                      updatedAt={article.updatedAt}
+                      tagRoute="reports"
+                      tags={cardTags}
+                    />
+                  </GridXSmallIsOneSmallIsThree>
+                );
+              })}
           </div>
         </div>
         <div className="container">
           <div className="row">
             <h2 className="text-center col-12">
-              Our {state.title} <span className="tertiary-text-color">Candidates</span>
+              Our {state.title}{' '}
+              <span className="tertiary-text-color">Candidates</span>
             </h2>
-            <p className="text-center">We are supporting candidates where we can make a big difference and help flip seats blue in State Houses and Senates.</p>
+            <p className="text-center">
+              We are supporting candidates where we can make a big difference
+              and help flip seats blue in State Houses and Senates.
+            </p>
           </div>
-          {candidates && candidates.map((candidate, i) => {
-            const headshotUrl =
-              candidate.headshotId && candidate.headshotId.url
-                ? candidate.headshotId.url
-                : null;
-            const seatTitle =
-              candidate &&
-              candidate.contestId &&
-              candidate.contestId.seatId &&
-              candidate.contestId.seatId.title
-                ? candidate.contestId.seatId.title
-                : null;
+          {candidates &&
+            candidates.map((candidate, i) => {
+              const headshotUrl =
+                candidate.headshotId && candidate.headshotId.url
+                  ? candidate.headshotId.url
+                  : null;
+              const seatTitle =
+                candidate &&
+                candidate.contestId &&
+                candidate.contestId.seatId &&
+                candidate.contestId.seatId.title
+                  ? candidate.contestId.seatId.title
+                  : null;
 
-            return (
-              <GridXSmallIsOneSmallIsThree key={i}>
-                <BasicCard
-                  title={candidate.title}
-                  subtitle={seatTitle}
-                  route={`candidates/${candidate.state.title}`}
-                  slug={candidate.slug}
-                  imageSrc={headshotUrl}
-                />
-              </GridXSmallIsOneSmallIsThree>
-            );
-          })}
+              return (
+                <GridXSmallIsOneSmallIsThree key={i}>
+                  <BasicCard
+                    title={candidate.title}
+                    subtitle={seatTitle}
+                    route={`candidates/${candidate.state.title}`}
+                    slug={candidate.slug}
+                    imageSrc={headshotUrl}
+                  />
+                </GridXSmallIsOneSmallIsThree>
+              );
+            })}
         </div>
       </section>
-    )
+    );
   }
 }
 
@@ -177,7 +185,7 @@ export default compose(
     name: 'StateDetailBySlug',
     options: props => {
       let slug = props.match.params.slug.toLowerCase();
-      return { variables: { slug } }
-    }
+      return { variables: { slug } };
+    },
   })
 )(State);
