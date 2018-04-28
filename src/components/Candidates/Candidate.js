@@ -26,6 +26,14 @@ class Candidate extends Component {
     } else {
       document.title = 'Local Majority | Unrecognized Candidate';
     }
+    this.state = {
+      showDistrictDetail: false,
+    }
+    this.showDistrictDetail = this.showDistrictDetail.bind(this)
+  }
+
+  showDistrictDetail(){
+    this.setState({showDistrictDetail: true});
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -78,6 +86,11 @@ class Candidate extends Component {
       candidate.headshotId && candidate.headshotId.url
         ? candidate.headshotId.url
         : null;
+    const stateName = 
+      candidate.state &&
+      candidate.state.title
+        ? candidate.state.title
+        : "State Name Missing";
     const seatTitle =
       candidate.contestId &&
       candidate.contestId.seatId &&
@@ -98,11 +111,18 @@ class Candidate extends Component {
       candidate.contestId.seatId.seatInStateImg.url
         ? candidate.contestId.seatId.seatInStateImg.url
         : 'Need image of district in state';
-
+    const seatPrimer = 
+      candidate.contestId &&
+      candidate.contestId.seatId &&
+      candidate.contestId.seatId.primers &&
+      candidate.contestId.seatId.primers.length
+        ? candidate.contestId.seatId.primers[0]
+        : null;
     const electionDate =
       candidate.contestId && candidate.contestId.electionDate
         ? prettifyDate(candidate.contestId.electionDate)
         : null;
+    console.log('all data from CandidateDetail', candidate);
 
     return (
       <main className="Candidate">
@@ -206,6 +226,7 @@ class Candidate extends Component {
             <div className="row">
               <div className="col-12 col-lg-8 col-xl-9">
                 <div className="Main">
+                  <h2>{candidate.title}</h2>
                   {candidate.summaryText && (
                     <Aux>
                       <h3>Summary</h3>
@@ -231,6 +252,32 @@ class Candidate extends Component {
                       ))}
                     </Aux>
                   )}
+                  {seatPrimer && (
+                    <div>
+                      {!this.state.showDistrictDetail && <h2 className="tertiary-text-color" onClick={this.showDistrictDetail}>&raquo; Learn More About the District</h2>}
+
+                      {this.state.showDistrictDetail && (
+                        <div className="row">
+                          <h2 className="col-12">{seatTitle}</h2>
+                          <div className="col-6">
+                            <ImageWithBackgroundPlaceholderImage
+                              imageSrc={seatMap}
+                              imageAlt={`district map of ${seatTitle}`}
+                            />
+                          </div>
+                          <div className="col-6">
+                            <ImageWithBackgroundPlaceholderImage
+                              imageSrc={seatInStateMap}
+                              imageAlt={`map of ${seatTitle}'s location within ${stateName}`}
+                            />
+                          </div>
+                          <div className="col-12">
+                            <Primer primer={seatPrimer}/>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="col-12 col-lg-4 col-xl-3">
@@ -238,6 +285,7 @@ class Candidate extends Component {
               </div>
             </div>
           </section>
+
         </article>
       </main>
     );
