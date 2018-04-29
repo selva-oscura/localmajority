@@ -20,6 +20,11 @@ Documentation at [http://react-responsive-carousel.js.org/](http://react-respons
 Storybook at [http://react-responsive-carousel.js.org/storybook/?selectedKind=Carousel&selectedStory=defaults&full=0&down=1&left=1&panelRight=0&downPanel=kadirahq%2Fstorybook-addon-actions%2Factions-panel](http://react-responsive-carousel.js.org/storybook/?selectedKind=Carousel&selectedStory=defaults&full=0&down=1&left=1&panelRight=0&downPanel=kadirahq%2Fstorybook-addon-actions%2Factions-panel)
 ES6 code at [https://github.com/leandrowd/demo-react-responsive-carousel-es6](https://github.com/leandrowd/demo-react-responsive-carousel-es6)
 
+Parallax -- used react-parallax
+Repo at [https://github.com/RRutsche/react-parallax](https://github.com/RRutsche/react-parallax)
+NPM at [https://www.npmjs.com/package/react-parallax](https://www.npmjs.com/package/react-parallax)
+Sandbox at [https://codesandbox.io/embed/r0yEkozrw?view=preview](https://codesandbox.io/embed/r0yEkozrw?view=preview)
+
 ReactTwitterWidgets -- used for displaying twitter profile
 Repo/documentation can be found at [https://github.com/andrewsuzuki/react-twitter-widgets](https://github.com/andrewsuzuki/react-twitter-widgets)
 Screenshots of available widgets and code can be found at [https://github.com/andrewsuzuki/react-twitter-widgets/blob/HEAD/site/screenshot.png](https://github.com/andrewsuzuki/react-twitter-widgets/blob/HEAD/site/screenshot.png)
