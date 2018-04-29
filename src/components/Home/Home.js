@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import States from '../States/States';
 import Slider from '../common/Sliders/Slider';
-import Parallax from '../common/Parallax/Parallax';
+import TextlessParallax from '../common/Parallax/TextlessParallax';
 import CandidatesFaces from '../common/CandidatesFaces';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import CardHover from '../common/Cards/CardHover';
@@ -178,7 +178,7 @@ const Home = props => {
         candidates={candidates}
       />
 
-      <Parallax />
+      <TextlessParallax imgSrc="https://images.unsplash.com/photo-1498092651296-641e88c3b057?auto=format&fit=crop&w=1778&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" strength="500" height="500"/>
 
       <section className="container">
         <div className="row">
@@ -202,6 +202,8 @@ const Home = props => {
           </div>
         </div>
       </section>
+
+      <TextlessParallax imgSrc="/images/constitution.jpg" strength="500" height="50"/>
 
       <section className="container">
         <div className="row">
