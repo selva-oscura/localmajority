@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import graphQLAPI from '../../api/graphQLAPI';
 import RelatedArticles from './RelatedArticles';
-import Primer from '../common/Primers/Primer';
-import Loading from '../common/Loading';
-import Offline from '../common/Offline';
 import NoSuchArticle from './NoSuchArticle';
 import Aux from '../common/Aux';
-import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import ArticleCard from '../common/Cards/ArticleCard';
+import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
+import Loading from '../common/Loading';
+import Offline from '../common/Offline';
+import Primer from '../common/Primers/Primer';
 import {
   getMostRecentUpdateTimestamp,
   prettifyDateAndTime,
