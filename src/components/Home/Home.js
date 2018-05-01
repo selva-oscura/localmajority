@@ -5,8 +5,10 @@ import Slider from '../common/Sliders/Slider';
 import TextlessParallax from '../common/Parallax/TextlessParallax';
 import CandidatesFaces from '../common/CandidatesFaces';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
+import Section from '../common/Section/Section';
 import CardHover from '../common/Cards/CardHover';
 import BasicCard from '../common/Cards/BasicCard';
+import FeaturedArticles from '../Articles/FeaturedArticles';
 import ArticleCard from '../common/Cards/ArticleCard';
 import VideoResponsive from '../common/Videos/VideoResponsive';
 import candidatesVA2017 from '../../data/candidatesVA2017';
@@ -16,31 +18,62 @@ const Home = props => {
   document.title = 'Local Majority';
 
   const { articles, candidates, currentStateRaces, pastCandidates } = props;
+  const featuredArticles = articles.slice(0, 3);
+  const slides1 = [
+    {
+      src: './images/local_majority_banner.png',
+      alt: 'local majority logo',
+    },
+    {
+      src: 'https://placekitten.com/900/300',
+      alt: 'place kitten 900 by 300',
+    },
+    {
+      src: './images/local_majority_banner.png',
+      alt: 'local majority logo',
+    },
+    {
+      src: 'https://placekitten.com/600/200',
+      alt: 'place kitten 600  by 200',
+    },
+  ];
+  const slides2 = [
+    {
+      src: './images/local_majority_banner.png',
+      alt: 'local majority logo',
+    },
+    {
+      src: 'https://placekitten.com/900/300',
+      alt: 'place kitten 900 by 300',
+    },
+    {
+      src: 'https://placekitten.com/600/200',
+      alt: 'place kitten 600  by 200',
+    },
+    {
+      src: './images/local_majority_banner.png',
+      alt: 'local majority logo',
+    },
+    {
+      src: 'https://placekitten.com/1200/300',
+      alt: 'place kitten 1200 by 300',
+    },
+    {
+      src: 'https://placekitten.com/600/300',
+      alt: 'place kitten 600 by 300',
+    },
+  ];
 
   return (
     <main className="Home">
-      <Slider
-        slides={[
-          {
-            src: './images/local_majority_banner.png',
-            alt: 'local majority logo',
-          },
-          {
-            src: 'https://placekitten.com/900/300',
-            alt: 'place kitten 900 by 300',
-          },
-          {
-            src: './images/local_majority_banner.png',
-            alt: 'local majority logo',
-          },
-          {
-            src: 'https://placekitten.com/600/200',
-            alt: 'place kitten 600  by 200',
-          },
-        ]}
-      />
+      
+      <Section hasContainer={false}>
+        <Slider
+          slides={slides1}
+        />
+      </Section>
 
-      <section className="container">
+      <Section hasContainer={true} spacingAbove={3} spacingBelow={3} background="medium">
         <div className="row">
           <div className="col-12">
             <h2 className="text-center">
@@ -58,49 +91,19 @@ const Home = props => {
             </p>
           </div>
         </div>
-      </section>
+      </Section>
 
-      <section className="container">
-        <div className="row">
-          <div className="col-12">
-            <h2 className="text-center">
-              Our Latest <span className="tertiary-text-color">Reports</span>
-            </h2>
-            <p className="text-center">
-              Read <Link to="./reports">here</Link> for our latest in-depth
-              research reports supporting progressive state district campaigns.
-            </p>
-          </div>
-          {articles && articles.length ? (
-            articles.slice(0, 3).map(article => {
-              let cardTags = article && article.tags ? article.tags : [];
-              let articleThumbnail = article.thumbnail
-                ? article.thumbnail
-                : 'https://placekitten.com/200/150';
+      <Section hasContainer={true} spacingAbove={3} spacingBelow={3}>
+        <FeaturedArticles 
+          articles={featuredArticles}
+        />
+      </Section>
 
-              return (
-                <GridXSmallIsOneSmallIsThree key={article.slug}>
-                  <ArticleCard
-                    slug={article.slug}
-                    imageSrc={articleThumbnail}
-                    title={article.title}
-                    author={article.author}
-                    updatedAt={article.updatedAt}
-                    tagRoute="reports"
-                    tags={cardTags}
-                  />
-                </GridXSmallIsOneSmallIsThree>
-              );
-            })
-          ) : (
-            <h2 className="col-12">Loading</h2>
-          )}
-        </div>
-      </section>
+      <Section hasContainer={true} spacingAbove={3} spacingBelow={3} background="light">
+        <States currentStateRaces={currentStateRaces} />
+      </Section>
 
-      <States currentStateRaces={currentStateRaces} />
-
-      <section className="container">
+      <Section hasContainer={true} spacingAbove={3} spacingBelow={3}>
         <div className="row">
           <div className="col-12">
             <h2 className="text-center">
@@ -142,70 +145,53 @@ const Home = props => {
             <h2 className="col-12">Loading</h2>
           )}
         </div>
-      </section>
+      </Section>
+      
+      <Section hasContainer={false}>
+        <Slider
+          slides={slides2}
+        />
+      </Section>
+      
+      <Section hasContainer={false}>
+        <CandidatesFaces
+          candidatesVA2017={candidatesVA2017}
+          candidates={candidates}
+        />
+      </Section>
 
-      <Slider
-        slides={[
-          {
-            src: './images/local_majority_banner.png',
-            alt: 'local majority logo',
-          },
-          {
-            src: 'https://placekitten.com/900/300',
-            alt: 'place kitten 900 by 300',
-          },
-          {
-            src: 'https://placekitten.com/600/200',
-            alt: 'place kitten 600  by 200',
-          },
-          {
-            src: './images/local_majority_banner.png',
-            alt: 'local majority logo',
-          },
-          {
-            src: 'https://placekitten.com/1200/300',
-            alt: 'place kitten 1200 by 300',
-          },
-          {
-            src: 'https://placekitten.com/600/300',
-            alt: 'place kitten 600 by 300',
-          },
-        ]}
-      />
+      <Section hasContainer={false}>
+        <TextlessParallax imgSrc="https://images.unsplash.com/photo-1498092651296-641e88c3b057?auto=format&fit=crop&w=1778&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" strength="500" height="500"/>
+      </Section>
 
-      <CandidatesFaces
-        candidatesVA2017={candidatesVA2017}
-        candidates={candidates}
-      />
-
-      <TextlessParallax imgSrc="https://images.unsplash.com/photo-1498092651296-641e88c3b057?auto=format&fit=crop&w=1778&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" strength="500" height="500"/>
-
-      <section className="container">
+      <Section hasContainer={true} spacingAbove={3} spacingBelow={3} background="medium">
         <div className="row">
           <div className="col-12 order-2 col-md-6 order-md-1">
             <VideoResponsive
-              key="vimeo-220517251"
+              key="youtube-eT2gSrO_v4g"
               title="Local Majority"
-              src="https://player.vimeo.com/video/220517251"
+              src="https://www.youtube.com/embed/eT2gSrO_v4g?start=1&amp;wmode=transparent&rel=0"
             />
           </div>
           <div className="col-12 order-1 col-md-6 order-md-2">
-            <h4 className="text-center">It's all about</h4>
-            <h2 className="text-center">
+            <h3 className="text-left">It's all about</h3>
+            <h2 className="text-left">
               Saving our <span className="tertiary-text-color">Democracy</span>
             </h2>
-            <p className="text-center">It's time to flip the country blue</p>
-            <p className="text-center">
+            <p className="text-left">It's time to flip the country <span className="primary-text-color">blue</span></p>
+            <p className="text-left">
               Help us take back state legislatures in November.
             </p>
-            <p className="text-center">BLUE IN 2018!</p>
+            <h2 className="text-left primary-text-color">BLUE IN 2018!</h2>
           </div>
         </div>
-      </section>
+      </Section>
 
-      <TextlessParallax imgSrc="/images/constitution.jpg" strength="500" height="50"/>
+      <Section>
+        <TextlessParallax imgSrc="/images/constitution.jpg" strength="500" height="50"/>
+      </Section>
 
-      <section className="container">
+      <Section hasContainer={true} spacingAbove={3} spacingBelow={3}>
         <div className="row">
           <div className="col-12">
             <h2 className="text-center">
@@ -225,7 +211,8 @@ const Home = props => {
             </p>
           </div>
         </div>
-      </section>
+      </Section>
+
     </main>
   );
 };
