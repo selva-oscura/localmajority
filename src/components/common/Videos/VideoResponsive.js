@@ -10,6 +10,7 @@ const VideoResponsive = ({title="", src="", width="640", height="360", frameBord
       height={height}
       frameBorder={frameBorder}
       allowFullScreen={allowFullScreen}
+      wmode="transparent"
     />
   </div>
 );
