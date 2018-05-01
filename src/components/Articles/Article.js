@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import graphQLAPI from '../../api/graphQLAPI';
+import RelatedArticles from './RelatedArticles';
 import Primer from '../common/Primers/Primer';
 import Loading from '../common/Loading';
 import Offline from '../common/Offline';
 import NoSuchArticle from './NoSuchArticle';
+import Aux from '../common/Aux';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import ArticleCard from '../common/Cards/ArticleCard';
 import {
@@ -81,6 +83,7 @@ class Article extends Component {
     }
 
     return (
+    <Aux>
       <div className="Article row">
         <article className="col-12">
           {isOffline && <Offline timestamp={article.timestamp} />}
@@ -97,35 +100,14 @@ class Article extends Component {
             loremIpsum.map((p, i) => formatLoremIpsum(p, i))
           )}
         </article>
+      </div>
 
         {relatedArticles && relatedArticles.length ? (
-          <aside className="col-12">
-            <h3>Featured Articles</h3>
-            <div className="row">
-              {relatedArticles &&
-                relatedArticles.map(article => {
-                  let cardTags = article && article.tags ? article.tags : [];
-                  let articleThumbnail = article.thumbnail
-                    ? article.thumbnail
-                    : 'https://placekitten.com/g/200/150';
-                  return (
-                    <GridXSmallIsOneSmallIsThree key={article.slug}>
-                      <ArticleCard
-                        slug={article.slug}
-                        imageSrc={articleThumbnail}
-                        title={article.title}
-                        author={article.author}
-                        updatedAt={article.updatedAt}
-                        tagRoute="reports"
-                        tags={cardTags}
-                      />
-                    </GridXSmallIsOneSmallIsThree>
-                  );
-                })}
-            </div>
-          </aside>
+          <RelatedArticles
+            articles={relatedArticles}
+          />
         ) : null}
-      </div>
+    </Aux>
     );
   }
 }
