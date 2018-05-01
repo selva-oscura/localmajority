@@ -66,14 +66,16 @@ const Home = props => {
 
   return (
     <main className="Home">
-      
       <Section hasContainer={false}>
-        <Slider
-          slides={slides1}
-        />
+        <Slider slides={slides1} />
       </Section>
 
-      <Section hasContainer={true} spacingAbove={3} spacingBelow={3} background="medium">
+      <Section
+        hasContainer={true}
+        spacingAbove={3}
+        spacingBelow={3}
+        background="medium"
+      >
         <div className="row">
           <div className="col-12">
             <h2 className="text-center">
@@ -94,12 +96,15 @@ const Home = props => {
       </Section>
 
       <Section hasContainer={true} spacingAbove={3} spacingBelow={3}>
-        <FeaturedArticles 
-          articles={featuredArticles}
-        />
+        <FeaturedArticles articles={featuredArticles} />
       </Section>
 
-      <Section hasContainer={true} spacingAbove={3} spacingBelow={3} background="light">
+      <Section
+        hasContainer={true}
+        spacingAbove={3}
+        spacingBelow={3}
+        background="light"
+      >
         <States currentStateRaces={currentStateRaces} />
       </Section>
 
@@ -146,13 +151,11 @@ const Home = props => {
           )}
         </div>
       </Section>
-      
+
       <Section hasContainer={false}>
-        <Slider
-          slides={slides2}
-        />
+        <Slider slides={slides2} />
       </Section>
-      
+
       <Section hasContainer={false}>
         <CandidatesFaces
           candidatesVA2017={candidatesVA2017}
@@ -161,10 +164,19 @@ const Home = props => {
       </Section>
 
       <Section hasContainer={false}>
-        <TextlessParallax imgSrc="https://images.unsplash.com/photo-1498092651296-641e88c3b057?auto=format&fit=crop&w=1778&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" strength="500" height="500"/>
+        <TextlessParallax
+          imgSrc="https://images.unsplash.com/photo-1498092651296-641e88c3b057?auto=format&fit=crop&w=1778&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
+          strength="500"
+          height="500"
+        />
       </Section>
 
-      <Section hasContainer={true} spacingAbove={3} spacingBelow={3} background="medium">
+      <Section
+        hasContainer={true}
+        spacingAbove={3}
+        spacingBelow={3}
+        background="medium"
+      >
         <div className="row">
           <div className="col-12 order-2 col-md-6 order-md-1">
             <VideoResponsive
@@ -178,7 +190,10 @@ const Home = props => {
             <h2 className="text-left">
               Saving our <span className="tertiary-text-color">Democracy</span>
             </h2>
-            <p className="text-left">It's time to flip the country <span className="primary-text-color">blue</span></p>
+            <p className="text-left">
+              It's time to flip the country{' '}
+              <span className="primary-text-color">blue</span>
+            </p>
             <p className="text-left">
               Help us take back state legislatures in November.
             </p>
@@ -188,7 +203,11 @@ const Home = props => {
       </Section>
 
       <Section>
-        <TextlessParallax imgSrc="/images/constitution.jpg" strength="500" height="50"/>
+        <TextlessParallax
+          imgSrc="/images/constitution.jpg"
+          strength="500"
+          height="50"
+        />
       </Section>
 
       <Section hasContainer={true} spacingAbove={3} spacingBelow={3}>
@@ -212,7 +231,6 @@ const Home = props => {
           </div>
         </div>
       </Section>
-
     </main>
   );
 };

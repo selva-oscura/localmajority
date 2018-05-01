@@ -83,31 +83,29 @@ class Article extends Component {
     }
 
     return (
-    <Aux>
-      <div className="Article row">
-        <article className="col-12">
-          {isOffline && <Offline timestamp={article.timestamp} />}
-          <h2>{article.title}</h2>
-          <p>Last updated: {prettifyDateAndTime(article.updatedAt)}</p>
-          <p>
-            {`Article tags: `}
-            {article.tags ? article.tags.join(', ') : 'No Tags'}
-          </p>
+      <Aux>
+        <div className="Article row">
+          <article className="col-12">
+            {isOffline && <Offline timestamp={article.timestamp} />}
+            <h2>{article.title}</h2>
+            <p>Last updated: {prettifyDateAndTime(article.updatedAt)}</p>
+            <p>
+              {`Article tags: `}
+              {article.tags ? article.tags.join(', ') : 'No Tags'}
+            </p>
 
-          {article.content ? (
-            <Primer primer={article} />
-          ) : (
-            loremIpsum.map((p, i) => formatLoremIpsum(p, i))
-          )}
-        </article>
-      </div>
+            {article.content ? (
+              <Primer primer={article} />
+            ) : (
+              loremIpsum.map((p, i) => formatLoremIpsum(p, i))
+            )}
+          </article>
+        </div>
 
         {relatedArticles && relatedArticles.length ? (
-          <RelatedArticles
-            articles={relatedArticles}
-          />
+          <RelatedArticles articles={relatedArticles} />
         ) : null}
-    </Aux>
+      </Aux>
     );
   }
 }
