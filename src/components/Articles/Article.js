@@ -4,8 +4,6 @@ import graphQLAPI from '../../api/graphQLAPI';
 import RelatedArticles from './RelatedArticles';
 import NoSuchArticle from './NoSuchArticle';
 import Aux from '../common/Aux';
-import ArticleCard from '../common/Cards/ArticleCard';
-import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import Loading from '../common/Loading';
 import Offline from '../common/Offline';
 import Primer from '../common/Primers/Primer';
