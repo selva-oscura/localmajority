@@ -14,8 +14,8 @@ class Districts extends Component {
 
   updateFilter = (filterCategory, selectedValue) => {
     selectedValue === 'All'
-      ? this.props.history.push('/districts')
-      : this.props.history.push(`/districts/${selectedValue}`);
+      ? this.props.history.push('/states')
+      : this.props.history.push(`/states/${selectedValue}`);
   };
 
   componentDidMount() {
@@ -55,7 +55,7 @@ class Districts extends Component {
             seatsMeetingFilters.map((seat, i) => (
               <GridXSmallIsOneSmallIsThree key={i}>
                 <CardHover>
-                  <Link to={`/districts/${seat.state.title}/${seat.slug}`}>
+                  <Link to={`/states/${seat.state.title}/${seat.slug}`}>
                     <FooterCard cardTitle={seat.title} imgSrc="missing" />
                   </Link>
                 </CardHover>
