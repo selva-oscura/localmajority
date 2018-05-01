@@ -50,7 +50,7 @@ const CandidatesFaces = ({ candidatesVA2017, candidates }) => {
 
   return (
     <section>
-      <div className="FacesColourBackground" style={{ padding: '24px 0' }}>
+      <div className="FacesColourBackground">
         {presentationForCandidatesFaces.map((rowContents, i) => (
           <div className="row no-gutters" key={i}>
             {rowContents.map((candidate, j) => {
