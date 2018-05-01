@@ -6,7 +6,7 @@ const NoSuchDistrict = ({ seatId }) => {
   return (
     <div className="NoSuchDistrict">
       <h2>District {seatId} does not have a race this year</h2>
-      <Link to="/districts">Return to List of Districts</Link>
+      <Link to="/states">Return to List of Districts</Link>
     </div>
   );
 };
