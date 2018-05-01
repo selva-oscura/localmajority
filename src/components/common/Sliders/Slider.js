@@ -8,7 +8,8 @@ const Slider = ({
   showArrows=true,
   showThumbs=false,
   showStatus=false,
-  showIndicators=false,
+  centerMode=false,
+  showIndicators=true,
   interval=3000,
   transitionTime=500,
   infiniteLoop=true,
@@ -19,11 +20,12 @@ const Slider = ({
 }) => (
   slides && slides.length
   ? (
-    <div className="row">
+    <div className="Slider row">
       <section className="col-12">
         <Carousel
           showArrows={showArrows}
           showThumbs={showThumbs}
+          centerMode={centerMode}
           showStatus={showStatus}
           showIndicators={showIndicators}
           interval={interval}
