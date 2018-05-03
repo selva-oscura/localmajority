@@ -20,29 +20,27 @@ const Slider = ({
 }) => (
   slides && slides.length
   ? (
-    <div className="Slider row">
-      <section className="col-12">
-        <Carousel
-          showArrows={showArrows}
-          showThumbs={showThumbs}
-          centerMode={centerMode}
-          showStatus={showStatus}
-          showIndicators={showIndicators}
-          interval={interval}
-          transitionTime={transitionTime}
-          infiniteLoop={infiniteLoop}
-          autoPlay={autoPlay}
-          emulateTouch={emulateTouch}
-          useKeyboardArrows={emulateTouch}
-        >
-          { slides.map((slide, i)=>(
-            <div key={i}>
-              <img src={slide.src} alt={slide.alt} />
-            </div>
-          ))}
-        </Carousel>
-      </section>
-    </div>
+    <section className="Slider">
+      <Carousel
+        showArrows={showArrows}
+        showThumbs={showThumbs}
+        centerMode={centerMode}
+        showStatus={showStatus}
+        showIndicators={showIndicators}
+        interval={interval}
+        transitionTime={transitionTime}
+        infiniteLoop={infiniteLoop}
+        autoPlay={autoPlay}
+        emulateTouch={emulateTouch}
+        useKeyboardArrows={emulateTouch}
+      >
+        { slides.map((slide, i)=>(
+          <div key={i}>
+            <img src={slide.src} alt={slide.alt} />
+          </div>
+        ))}
+      </Carousel>
+    </section>
   ) : null
 );
 
