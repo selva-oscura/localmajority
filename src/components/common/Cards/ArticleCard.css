@@ -1,5 +1,5 @@
 .ArticleCard .contents{
-	padding: 0px 9px 6px;
+	padding: 0px 0px 6px;
 }
 
 .ArticleCard h3, .ArticleCard p{
@@ -19,8 +19,13 @@
 }
 
 .ArticleCard .tags {
-	padding: 0px 12px 12px 12px;
+	padding: 0px 12px 12px 0px;
 }
+
+.ArticleCard .tags:last-child {
+	padding: 0px 0px 12px 0px;
+}
+
 
 .ArticleCard .tag {
 	font-size: .8em;
