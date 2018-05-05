@@ -32,7 +32,7 @@ class ButtonlessFilters extends Component {
     const { selectedValue } = this.state;
     return (
       <div className="ButtonlessFilters">
-        <p>
+        <ul>
           {includeAll && (
             <ButtonlessFilter
               key="All"
@@ -51,7 +51,7 @@ class ButtonlessFilters extends Component {
               updateSelectedValues={this.updateSelectedValues}
             />
           ))}
-        </p>
+        </ul>
       </div>
     );
   }

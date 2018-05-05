@@ -13,9 +13,9 @@ const ButtonlessFilter = ({
       : 'secondary-text-color';
   };
   return (
-    <span onClick={handleClick} className={selectedClassName(currentItem)}>
+    <li onClick={handleClick} className={selectedClassName(currentItem)}>
       {currentItem}
-    </span>
+    </li>
   );
 };
 
