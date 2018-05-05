@@ -7,7 +7,7 @@ const GridXSmallIsOneSmallIsThree = (props) => (
 );
 
 const style = {
-	padding: "1vw 0.75vw 0.75vw 0.75vw",
+	padding: "1vw inherit 0.75vw",
 	margin: "1vw 0",
 }
 
