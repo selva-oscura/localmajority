@@ -1,8 +1,9 @@
-.ButtonlessFilters span {
+.ButtonlessFilters li {
   display: inline-block;
-  margin: 0 12px 6px 0;
+  margin: 0 18px 6px 0;
+  font-size: 1.17em;
 }
 
 .ButtonlessFilters .selected{
-  border-bottom: 2px solid #d1212e;
+  border-bottom: 3px solid #d1212e;
 }
