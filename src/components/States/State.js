@@ -8,6 +8,7 @@ import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsT
 import Loading from '../common/Loading';
 import Offline from '../common/Offline';
 import Primer from '../common/Primers/Primer';
+import Section from '../common/Section/Section';
 import { getMostRecentUpdateTimestamp } from '../../utils/functions';
 import loremIpsum from '../../data/loremIpsum';
 
@@ -79,21 +80,27 @@ class State extends Component {
 
     const formatLoremIpsum = (p, i) => {
       if (p.format === 'title') {
-        return <h3 key={i}>{p.content}</h3>;
+        return <h3 key={i} className="col-12">{p.content}</h3>;
       } else if (p.format === 'subtitle') {
         return (
-          <h4 key={i}>
+          <h4 key={i} className="col-12">
             <i>{p.content}</i>
           </h4>
         );
       }
-      return <p key={i}>{p.content}</p>;
+      return <p key={i} className="col-12">{p.content}</p>;
     };
 
     return (
-      <section className="State">
+      <article>
         {isOffline && <Offline timestamp={state.timestamp} />}
-        <div className="container">
+        <Section
+          hasContainer={true}
+          spacingAbove={3}
+          spacingBelow={0}
+          background=""
+          className="State"
+        >
           <div className="row">
             <h2 className="text-center col-12">{state.title}</h2>
             {state.content ? (
@@ -102,14 +109,21 @@ class State extends Component {
               loremIpsum.map((p, i) => formatLoremIpsum(p, i))
             )}
           </div>
-        </div>
-        <div className="container">
+        </Section>
+        <Section
+          hasContainer={true}
+          spacingAbove={2}
+          spacingBelow={2}
+          background=""
+          className="State"
+        >
+
           <div className="row">
             <h2 className="text-center col-12">
               Our Latest {state.title} Research{' '}
               <span className="tertiary-text-color">Reports</span>
             </h2>
-            <p className="text-center">
+            <p className="text-center col-12">
               See <Link to="/reports">here</Link> for our latest in-depth
               research reports supporting progressive state district campaigns.
             </p>
@@ -136,46 +150,52 @@ class State extends Component {
                 );
               })}
           </div>
-        </div>
-        <div className="container">
+        </Section>
+        <Section
+          hasContainer={true}
+          spacingAbove={2}
+          spacingBelow={2}
+          background=""
+          className="State"
+        >
           <div className="row">
             <h2 className="text-center col-12">
               Our {state.title}{' '}
               <span className="tertiary-text-color">Candidates</span>
             </h2>
-            <p className="text-center">
+            <p className="text-center col-12">
               We are supporting candidates where we can make a big difference
               and help flip seats blue in State Houses and Senates.
             </p>
-          </div>
-          {candidates &&
-            candidates.map((candidate, i) => {
-              const headshotUrl =
-                candidate.headshotId && candidate.headshotId.url
-                  ? candidate.headshotId.url
-                  : null;
-              const seatTitle =
-                candidate &&
-                candidate.contestId &&
-                candidate.contestId.seatId &&
-                candidate.contestId.seatId.title
-                  ? candidate.contestId.seatId.title
-                  : null;
+            {candidates &&
+              candidates.map((candidate, i) => {
+                const headshotUrl =
+                  candidate.headshotId && candidate.headshotId.url
+                    ? candidate.headshotId.url
+                    : null;
+                const seatTitle =
+                  candidate &&
+                  candidate.contestId &&
+                  candidate.contestId.seatId &&
+                  candidate.contestId.seatId.title
+                    ? candidate.contestId.seatId.title
+                    : null;
 
-              return (
-                <GridXSmallIsOneSmallIsThree key={i}>
-                  <BasicCard
-                    title={candidate.title}
-                    subtitle={seatTitle}
-                    route={`candidates/${candidate.state.title}`}
-                    slug={candidate.slug}
-                    imageSrc={headshotUrl}
-                  />
-                </GridXSmallIsOneSmallIsThree>
-              );
-            })}
-        </div>
-      </section>
+                return (
+                  <GridXSmallIsOneSmallIsThree key={i}>
+                    <BasicCard
+                      title={candidate.title}
+                      subtitle={seatTitle}
+                      route={`candidates/${candidate.state.title}`}
+                      slug={candidate.slug}
+                      imageSrc={headshotUrl}
+                    />
+                  </GridXSmallIsOneSmallIsThree>
+                );
+              })}
+          </div>
+        </Section>
+      </article>
     );
   }
 }
