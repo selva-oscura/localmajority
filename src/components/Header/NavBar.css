@@ -33,7 +33,7 @@
 
 .NavBar a.selected{
   color: #18467e;
-  border-bottom: 2px solid #d1212e;
+  border-bottom: 3px solid #d1212e;
 }
 
 .NavBar a.selected:hover{
