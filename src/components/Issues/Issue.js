@@ -88,7 +88,7 @@ class Issue extends Component {
             >
               <h2 className="text-center">{issue.title}</h2>
               <div className="row">
-                <div className="col">
+                <div className="col-12">
                   {subIssues && subIssues.length && (
                     <Aux>
                       <h3>Subtopics:</h3>
