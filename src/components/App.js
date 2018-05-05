@@ -386,7 +386,13 @@ class App extends Component {
                   ))
             );
             return (
-              <Issue {...props} issue={issue} articles={filteredArticles} />
+              <Issue
+                {...props}
+                issue={issue}
+                articles={filteredArticles}
+                issuesMasterList={issueTitles}
+                statesMasterList={statesMasterList}
+              />
             );
           }}
         />
@@ -399,6 +405,7 @@ class App extends Component {
                 <Issue
                   {...props}
                   articles={articles}
+                  issuesMasterList={issueTitles}
                   statesMasterList={statesMasterList}
                 />
               ) : (
