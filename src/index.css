@@ -6,26 +6,27 @@ body {
 }
 
 section {
-  padding-top: 24px;
+  border: 1px solid transparent;
+  /*border: 1px solid green;*/
 }
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: .5rem;
 }
 
-h1, h2, h3, h4, h5, h6, svg text, .primary-text-color {
+h1, h2, h3, h4, h5, h6, svg text {
   color: #18467e;
   text-transform: uppercase;
 }
 
-/*.primary-text-color {
-  color: rgb(26, 35, 126);
+.primary-text-color {
+  color: #18467e;
 }
 
 .secondary-text-color {
-  rgb(26, 35, 126)
+  color: #216bb4;
 }
-*/
+
 
 .tertiary-text-color {
   color: #d1212e;
@@ -43,7 +44,7 @@ p, li, .default-text-color {
   line-height: 20px;
 }
 
-a, a h1, a h2, a h3, a h4, a h5, a h6, a p, .secondary-text-color {
+a, a h1, a h2, a h3, a h4, a h5, a h6, a p {
   color: #216bb4;
   text-decoration-color: transparent;
   transition: all 0.5s ease-out;
@@ -54,7 +55,6 @@ a:hover, a:hover, a:hover h1, a:hover h2, a:hover h3, a:hover h4, a:hover h5, a:
   color: rgba(33,107,180, 0.75);
   text-decoration-color: inherit;
 }
-
 
 .text-left {
   text-align: left;
@@ -71,6 +71,22 @@ a:hover, a:hover, a:hover h1, a:hover h2, a:hover h3, a:hover h4, a:hover h5, a:
 .error {
   background-color: rgba(183, 28, 28, 0.2);
   color: rgba(183, 28, 28, 1);
+}
+
+
+.background-light {
+  background-color: aliceblue;
+  /*background-color: #f8f8f8;*/
+}
+
+.background-medium {
+  background-color: #e0f0ff;
+  /*background-color: hsl(0, 1%, 91%);*/
+}
+
+.background-dark {
+  background-color: #d0e8ff;
+  /*background-color: #d8d8d8;*/
 }
 
 .full-width {
