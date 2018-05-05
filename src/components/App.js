@@ -16,8 +16,9 @@ import Issue from './Issues/Issue';
 import AboutUs from './AboutUs/AboutUs';
 import TakeAction from './TakeAction/TakeAction';
 import Elements from './common/Elements';
-import FourZeroFour from './FourZeroFour';
 import Loading from './common/Loading';
+import Section from './common/Section/Section';
+import FourZeroFour from './FourZeroFour';
 import './App.css';
 
 injectTapEventPlugin();
@@ -588,11 +589,19 @@ class App extends Component {
             seats &&
             validFutureCandidatesStates &&
             validFutureCandidatesStates.length ? (
-              <States
-                // should be restored once we have a database that will support this
-                // currentStateRaces={validFutureCandidatesStates}
-                currentStateRaces={stateFakeData}
-              />
+              <Section
+                hasContainer={true}
+                spacingAbove={3}
+                spacingBelow={3}
+                background=""
+              >
+                <States
+                  // should be restored once we have a database that will support this
+                  // currentStateRaces={validFutureCandidatesStates}
+                  currentStateRaces={stateFakeData}
+                />
+              </Section>
+
             ) : (
               <Loading />
             )
