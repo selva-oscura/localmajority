@@ -28,12 +28,20 @@ class Candidate extends Component {
     }
     this.state = {
       showDistrictDetail: false,
+      hidingDistrictDetail: false,
     };
     this.showDistrictDetail = this.showDistrictDetail.bind(this);
+    this.hideDistrictDetail = this.hideDistrictDetail.bind(this);
   }
 
   showDistrictDetail() {
     this.setState({ showDistrictDetail: true });
+  }
+  hideDistrictDetail() {
+    this.setState({ hidingDistrictDetail: true });
+    setTimeout(() => {
+      this.setState({ showDistrictDetail: false, hidingDistrictDetail: false  });
+    }, 500)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -263,24 +271,18 @@ class Candidate extends Component {
                       )}
 
                       {this.state.showDistrictDetail && (
-                        <div className="row">
-                          <h2 className="col-12">{seatTitle}</h2>
-                          <div className="col-6">
-                            <ImageWithBackgroundPlaceholderImage
-                              imageSrc={seatMap}
-                              imageAlt={`district map of ${seatTitle}`}
-                            />
-                          </div>
-                          <div className="col-6">
-                            <ImageWithBackgroundPlaceholderImage
-                              imageSrc={seatInStateMap}
-                              imageAlt={`map of ${seatTitle}'s location within ${stateName}`}
-                            />
-                          </div>
-                          <div className="col-12">
+                        <Aux>
+                          <h2
+                            className="tertiary-text-color"
+                            onClick={this.hideDistrictDetail}
+                          >
+                            <span className={this.state.hidingDistrictDetail ? 'rotate90to0' : 'rotate0to90'}>&raquo;</span> 
+                            &nbsp;About the District
+                          </h2>
+                          <div className={this.state.hidingDistrictDetail ? 'slow-removal' : 'slow-reveal'}>
                             <Primer primer={seatPrimer} />
                           </div>
-                        </div>
+                        </Aux>
                       )}
                     </div>
                   )}
