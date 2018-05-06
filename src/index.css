@@ -155,7 +155,64 @@ a:hover, a:hover, a:hover h1, a:hover h2, a:hover h3, a:hover h4, a:hover h5, a:
   display: none !important;
 }
 
+.rotated90 {
+  display: inline-block;
+  transform: rotate(90deg);
+}
 
+.rotated-90 {
+  display: inline-block;
+  transform: rotate(-90deg);
+}
+
+/* ANIMATIONS */
+
+.slow-reveal {
+  height: auto;
+  max-height: 1000px;
+  animation-name: slow-reveal-animation;
+  animation-duration: .5s;
+}
+
+.slow-removal {
+  max-height: 0px;
+  animation-name: slow-removal-animation;
+  animation-duration: .5s;
+}
+
+.rotate0to90{
+  display: inline-block;
+  transform: rotate(90deg);
+  animation-name: rotate0to90-animation;
+  animation-duration: 0.5s;
+}
+
+.rotate90to0{
+  display: inline-block;
+  transform: rotate(0deg);
+  animation-name: rotate90to0-animation;
+  animation-duration: 0.5s;
+}
+
+@keyframes slow-reveal-animation {
+  from { max-height: 0px; }
+  to { max-height: 1000px; }
+}
+
+@keyframes slow-removal-animation {
+  from { max-height: 1000px; }
+  to { max-height: 0px; }
+}
+
+@keyframes rotate0to90-animation {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(90deg); }
+}
+
+@keyframes rotate90to0-animation {
+  from { transform: rotate(90deg); }
+  to { transform: rotate(0deg); }
+}
 
 /* Bootstrap 4 grid */
 
