@@ -1,0 +1,43 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import ImageWithBackgroundPlaceholderImage from '../common/ImageWithBackgroundPlaceholderImage';
+import { prettifyDate } from '../../utils/functions';
+
+const FeaturedArticle = ({ article }) => {
+  const {slug, imageSrc, imageAlt="", title, author, updatedAt, tagRoute="", tags=[]} = article;
+  console.log('article for FeaturedArticle', article);
+  return (
+    <div className="row">
+      <div className="col-12" style={{margin: '1vw 0px 2vw 0px'}}>
+
+        <Link
+          to={`/articles/${slug}`}
+        >
+          <ImageWithBackgroundPlaceholderImage
+            imageSrc={imageSrc}
+            imageAlt=""
+            aspectRatioInPercent="25"
+          />
+          <div className="contents row">
+            <h3 className="title col-12">{title}</h3>
+            <p className="details col-12 col-sm-6">{author}</p>
+            <p className="details col-12 col-sm-6 text-right">updated {prettifyDate(updatedAt)}</p>
+          </div>
+        </Link>
+        {tags && tags.length
+          ? (
+              <div className="tags flex-container flex-wrap flex-start">
+                {tags.map(tag => (
+                  <Link key={tag} to={`/${tagRoute}/${tag}`} className="tag">{tag}
+                  </Link>
+                ))}
+              </div>
+          )
+          : null
+        }
+      </div>
+    </div>
+  )
+};
+
+export default FeaturedArticle;
