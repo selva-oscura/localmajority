@@ -4,7 +4,7 @@ import navLinks from '../../navLinks.js';
 import './Footer.css';
 
 const Footer = () => (
-  <footer className="Footer full-width">
+  <footer className="Footer full-width background-dark">
     <div className="container">
       <p className="text-center">
         <small>
