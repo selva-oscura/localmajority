@@ -4,6 +4,7 @@ import graphQLAPI from '../../api/graphQLAPI';
 import RelatedArticles from './RelatedArticles';
 import NoSuchArticle from './NoSuchArticle';
 import Aux from '../common/Aux';
+import ImageWithBackgroundPlaceholderImage from '../common/ImageWithBackgroundPlaceholderImage';
 import Loading from '../common/Loading';
 import Offline from '../common/Offline';
 import Primer from '../common/Primers/Primer';
@@ -75,6 +76,7 @@ class Article extends Component {
     const article = this.props.articleDetail
       ? this.props.articleDetail
       : this.props.article;
+    const hero = article.heroImg ? article.heroImg : '';
     const relatedArticles = this.props.relatedArticles;
 
     if (!article) {
@@ -91,6 +93,12 @@ class Article extends Component {
         >
           <div className="Article row">
             <article className="col-12">
+              <ImageWithBackgroundPlaceholderImage
+                imageSrc={hero}
+                imageAlt=""
+                aspectRatioInPercent="25"
+              />
+
               {isOffline && <Offline timestamp={article.timestamp} />}
               <h2>{article.title}</h2>
               <p>Last updated: {prettifyDateAndTime(article.updatedAt)}</p>
