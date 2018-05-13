@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Tags.css'
 
 const Tags = ({ tags, tagRoute }) => (
   <div className="Tags flex-container flex-wrap flex-start">

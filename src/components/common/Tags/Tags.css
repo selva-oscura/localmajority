@@ -1,0 +1,25 @@
+.Tags {
+	padding: 0px 12px 12px 0px;
+}
+
+.Tags:last-child {
+	padding: 0px 0px 12px 0px;
+}
+
+
+.Tags .tag {
+	font-size: .8em;
+	font-weight: bold;
+	/* tertiary-color */
+	border: 1px solid #d1212e;
+	background-color: #d1212e;
+	color: white;
+	font-weight: bold;
+	padding: 1px 4px;
+	margin: 0 8px 8px 0;
+	transition: background-color 0.5s ease-out;
+}
+
+.Tags .tag:hover {
+	background-color: #ff0013;
+}
