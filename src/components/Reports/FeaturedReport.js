@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom';
 import ImageWithBackgroundPlaceholderImage from '../common/ImageWithBackgroundPlaceholderImage';
 import Tags from '../common/Tags/Tags';
 import { prettifyDate } from '../../utils/functions';
-import './FeaturedArticle.css';
+import './FeaturedReport.css';
 
-const FeaturedArticle = ({ article }) => {
+const FeaturedReport = ({ article }) => {
   const {slug, imageSrc, imageAlt="", title, author, updatedAt, tagRoute="", tags=[]} = article;
   return (
-    <div className="FeaturedArticle row">
+    <div className="FeaturedReport row">
       <div className="col-12" style={{margin: '1vw 0px 2vw 0px'}}>
 
         <Link
-          to={`/articles/${slug}`}
+          to={`/report/${slug}`}
         >
           <ImageWithBackgroundPlaceholderImage
             imageSrc={imageSrc}
@@ -34,4 +34,4 @@ const FeaturedArticle = ({ article }) => {
   )
 };
 
-export default FeaturedArticle;
+export default FeaturedReport;

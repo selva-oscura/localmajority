@@ -1,17 +1,17 @@
-.FeaturedArticle .contents{
+.FeaturedReport .contents{
   padding: 0px 0px 6px;
 }
 
-.FeaturedArticle h3, .FeaturedArticle p{
+.FeaturedReport h3, .FeaturedReport p{
   font-weight: normal;
   vertical-align: text-bottom;
 }
 
-.FeaturedArticle h3.title {
+.FeaturedReport h3.title {
   line-height: 1em;
 } 
 
-.FeaturedArticle p.details {
+.FeaturedReport p.details {
   font-size: .9em;
   line-height: 1em;
   margin-bottom: 0;

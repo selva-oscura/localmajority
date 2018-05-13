@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NoSuchArticle = ({ candidateId }) => {
+const NoSuchReport = ({ candidateId }) => {
   return (
-    <div className="NoSuchArticle">
-      <h2>Error fetching Article</h2>
+    <div className="NoSuchReport">
+      <h2>Error fetching Report</h2>
       <Link to="/reports">Return to List of Issues</Link>
     </div>
   );
 };
 
-export default NoSuchArticle;
+export default NoSuchReport;

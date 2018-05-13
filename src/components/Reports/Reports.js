@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import NoSuchIssue from './NoSuchIssue';
-import FeaturedArticle from '../Articles/FeaturedArticle';
+import NoSuchReports from './NoSuchReports';
+import FeaturedReport from '../Reports/FeaturedReport';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import ArticleCard from '../common/Cards/ArticleCard';
 import Aux from '../common/Aux';
@@ -8,7 +8,7 @@ import Section from '../common/Section/Section';
 import Filters from '../common/Filters/Filters';
 import ButtonlessFilters from '../common/Filters/ButtonlessFilters';
 
-class Issue extends Component {
+class Reports extends Component {
   state = {
     issueSelected: this.props.match.params.slug,
   };
@@ -35,7 +35,7 @@ class Issue extends Component {
     console.log('subIssues', subIssues);
     console.log('this.props', this.props);
     return (
-      <main className="Issue">
+      <main className="Reports">
         <Section
           hasContainer={true}
           spacingAbove={3}
@@ -115,7 +115,7 @@ class Issue extends Component {
               spacingBelow={0}
               background=""
             >
-              <FeaturedArticle article={featuredArticle} />
+              <FeaturedReport article={featuredArticle} />
             </Section>
 
             {subIssues.map(subIssue => (
@@ -162,7 +162,7 @@ class Issue extends Component {
           >
             <h2 className="text-center">{this.props.match.params.slug}</h2>
 
-            <FeaturedArticle article={featuredArticle} />
+            <FeaturedReport article={featuredArticle} />
             <div className="row">
 
               {otherArticles.map((article, i) => {
@@ -194,4 +194,4 @@ class Issue extends Component {
   }
 }
 
-export default Issue;
+export default Reports;

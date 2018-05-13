@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import graphQLAPI from '../../api/graphQLAPI';
-import RelatedArticles from './RelatedArticles';
-import NoSuchArticle from './NoSuchArticle';
+import RelatedReports from './RelatedReports';
+import NoSuchReport from './NoSuchReport';
 import Aux from '../common/Aux';
 import ImageWithBackgroundPlaceholderImage from '../common/ImageWithBackgroundPlaceholderImage';
 import Loading from '../common/Loading';
@@ -15,7 +15,7 @@ import {
 } from '../../utils/functions';
 import loremIpsum from '../../data/loremIpsum';
 
-class Article extends Component {
+class Report extends Component {
   constructor(props) {
     super(props);
     console.log('this.props', this.props);
@@ -77,10 +77,10 @@ class Article extends Component {
       ? this.props.articleDetail
       : this.props.article;
     const hero = article.heroImg ? article.heroImg : '';
-    const relatedArticles = this.props.relatedArticles;
+    const relatedReports = this.props.relatedArticles;
 
     if (!article) {
-      return <NoSuchArticle articleId={this.props.match.params.slug} />;
+      return <NoSuchReport articleId={this.props.match.params.slug} />;
     }
 
     return (
@@ -91,7 +91,7 @@ class Article extends Component {
           spacingBelow={3}
           background=""
         >
-          <div className="Article row">
+          <div className="Report row">
             <article className="col-12">
               <ImageWithBackgroundPlaceholderImage
                 imageSrc={hero}
@@ -121,8 +121,8 @@ class Article extends Component {
           spacingBelow={3}
           background="light"
         >
-          {relatedArticles && relatedArticles.length ? (
-            <RelatedArticles articles={relatedArticles} />
+          {relatedReports && relatedReports.length ? (
+            <RelatedReports articles={relatedReports} />
           ) : null}
         </Section>
       </Aux>
@@ -137,4 +137,4 @@ export default compose(
       return { variables: { slug: props.match.params.slug } };
     },
   })
-)(Article);
+)(Report);
