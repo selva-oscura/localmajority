@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import NoSuchIssue from './NoSuchIssue';
+import FeaturedArticle from '../Articles/FeaturedArticle';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import ArticleCard from '../common/Cards/ArticleCard';
 import Aux from '../common/Aux';
 import Section from '../common/Section/Section';
 import Filters from '../common/Filters/Filters';
 import ButtonlessFilters from '../common/Filters/ButtonlessFilters';
-
 
 class Issue extends Component {
   state = {
@@ -29,6 +29,8 @@ class Issue extends Component {
 
   render() {
     const { issue, articles, issuesMasterList, statesMasterList } = this.props;
+    const featuredArticle = articles[0];
+    const otherArticles = articles.slice(1);
     const subIssues = issue ? issue.subIssues : [];
     console.log('subIssues', subIssues);
     console.log('this.props', this.props);
@@ -62,8 +64,7 @@ class Issue extends Component {
             <div className="col">
               {issuesMasterList && (
                 <Aux>
-                  <h3 className="text-center">Topics
-                  </h3>
+                  <h3 className="text-center">Topics</h3>
                   <Filters>
                     <ButtonlessFilters
                       filterCategory="issueSelected"
@@ -89,21 +90,32 @@ class Issue extends Component {
               <h2 className="text-center">{issue.title}</h2>
               <div className="row">
                 <div className="col-12">
-                  {subIssues && subIssues.length && (
-                    <Aux>
-                      <h3>Subtopics:</h3>
-                      <Filters>
-                        <ButtonlessFilters
-                          filterCategory="issueSelected"
-                          passedParam={this.state.issueSelected}
-                          masterList={subIssues.map(subIssue => (subIssue.slug))}
-                          updateFilter={this.updateFilter}
-                        />
-                      </Filters>
-                    </Aux>
-                  )}
+                  {subIssues &&
+                    subIssues.length && (
+                      <Aux>
+                        <h3>Subtopics:</h3>
+                        <Filters>
+                          <ButtonlessFilters
+                            filterCategory="issueSelected"
+                            passedParam={this.state.issueSelected}
+                            masterList={subIssues.map(
+                              subIssue => subIssue.slug
+                            )}
+                            updateFilter={this.updateFilter}
+                          />
+                        </Filters>
+                      </Aux>
+                    )}
                 </div>
               </div>
+            </Section>
+            <Section
+              hasContainer={true}
+              spacingAbove={0}
+              spacingBelow={0}
+              background=""
+            >
+              <FeaturedArticle article={featuredArticle} />
             </Section>
 
             {subIssues.map(subIssue => (
@@ -120,8 +132,7 @@ class Issue extends Component {
                     let articleThumbnail = article.thumbnail
                       ? article.thumbnail
                       : 'https://placekitten.com/400/300';
-                    let cardTags =
-                      article && article.tags ? article.tags : [];
+                    let cardTags = article && article.tags ? article.tags : [];
                     return article.tags.includes(subIssue.slug) ? (
                       <GridXSmallIsOneSmallIsThree key={article.slug}>
                         <ArticleCard
@@ -150,8 +161,11 @@ class Issue extends Component {
             background=""
           >
             <h2 className="text-center">{this.props.match.params.slug}</h2>
+
+            <FeaturedArticle article={featuredArticle} />
             <div className="row">
-              {articles.map((article, i) => {
+
+              {otherArticles.map((article, i) => {
                 let articleThumbnail = article.thumbnail
                   ? article.thumbnail
                   : 'https://placekitten.com/400/300';
