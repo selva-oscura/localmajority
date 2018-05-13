@@ -7,6 +7,7 @@ import Aux from '../common/Aux';
 import Loading from '../common/Loading';
 import Offline from '../common/Offline';
 import Primer from '../common/Primers/Primer';
+import Section from '../common/Section/Section';
 import {
   getMostRecentUpdateTimestamp,
   prettifyDateAndTime,
@@ -82,27 +83,40 @@ class Article extends Component {
 
     return (
       <Aux>
-        <div className="Article row">
-          <article className="col-12">
-            {isOffline && <Offline timestamp={article.timestamp} />}
-            <h2>{article.title}</h2>
-            <p>Last updated: {prettifyDateAndTime(article.updatedAt)}</p>
-            <p>
-              {`Article tags: `}
-              {article.tags ? article.tags.join(', ') : 'No Tags'}
-            </p>
+        <Section
+          hasContainer={true}
+          spacingAbove={3}
+          spacingBelow={3}
+          background=""
+        >
+          <div className="Article row">
+            <article className="col-12">
+              {isOffline && <Offline timestamp={article.timestamp} />}
+              <h2>{article.title}</h2>
+              <p>Last updated: {prettifyDateAndTime(article.updatedAt)}</p>
+              <p>
+                {`Article tags: `}
+                {article.tags ? article.tags.join(', ') : 'No Tags'}
+              </p>
 
-            {article.content ? (
-              <Primer primer={article} />
-            ) : (
-              loremIpsum.map((p, i) => formatLoremIpsum(p, i))
-            )}
-          </article>
-        </div>
-
-        {relatedArticles && relatedArticles.length ? (
-          <RelatedArticles articles={relatedArticles} />
-        ) : null}
+              {article.content ? (
+                <Primer primer={article} />
+              ) : (
+                loremIpsum.map((p, i) => formatLoremIpsum(p, i))
+              )}
+            </article>
+          </div>
+        </Section>
+        <Section
+          hasContainer={true}
+          spacingAbove={3}
+          spacingBelow={3}
+          background="light"
+        >
+          {relatedArticles && relatedArticles.length ? (
+            <RelatedArticles articles={relatedArticles} />
+          ) : null}
+        </Section>
       </Aux>
     );
   }
