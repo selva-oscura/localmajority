@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ImageWithBackgroundPlaceholderImage from '../common/ImageWithBackgroundPlaceholderImage';
+import Tags from '../common/Tags/Tags';
 import { prettifyDate } from '../../utils/functions';
 import './FeaturedArticle.css';
 
@@ -26,14 +27,7 @@ const FeaturedArticle = ({ article }) => {
           </div>
         </Link>
         {tags && tags.length
-          ? (
-              <div className="tags flex-container flex-wrap flex-start">
-                {tags.map(tag => (
-                  <Link key={tag} to={`/${tagRoute}/${tag}`} className="tag">{tag}
-                  </Link>
-                ))}
-              </div>
-          )
+          ? <Tags tags={tags} tagRoute={tagRoute} />
           : null
         }
       </div>
