@@ -7,7 +7,6 @@ import './FeaturedArticle.css';
 
 const FeaturedArticle = ({ article }) => {
   const {slug, imageSrc, imageAlt="", title, author, updatedAt, tagRoute="", tags=[]} = article;
-  console.log('article for FeaturedArticle', article);
   return (
     <div className="FeaturedArticle row">
       <div className="col-12" style={{margin: '1vw 0px 2vw 0px'}}>
