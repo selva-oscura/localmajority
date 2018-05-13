@@ -17,29 +17,3 @@
 	margin-bottom: 0;
 	padding-bottom: 0;
 }
-
-.ArticleCard .tags {
-	padding: 0px 12px 12px 0px;
-}
-
-.ArticleCard .tags:last-child {
-	padding: 0px 0px 12px 0px;
-}
-
-
-.ArticleCard .tag {
-	font-size: .8em;
-	font-weight: bold;
-	/* tertiary-color */
-	border: 1px solid #d1212e;
-	background-color: #d1212e;
-	color: white;
-	font-weight: bold;
-	padding: 1px 4px;
-	margin: 0 8px 8px 0;
-	transition: background-color 0.5s ease-out;
-}
-
-.ArticleCard .tag:hover {
-	background-color: #ff0013;
-}
