@@ -8,7 +8,7 @@ import './ArticleCard.css';
 const ArticleCard = ({slug, imageSrc, imageAlt="", title, author, updatedAt, tagRoute="", tags=[]}) => (
 	<div className="ArticleCard">
     <Link
-      to={`/articles/${slug}`}
+      to={`/report/${slug}`}
     >
       <ImageWithBackgroundPlaceholderImage
         imageSrc={imageSrc}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import FeaturedArticles from '../Articles/FeaturedArticles';
+import FeaturedReports from '../Reports/FeaturedReports';
 import States from '../States/States';
 import CandidatesFaces from '../common/CandidatesFaces';
 import BasicCard from '../common/Cards/BasicCard';
@@ -94,7 +94,7 @@ const Home = props => {
       </Section>
 
       <Section hasContainer={true} spacingAbove={3} spacingBelow={3}>
-        <FeaturedArticles articles={featuredArticles} />
+        <FeaturedReports articles={featuredArticles} />
       </Section>
 
       <Section

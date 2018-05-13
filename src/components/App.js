@@ -7,12 +7,12 @@ import Header from './Header/Header';
 import ErrorBoundary from './common/ErrorBoundary';
 import Footer from './Footer/Footer';
 import Home from './Home/Home';
-import Article from './Articles/Article';
 import Candidate from './Candidates/Candidate';
 import Candidates from './Candidates/Candidates';
 import States from './States/States';
 import State from './States/State';
-import Issue from './Issues/Issue';
+import Report from './Reports/Report';
+import Reports from './Reports/Reports';
 import AboutUs from './AboutUs/AboutUs';
 import TakeAction from './TakeAction/TakeAction';
 import Elements from './common/Elements';
@@ -387,7 +387,7 @@ class App extends Component {
                   ))
             );
             return (
-              <Issue
+              <Reports
                 {...props}
                 issue={issue}
                 articles={filteredArticles}
@@ -403,7 +403,7 @@ class App extends Component {
           component={props => (
             <ErrorBoundary>
               {issues && statesMasterList && statesMasterList.length ? (
-                <Issue
+                <Reports
                   {...props}
                   articles={articles}
                   issuesMasterList={issueTitles}
@@ -417,7 +417,7 @@ class App extends Component {
         />
 
         <Route
-          path="/articles/:slug"
+          path="/report/:slug"
           component={props => {
             const article = articles
               ? articles.find(
@@ -465,7 +465,7 @@ class App extends Component {
             }
             return (
               <ErrorBoundary>
-                <Article
+                <Report
                   {...props}
                   article={article}
                   articleDetail={articleDetail}
