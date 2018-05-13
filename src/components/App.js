@@ -601,7 +601,6 @@ class App extends Component {
                   currentStateRaces={stateFakeData}
                 />
               </Section>
-
             ) : (
               <Loading />
             )

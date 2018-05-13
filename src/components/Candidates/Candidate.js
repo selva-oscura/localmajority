@@ -40,8 +40,8 @@ class Candidate extends Component {
   hideDistrictDetail() {
     this.setState({ hidingDistrictDetail: true });
     setTimeout(() => {
-      this.setState({ showDistrictDetail: false, hidingDistrictDetail: false  });
-    }, 500)
+      this.setState({ showDistrictDetail: false, hidingDistrictDetail: false });
+    }, 500);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -276,10 +276,24 @@ class Candidate extends Component {
                             className="tertiary-text-color"
                             onClick={this.hideDistrictDetail}
                           >
-                            <span className={this.state.hidingDistrictDetail ? 'rotate90to0' : 'rotate0to90'}>&raquo;</span> 
+                            <span
+                              className={
+                                this.state.hidingDistrictDetail
+                                  ? 'rotate90to0'
+                                  : 'rotate0to90'
+                              }
+                            >
+                              &raquo;
+                            </span>
                             &nbsp;About the District
                           </h2>
-                          <div className={this.state.hidingDistrictDetail ? 'slow-removal' : 'slow-reveal'}>
+                          <div
+                            className={
+                              this.state.hidingDistrictDetail
+                                ? 'slow-removal'
+                                : 'slow-reveal'
+                            }
+                          >
                             <Primer primer={seatPrimer} />
                           </div>
                         </Aux>

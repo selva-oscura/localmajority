@@ -8,7 +8,8 @@ const States = ({ currentStateRaces }) => (
       Our <span className="tertiary-text-color">States</span>
     </h2>
     <p className="text-center col-12">
-      We are supporting states where we can make a big difference and help flip seats blue in State Houses and Senate races.
+      We are supporting states where we can make a big difference and help flip
+      seats blue in State Houses and Senate races.
     </p>
     {currentStateRaces.map((state, i) => (
       <GridXSmallIsOneSmallIsThree key={i}>

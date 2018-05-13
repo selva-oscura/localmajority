@@ -80,7 +80,11 @@ class State extends Component {
 
     const formatLoremIpsum = (p, i) => {
       if (p.format === 'title') {
-        return <h3 key={i} className="col-12">{p.content}</h3>;
+        return (
+          <h3 key={i} className="col-12">
+            {p.content}
+          </h3>
+        );
       } else if (p.format === 'subtitle') {
         return (
           <h4 key={i} className="col-12">
@@ -88,7 +92,11 @@ class State extends Component {
           </h4>
         );
       }
-      return <p key={i} className="col-12">{p.content}</p>;
+      return (
+        <p key={i} className="col-12">
+          {p.content}
+        </p>
+      );
     };
 
     return (
@@ -117,7 +125,6 @@ class State extends Component {
           background=""
           className="State"
         >
-
           <div className="row">
             <h2 className="text-center col-12">
               Our Latest {state.title} Research{' '}
