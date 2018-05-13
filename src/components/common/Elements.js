@@ -143,7 +143,7 @@ class Elements extends Component {
             label="Secondary Button onsite"
           />
           <Button
-            link="/districts/2"
+            link="/states/2"
             kind="tertiary"
             label="Tertiary Button onsite"
           />
