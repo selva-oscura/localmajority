@@ -21,6 +21,9 @@ import Section from './common/Section/Section';
 import FourZeroFour from './FourZeroFour';
 import './App.css';
 
+// DEV ONLY -- fixtures -- SHOULD BE ELIMINATED ONCE THE DATABASE IS HAPPY
+import { stateFakeData, issueTitles, statesForIssues, issuesArticlesFakeData } from '../data/fixtures';
+
 injectTapEventPlugin();
 
 class App extends Component {
@@ -69,10 +72,10 @@ class App extends Component {
   }
 
   updateStateDetail(detail, key, value) {
-    // this is for statesDetails and candidatesDetails
-    // detail specifies whether it is statesDetails or candidatesDetails
-    // key is the slug that is used in routing
-    // value is the data returned from the detailed query
+    // this is for state.statesDetails and state.candidatesDetails
+    // detail parameter specifies statesDetails or candidatesDetails
+    // key is the slug that will be used in the route
+    // value is the data returned from the detail query
     console.log('updatingStateDetail', detail, key, value);
     let state = { ...this.state };
     state[detail][key] = value;
@@ -81,12 +84,9 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     let state = { ...this.state };
-    // let allQueriesSuccessful = true;
+
     let allQueriesConcluded = true;
     Object.keys(this.props).forEach(query => {
-      // if (this.props[query].loading || this.props[query].error) {
-      //   allQueriesSuccessful = false;
-      // }
       if (this.props[query].loading || this.props[query].error) {
         console.log(
           query,
@@ -99,7 +99,8 @@ class App extends Component {
       }
     });
     // console.log('allQueriesConcluded', allQueriesConcluded);
-    // Freeze-dry updates to state in localStorage
+
+    // Freeze-dry updates to localStorage's copy of state
     if (allQueriesConcluded && prevProps !== this.props) {
       Object.keys(this.props).forEach(query => {
         if (!this.props[query].error) {
@@ -135,6 +136,9 @@ class App extends Component {
             }`
           );
         }
+        // DEV ONLY -- hard-coded/imported data from fixtures to be replaced by queries once database is happy
+        state.issues = issuesArticlesFakeData.issues;
+
       });
       state.timestamp = new Date().getTime();
       if (prevProps !== this.props) {
@@ -255,99 +259,9 @@ class App extends Component {
     // console.log('candidatesWithProblematicData', candidatesWithProblematicData);
 
     // RETURN HERE
-    // delete next section once we have state data in database
-
-    const stateFakeData = [
-      {
-        title: 'Florida',
-        text:
-          "Democrats make up nearly 50% in this heavily-gerrymandered state but have little representation in state government. Only 40% in the Senate and 33% in the House. It's time to turn the state Blue!",
-      },
-      {
-        title: 'Michigan',
-        text:
-          "Democrats make up 49.8% of the electorate but are not represented in this heavily-gerrymandered and voter-suppressed state. The Dems only have 43% of the Senate and only 29% of the Senate! With all the term limits, it's time to turn this state back to BLUE!",
-      },
-      {
-        title: 'Minnesota',
-        text:
-          'All 134 members of the State House are up for election in November 2018, and Democrats only need to flip 11 seats to regain control. In 2016 Hillary carried Minnesota by 1.4%, winning 12 of the districts that are currently occupied by nervous Republicans.',
-      },
-    ];
-
-    // RETURN HERE -- END
-    // END -- delete previous section once we have state info in the database
-
-    // RETURN HERE
-    // delete next next section once we have real issues and articles
-    const issueTitles = [
-      'Economy',
-      'Justice',
-      'Environment',
-      'Health Care',
-      'Foreign Policy & Defense',
-      'Education',
-      'Technology',
-      'Governance',
-    ];
-    const statesForIssues = ['Michigan', 'Florida', 'Minnesota'];
-    const issues = [];
-    issueTitles.forEach((title, i) => {
-      let subIssues = [];
-      let date = new Date().toISOString();
-      let author = 'somebody or other';
-      for (let j = 1; j < 5; j++) {
-        const sockPuppetArticles = [];
-        for (let k = 1; k < 4; k++) {
-          let type = '';
-          if (k === 1) {
-            type = 'Talking Points';
-          } else {
-            type = 'Research Article';
-          }
-          let articleTitle = `Fake Article title blah, blah, blah ${title} - ${j} - ${k}`;
-          let numStates = Math.floor(Math.random() * 3);
-          let stateChoice = Math.floor(Math.random() * 3);
-          let statesForArticle = [];
-          if (numStates === 1) {
-            statesForArticle.push(statesForIssues[stateChoice]);
-          } else if (numStates === 2) {
-            statesForArticle = statesForIssues
-              .slice(0, stateChoice)
-              .concat(statesForIssues.slice(stateChoice + 1));
-          }
-          sockPuppetArticles.push({
-            id: `${title}_${j}_${k}`,
-            title: articleTitle,
-            slug: articleTitle
-              .split(' ')
-              .join('-')
-              .toLowerCase(),
-            tags: [title, `sub-topic-${title}-${j}`].concat(statesForArticle),
-            articleType: type,
-            createdAt: date,
-            updatedAt: date,
-            author: author,
-          });
-        }
-
-        subIssues.push({
-          id: `${title}_${j}`,
-          title: `Fake Subtopic ${title} - ${j}`,
-          slug: `sub-topic-${title}-${j}`,
-        });
-        articles = articles.concat(sockPuppetArticles);
-      }
-      issues.push({
-        id: i,
-        title: title,
-        slug: title
-          .split(' ')
-          .join('-')
-          .toLowerCase(),
-        subIssues: subIssues,
-      });
-    });
+    // DEV ONLY -- delete next section once we have state data in database
+    const { issues } = issuesArticlesFakeData;
+    articles = articles.concat(issuesArticlesFakeData.articles);
     // RETURN HERE -- END
     // END -- delete previous section once we have real issues and articles
 
