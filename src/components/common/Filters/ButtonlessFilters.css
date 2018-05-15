@@ -2,6 +2,7 @@
   display: inline-block;
   margin: 0 18px 6px 0;
   font-size: 1.17em;
+  border-bottom: 3px solid transparent;`
 }
 
 .ButtonlessFilters .selected{
