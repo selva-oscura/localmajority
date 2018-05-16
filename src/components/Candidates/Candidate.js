@@ -6,7 +6,6 @@ import Aux from '../common/Aux';
 import ImageWithBackgroundPlaceholderImage from '../common/ImageWithBackgroundPlaceholderImage';
 import Loading from '../common/Loading';
 import Offline from '../common/Offline';
-import NoSuchCandidate from './NoSuchCandidate';
 import { SocialIcon } from 'react-social-icons';
 import CandidateDonateButton from './CandidateDonateButton';
 import CandidateWebsiteButton from './CandidateWebsiteButton';
@@ -68,6 +67,18 @@ class Candidate extends Component {
     }
   }
 
+  componentDidMount() {
+    const candidate = this.props.candidateDetail
+      ? this.props.candidateDetail
+      : this.props.candidate;
+
+    // redirect to /candidates/:state if /candidates/:state/:slug is not a candidate for which we have information
+    // (shouldn't be called if clicking on candidate on page, but if directly typing in url or following faulty link this will redirect to the default page)\
+    if (!candidate) {
+      return this.props.history.push(`/candidates/${this.props.match.params.state}`);
+    }
+  }
+
   render() {
     const isLoading = this.props.CandidateDetailBySlug.loading;
 
@@ -85,10 +96,6 @@ class Candidate extends Component {
     const candidate = this.props.candidateDetail
       ? this.props.candidateDetail
       : this.props.candidate;
-
-    if (!candidate) {
-      return <NoSuchCandidate candidateId={this.props.match.params.slug} />;
-    }
 
     const candidateHeadshot =
       candidate.headshotId && candidate.headshotId.url
