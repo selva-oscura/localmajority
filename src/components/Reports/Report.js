@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import graphQLAPI from '../../api/graphQLAPI';
 import RelatedReports from './RelatedReports';
-import NoSuchReport from './NoSuchReport';
 import Aux from '../common/Aux';
 import ImageWithBackgroundPlaceholderImage from '../common/ImageWithBackgroundPlaceholderImage';
 import Loading from '../common/Loading';
@@ -16,14 +15,15 @@ import {
 import loremIpsum from '../../data/loremIpsum';
 
 class Report extends Component {
-  constructor(props) {
-    super(props);
-    console.log('this.props', this.props);
-    const { article } = this.props;
-    console.log('article from Article', article);
-    document.title = article
-      ? `Local Majority | ${article.articleType} | ${article.title}`
-      : 'Local Majority | Unrecognized Article';
+
+  componentDidMount() {
+    const article = this.props.articleDetail
+      ? this.props.articleDetail
+      : this.props.article;
+    if (!article) {
+      return this.props.history.push('/reports');
+    }
+    document.title = `Local Majority | ${article.articleType} | ${article.title}`;
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -79,10 +79,6 @@ class Report extends Component {
     const hero = article.heroImg ? article.heroImg : '';
     const relatedReports = this.props.relatedArticles;
 
-    if (!article) {
-      return <NoSuchReport articleId={this.props.match.params.slug} />;
-    }
-
     return (
       <Aux>
         <Section
@@ -115,16 +111,18 @@ class Report extends Component {
             </article>
           </div>
         </Section>
-        <Section
-          hasContainer={true}
-          spacingAbove={3}
-          spacingBelow={3}
-          background="light"
-        >
-          {relatedReports && relatedReports.length ? (
-            <RelatedReports articles={relatedReports} />
-          ) : null}
-        </Section>
+        {
+          relatedReports && relatedReports.length ? (
+            <Section
+              hasContainer={true}
+              spacingAbove={3}
+              spacingBelow={3}
+              background="light"
+            >
+              <RelatedReports articles={relatedReports} />
+            </Section>
+          ) : null
+        }
       </Aux>
     );
   }
