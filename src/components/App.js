@@ -22,7 +22,7 @@ import FourZeroFour from './FourZeroFour';
 import './App.css';
 
 // DEV ONLY -- fixtures -- SHOULD BE ELIMINATED ONCE THE DATABASE IS HAPPY
-import { stateFakeData, issueTitles, statesForIssues, issuesArticlesFakeData } from '../data/fixtures';
+import { stateFakeData, issueTitles, issuesArticlesFakeData } from '../data/fixtures';
 
 injectTapEventPlugin();
 
@@ -160,8 +160,6 @@ class App extends Component {
       // articles,
       articlesDetails,
       candidates,
-      seats,
-      seatsDetails,
       candidatesDetails,
       statesMasterList,
       statesDetails,
@@ -257,6 +255,7 @@ class App extends Component {
       isMissingCandidateData
     );
     // console.log('candidatesWithProblematicData', candidatesWithProblematicData);
+
 
     // RETURN HERE
     // DEV ONLY -- delete next section once we have state data in database
@@ -500,7 +499,6 @@ class App extends Component {
         <Route
           path="/states"
           component={props =>
-            seats &&
             validFutureCandidatesStates &&
             validFutureCandidatesStates.length ? (
               <Section
