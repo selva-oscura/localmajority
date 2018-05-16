@@ -341,9 +341,9 @@ class App extends Component {
             const articleDetail = articlesDetails[props.match.params.slug]
               ? articlesDetails[props.match.params.slug]
               : null;
-            const articleTags = article.tags;
             let relatedArticles = [];
-            if (articleTags) {
+            if (article && article.tags) {
+              const articleTags = article.tags;
               articles.forEach(possiblyRelatedArticle => {
                 let relationshipDegree = 0;
                 if (possiblyRelatedArticle.tags) {
