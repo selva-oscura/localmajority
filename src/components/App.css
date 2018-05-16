@@ -1,4 +1,4 @@
 .App main{
-	min-height: 75vh;
+	min-height: calc(100vh - 140px);
 	margin: 0px auto;
 }
