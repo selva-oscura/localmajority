@@ -18,6 +18,10 @@ class Candidates extends Component {
   };
 
   componentDidMount() {
+    const { statesMasterList } = this.props;
+    if(!statesMasterList.includes(this.props.match.params.state) && this.props.match.params.state){
+      return this.props.history.push('/candidates');
+    }
     this.props.match.params.state
       ? (document.title = `Local Majority | Candidates | ${
           this.props.match.params.state
