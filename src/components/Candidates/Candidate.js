@@ -36,7 +36,6 @@ class Candidate extends Component {
     this.hideDistrictDetail = this.hideDistrictDetail.bind(this);
     this.showOpponentDetail = this.showOpponentDetail.bind(this);
     this.hideOpponentDetail = this.hideOpponentDetail.bind(this);
-
   }
 
   showDistrictDetail() {
@@ -91,7 +90,9 @@ class Candidate extends Component {
     // redirect to /candidates/:state if /candidates/:state/:slug is not a candidate for which we have information
     // (shouldn't be called if clicking on candidate on page, but if directly typing in url or following faulty link this will redirect to the default page)\
     if (!candidate) {
-      return this.props.history.push(`/candidates/${this.props.match.params.state}`);
+      return this.props.history.push(
+        `/candidates/${this.props.match.params.state}`
+      );
     }
   }
 
@@ -177,9 +178,9 @@ class Candidate extends Component {
               />
               <ImageWithBackgroundPlaceholderImage
                 imageSrc={seatInStateMap}
-                imageAlt={`location of ${candidate.title}'s district within ${
-                  stateName
-                }`}
+                imageAlt={`location of ${
+                  candidate.title
+                }'s district within ${stateName}`}
               />
             </div>
 
@@ -192,9 +193,9 @@ class Candidate extends Component {
             <div className="hidden-lg-down col-xl-3">
               <ImageWithBackgroundPlaceholderImage
                 imageSrc={seatInStateMap}
-                imageAlt={`location of ${candidate.title}'s district within ${
-                  stateName
-                }`}
+                imageAlt={`location of ${
+                  candidate.title
+                }'s district within ${stateName}`}
               />
             </div>
 
@@ -338,7 +339,8 @@ class Candidate extends Component {
                         className="tertiary-text-color"
                         onClick={this.showOpponentDetail}
                       >
-                        &raquo; Learn More About why We Must Defeat {candidate.firstName}'s Opponent
+                        &raquo; Learn More About why We Must Defeat{' '}
+                        {candidate.firstName}'s Opponent
                       </h2>
                     )}
 
@@ -366,21 +368,24 @@ class Candidate extends Component {
                               : 'slow-reveal'
                           }
                         >
-                          {
-                            candidate && candidate.opponent && candidate.opponent.opponentPrimer
-                              ? <Primer primer={candidate.opponent.opponentPrimer} />
-                              : (<Aux>
-                                  <h2>Need data about the opponent HERE</h2>
-                                  <p>Oh, data, where art thou?</p>
-                                  <p>Go, database, go.  </p>
-                                </Aux>)
-                          }
+                          {candidate &&
+                          candidate.opponent &&
+                          candidate.opponent.opponentPrimer ? (
+                            <Primer
+                              primer={candidate.opponent.opponentPrimer}
+                            />
+                          ) : (
+                            <Aux>
+                              <h2>Need data about the opponent HERE</h2>
+                              <p>Oh, data, where art thou?</p>
+                              <p>Go, database, go. </p>
+                            </Aux>
+                          )}
                         </div>
                       </Aux>
                     )}
                   </div>
                 )}
-
               </div>
             </div>
             <div className="col-12 col-lg-4 col-xl-3">

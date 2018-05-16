@@ -15,7 +15,6 @@ import {
 import loremIpsum from '../../data/loremIpsum';
 
 class Report extends Component {
-
   componentDidMount() {
     const article = this.props.articleDetail
       ? this.props.articleDetail
@@ -23,7 +22,9 @@ class Report extends Component {
     if (!article) {
       return this.props.history.push('/reports');
     }
-    document.title = `Local Majority | ${article.articleType} | ${article.title}`;
+    document.title = `Local Majority | ${article.articleType} | ${
+      article.title
+    }`;
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -111,18 +112,16 @@ class Report extends Component {
             </article>
           </div>
         </Section>
-        {
-          relatedReports && relatedReports.length ? (
-            <Section
-              hasContainer={true}
-              spacingAbove={3}
-              spacingBelow={3}
-              background="light"
-            >
-              <RelatedReports articles={relatedReports} />
-            </Section>
-          ) : null
-        }
+        {relatedReports && relatedReports.length ? (
+          <Section
+            hasContainer={true}
+            spacingAbove={3}
+            spacingBelow={3}
+            background="light"
+          >
+            <RelatedReports articles={relatedReports} />
+          </Section>
+        ) : null}
       </Aux>
     );
   }

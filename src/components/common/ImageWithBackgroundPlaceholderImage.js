@@ -15,7 +15,7 @@ const ImageWithBackgroundPlaceholderImage = ({
   backgroundImageURL = '/images/placeholderImage.svg',
   aspectRatioInPercent = 100,
 }) => (
-  <div style={{backgroundColor: 'rgba(238,238,238, 0.5)'}}>
+  <div style={{ backgroundColor: 'rgba(238,238,238, 0.5)' }}>
     <div
       style={{
         paddingBottom: '0',

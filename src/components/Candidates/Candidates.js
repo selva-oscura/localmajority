@@ -20,7 +20,10 @@ class Candidates extends Component {
 
   componentDidMount() {
     const { statesMasterList } = this.props;
-    if(!statesMasterList.includes(this.props.match.params.state) && this.props.match.params.state){
+    if (
+      !statesMasterList.includes(this.props.match.params.state) &&
+      this.props.match.params.state
+    ) {
       return this.props.history.push('/candidates');
     }
     this.props.match.params.state
@@ -44,7 +47,6 @@ class Candidates extends Component {
     }
 
     return (
-
       <article className="Candidates">
         <Section
           hasContainer={true}
@@ -56,7 +58,9 @@ class Candidates extends Component {
             Our <span className="tertiary-text-color">Candidates</span>
           </h2>
           <p className="text-center">
-            Local Majority is supporting progressive Democratic candidates in State House and State Senate races where we can make a difference and flip seats blue.
+            Local Majority is supporting progressive Democratic candidates in
+            State House and State Senate races where we can make a difference
+            and flip seats blue.
           </p>
         </Section>
 
@@ -128,7 +132,6 @@ class Candidates extends Component {
             </div>
           </div>
         </Section>
-
       </article>
     );
   }

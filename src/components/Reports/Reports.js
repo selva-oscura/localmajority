@@ -164,7 +164,6 @@ class Reports extends Component {
 
             <FeaturedReport article={featuredArticle} />
             <div className="row">
-
               {otherArticles.map((article, i) => {
                 let articleThumbnail = article.thumbnail
                   ? article.thumbnail

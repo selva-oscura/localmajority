@@ -22,7 +22,11 @@ import FourZeroFour from './FourZeroFour';
 import './App.css';
 
 // DEV ONLY -- fixtures -- SHOULD BE ELIMINATED ONCE THE DATABASE IS HAPPY
-import { stateFakeData, issueTitles, issuesArticlesFakeData } from '../data/fixtures';
+import {
+  stateFakeData,
+  issueTitles,
+  issuesArticlesFakeData,
+} from '../data/fixtures';
 
 injectTapEventPlugin();
 
@@ -138,7 +142,6 @@ class App extends Component {
         }
         // DEV ONLY -- hard-coded/imported data from fixtures to be replaced by queries once database is happy
         state.issues = issuesArticlesFakeData.issues;
-
       });
       state.timestamp = new Date().getTime();
       if (prevProps !== this.props) {
@@ -255,7 +258,6 @@ class App extends Component {
       isMissingCandidateData
     );
     // console.log('candidatesWithProblematicData', candidatesWithProblematicData);
-
 
     // RETURN HERE
     // DEV ONLY -- delete next section once we have state data in database

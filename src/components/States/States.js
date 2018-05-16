@@ -8,7 +8,9 @@ const States = ({ currentStateRaces }) => (
       Our <span className="tertiary-text-color">States</span>
     </h2>
     <p className="text-center col-12">
-      Local Majority is supporting progressive candidates in State House and State Senate races in purple states where flipping seats blue can make the biggest difference.
+      Local Majority is supporting progressive candidates in State House and
+      State Senate races in purple states where flipping seats blue can make the
+      biggest difference.
     </p>
     {currentStateRaces.map((state, i) => (
       <GridXSmallIsOneSmallIsThree key={i}>
