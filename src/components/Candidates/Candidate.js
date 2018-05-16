@@ -29,9 +29,14 @@ class Candidate extends Component {
     this.state = {
       showDistrictDetail: false,
       hidingDistrictDetail: false,
+      showOpponentDetail: false,
+      hidingOpponentDetail: false,
     };
     this.showDistrictDetail = this.showDistrictDetail.bind(this);
     this.hideDistrictDetail = this.hideDistrictDetail.bind(this);
+    this.showOpponentDetail = this.showOpponentDetail.bind(this);
+    this.hideOpponentDetail = this.hideOpponentDetail.bind(this);
+
   }
 
   showDistrictDetail() {
@@ -41,6 +46,16 @@ class Candidate extends Component {
     this.setState({ hidingDistrictDetail: true });
     setTimeout(() => {
       this.setState({ showDistrictDetail: false, hidingDistrictDetail: false });
+    }, 500);
+  }
+
+  showOpponentDetail() {
+    this.setState({ showOpponentDetail: true });
+  }
+  hideOpponentDetail() {
+    this.setState({ hidingOpponentDetail: true });
+    setTimeout(() => {
+      this.setState({ showOpponentDetail: false, hidingOpponentDetail: false });
     }, 500);
   }
 
@@ -316,6 +331,56 @@ class Candidate extends Component {
                     )}
                   </div>
                 )}
+                {seatPrimer && (
+                  <div>
+                    {!this.state.showOpponentDetail && (
+                      <h2
+                        className="tertiary-text-color"
+                        onClick={this.showOpponentDetail}
+                      >
+                        &raquo; Learn More About why We Must Defeat {candidate.firstName}'s Opponent
+                      </h2>
+                    )}
+
+                    {this.state.showOpponentDetail && (
+                      <Aux>
+                        <h2
+                          className="tertiary-text-color"
+                          onClick={this.hideOpponentDetail}
+                        >
+                          <span
+                            className={
+                              this.state.hidingOpponentDetail
+                                ? 'rotate90to0'
+                                : 'rotate0to90'
+                            }
+                          >
+                            &raquo;
+                          </span>
+                          &nbsp;About {candidate.firstName}'s Opponent
+                        </h2>
+                        <div
+                          className={
+                            this.state.hidingOpponentDetail
+                              ? 'slow-removal'
+                              : 'slow-reveal'
+                          }
+                        >
+                          {
+                            candidate && candidate.opponent && candidate.opponent.opponentPrimer
+                              ? <Primer primer={candidate.opponent.opponentPrimer} />
+                              : (<Aux>
+                                  <h2>Need data about the opponent HERE</h2>
+                                  <p>Oh, data, where art thou?</p>
+                                  <p>Go, database, go.  </p>
+                                </Aux>)
+                          }
+                        </div>
+                      </Aux>
+                    )}
+                  </div>
+                )}
+
               </div>
             </div>
             <div className="col-12 col-lg-4 col-xl-3">
