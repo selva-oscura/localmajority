@@ -178,7 +178,7 @@ class Candidate extends Component {
               <ImageWithBackgroundPlaceholderImage
                 imageSrc={seatInStateMap}
                 imageAlt={`location of ${candidate.title}'s district within ${
-                  candidate.state.title
+                  stateName
                 }`}
               />
             </div>
@@ -193,7 +193,7 @@ class Candidate extends Component {
               <ImageWithBackgroundPlaceholderImage
                 imageSrc={seatInStateMap}
                 imageAlt={`location of ${candidate.title}'s district within ${
-                  candidate.state.title
+                  stateName
                 }`}
               />
             </div>
@@ -211,7 +211,7 @@ class Candidate extends Component {
                     imageSrc={seatInStateMap}
                     imageAlt={`location of ${
                       candidate.title
-                    }'s district within ${candidate.state.title}`}
+                    }'s district within ${stateName}`}
                   />
                 </div>
               </div>
