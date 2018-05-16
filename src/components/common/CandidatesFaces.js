@@ -1,4 +1,5 @@
 import React from 'react';
+import Section from '../common/Section/Section';
 
 const CandidatesFaces = ({ candidatesVA2017, candidates }) => {
   const facesCandidates = []
@@ -49,7 +50,12 @@ const CandidatesFaces = ({ candidatesVA2017, candidates }) => {
   }
 
   return (
-    <section>
+    <Section
+      hasContainer={false}
+      spacingAbove={0}
+      spacingBelow={0}
+      background=""
+    >
       <div className="FacesColourBackground">
         {presentationForCandidatesFaces.map((rowContents, i) => (
           <div className="row no-gutters" key={i}>
@@ -90,7 +96,7 @@ const CandidatesFaces = ({ candidatesVA2017, candidates }) => {
           </div>
         ))}
       </div>
-    </section>
+    </Section>
   );
 };
 
