@@ -50,7 +50,6 @@ class TakeAction extends Component {
     };
     const mobilizeVolunteerRoles = ['Canvassers', 'Phonebankers'];
 
-      // <article className="container">
     return (
       <article className="TakeAction">
         <Section
@@ -76,8 +75,8 @@ class TakeAction extends Component {
           <h2 className="text-right secondary-text-color">
             <i>Your Vote is Your Voice</i>
           </h2>
-          <h1>Take Action!</h1>
-          <h3>Select Your State</h3>
+          <h2>Take Action!</h2>
+          <h3 className="text-center">Select Your State</h3>
           <Filters>
             <ButtonlessFilters
               filterCategory="stateSelected"
@@ -175,7 +174,7 @@ class TakeAction extends Component {
         >
           <h2 className="text-right secondary-text-color">
             <i>
-              Your Vote Counts More than Ever!<br />
+              Your Vote Counts More than Ever<br />
               &amp; it is the Only Way to turn {regionText} Blue Again
             </i>
           </h2>
@@ -183,7 +182,7 @@ class TakeAction extends Component {
           {!this.state.stateSelected ? (
             <Aux>
               <h4>
-                An Absentee Ballot (Vote By Mail) can Help You Avoid the
+                An Absentee (Vote By Mail) Ballot can Help You Avoid the
                 Lines and Give you Peace of Mind on Election Day.
               </h4>
               <p>

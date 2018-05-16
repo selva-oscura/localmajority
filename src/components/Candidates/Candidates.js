@@ -5,6 +5,7 @@ import Filters from '../common/Filters/Filters';
 import ButtonlessFilters from '../common/Filters/ButtonlessFilters';
 import HorizontalCards from '../common/Cards/HorizontalCards';
 import HorizontalCard from '../common/Cards/HorizontalCard';
+import Section from '../common/Section/Section';
 
 class Candidates extends Component {
   state = {
@@ -43,13 +44,33 @@ class Candidates extends Component {
     }
 
     return (
-      <main className="Candidates">
-        <div className="container">
+
+      <article className="Candidates">
+        <Section
+          hasContainer={true}
+          spacingAbove={3}
+          spacingBelow={3}
+          background=""
+        >
+          <h2 className="text-center">
+            Our <span className="tertiary-text-color">Candidates</span>
+          </h2>
+          <p className="text-center">
+            Local Majority is supporting progressive Democratic candidates in State House and State Senate races where we can make a difference and flip seats blue.
+          </p>
+        </Section>
+
+        <Section
+          hasContainer={true}
+          spacingAbove={3}
+          spacingBelow={3}
+          background="light"
+        >
           <div className="row">
             <div className="col">
               {statesMasterList && (
                 <Aux>
-                  <h3>Select Your State</h3>
+                  <h3 className="text-center">Select Your State</h3>
                   <Filters>
                     <ButtonlessFilters
                       filterCategory="stateSelected"
@@ -62,6 +83,14 @@ class Candidates extends Component {
               )}
             </div>
           </div>
+        </Section>
+
+        <Section
+          hasContainer={true}
+          spacingAbove={3}
+          spacingBelow={3}
+          background=""
+        >
           <div className="row">
             <div className="col">
               {candidatesMeetingFilters && candidatesMeetingFilters.length ? (
@@ -98,8 +127,9 @@ class Candidates extends Component {
               )}
             </div>
           </div>
-        </div>
-      </main>
+        </Section>
+
+      </article>
     );
   }
 }
