@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from 'react-apollo';
-import { ApolloClient } from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost';
 import graphQLAPI from './api/graphQLAPI';
 import { BrowserRouter } from 'react-router-dom';
 import './styles/bootstrap-reboot.css';
