@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from './Button';
 import TwitterTimeline from './TwitterTimeline';
 import { SocialIcon, SocialIcons } from 'react-social-icons';
-import axios from 'axios';
+// import axios from 'axios';
 
 let urls = [
   'http://jaketrent.com',
@@ -32,61 +32,61 @@ class Elements extends Component {
     this.incrementCounter = this.incrementCounter.bind(this);
   }
 
-  fetchData() {
-    // var fields = ["parties", "issues", "candidates", "articles", "districts", "races"];
-    // var queries = ["Party", "Issue", "Candidate", "Article", "District", "Race"];
-    // const fields = ["parties", "issues"];
-    const queries = [
-      // {tableName:"Article", propsName:"articles"},
-      // {tableName:"Candidate", propsName:"candidates"},
-      // {tableName:"Contest", propsName:"contests"},
-      // {tableName:"District", propsName:"districts"},
-      // {tableName:"Issue", propsName:"issues"},
-      // {tableName:"IssuePrimer", propsName:"issuePrimers"},
-      // {tableName:"Party", propsName:"parties"},
-      // {tableName:"Seat", propsName:"seats"},
-      // {tableName:"State", propsName:"states"},
-      // {tableName:"TalkingPoints", propsName:"talkingPoints"},
-    ];
-    queries.forEach(query => {
-      const apiOptions = {
-        url: `https://cmsdev.localmajority.net/nuxeo/api/v1/search/lang/NXQL/execute?query=select%20*%20from%20${
-          query.tableName
-        }`,
-        headers: {
-          Authorization: 'Basic anNvbjpjc3d4V2xSdk5XTnBHN0FKTzhIeg==',
-          'X-NXproperties': '*',
-          'content-type': 'application/json; charset=utf-8',
-        },
-      };
-      // 'X-NXRepository': 'default',
-      // 'Accept': 'application/json'
-      console.log('query', apiOptions.url);
-      axios(apiOptions)
-        .then(res => {
-          if (res.status === 200 && res.data && res.data.entries) {
-            // console.log('data entries', res.data.entries);
-            let state = Object.assign({}, this.state);
-            state[query['propsName']] = res.data.entries;
-            this.setState(state);
-            // if(query.propsName==="articles"){
-            // 	// let articleSpace = document.getElementById('article-space');
-            // 	res.data.entries.forEach(article => {
-            // 		console.log('should be appending...', JSON.stringify(article.properties['article:body']));
-            // 		document.getElementById('article-space').innerHTML = article.properties['article:body'];
-            // 	})
-            // }
-          }
-        })
-        .catch(err => {
-          console.log(
-            `error acessing data for ${query.tableName} table`,
-            JSON.stringify(err)
-          );
-          this.setState({ errors: err });
-        });
-    });
-  }
+  // fetchData() {
+  //   // var fields = ["parties", "issues", "candidates", "articles", "districts", "races"];
+  //   // var queries = ["Party", "Issue", "Candidate", "Article", "District", "Race"];
+  //   // const fields = ["parties", "issues"];
+  //   const queries = [
+  //     // {tableName:"Article", propsName:"articles"},
+  //     // {tableName:"Candidate", propsName:"candidates"},
+  //     // {tableName:"Contest", propsName:"contests"},
+  //     // {tableName:"District", propsName:"districts"},
+  //     // {tableName:"Issue", propsName:"issues"},
+  //     // {tableName:"IssuePrimer", propsName:"issuePrimers"},
+  //     // {tableName:"Party", propsName:"parties"},
+  //     // {tableName:"Seat", propsName:"seats"},
+  //     // {tableName:"State", propsName:"states"},
+  //     // {tableName:"TalkingPoints", propsName:"talkingPoints"},
+  //   ];
+  //   queries.forEach(query => {
+  //     const apiOptions = {
+  //       url: `https://cmsdev.localmajority.net/nuxeo/api/v1/search/lang/NXQL/execute?query=select%20*%20from%20${
+  //         query.tableName
+  //       }`,
+  //       headers: {
+  //         Authorization: 'Basic anNvbjpjc3d4V2xSdk5XTnBHN0FKTzhIeg==',
+  //         'X-NXproperties': '*',
+  //         'content-type': 'application/json; charset=utf-8',
+  //       },
+  //     };
+  //     // 'X-NXRepository': 'default',
+  //     // 'Accept': 'application/json'
+  //     console.log('query', apiOptions.url);
+  //     axios(apiOptions)
+  //       .then(res => {
+  //         if (res.status === 200 && res.data && res.data.entries) {
+  //           // console.log('data entries', res.data.entries);
+  //           let state = Object.assign({}, this.state);
+  //           state[query['propsName']] = res.data.entries;
+  //           this.setState(state);
+  //           // if(query.propsName==="articles"){
+  //           // 	// let articleSpace = document.getElementById('article-space');
+  //           // 	res.data.entries.forEach(article => {
+  //           // 		console.log('should be appending...', JSON.stringify(article.properties['article:body']));
+  //           // 		document.getElementById('article-space').innerHTML = article.properties['article:body'];
+  //           // 	})
+  //           // }
+  //         }
+  //       })
+  //       .catch(err => {
+  //         console.log(
+  //           `error acessing data for ${query.tableName} table`,
+  //           JSON.stringify(err)
+  //         );
+  //         this.setState({ errors: err });
+  //       });
+  //   });
+  // }
 
   decrementCounter() {
     let count = this.state.count;
