@@ -15,7 +15,6 @@ import Report from './Reports/Report';
 import Reports from './Reports/Reports';
 import AboutUs from './AboutUs/AboutUs';
 import TakeAction from './TakeAction/TakeAction';
-import Elements from './common/Elements';
 import Loading from './common/Loading';
 import Section from './common/Section/Section';
 import FourZeroFour from './FourZeroFour';
@@ -550,8 +549,6 @@ class App extends Component {
         />
 
         <Route path="/about-us" component={AboutUs} />
-
-        <Route path="/elements" component={Elements} />
 
         <Route component={FourZeroFour} />
       </Switch>
