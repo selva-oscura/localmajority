@@ -40,12 +40,19 @@ class HorizontalCard extends Component {
             <div className="card-body">
               <h3>{cardTitle}</h3>
               {cardSubtitle && <h4>{cardSubtitle}</h4>}
-              {cardText && <div className="clamp"><p>{cardText}</p></div>}
-              {cardTextHtml && <div className="clamp"
-                dangerouslySetInnerHTML={{
-                  __html: cardTextHtml
-                }}
-              />}
+              {cardText && (
+                <div className="clamp">
+                  <p>{cardText}</p>
+                </div>
+              )}
+              {cardTextHtml && (
+                <div
+                  className="clamp"
+                  dangerouslySetInnerHTML={{
+                    __html: cardTextHtml,
+                  }}
+                />
+              )}
             </div>
           </Link>
         </Paper>
@@ -61,7 +68,6 @@ HorizontalCard.propTypes = {
   imgSrc: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
-}
-
+};
 
 export default HorizontalCard;

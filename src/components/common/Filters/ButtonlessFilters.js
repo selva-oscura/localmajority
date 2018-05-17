@@ -14,12 +14,12 @@ import './ButtonlessFilters.css';
 */
 
 class ButtonlessFilters extends Component {
-  constructor (props) {
-    super (props);
-    const { passedParam=''} = this.props;
+  constructor(props) {
+    super(props);
+    const { passedParam = '' } = this.props;
     this.state = {
       selectedValue: passedParam,
-    }
+    };
     this.updateSelectedValues = this.updateSelectedValues.bind(this);
   }
 
@@ -28,7 +28,7 @@ class ButtonlessFilters extends Component {
   }
 
   render() {
-    const { filterCategory, includeAll=true, masterList } = this.props;
+    const { filterCategory, includeAll = true, masterList } = this.props;
     const { selectedValue } = this.state;
     return (
       <div className="ButtonlessFilters">

@@ -5,21 +5,20 @@ import 'react-responsive-carousel/lib/styles/carousel.css';
 import './Slider.css';
 
 const Slider = ({
-  showArrows=true,
-  showThumbs=false,
-  showStatus=false,
-  centerMode=false,
-  showIndicators=true,
-  interval=3000,
-  transitionTime=500,
-  infiniteLoop=true,
-  autoPlay=true,
-  emulateTouch=true,
-  useKeyboardArrows=false,
-  slides=[]
-}) => (
-  slides && slides.length
-  ? (
+  showArrows = true,
+  showThumbs = false,
+  showStatus = false,
+  centerMode = false,
+  showIndicators = true,
+  interval = 3000,
+  transitionTime = 500,
+  infiniteLoop = true,
+  autoPlay = true,
+  emulateTouch = true,
+  useKeyboardArrows = false,
+  slides = [],
+}) =>
+  slides && slides.length ? (
     <section className="Slider">
       <Carousel
         showArrows={showArrows}
@@ -34,14 +33,13 @@ const Slider = ({
         emulateTouch={emulateTouch}
         useKeyboardArrows={emulateTouch}
       >
-        { slides.map((slide, i)=>(
+        {slides.map((slide, i) => (
           <div key={i}>
             <img src={slide.src} alt={slide.alt} />
           </div>
         ))}
       </Carousel>
     </section>
-  ) : null
-);
+  ) : null;
 
 export default Slider;

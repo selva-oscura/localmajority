@@ -1,7 +1,14 @@
 import React from 'react';
 import './VideoResponsive.css';
 
-const VideoResponsive = ({title="", src="", width="640", height="360", frameBorder="0", allowFullScreen=""}) => (
+const VideoResponsive = ({
+  title = '',
+  src = '',
+  width = '640',
+  height = '360',
+  frameBorder = '0',
+  allowFullScreen = '',
+}) => (
   <div className="VideoResponsive">
     <iframe
       title={title}

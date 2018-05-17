@@ -16,7 +16,8 @@ const Primer = ({ primer, i }) => (
           : '';
       const body = section.body;
       const btype = body && body.type;
-      const titleAndContent = (title && body.text) || (title && body.url) || (title && !body);
+      const titleAndContent =
+        (title && body.text) || (title && body.url) || (title && !body);
       if (!body && !title) {
         return null;
       }

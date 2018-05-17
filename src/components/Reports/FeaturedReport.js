@@ -34,7 +34,9 @@ const FeaturedReport = ({ article }) => {
               </p>
             </div>
           </Link>
-          {tags && tags.length ? <Tags tags={tags} tagRoute={tagRoute} /> : null}
+          {tags && tags.length ? (
+            <Tags tags={tags} tagRoute={tagRoute} />
+          ) : null}
         </div>
       </div>
     </div>

@@ -11,9 +11,7 @@ class CardHover extends Component {
   onMouseOver = () => this.setState({ depth: 3 });
   onMouseOut = () => this.setState({ depth: 2 });
   render() {
-    let {
-      imgShape,
-    } = this.props;
+    let { imgShape } = this.props;
     let aspectRatio = imgShape || '';
     return (
       <div
@@ -21,7 +19,7 @@ class CardHover extends Component {
         onMouseOver={this.onMouseOver}
         onMouseOut={this.onMouseOut}
       >
-        <Paper zDepth={this.state.depth} style={{height: "100%"}}>
+        <Paper zDepth={this.state.depth} style={{ height: '100%' }}>
           {this.props.children}
         </Paper>
       </div>
