@@ -29,7 +29,7 @@ class Header extends Component {
                 />
               </IconButton>
             }
-            onLeftIconButtonTouchTap={this.handleHamburgerClick}
+            onLeftIconButtonClick={this.handleHamburgerClick}
           />
           <NavDrawer
             navLinks={navLinks}
