@@ -63,7 +63,7 @@ const Home = props => {
   ];
 
   return (
-    <main className="Home">
+    <article className="Home">
       <Section hasContainer={false}>
         <Slider slides={slides1} />
       </Section>
@@ -229,7 +229,7 @@ const Home = props => {
           </div>
         </div>
       </Section>
-    </main>
+    </article>
   );
 };
 

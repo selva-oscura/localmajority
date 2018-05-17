@@ -35,7 +35,7 @@ class Reports extends Component {
     console.log('subIssues', subIssues);
     console.log('this.props', this.props);
     return (
-      <main className="Reports">
+      <article className="Reports">
         <Section
           hasContainer={true}
           spacingAbove={3}
@@ -188,7 +188,7 @@ class Reports extends Component {
             </div>
           </Section>
         )}
-      </main>
+      </article>
     );
   }
 }
