@@ -30,8 +30,8 @@ import {
 injectTapEventPlugin();
 
 class App extends Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
 
     // check if there is local storage capability and stored data from last time
     let localMajorityData =
@@ -270,7 +270,7 @@ class App extends Component {
         <Route
           exact
           path="/"
-          component={props => (
+          render={props => (
             <Home
               articles={articles}
               pastCandidates={validPastCandidates}
