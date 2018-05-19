@@ -60,6 +60,10 @@ const queries = {
           id
           url
         }
+        partyId {
+          id
+          slug
+        }
       }
     }
   `,
@@ -75,8 +79,6 @@ const queries = {
           electionDate
           seatId {
             id
-            lat
-            lng
             regionKind
             regionName
             slug
@@ -104,7 +106,7 @@ const queries = {
         homepageUrl
         partyId {
           id
-          title
+          slug
           updatedAt
         }
         primers {
@@ -162,6 +164,7 @@ const queries = {
         color
         homepageUrl
         iconUrl
+        slug
       }
     }
   `,
