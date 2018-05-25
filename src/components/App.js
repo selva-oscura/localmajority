@@ -85,9 +85,7 @@ class App extends Component {
     this.updateStateAndLocalStorage(state);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    let state = { ...this.state };
-
+  allQueriesConcluded() {
     let allQueriesConcluded = true;
     Object.keys(this.props).forEach(query => {
       if (this.props[query].loading || this.props[query].error) {
@@ -101,47 +99,59 @@ class App extends Component {
         allQueriesConcluded = false;
       }
     });
-    // console.log('allQueriesConcluded', allQueriesConcluded);
+    return allQueriesConcluded;
+  }
 
-    // Freeze-dry updates to localStorage's copy of state
-    if (allQueriesConcluded && prevProps !== this.props) {
-      Object.keys(this.props).forEach(query => {
-        if (!this.props[query].error) {
-          if (query === 'ArticlesBasics') {
-            state.articles = this.props[query].allArticles;
-          } else if (query === 'CandidatesBasics') {
-            state.candidates = this.props[query].allCandidates;
-          } else if (query === 'States') {
-            state.states = this.props[query].allStates
-              .map(item => {
-                let { title, abbrev } = item;
-                return { title, abbrev };
-              })
-              .sort((a, b) => (a.title > b.title ? 1 : -1));
-            state.statesMasterList = state.states.map(state => state.title);
-          } else if (query === 'Parties') {
-            if (this.props.Parties && this.props.Parties.allParties) {
-              this.props[query].allParties.forEach(
-                party => (state.parties[`${party.id}`] = party)
-              );
-            }
-          } else {
-            console.log(
-              `Huh....  Had a successful query for ${query} amd nothing was done with the data.\nReturned ${
-                this.props[query]
-              }`
+  prepareGraphQLResultsForSavingToState() {
+    let state = { ...this.state };
+    Object.keys(this.props).forEach(query => {
+      if (!this.props[query].error) {
+        if (query === 'ArticlesBasics') {
+          state.articles = this.props[query].allArticles;
+        } else if (query === 'CandidatesBasics') {
+          state.candidates = this.props[query].allCandidates;
+        } else if (query === 'States') {
+          state.states = this.props[query].allStates
+            .map(item => {
+              let { title, abbrev } = item;
+              return { title, abbrev };
+            })
+            .sort((a, b) => (a.title > b.title ? 1 : -1));
+          state.statesMasterList = state.states.map(state => state.title);
+        } else if (query === 'Parties') {
+          if (this.props.Parties && this.props.Parties.allParties) {
+            this.props[query].allParties.forEach(
+              party => (state.parties[`${party.slug}`] = party)
             );
           }
         } else {
           console.log(
-            `Huh....  Had an error on the query for ${query}.\nReturned ${
+            `Successful query for ${query}, but nothing done with the data.\nReturned ${
               this.props[query]
             }`
           );
         }
-        // DEV ONLY -- hard-coded/imported data from fixtures to be replaced by queries once database is happy
-        state.issues = issuesArticlesFakeData.issues;
-      });
+      } else {
+        console.log(
+          `Huh....  Had an error on the query for ${query}.\nReturned ${
+            this.props[query]
+          }`
+        );
+      }
+      // DEV ONLY -- hard-coded/imported data from fixtures to be replaced by queries once database is happy
+      state.issues = issuesArticlesFakeData.issues;
+    });
+    return state;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // Freeze-dry updates to localStorage's copy of state IF all queries concluded and props !== prevProps
+
+    const allQueriesConcluded = this.allQueriesConcluded();
+    // console.log('allQueriesConcluded', allQueriesConcluded);
+
+    if (allQueriesConcluded && prevProps !== this.props) {
+      let state = this.prepareGraphQLResultsForSavingToState();
       state.timestamp = new Date().getTime();
       if (prevProps !== this.props) {
         this.updateStateAndLocalStorage(state);
