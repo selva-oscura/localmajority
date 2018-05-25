@@ -180,13 +180,13 @@ const Home = props => {
               Click <Link to="./take-action">here</Link> to make a difference in
               2018.
             </p>
-            <RaisedButton
-              containerElement={<Link to="./take-action" />}
-              linkButton={true}
-              primary={true}
-              label="Take Action"
-              style={{ display: 'inline-block', margin: '0px auto' }}
-            />
+            <div style={{ textAlign: 'center' }}>
+              <RaisedButton
+                containerElement={<Link to="./take-action" />}
+                primary={true}
+                label="Take Action"
+              />
+            </div>
           </div>
         </div>
       </Section>
