@@ -1,9 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import navLinks from '../../navLinks.js';
+import { SocialIcon } from 'react-social-icons';
 import './Footer.css';
 
-const Footer = () => (
+const Footer = ({socialMedia=[]}) => (
   <footer className="Footer full-width background-dark">
     <div className="container">
       <p className="text-center">
@@ -27,8 +28,14 @@ const Footer = () => (
           ))}
         </nav>
       </div>
+      { socialMedia && (
+        <div style={{textAlign: 'center', padding: "16px 0px 8px"}}>
+          {socialMedia.map(url=><SocialIcon url={url} style={{display: "inline-block", width: "30px", height: "30px", position: "relative", overflow: "hidden", verticalAlign: "middle"}}/>)}
+        </div>
+      )}
     </div>
   </footer>
 );
 
 export default Footer;
+
