@@ -1,15 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import RaisedButton from 'material-ui/RaisedButton';
 import FeaturedReports from '../Reports/FeaturedReports';
 import States from '../States/States';
-import CandidatesFaces from '../common/CandidatesFaces';
 import BasicCard from '../common/Cards/BasicCard';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import TextlessParallax from '../common/Parallax/TextlessParallax';
 import Section from '../common/Section/Section';
 import Slider from '../common/Sliders/Slider';
 import VideoResponsive from '../common/Videos/VideoResponsive';
-import candidatesVA2017 from '../../data/candidatesVA2017';
 import './Home.css';
 
 const Home = props => {
@@ -23,42 +22,16 @@ const Home = props => {
       alt: 'local majority logo',
     },
     {
-      src: 'https://placekitten.com/900/300',
-      alt: 'place kitten 900 by 300',
+      src: './images/va-candidates-faces.png',
+      alt: '1431 by 868',
     },
     {
-      src: './images/local_majority_banner.png',
-      alt: 'local majority logo',
-    },
-    {
-      src: 'https://placekitten.com/600/200',
-      alt: 'place kitten 600  by 200',
-    },
-  ];
-  const slides2 = [
-    {
-      src: './images/local_majority_banner.png',
-      alt: 'local majority logo',
-    },
-    {
-      src: 'https://placekitten.com/900/300',
-      alt: 'place kitten 900 by 300',
+      src: './images/constitution.jpg',
+      alt: 'constitution',
     },
     {
       src: 'https://placekitten.com/600/200',
       alt: 'place kitten 600  by 200',
-    },
-    {
-      src: './images/local_majority_banner.png',
-      alt: 'local majority logo',
-    },
-    {
-      src: 'https://placekitten.com/1200/300',
-      alt: 'place kitten 1200 by 300',
-    },
-    {
-      src: 'https://placekitten.com/600/300',
-      alt: 'place kitten 600 by 300',
     },
   ];
 
@@ -150,22 +123,11 @@ const Home = props => {
         </div>
       </Section>
 
-      <Section hasContainer={false}>
-        <Slider slides={slides2} />
-      </Section>
-
-      <Section hasContainer={false}>
-        <CandidatesFaces
-          candidatesVA2017={candidatesVA2017}
-          candidates={candidates}
-        />
-      </Section>
-
-      <Section hasContainer={false}>
+      <Section>
         <TextlessParallax
           imgSrc="/images/constitution.jpg"
-          strength="800"
-          height="400"
+          strength="500"
+          height="50"
         />
       </Section>
 
@@ -200,14 +162,6 @@ const Home = props => {
         </div>
       </Section>
 
-      <Section>
-        <TextlessParallax
-          imgSrc="/images/constitution.jpg"
-          strength="500"
-          height="50"
-        />
-      </Section>
-
       <Section hasContainer={true} spacingAbove={3} spacingBelow={3}>
         <div className="row">
           <div className="col-12">
@@ -226,8 +180,23 @@ const Home = props => {
               Click <Link to="./take-action">here</Link> to make a difference in
               2018.
             </p>
+            <RaisedButton
+              containerElement={<Link to="./take-action" />}
+              linkButton={true}
+              primary={true}
+              label="Take Action"
+              style={{ display: 'inline-block', margin: '0px auto' }}
+            />
           </div>
         </div>
+      </Section>
+
+      <Section hasContainer={false}>
+        <TextlessParallax
+          imgSrc="/images/constitution.jpg"
+          strength="800"
+          height="400"
+        />
       </Section>
     </article>
   );
