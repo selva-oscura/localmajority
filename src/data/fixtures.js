@@ -96,3 +96,9 @@ const createIssuesAndArticlesFakeData = () => {
 export const issuesArticlesFakeData = createIssuesAndArticlesFakeData();
 
 // export const issues = [...issuesArticlesFakeData];
+
+export const socialMedia = [
+	'https://www.facebook.com/localmajority/',
+	'https://twitter.com/local_majority',
+	'https://www.instagram.com/localmajority/'
+]
