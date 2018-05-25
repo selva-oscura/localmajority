@@ -91,7 +91,7 @@ class Candidates extends Component {
 
         <Section
           hasContainer={true}
-          spacingAbove={3}
+          spacingAbove={0}
           spacingBelow={3}
           background=""
         >
