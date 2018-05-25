@@ -25,6 +25,7 @@ import {
   stateFakeData,
   issueTitles,
   issuesArticlesFakeData,
+  socialMedia,
 } from '../data/fixtures';
 
 injectTapEventPlugin();
@@ -572,7 +573,9 @@ class App extends Component {
         <ErrorBoundary>
           <main>{this.renderPage()}</main>
         </ErrorBoundary>
-        <Footer />
+        <Footer
+          socialMedia={socialMedia}
+        />
       </div>
     );
   }
