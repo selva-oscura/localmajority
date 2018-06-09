@@ -1,25 +1,27 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import ImageWithBackgroundPlaceholderImage from '../common/ImageWithBackgroundPlaceholderImage';
-import Tags from '../common/Tags/Tags';
-import { prettifyDate } from '../../utils/functions';
-import './FeaturedReport.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import GridOneAcross from "../common/Grids/GridOneAcross";
+import ImageWithBackgroundPlaceholderImage from "../common/ImageWithBackgroundPlaceholderImage";
+import CardHover from "../common/Cards/CardHover";
+import Tags from "../common/Tags/Tags";
+import { prettifyDate } from "../../utils/functions";
+import "./FeaturedReport.css";
 
 const FeaturedReport = ({ article }) => {
   const {
     slug,
     imageSrc,
-    imageAlt = '',
+    imageAlt = "",
     title,
     author,
     updatedAt,
-    tagRoute = '',
-    tags = [],
+    tagRoute = "",
+    tags = []
   } = article;
   return (
     <div className="FeaturedReport row">
-      <div className="col-12" style={{ margin: '1vw 0px 2vw 0px' }}>
-        <div className="FeaturedReportShadow">
+      <GridOneAcross>
+        <CardHover>
           <Link to={`/report/${slug}`}>
             <ImageWithBackgroundPlaceholderImage
               imageSrc={imageSrc}
@@ -37,8 +39,8 @@ const FeaturedReport = ({ article }) => {
           {tags && tags.length ? (
             <Tags tags={tags} tagRoute={tagRoute} />
           ) : null}
-        </div>
-      </div>
+        </CardHover>
+      </GridOneAcross>
     </div>
   );
 };
