@@ -1,39 +1,43 @@
-import React, { Component } from 'react';
-import NoSuchReports from './NoSuchReports';
-import FeaturedReport from '../Reports/FeaturedReport';
-import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
-import ArticleCard from '../common/Cards/ArticleCard';
-import Aux from '../common/Aux';
-import Section from '../common/Section/Section';
-import Filters from '../common/Filters/Filters';
-import ButtonlessFilters from '../common/Filters/ButtonlessFilters';
+import React, { Component } from "react";
+import NoSuchReports from "./NoSuchReports";
+import FeaturedReport from "../Reports/FeaturedReport";
+import GridXSmallIsOneSmallIsThree from "../common/Grids/GridXSmallIsOneSmallIsThree";
+import ArticleCard from "../common/Cards/ArticleCard";
+import Aux from "../common/Aux";
+import Section from "../common/Section/Section";
+import Filters from "../common/Filters/Filters";
+import ButtonlessFilters from "../common/Filters/ButtonlessFilters";
 
 class Reports extends Component {
   state = {
-    issueSelected: this.props.match.params.slug,
+    issueSelected: this.props.match.params.slug
   };
 
   updateFilter = (filterCategory, selectedValue) => {
-    selectedValue === 'All'
-      ? this.props.history.push('/reports')
+    selectedValue === "All"
+      ? this.props.history.push("/reports")
       : this.props.history.push(`/reports/${selectedValue}`);
   };
 
   componentDidMount() {
+    if (!this.props.articles.length) {
+      return this.props.history.push("/reports");
+    }
     this.props.issue && this.props.issue.title
       ? (document.title = `Local Majority | Reports | ${
           this.props.issue.title
         }`)
-      : (document.title = 'Local Majority | Reports');
+      : (document.title = "Local Majority | Reports");
   }
 
   render() {
     const { issue, articles, issuesMasterList, statesMasterList } = this.props;
-    const featuredArticle = articles[0];
-    const otherArticles = articles.slice(1);
+    const featuredArticle = articles.length && articles[0] ? articles[0] : [];
+    const otherArticles =
+      articles.length && articles.slice(1) ? articles.slice(1) : [];
     const subIssues = issue ? issue.subIssues : [];
-    console.log('subIssues', subIssues);
-    console.log('this.props', this.props);
+    // console.log('subIssues', subIssues);
+    // console.log('this.props', this.props);
     return (
       <article className="Reports">
         <Section
@@ -131,7 +135,7 @@ class Reports extends Component {
                   {articles.map(article => {
                     let articleThumbnail = article.thumbnail
                       ? article.thumbnail
-                      : 'https://placekitten.com/400/300';
+                      : "https://placekitten.com/400/300";
                     let cardTags = article && article.tags ? article.tags : [];
                     return article.tags.includes(subIssue.slug) ? (
                       <GridXSmallIsOneSmallIsThree key={article.slug}>
@@ -167,7 +171,7 @@ class Reports extends Component {
               {otherArticles.map((article, i) => {
                 let articleThumbnail = article.thumbnail
                   ? article.thumbnail
-                  : 'https://placekitten.com/400/300';
+                  : "https://placekitten.com/400/300";
                 let cardTags = article && article.tags ? article.tags : [];
                 return (
                   <GridXSmallIsOneSmallIsThree key={article.slug}>
