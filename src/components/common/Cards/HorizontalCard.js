@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import Paper from 'material-ui/Paper';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import './HorizontalCard.css';
+import React, { Component } from "react";
+import Paper from "material-ui/Paper";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import "./HorizontalCard.css";
 
 class HorizontalCard extends Component {
   constructor(props) {
     super(props);
-    this.state = { depth: 2 };
+    this.state = { depth: 0 };
   }
-  onMouseOver = () => this.setState({ depth: 3 });
-  onMouseOut = () => this.setState({ depth: 2 });
+  onMouseOver = () => this.setState({ depth: 1 });
+  onMouseOut = () => this.setState({ depth: 0 });
   render() {
     let {
       cardTitle,
@@ -19,7 +19,7 @@ class HorizontalCard extends Component {
       cardTextHtml,
       imgSrc,
       category,
-      slug,
+      slug
     } = this.props;
     return (
       <div
@@ -49,7 +49,7 @@ class HorizontalCard extends Component {
                 <div
                   className="clamp"
                   dangerouslySetInnerHTML={{
-                    __html: cardTextHtml,
+                    __html: cardTextHtml
                   }}
                 />
               )}
@@ -67,7 +67,7 @@ HorizontalCard.propTypes = {
   cardText: PropTypes.string,
   imgSrc: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
-  slug: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired
 };
 
 export default HorizontalCard;
