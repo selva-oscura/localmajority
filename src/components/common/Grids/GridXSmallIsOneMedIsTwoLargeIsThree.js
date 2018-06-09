@@ -1,14 +1,10 @@
-import React from 'react';
+import React from "react";
+import style from "./GridStyle";
 
 const GridXSmallIsOneMedIsTwoLargeIsThree = props => (
   <div className="col-12 col-md-6 col-lg-4" style={style}>
     {props.children}
   </div>
 );
-
-const style = {
-  padding: '1vw inherit 0.75vw',
-  margin: '1vw 0',
-};
 
 export default GridXSmallIsOneMedIsTwoLargeIsThree;
