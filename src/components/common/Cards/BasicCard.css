@@ -1,24 +1,27 @@
-.BasicCard .contents{
-	padding: 0px 9px 6px;
+.BasicCard .contents {
+  padding: 0px 6px 6px;
 }
 
-.BasicCard h3, .BasicCard h4, .BasicCard p {
-	vertical-align: text-bottom;
+.BasicCard h3,
+.BasicCard h4,
+.BasicCard p {
+  vertical-align: text-bottom;
 }
 
 .BasicCard h3.title {
-	font-weight: bold;
+  font-weight: bold;
 }
 
-.BasicCard h3.title, .BasicCard h4 {
-	line-height: 1em;
-	text-align: center;
-} 
+.BasicCard h3.title,
+.BasicCard h4 {
+  line-height: 1em;
+  text-align: center;
+}
 
 .BasicCard p {
-	font-weight: normal;
-	font-size: 1em;
-	line-height: 1em;
-	margin-bottom: 0;
-	padding-bottom: 0;
+  font-weight: normal;
+  font-size: 1em;
+  line-height: 1em;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
