@@ -1,39 +1,20 @@
-.FeaturedReport .contents{
-  padding: 0px 0px 6px;
+.FeaturedReport .contents {
+  padding: 0px 6px 6px;
 }
 
-.FeaturedReport h3, .FeaturedReport p{
+.FeaturedReport h3,
+.FeaturedReport p {
   font-weight: normal;
   vertical-align: text-bottom;
 }
 
 .FeaturedReport h3.title {
   line-height: 1em;
-} 
+}
 
 .FeaturedReport p.details {
-  font-size: .9em;
+  font-size: 0.9em;
   line-height: 1em;
   margin-bottom: 0;
   padding-bottom: 0;
-}
-
-.FeaturedReportShadow {
-	box-shadow: 3px 3px 3px rgba(238, 238, 238, 0), 
-		-3px 3px 3px rgba(238, 238, 238, 0),
-		-3px -3px 3px rgba(238, 238, 238, 0),
-		3px -3px 3px rgba(238, 238, 238, 0),
-		1px 1px 1px rgba(238, 238, 238, 0);
-	transition: box-shadow 0.5s;
-}
-
-.FeaturedReportShadow:hover {
-	box-shadow: 3px 3px 3px rgba(238, 238, 238, 0.8), 
-		-3px 3px 3px rgba(238, 238, 238, 0.8),
-		-3px -3px 3px rgba(238, 238, 238, 0.8),
-		3px -3px 3px rgba(238, 238, 238, 0.8),
-		2px 2px 1px rgba(255, 255, 255, 1),
-		2px 0px 1px rgba(255, 255, 255, 1),
-		-2px 2px 1px rgba(255, 255, 255, 1),
-		-2px 0px 1px rgba(255, 255, 255, 1);
 }
