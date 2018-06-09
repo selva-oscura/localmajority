@@ -1,39 +1,20 @@
-.ArticleCard {
-	box-shadow: 3px 3px 3px rgba(238, 238, 238, 0), 
-		-3px 3px 3px rgba(238, 238, 238, 0),
-		-3px -3px 3px rgba(238, 238, 238, 0),
-		3px -3px 3px rgba(238, 238, 238, 0),
-		1px 1px 1px rgba(238, 238, 238, 0);
-	transition: box-shadow 0.5s;
+.ArticleCard .contents {
+  padding: 0px 6px 6px;
 }
 
-.ArticleCard:hover {
-	box-shadow: 3px 3px 3px rgba(238, 238, 238, 0.8), 
-		-3px 3px 3px rgba(238, 238, 238, 0.8),
-		-3px -3px 3px rgba(238, 238, 238, 0.8),
-		3px -3px 3px rgba(238, 238, 238, 0.8),
-		2px 2px 1px rgba(255, 255, 255, 1),
-		2px 0px 1px rgba(255, 255, 255, 1),
-		-2px 2px 1px rgba(255, 255, 255, 1),
-		-2px 0px 1px rgba(255, 255, 255, 1);
-}
-
-.ArticleCard .contents{
-	padding: 0px 0px 6px;
-}
-
-.ArticleCard h3, .ArticleCard p{
-	font-weight: normal;
-	vertical-align: text-bottom;
+.ArticleCard h3,
+.ArticleCard p {
+  font-weight: normal;
+  vertical-align: text-bottom;
 }
 
 .ArticleCard h3.title {
-	line-height: 1em;
-} 
+  line-height: 1em;
+}
 
 .ArticleCard p.details {
-	font-size: .9em;
-	line-height: 1em;
-	margin-bottom: 0;
-	padding-bottom: 0;
+  font-size: 0.9em;
+  line-height: 1em;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
