@@ -36,9 +36,11 @@ const FeaturedReport = ({ article }) => {
               </p>
             </div>
           </Link>
-          {tags && tags.length ? (
-            <Tags tags={tags} tagRoute={tagRoute} />
-          ) : null}
+          <div className="contents">
+            {tags && tags.length ? (
+              <Tags tags={tags} tagRoute={tagRoute} />
+            ) : null}
+          </div>
         </CardHover>
       </GridOneAcross>
     </div>
