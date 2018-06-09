@@ -1,32 +1,32 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-import graphQLAPI from '../api/graphQLAPI';
-import { graphql, compose } from 'react-apollo';
-import Header from './Header/Header';
-import ErrorBoundary from './common/ErrorBoundary';
-import Footer from './Footer/Footer';
-import Home from './Home/Home';
-import Candidate from './Candidates/Candidate';
-import Candidates from './Candidates/Candidates';
-import States from './States/States';
-import State from './States/State';
-import Report from './Reports/Report';
-import Reports from './Reports/Reports';
-import AboutUs from './AboutUs/AboutUs';
-import TakeAction from './TakeAction/TakeAction';
-import Loading from './common/Loading';
-import Section from './common/Section/Section';
-import FourZeroFour from './FourZeroFour';
-import './App.css';
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
+import injectTapEventPlugin from "react-tap-event-plugin";
+import graphQLAPI from "../api/graphQLAPI";
+import { graphql, compose } from "react-apollo";
+import Header from "./Header/Header";
+import ErrorBoundary from "./common/ErrorBoundary";
+import Footer from "./Footer/Footer";
+import Home from "./Home/Home";
+import Candidate from "./Candidates/Candidate";
+import Candidates from "./Candidates/Candidates";
+import States from "./States/States";
+import State from "./States/State";
+import Report from "./Reports/Report";
+import Reports from "./Reports/Reports";
+import AboutUs from "./AboutUs/AboutUs";
+import TakeAction from "./TakeAction/TakeAction";
+import Loading from "./common/Loading";
+import Section from "./common/Section/Section";
+import FourZeroFour from "./FourZeroFour";
+import "./App.css";
 
 // DEV ONLY -- fixtures -- SHOULD BE ELIMINATED ONCE THE DATABASE IS HAPPY
 import {
   stateFakeData,
   issueTitles,
   issuesArticlesFakeData,
-  socialMedia,
-} from '../data/fixtures';
+  socialMedia
+} from "../data/fixtures";
 
 injectTapEventPlugin();
 
@@ -56,7 +56,7 @@ class App extends Component {
         states: [],
         statesDetails: {},
         statesMasterList: [],
-        timestamp: -Infinity,
+        timestamp: -Infinity
       };
       if (localStorage) {
         // store data to localStorage if available
@@ -72,7 +72,7 @@ class App extends Component {
     if (localStorage) {
       localStorage.localMajorityData = JSON.stringify(state);
     }
-    console.log('updatingStateAndLocalStorage', state);
+    // console.log('updatingStateAndLocalStorage', state);
   }
 
   updateStateDetail(detail, key, value) {
@@ -80,7 +80,7 @@ class App extends Component {
     // detail parameter specifies statesDetails or candidatesDetails
     // key is the slug that will be used in the route
     // value is the data returned from the detail query
-    console.log('updatingStateDetail', detail, key, value);
+    console.log("updatingStateDetail", detail, key, value);
     let state = { ...this.state };
     state[detail][key] = value;
     this.updateStateAndLocalStorage(state);
@@ -92,9 +92,9 @@ class App extends Component {
       if (this.props[query].loading || this.props[query].error) {
         console.log(
           query,
-          'loading?',
+          "loading?",
           this.props[query].loading,
-          'error?',
+          "error?",
           this.props[query].error && this.props[query].error.length > 0
         );
         allQueriesConcluded = false;
@@ -107,11 +107,11 @@ class App extends Component {
     let state = { ...this.state };
     Object.keys(this.props).forEach(query => {
       if (!this.props[query].error) {
-        if (query === 'ArticlesBasics') {
+        if (query === "ArticlesBasics") {
           state.articles = this.props[query].allArticles;
-        } else if (query === 'CandidatesBasics') {
+        } else if (query === "CandidatesBasics") {
           state.candidates = this.props[query].allCandidates;
-        } else if (query === 'States') {
+        } else if (query === "States") {
           state.states = this.props[query].allStates
             .map(item => {
               let { title, abbrev } = item;
@@ -119,7 +119,7 @@ class App extends Component {
             })
             .sort((a, b) => (a.title > b.title ? 1 : -1));
           state.statesMasterList = state.states.map(state => state.title);
-        } else if (query === 'Parties') {
+        } else if (query === "Parties") {
           if (this.props.Parties && this.props.Parties.allParties) {
             this.props[query].allParties.forEach(
               party => (state.parties[`${party.slug}`] = party)
@@ -175,7 +175,7 @@ class App extends Component {
       candidates,
       candidatesDetails,
       statesMasterList,
-      statesDetails,
+      statesDetails
     } = this.state;
 
     let { articles } = this.state;
@@ -371,7 +371,7 @@ class App extends Component {
                 if (relationshipDegree) {
                   let relatedArticle = {
                     ...possiblyRelatedArticle,
-                    relationshipDegree,
+                    relationshipDegree
                   };
                   relatedArticles.push(relatedArticle);
                 }
@@ -400,6 +400,25 @@ class App extends Component {
               </ErrorBoundary>
             );
           }}
+        />
+
+        <Route
+          path="/report"
+          component={props => (
+            <ErrorBoundary>
+              {issues && statesMasterList && statesMasterList.length ? (
+                <Report
+                  {...props}
+                  article={null}
+                  articleDetail={null}
+                  relatedArticles={[]}
+                  updateStateDetail={this.updateStateDetail}
+                />
+              ) : (
+                <Loading />
+              )}
+            </ErrorBoundary>
+          )}
         />
 
         <Route
@@ -573,17 +592,15 @@ class App extends Component {
         <ErrorBoundary>
           <main>{this.renderPage()}</main>
         </ErrorBoundary>
-        <Footer
-          socialMedia={socialMedia}
-        />
+        <Footer socialMedia={socialMedia} />
       </div>
     );
   }
 }
 
 export default compose(
-  graphql(graphQLAPI.queries.ArticlesBasics, { name: 'ArticlesBasics' }),
-  graphql(graphQLAPI.queries.CandidatesBasics, { name: 'CandidatesBasics' }),
-  graphql(graphQLAPI.queries.Parties, { name: 'Parties' }),
-  graphql(graphQLAPI.queries.States, { name: 'States' })
+  graphql(graphQLAPI.queries.ArticlesBasics, { name: "ArticlesBasics" }),
+  graphql(graphQLAPI.queries.CandidatesBasics, { name: "CandidatesBasics" }),
+  graphql(graphQLAPI.queries.Parties, { name: "Parties" }),
+  graphql(graphQLAPI.queries.States, { name: "States" })
 )(App);
