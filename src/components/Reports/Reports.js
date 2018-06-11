@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import NoSuchReports from "./NoSuchReports";
 import FeaturedReport from "../Reports/FeaturedReport";
 import GridXSmallIsOneSmallIsThree from "../common/Grids/GridXSmallIsOneSmallIsThree";
 import ArticleCard from "../common/Cards/ArticleCard";
