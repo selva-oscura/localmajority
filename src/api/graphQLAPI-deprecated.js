@@ -1,10 +1,10 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
-const PROJECT_ID = 'cj9mz2ija00wh01583casvk69';
+const PROJECT_ID = "cj9mz2ija00wh01583casvk69";
 
 const endpoints = {
-  graphQL: 'https://api.graph.cool/simple/v1/' + PROJECT_ID,
-  imageUpload: 'https://api.graph.cool/file/v1/' + PROJECT_ID,
+  graphQL: "https://api.graph.cool/simple/v1/" + PROJECT_ID,
+  imageUpload: "https://api.graph.cool/file/v1/" + PROJECT_ID
 };
 
 const queries = {
@@ -205,11 +205,11 @@ const queries = {
         }
       }
     }
-  `,
+  `
 };
 
 const graphQLAPI = {
   endpoints,
-  queries,
+  queries
 };
 export default graphQLAPI;
