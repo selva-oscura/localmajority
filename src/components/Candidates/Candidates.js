@@ -1,36 +1,39 @@
-import React, { Component } from 'react';
-import Loading from '../common/Loading';
-import Aux from '../common/Aux';
-import Filters from '../common/Filters/Filters';
-import ButtonlessFilters from '../common/Filters/ButtonlessFilters';
-import HorizontalCards from '../common/Cards/HorizontalCards';
-import HorizontalCard from '../common/Cards/HorizontalCard';
-import Section from '../common/Section/Section';
+import React, { Component } from "react";
+import Loading from "../common/Loading";
+import Aux from "../common/Aux";
+import Filters from "../common/Filters/Filters";
+import ButtonlessFilters from "../common/Filters/ButtonlessFilters";
+import HorizontalCards from "../common/Cards/HorizontalCards";
+import HorizontalCard from "../common/Cards/HorizontalCard";
+import Section from "../common/Section/Section";
 
 class Candidates extends Component {
   state = {
-    stateSelected: this.props.match.params.state,
+    stateSelected: this.props.match.params.state
   };
 
   updateFilter = (filterCategory, selectedValue) => {
-    selectedValue === 'All'
-      ? this.props.history.push('/candidates')
+    selectedValue === "All"
+      ? this.props.history.push("/candidates")
       : this.props.history.push(`/candidates/${selectedValue}`);
   };
 
   componentDidMount() {
     const { statesMasterList } = this.props;
+    let candidateState = this.props.match.params.state
+      .replace("-", " ")
+      .split(" ")
+      .map(word => word[0].toUpperCase() + word.slice(1))
+      .join(" ");
     if (
       !statesMasterList.includes(this.props.match.params.state) &&
-      this.props.match.params.state
+      candidateState
     ) {
-      return this.props.history.push('/candidates');
+      return this.props.history.push("/candidates");
     }
     this.props.match.params.state
-      ? (document.title = `Local Majority | Candidates | ${
-          this.props.match.params.state
-        }`)
-      : (document.title = 'Local Majority | Candidates');
+      ? (document.title = `Local Majority | Candidates | ${candidateState}`)
+      : (document.title = "Local Majority | Candidates");
   }
 
   render() {
@@ -38,7 +41,7 @@ class Candidates extends Component {
 
     const candidatesMeetingFilters = this.props.match.params.state
       ? candidates.filter(
-          candidate => candidate.state.title === this.props.match.params.state
+          candidate => candidate.state.slug === this.props.match.params.state
         )
       : candidates;
 
@@ -120,7 +123,7 @@ class Candidates extends Component {
                         cardTextHtml={candidate.summaryText}
                         category="candidates"
                         imgSrc={headshotUrl}
-                        slug={`${candidate.state.title}/${candidate.slug}`}
+                        slug={`${candidate.state.slug}/${candidate.slug}`}
                         imgShape="square"
                       />
                     );
