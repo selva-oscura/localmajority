@@ -39,6 +39,7 @@ class App extends Component {
       localStorage && localStorage.localMajorityData
         ? localStorage.localMajorityData
         : null;
+
     if (localMajorityData) {
       // if there is stored data from last time, use that to bootstrap state (this will be fallback data in case of no internet access)
       let state = JSON.parse(localMajorityData);
@@ -56,6 +57,7 @@ class App extends Component {
         states: [],
         statesDetails: {},
         statesMasterList: [],
+        tags: {},
         timestamp: -Infinity
       };
       if (localStorage) {
@@ -90,16 +92,17 @@ class App extends Component {
     let allQueriesConcluded = true;
     Object.keys(this.props).forEach(query => {
       if (this.props[query].loading || this.props[query].error) {
-        console.log(
-          query,
-          "loading?",
-          this.props[query].loading,
-          "error?",
-          this.props[query].error && this.props[query].error.length > 0
-        );
+        // console.log(
+        //   query,
+        //   'loading?',
+        //   this.props[query].loading,
+        //   'error?',
+        //   this.props[query].error && this.props[query].error.length > 0
+        // );
         allQueriesConcluded = false;
       }
     });
+    console.log("this.props for all of the queries", this.props);
     return allQueriesConcluded;
   }
 
@@ -107,22 +110,44 @@ class App extends Component {
     let state = { ...this.state };
     Object.keys(this.props).forEach(query => {
       if (!this.props[query].error) {
-        if (query === "ArticlesBasics") {
-          state.articles = this.props[query].allArticles;
-        } else if (query === "CandidatesBasics") {
-          state.candidates = this.props[query].allCandidates;
+        if (query === "Articles") {
+          state.articles = this.props[query].articles;
+        } else if (query === "Candidates") {
+          let candidates = this.props[query].candidates;
+          candidates = candidates.map(candidate => {
+            let stateData = { ...candidate.state };
+            stateData.slug = stateData.title.replace(" ", "-").toLowerCase();
+            return { ...candidate, state: stateData };
+          });
+          console.log("candidates after adding state slug");
+          state.candidates = candidates;
         } else if (query === "States") {
-          state.states = this.props[query].allStates
+          state.states = this.props[query].states
             .map(item => {
               let { title, abbrev } = item;
-              return { title, abbrev };
+              let slug = title.replace(" ", "-").toLowerCase();
+              let imageSm =
+                item && item.imageSm && item.imageSm.url
+                  ? item.imageSm.url
+                  : null;
+              let imageMap =
+                item && item.imageMap && item.imageMap.url
+                  ? item.imageMap.url
+                  : null;
+              return { title, slug, abbrev, imageSm, imageMap };
             })
             .sort((a, b) => (a.title > b.title ? 1 : -1));
           state.statesMasterList = state.states.map(state => state.title);
         } else if (query === "Parties") {
-          if (this.props.Parties && this.props.Parties.allParties) {
-            this.props[query].allParties.forEach(
+          if (this.props.Parties && this.props.Parties.parties) {
+            this.props[query].parties.forEach(
               party => (state.parties[`${party.slug}`] = party)
+            );
+          }
+        } else if (query === "Tags") {
+          if (this.props.Tags && this.props.Tags.tags) {
+            this.props[query].tags.forEach(
+              tag => (state.tags[`${tag.slug}`] = tag)
             );
           }
         } else {
@@ -140,7 +165,7 @@ class App extends Component {
         );
       }
       // DEV ONLY -- hard-coded/imported data from fixtures to be replaced by queries once database is happy
-      state.issues = issuesArticlesFakeData.issues;
+      // state.issues = issuesArticlesFakeData.issues;
     });
     return state;
   }
@@ -181,14 +206,19 @@ class App extends Component {
     let { articles } = this.state;
 
     const hasElectionData = candidate =>
-      candidate.contestId &&
-      candidate.contestId.seatId &&
-      candidate.contestId.seatId.title;
+      candidate.office &&
+      candidate.office.elections &&
+      candidate.office.elections[0] &&
+      candidate.office.elections[0].title &&
+      candidate.office.elections[0].electionDate;
 
     const hasFutureElection = candidate => {
       const electionDate =
-        candidate.contestId && candidate.contestId.electionDate
-          ? new Date(candidate.contestId.electionDate).getTime()
+        candidate.office &&
+        candidate.office.elections &&
+        candidate.office.elections[0] &&
+        candidate.office.elections[0].electionDate
+          ? new Date(candidate.office.elections[0].electionDate).getTime()
           : null;
       const now = new Date().getTime();
       return electionDate && electionDate > now;
@@ -196,44 +226,55 @@ class App extends Component {
 
     const hasPastElection = candidate => {
       const electionDate =
-        candidate.contestId && candidate.contestId.electionDate
-          ? new Date(candidate.contestId.electionDate).getTime()
+        candidate.office &&
+        candidate.office.elections &&
+        candidate.office.elections[0] &&
+        candidate.office.elections[0].electionDate
+          ? new Date(candidate.office.elections[0].electionDate).getTime()
           : null;
       const now = new Date().getTime();
       return electionDate && electionDate < now;
     };
 
     const isMissingCandidateData = candidate => {
-      if (!candidate.headshotId || !candidate.headshotId.url) {
+      let missingData = false;
+      if (!candidate.imageSm || !candidate.imageSm.url) {
+        missingData = true;
         console.log(`${candidate.title} is missing headshot`);
       }
-      if (!candidate.contestId) {
-        console.log(`${candidate.title} is missing contest data`);
+      if (!(candidate.office && candidate.office.elections)) {
+        missingData = true;
+        console.log(`${candidate.title} is missing election data`);
       }
-      if (!candidate.contestId || !candidate.contestId.electionDate) {
+      if (
+        !(
+          candidate.office &&
+          candidate.office.elections &&
+          candidate.office.elections[0].electionDate
+        )
+      ) {
+        missingData = true;
         console.log(`${candidate.title} is missing election date`);
       }
       if (
-        !candidate.contestId ||
-        !candidate.contestId.seatId ||
-        !candidate.contestId.seatId.title
+        !(
+          candidate.office &&
+          candidate.office.elections &&
+          candidate.office.elections[0].title
+        )
       ) {
+        missingData = true;
         console.log(`${candidate.title} is missing seat data`);
       }
-      if (!candidate.state || !candidate.state.title) {
+      if (
+        !candidate.state ||
+        !candidate.state.title ||
+        !candidate.state.abbrev
+      ) {
+        missingData = true;
         console.log(`${candidate.title} is missing state data`);
       }
-      if (
-        !candidate.headshotId ||
-        !candidate.headshotId.url ||
-        !candidate.contestId ||
-        !candidate.contestId.electionDate ||
-        !candidate.contestId.seatId ||
-        !candidate.state
-      ) {
-        return true;
-      }
-      return false;
+      return missingData;
     };
 
     const candidateStatesArray = candidates => {
@@ -487,9 +528,8 @@ class App extends Component {
           path="/states/:slug"
           component={props => {
             const stateData = stateFakeData.find(
-              state =>
-                props.match.params.slug.toLowerCase() ===
-                state.title.toLowerCase()
+              // state => props.match.params.slug.toLowerCase() === state.title.toLowerCase()
+              state => props.match.params.slug === state.slug
             );
             const stateDetail =
               statesDetails && statesDetails[props.match.params.slug]
@@ -497,9 +537,8 @@ class App extends Component {
                 : null;
 
             const stateCandidates = validFutureCandidates.filter(
-              candidate =>
-                props.match.params.slug.toLowerCase() ===
-                candidate.state.title.toLowerCase()
+              // candidate => props.match.params.slug.toLowerCase() === candidate.state.title.toLowerCase()
+              candidate => props.match.params.slug === candidate.state.slug
             );
             const stateArticles = articles.filter(
               article =>
@@ -597,10 +636,12 @@ class App extends Component {
     );
   }
 }
+//          <h2>Check the Console!!!!</h2>
 
 export default compose(
-  graphql(graphQLAPI.queries.ArticlesBasics, { name: "ArticlesBasics" }),
-  graphql(graphQLAPI.queries.CandidatesBasics, { name: "CandidatesBasics" }),
+  graphql(graphQLAPI.queries.Articles, { name: "Articles" }),
+  graphql(graphQLAPI.queries.Candidates, { name: "Candidates" }),
   graphql(graphQLAPI.queries.Parties, { name: "Parties" }),
-  graphql(graphQLAPI.queries.States, { name: "States" })
+  graphql(graphQLAPI.queries.States, { name: "States" }),
+  graphql(graphQLAPI.queries.Tags, { name: "Tags" })
 )(App);
