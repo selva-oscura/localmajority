@@ -17,10 +17,10 @@ const States = ({ currentStateRaces }) => (
         <GridXSmallIsOneSmallIsThree key={i}>
           <BasicCard
             title={state.title}
-            text={state.text}
+            text={'Yep....  do not yet have text'}
             route="states"
-            slug={state.title}
-            imageSrc={`../images/${state.title}.jpg`}
+            slug={state.slug}
+            imageSrc={`../images/${state.imageSm}.jpg`}
             imageAlt={state.title}
           />
         </GridXSmallIsOneSmallIsThree>

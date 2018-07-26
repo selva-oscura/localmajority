@@ -1,38 +1,38 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import RaisedButton from "material-ui/RaisedButton";
-import FeaturedReports from "../Reports/FeaturedReports";
-import States from "../States/States";
-import BasicCard from "../common/Cards/BasicCard";
-import GridXSmallIsOneSmallIsThree from "../common/Grids/GridXSmallIsOneSmallIsThree";
-import TextlessParallax from "../common/Parallax/TextlessParallax";
-import Section from "../common/Section/Section";
-import Slider from "../common/Sliders/Slider";
-import VideoResponsive from "../common/Videos/VideoResponsive";
-import "./Home.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import RaisedButton from 'material-ui/RaisedButton';
+import FeaturedReports from '../Reports/FeaturedReports';
+import States from '../States/States';
+import BasicCard from '../common/Cards/BasicCard';
+import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
+import TextlessParallax from '../common/Parallax/TextlessParallax';
+import Section from '../common/Section/Section';
+import Slider from '../common/Sliders/Slider';
+import VideoResponsive from '../common/Videos/VideoResponsive';
+import './Home.css';
 
 const Home = props => {
-  document.title = "Local Majority";
+  document.title = 'Local Majority';
 
   const { articles, candidates, currentStateRaces, pastCandidates } = props;
   const featuredArticles = articles.slice(0, 3);
   const slides1 = [
     {
-      src: "./images/local_majority_banner.png",
-      alt: "local majority logo"
+      src: './images/local_majority_banner.png',
+      alt: 'local majority logo',
     },
     {
-      src: "./images/va-candidates-faces.png",
-      alt: "1431 by 868"
+      src: './images/va-candidates-faces.png',
+      alt: '1431 by 868',
     },
     {
-      src: "./images/constitution.jpg",
-      alt: "constitution"
+      src: './images/constitution.jpg',
+      alt: 'constitution',
     },
     {
-      src: "https://placekitten.com/600/200",
-      alt: "place kitten 600  by 200"
-    }
+      src: 'https://placekitten.com/600/200',
+      alt: 'place kitten 600  by 200',
+    },
   ];
 
   return (
@@ -50,7 +50,7 @@ const Home = props => {
         <div className="row">
           <div className="col-12">
             <h2 className="text-center">
-              State Legislatures are{" "}
+              State Legislatures are{' '}
               <span className="tertiary-text-color">Key</span>
             </h2>
             <p className="text-center">
@@ -83,7 +83,7 @@ const Home = props => {
         <div className="row">
           <div className="col-12">
             <h2 className="text-center">
-              Our Featured{" "}
+              Our Featured{' '}
               <span className="tertiary-text-color">Candidates</span>
             </h2>
             <p className="text-center">
@@ -151,7 +151,7 @@ const Home = props => {
               Saving our <span className="tertiary-text-color">Democracy</span>
             </h2>
             <p className="text-left">
-              It's time to flip the country{" "}
+              It's time to flip the country{' '}
               <span className="primary-text-color">blue</span>
             </p>
             <p className="text-left">
@@ -180,7 +180,7 @@ const Home = props => {
               Click <Link to="./take-action">here</Link> to make a difference in
               2018.
             </p>
-            <div style={{ textAlign: "center" }}>
+            <div style={{ textAlign: 'center' }}>
               <RaisedButton
                 containerElement={<Link to="./take-action" />}
                 primary={true}

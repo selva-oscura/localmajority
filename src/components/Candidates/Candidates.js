@@ -1,39 +1,39 @@
-import React, { Component } from "react";
-import Loading from "../common/Loading";
-import Aux from "../common/Aux";
-import Filters from "../common/Filters/Filters";
-import ButtonlessFilters from "../common/Filters/ButtonlessFilters";
-import HorizontalCards from "../common/Cards/HorizontalCards";
-import HorizontalCard from "../common/Cards/HorizontalCard";
-import Section from "../common/Section/Section";
+import React, { Component } from 'react';
+import Loading from '../common/Loading';
+import Aux from '../common/Aux';
+import Filters from '../common/Filters/Filters';
+import ButtonlessFilters from '../common/Filters/ButtonlessFilters';
+import HorizontalCards from '../common/Cards/HorizontalCards';
+import HorizontalCard from '../common/Cards/HorizontalCard';
+import Section from '../common/Section/Section';
 
 class Candidates extends Component {
   state = {
-    stateSelected: this.props.match.params.state
+    stateSelected: this.props.match.params.state,
   };
 
   updateFilter = (filterCategory, selectedValue) => {
-    selectedValue === "All"
-      ? this.props.history.push("/candidates")
+    selectedValue === 'All'
+      ? this.props.history.push('/candidates')
       : this.props.history.push(`/candidates/${selectedValue}`);
   };
 
   componentDidMount() {
     const { statesMasterList } = this.props;
     let candidateState = this.props.match.params.state
-      .replace("-", " ")
-      .split(" ")
+      .replace('-', ' ')
+      .split(' ')
       .map(word => word[0].toUpperCase() + word.slice(1))
-      .join(" ");
+      .join(' ');
     if (
       !statesMasterList.includes(this.props.match.params.state) &&
       candidateState
     ) {
-      return this.props.history.push("/candidates");
+      return this.props.history.push('/candidates');
     }
     this.props.match.params.state
       ? (document.title = `Local Majority | Candidates | ${candidateState}`)
-      : (document.title = "Local Majority | Candidates");
+      : (document.title = 'Local Majority | Candidates');
   }
 
   render() {

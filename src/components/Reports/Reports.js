@@ -1,32 +1,32 @@
-import React, { Component } from "react";
-import FeaturedReport from "../Reports/FeaturedReport";
-import GridXSmallIsOneSmallIsThree from "../common/Grids/GridXSmallIsOneSmallIsThree";
-import ArticleCard from "../common/Cards/ArticleCard";
-import Aux from "../common/Aux";
-import Section from "../common/Section/Section";
-import Filters from "../common/Filters/Filters";
-import ButtonlessFilters from "../common/Filters/ButtonlessFilters";
+import React, { Component } from 'react';
+import FeaturedReport from '../Reports/FeaturedReport';
+import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
+import ArticleCard from '../common/Cards/ArticleCard';
+import Aux from '../common/Aux';
+import Section from '../common/Section/Section';
+import Filters from '../common/Filters/Filters';
+import ButtonlessFilters from '../common/Filters/ButtonlessFilters';
 
 class Reports extends Component {
   state = {
-    issueSelected: this.props.match.params.slug
+    issueSelected: this.props.match.params.slug,
   };
 
   updateFilter = (filterCategory, selectedValue) => {
-    selectedValue === "All"
-      ? this.props.history.push("/reports")
+    selectedValue === 'All'
+      ? this.props.history.push('/reports')
       : this.props.history.push(`/reports/${selectedValue}`);
   };
 
   componentDidMount() {
     if (!this.props.articles.length) {
-      return this.props.history.push("/reports");
+      return this.props.history.push('/reports');
     }
     this.props.issue && this.props.issue.title
       ? (document.title = `Local Majority | Reports | ${
           this.props.issue.title
         }`)
-      : (document.title = "Local Majority | Reports");
+      : (document.title = 'Local Majority | Reports');
   }
 
   render() {
@@ -134,7 +134,7 @@ class Reports extends Component {
                   {articles.map(article => {
                     let articleThumbnail = article.thumbnail
                       ? article.thumbnail
-                      : "https://placekitten.com/400/300";
+                      : 'https://placekitten.com/400/300';
                     let cardTags = article && article.tags ? article.tags : [];
                     return article.tags.includes(subIssue.slug) ? (
                       <GridXSmallIsOneSmallIsThree key={article.slug}>
@@ -170,7 +170,7 @@ class Reports extends Component {
               {otherArticles.map((article, i) => {
                 let articleThumbnail = article.thumbnail
                   ? article.thumbnail
-                  : "https://placekitten.com/400/300";
+                  : 'https://placekitten.com/400/300';
                 let cardTags = article && article.tags ? article.tags : [];
                 return (
                   <GridXSmallIsOneSmallIsThree key={article.slug}>

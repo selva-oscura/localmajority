@@ -1,20 +1,20 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import ImageWithBackgroundPlaceholderImage from "../ImageWithBackgroundPlaceholderImage";
-import CardHover from "./CardHover";
-import Tags from "../Tags/Tags";
-import { prettifyDate } from "../../../utils/functions";
-import "./ArticleCard.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import ImageWithBackgroundPlaceholderImage from '../ImageWithBackgroundPlaceholderImage';
+import CardHover from './CardHover';
+import Tags from '../Tags/Tags';
+import { prettifyDate } from '../../../utils/functions';
+import './ArticleCard.css';
 
 const ArticleCard = ({
   slug,
   imageSrc,
-  imageAlt = "",
+  imageAlt = '',
   title,
   author,
   updatedAt,
-  tagRoute = "",
-  tags = []
+  tagRoute = '',
+  tags = [],
 }) => (
   <CardHover>
     <div className="ArticleCard">

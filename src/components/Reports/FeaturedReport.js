@@ -1,22 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import GridOneAcross from "../common/Grids/GridOneAcross";
-import ImageWithBackgroundPlaceholderImage from "../common/ImageWithBackgroundPlaceholderImage";
-import CardHover from "../common/Cards/CardHover";
-import Tags from "../common/Tags/Tags";
-import { prettifyDate } from "../../utils/functions";
-import "./FeaturedReport.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import GridOneAcross from '../common/Grids/GridOneAcross';
+import ImageWithBackgroundPlaceholderImage from '../common/ImageWithBackgroundPlaceholderImage';
+import CardHover from '../common/Cards/CardHover';
+import Tags from '../common/Tags/Tags';
+import { prettifyDate } from '../../utils/functions';
+import './FeaturedReport.css';
 
 const FeaturedReport = ({ article }) => {
   const {
     slug,
     imageSrc,
-    imageAlt = "",
+    imageAlt = '',
     title,
     author,
     updatedAt,
-    tagRoute = "",
-    tags = []
+    tagRoute = '',
+    tags = [],
   } = article;
   return (
     <div className="FeaturedReport row">

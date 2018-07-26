@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import { FontIcon } from "material-ui";
-import Aux from "../common/Aux";
-import Filters from "../common/Filters/Filters";
-import ButtonlessFilters from "../common/Filters/ButtonlessFilters";
-import Section from "../common/Section/Section";
-import "./TakeAction.css";
+import React, { Component } from 'react';
+import { FontIcon } from 'material-ui';
+import Aux from '../common/Aux';
+import Filters from '../common/Filters/Filters';
+import ButtonlessFilters from '../common/Filters/ButtonlessFilters';
+import Section from '../common/Section/Section';
+import './TakeAction.css';
 
 class TakeAction extends Component {
   state = {
-    stateSelected: this.props.match.params.state
+    stateSelected: this.props.match.params.state,
   };
 
   updateFilter = (filterCategory, selectedValue) => {
-    selectedValue === "all"
-      ? this.props.history.push("/take-action")
+    selectedValue === 'all'
+      ? this.props.history.push('/take-action')
       : this.props.history.push(`/take-action/${selectedValue}`);
   };
 
@@ -24,31 +24,31 @@ class TakeAction extends Component {
       this.props.match.params.state &&
       !this.props.statesMasterList.includes(this.props.match.params.state)
     ) {
-      this.props.history.push("/take-action");
+      this.props.history.push('/take-action');
     }
   }
 
   render() {
     const { statesMasterList } = this.props;
     const regionText = !this.state.stateSelected
-      ? "America"
+      ? 'America'
       : this.state.stateSelected;
     const localMajorityVolunteerRoles = [
-      "Researchers",
-      "Writers",
-      "Editors",
-      "Videographers",
-      "Graphic Designers",
-      "Web Designers"
+      'Researchers',
+      'Writers',
+      'Editors',
+      'Videographers',
+      'Graphic Designers',
+      'Web Designers',
     ];
 
     const mobilizeURLs = {
-      website: "https://events.mobilizeamerica.io/",
-      apple: "https://itunes.apple.com/us/app/mobilize-america/id1245726310",
+      website: 'https://events.mobilizeamerica.io/',
+      apple: 'https://itunes.apple.com/us/app/mobilize-america/id1245726310',
       android:
-        "https://play.google.com/store/apps/details?id=org.mobilize2020.mobilize"
+        'https://play.google.com/store/apps/details?id=org.mobilize2020.mobilize',
     };
-    const mobilizeVolunteerRoles = ["Canvassers", "Phonebankers"];
+    const mobilizeVolunteerRoles = ['Canvassers', 'Phonebankers'];
 
     return (
       <article className="TakeAction">
@@ -75,7 +75,7 @@ class TakeAction extends Component {
           <div className="row">
             <div className="col-12">
               <h2 className="text-center">
-                Your Vote is Your{" "}
+                Your Vote is Your{' '}
                 <span className="tertiary-text-color">Voice</span>
               </h2>
               <h2 className="text-right secondary-text-color">
@@ -123,7 +123,7 @@ class TakeAction extends Component {
             <Aux>
               <h4>Are you Registered to Vote?</h4>
               <p>
-                Register to vote at{" "}
+                Register to vote at{' '}
                 <a
                   href="https://vote.elections.virginia.gov/Registration/Eligibility"
                   target="register"
@@ -137,7 +137,7 @@ class TakeAction extends Component {
                 Is your Voter Registration Information Current and Accurate?
               </h4>
               <p>
-                Check your registration details at{" "}
+                Check your registration details at{' '}
                 <a
                   href="https://vote.elections.virginia.gov/VoterInformation"
                   target="accurate"
@@ -153,7 +153,7 @@ class TakeAction extends Component {
               <p>
                 Check what's on your ballot, your polling location, what voter
                 photo ids are valid, upcoming elections, accessibility, and much
-                more at{" "}
+                more at{' '}
                 <a
                   href="https://www.elections.virginia.gov/voter-outreach/"
                   target="voter-outreach"
@@ -164,8 +164,8 @@ class TakeAction extends Component {
                 </a>
               </p>
               <p>
-                Hope to see you at the polls. The next criticla election in{" "}
-                {this.state.stateSelected} is{" "}
+                Hope to see you at the polls. The next criticla election in{' '}
+                {this.state.stateSelected} is{' '}
                 <span className="tertiary-text-color">
                   whatever the date should be
                 </span>.
@@ -199,37 +199,37 @@ class TakeAction extends Component {
             <Aux>
               <h4>{this.state.stateSelected} Absentee Ballot Application</h4>
               <p>
-                You can also apply to vote absentee{" "}
+                You can also apply to vote absentee{' '}
                 <span className="tertiary-text-color">
                   as early as one year
-                </span>{" "}
+                </span>{' '}
                 before the election. Ballots are available 45 days before most
                 elections. The deadline for receipt of your application to vote
-                absentee by mail is{" "}
+                absentee by mail is{' '}
                 <span className="tertiary-text-color">
                   5:00 PM the Tuesday before the election
-                </span>. You can contact{" "}
+                </span>. You can contact{' '}
                 <span className="tertiary-text-color">
                   the State Board of Elections at 800-552-9745 or
                   info@sbe.virginia.gov
                 </span>.
               </p>
               <p>
-                Click{" "}
+                Click{' '}
                 <a href="" target="absentee">
                   here
-                </a>{" "}
+                </a>{' '}
                 for online Absentee Ballot Registration.
               </p>
               <p>
                 <span className="secondary-text-color">
                   Deadline to register to vote
-                </span>{" "}
-                or update an existing registration, for the{" "}
+                </span>{' '}
+                or update an existing registration, for the{' '}
                 <span className="tertiary-text-color">
                   November 7, 2017 General
-                </span>{" "}
-                Election is{" "}
+                </span>{' '}
+                Election is{' '}
                 <span className="tertiary-text-color">
                   Monday, October 16, 2017
                 </span>
@@ -237,8 +237,8 @@ class TakeAction extends Component {
               <p>
                 <span className="secondary-text-color">
                   Deadline to request an absentee ballot
-                </span>{" "}
-                to be mailed to you is{" "}
+                </span>{' '}
+                to be mailed to you is{' '}
                 <span className="tertiary-text-color">
                   5:00 p.m. Tuesday, October 31, 2017
                 </span>. Your request must be received by your Registrar by 5:00
@@ -272,7 +272,7 @@ class TakeAction extends Component {
                 </li>
                 <li className="tertiary-text-color">Student away at college</li>
                 <li className="tertiary-text-color">
-                  See other reasons{" "}
+                  See other reasons{' '}
                   <a href="" target="absentee-reasons">
                     here
                   </a>
@@ -358,16 +358,16 @@ class TakeAction extends Component {
             <Aux>
               <p>
                 If you live near {this.state.stateSelected}, Mobilize can hook
-                you in to Democratic campaigns for{" "}
+                you in to Democratic campaigns for{' '}
                 <span className="tertiary-text-color">
                   House of Delegates or whatever it is called IN THAT STATE
                   (NEED STATE-SPECIFIC TERMS in the database!)
-                </span>{" "}
-                for canvassing and phonebanking. Opportunities{" "}
+                </span>{' '}
+                for canvassing and phonebanking. Opportunities{' '}
                 <span className="tertiary-text-color">this weekend</span>!
               </p>
               <p>
-                {this.state.stateSelected} elections on{" "}
+                {this.state.stateSelected} elections on{' '}
                 <span className="tertiary-text-color">November 7, 2017</span>.
               </p>
             </Aux>

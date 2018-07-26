@@ -1,7 +1,7 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 const endpoints = {
-  graphQL: "http://localhost:9000/gql"
+  graphQL: 'http://localhost:9000/gql',
 };
 
 // const queries = {
@@ -296,12 +296,12 @@ const queries = {
         isAdmin
       }
     }
-  `
+  `,
 };
 
 const graphQLAPI = {
   endpoints,
-  queries
+  queries,
 };
 
 export default graphQLAPI;
