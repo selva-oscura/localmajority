@@ -8,7 +8,7 @@ export function getMostRecentUpdateTimestamp(data) {
 
   const checkObject = obj => {
     Object.keys(obj).forEach(key => {
-      if (key === "updatedAt") {
+      if (key === 'updatedAt') {
         let timestamp = new Date(obj[key]).getTime();
         mostRecent = Math.max(timestamp, mostRecent);
       } else if (Array.isArray(obj[key])) {
@@ -44,31 +44,31 @@ NOTE REGARDING INPUTS:
 */
 export function prettifyDate(dateString) {
   let datetime = new Date(dateString);
-  return datetime.toLocaleDateString("en-US");
+  return datetime.toLocaleDateString('en-US');
 }
 
 export function prettifyDateAndTime(dateString) {
   let datetime = new Date(dateString);
   return `${datetime.toLocaleDateString(
-    "en-US"
-  )}, ${datetime.toLocaleTimeString("en-US")}`;
+    'en-US'
+  )}, ${datetime.toLocaleTimeString('en-US')}`;
 }
 
 export function prettifyTimestamp(timestamp) {
   let datetime = new Date(timestamp);
   return `${datetime.toLocaleDateString(
-    "en-US"
-  )}, ${datetime.toLocaleTimeString("en-US")}`;
+    'en-US'
+  )}, ${datetime.toLocaleTimeString('en-US')}`;
 }
 
 export function arrayToSentenceWithCommasAndAnd(arr) {
   if (arr.length === 1) {
     return arr[0];
   } else if (arr.length === 2) {
-    return arr.join(" and ");
+    return arr.join(' and ');
   } else if (arr.length > 2) {
     arr[arr.length - 1] = `and ${arr[arr.length - 1]}`;
-    return arr.join(", ");
+    return arr.join(', ');
   } else {
     return null;
   }
@@ -76,9 +76,20 @@ export function arrayToSentenceWithCommasAndAnd(arr) {
 
 export function strToTitleCase(str) {
   return str
-    .split(" ")
+    .split(' ')
     .map(word => word[0].toUpperCase() + word.slice(1).toLowerCase())
-    .join(" ");
+    .join(' ');
+}
+
+export function strToSlug(str) {
+  return str.replace(' ', '-').toLowerCase();
+}
+
+export function slugToTitleCase(str) {
+  return str
+    .split('-')
+    .map(word => word[0].toUpperCase() + word.slice(1))
+    .join(' ');
 }
 
 export default {
@@ -87,5 +98,7 @@ export default {
   prettifyDateAndTime,
   prettifyTimestamp,
   arrayToSentenceWithCommasAndAnd,
-  strToTitleCase
+  strToTitleCase,
+  strToSlug,
+  slugToTitleCase,
 };
