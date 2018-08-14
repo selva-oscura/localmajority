@@ -4,41 +4,6 @@ const endpoints = {
   graphQL: 'http://localhost:9000/gql',
 };
 
-// const queries = {
-
-// };
-
-// query {
-//   articles (where:{title_starts_with: "ar"}, orderBy: createdAt_ASC){
-//     title
-//     slug
-//     createdAt
-//   }
-// }
-
-// query {
-// 	offices {
-//     title
-//   }
-// }
-
-// -- GOOD ONE WAS BELOW --
-// query($where:ArticlesByTagWhereInput) {
-//   articlesByTag(where: $where) {
-//     id
-//     title
-//     tags {
-//       slug
-//     }
-//   }
-// }
-
-// {
-//   "where": {
-//     "tagWhere": { "tag_slug_in": "economy"}
-//   }
-// }
-
 const queries = {
   Articles: gql`
     query Articles {
@@ -70,6 +35,10 @@ const queries = {
           id
           url
         }
+        imageHero {
+          id
+          url
+        }
         tags {
           isTLIssue
           isTopic
@@ -88,7 +57,6 @@ const queries = {
         author
         slug
         content_html
-        content_rt
         imageHero {
           id
           url
@@ -108,7 +76,6 @@ const queries = {
         title
         slug
         summary_html
-        summary_rt
         state {
           title
           abbrev
@@ -116,6 +83,7 @@ const queries = {
         office {
           id
           title
+          slug
           chamber {
             id
             title
@@ -147,9 +115,7 @@ const queries = {
         lastName
         slug
         summary_html
-        summary_rt
         bio_html
-        bio_rt
         homepageUrl
         donateUrl
         volunteerUrl
@@ -247,9 +213,7 @@ const queries = {
           url
         }
         summary_html
-        summary_rt
         content_html
-        content_rt
         tags {
           title
           slug
@@ -274,9 +238,7 @@ const queries = {
           url
         }
         summary_html
-        summary_rt
         content_html
-        content_rt
         tags {
           title
           slug
@@ -305,14 +267,3 @@ const graphQLAPI = {
 };
 
 export default graphQLAPI;
-
-// Articles
-// ArticleDetailBySlug
-// Candidates
-// CandidateDetailBySlug
-// Parties
-// States
-// StateDetailBySlug
-// Tags
-
-// not seeing how to pull Article by slug (doesn't seem to consider ArticlesByUniqueInput to be a valid option for slugs, just for id)
