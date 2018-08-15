@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import graphQLAPI from '../api/graphQLAPI';
+import { strToSlug } from '../utils/functions';
 import { graphql, compose } from 'react-apollo';
 import Header from './Header/Header';
 import ErrorBoundary from './common/ErrorBoundary';
@@ -23,8 +24,8 @@ import './App.css';
 // DEV ONLY -- fixtures -- SHOULD BE ELIMINATED ONCE THE DATABASE IS HAPPY
 import {
   stateFakeData,
-  issueTitles,
-  issuesArticlesFakeData,
+  // issueTitles,
+  // issuesArticlesFakeData,
   socialMedia,
 } from '../data/fixtures';
 
@@ -52,12 +53,12 @@ class App extends Component {
         articlesDetails: {},
         candidates: [],
         candidatesDetails: {},
-        issues: [],
         parties: {},
         states: [],
         statesDetails: {},
         statesMasterList: [],
         tags: {},
+        tagsMasterList: [],
         timestamp: -Infinity,
       };
       if (localStorage) {
@@ -102,30 +103,89 @@ class App extends Component {
         allQueriesConcluded = false;
       }
     });
-    console.log('this.props for all of the queries', this.props);
+    // console.log('this.props for all of the queries', this.props);
     return allQueriesConcluded;
   }
 
   prepareGraphQLResultsForSavingToState() {
     let state = { ...this.state };
+    // console.log('state', state);
     Object.keys(this.props).forEach(query => {
       if (!this.props[query].error) {
         if (query === 'Articles') {
-          state.articles = this.props[query].articles;
+          let articles = this.props[query].articles
+            .map(article => {
+              const imageSm =
+                article.imageSm && article.imageSm.url
+                  ? article.imageSm.url
+                  : null;
+              const imageHero =
+                article.imageHero && article.imageHero.url
+                  ? article.imageHero.url
+                  : null;
+              return {
+                ...article,
+                imageSm,
+                imageHero,
+              };
+            })
+            .filter(article => !article.slug.includes('-primer'));
+          state.articles = articles;
         } else if (query === 'Candidates') {
-          let candidates = this.props[query].candidates;
-          candidates = candidates.map(candidate => {
-            let stateData = { ...candidate.state };
-            stateData.slug = stateData.title.replace(' ', '-').toLowerCase();
-            return { ...candidate, state: stateData };
+          let candidates = this.props[query].candidates.map(candidate => {
+            const stateData = { ...candidate.state };
+            const imageSm =
+              candidate.imageSm && candidate.imageSm.url
+                ? candidate.imageSm.url
+                : null;
+            const seatLongTitle =
+              candidate && candidate.office && candidate.office.title
+                ? candidate.office.title
+                : null;
+            const chamberName =
+              candidate.office &&
+              candidate.office.chamber &&
+              candidate.office.chamber.name
+                ? candidate.office.chamber.name
+                : null;
+            const electionDate =
+              candidate.office &&
+              candidate.office.elections &&
+              candidate.office.elections[0] &&
+              candidate.office.elections[0].electionDate
+                ? candidate.office.elections[0].electionDate
+                : null;
+            const seatShortTitle =
+              candidate.office &&
+              candidate.office.elections &&
+              candidate.office.elections[0] &&
+              candidate.office.elections[0].title
+                ? candidate.office.elections[0].title
+                : null;
+            const party =
+              candidate.party && candidate.party.title
+                ? candidate.party.title
+                : null;
+            stateData.slug = strToSlug(stateData.title);
+            return {
+              title: candidate.title,
+              slug: candidate.slug,
+              summary_html: candidate.summary_html,
+              state: stateData,
+              seatShortTitle,
+              seatLongTitle,
+              chamberName,
+              electionDate,
+              party,
+              imageSm,
+            };
           });
-          console.log('candidates after adding state slug');
           state.candidates = candidates;
         } else if (query === 'States') {
           state.states = this.props[query].states
             .map(item => {
-              let { title, abbrev } = item;
-              let slug = title.replace(' ', '-').toLowerCase();
+              let { title, abbrev, slug } = item;
+              // let slug = strToSlug(title);
               let imageSm =
                 item && item.imageSm && item.imageSm.url
                   ? item.imageSm.url
@@ -137,7 +197,12 @@ class App extends Component {
               return { title, slug, abbrev, imageSm, imageMap };
             })
             .sort((a, b) => (a.title > b.title ? 1 : -1));
-          state.statesMasterList = state.states.map(state => state.title);
+          state.statesMasterList = state.states.map(state => {
+            return {
+              title: state.title,
+              slug: strToSlug(state.title),
+            };
+          });
         } else if (query === 'Parties') {
           if (this.props.Parties && this.props.Parties.parties) {
             this.props[query].parties.forEach(
@@ -149,6 +214,9 @@ class App extends Component {
             this.props[query].tags.forEach(
               tag => (state.tags[`${tag.slug}`] = tag)
             );
+            state.tagsMasterList = Object.values(this.props.Tags.tags)
+              .filter(tag => tag.isTLIssue)
+              .map(tag => tag);
           }
         } else {
           console.log(
@@ -164,8 +232,6 @@ class App extends Component {
           }`
         );
       }
-      // DEV ONLY -- hard-coded/imported data from fixtures to be replaced by queries once database is happy
-      // state.issues = issuesArticlesFakeData.issues;
     });
     return state;
   }
@@ -195,76 +261,51 @@ class App extends Component {
 
     // once queries are no longer being loaded, display content
     const {
-      // articles,
+      articles,
       articlesDetails,
       candidates,
       candidatesDetails,
       statesMasterList,
       statesDetails,
+      tags,
+      tagsMasterList,
     } = this.state;
 
-    let { articles } = this.state;
-
-    const hasElectionData = candidate =>
-      candidate.office &&
-      candidate.office.elections &&
-      candidate.office.elections[0] &&
-      candidate.office.elections[0].title &&
-      candidate.office.elections[0].electionDate;
+    const hasElectionData = candidate => candidate.electionDate;
 
     const hasFutureElection = candidate => {
-      const electionDate =
-        candidate.office &&
-        candidate.office.elections &&
-        candidate.office.elections[0] &&
-        candidate.office.elections[0].electionDate
-          ? new Date(candidate.office.elections[0].electionDate).getTime()
-          : null;
+      const electionDate = candidate.electionDate
+        ? new Date(candidate.electionDate).getTime()
+        : null;
       const now = new Date().getTime();
       return electionDate && electionDate > now;
     };
 
     const hasPastElection = candidate => {
-      const electionDate =
-        candidate.office &&
-        candidate.office.elections &&
-        candidate.office.elections[0] &&
-        candidate.office.elections[0].electionDate
-          ? new Date(candidate.office.elections[0].electionDate).getTime()
-          : null;
+      const electionDate = candidate.electionDate
+        ? new Date(candidate.electionDate).getTime()
+        : null;
       const now = new Date().getTime();
       return electionDate && electionDate < now;
     };
 
     const isMissingCandidateData = candidate => {
       let missingData = false;
-      if (!candidate.imageSm || !candidate.imageSm.url) {
+      if (!candidate.imageSm) {
         missingData = true;
         console.log(`${candidate.title} is missing headshot`);
       }
-      if (!(candidate.office && candidate.office.elections)) {
+      if (!(candidate.seatShortTitle || candidate.seatLongTitle)) {
         missingData = true;
-        console.log(`${candidate.title} is missing election data`);
+        console.log(
+          `${candidate.title} is missing seat data, seatShortTitle is ${
+            candidate.seatShortTitle
+          }, seatLongTitle is ${candidate.seatLongTitle}`
+        );
       }
-      if (
-        !(
-          candidate.office &&
-          candidate.office.elections &&
-          candidate.office.elections[0].electionDate
-        )
-      ) {
+      if (!candidate.electionDate) {
         missingData = true;
         console.log(`${candidate.title} is missing election date`);
-      }
-      if (
-        !(
-          candidate.office &&
-          candidate.office.elections &&
-          candidate.office.elections[0].title
-        )
-      ) {
-        missingData = true;
-        console.log(`${candidate.title} is missing seat data`);
       }
       if (
         !candidate.state ||
@@ -280,9 +321,7 @@ class App extends Component {
     const candidateStatesArray = candidates => {
       let states = candidates.map(
         candidate =>
-          candidate.state && candidate.state.title
-            ? candidate.state.title
-            : null
+          candidate.state && candidate.state.slug ? candidate.state.slug : null
       );
       return [...new Set(states)].sort();
     };
@@ -312,8 +351,8 @@ class App extends Component {
 
     // RETURN HERE
     // DEV ONLY -- delete next section once we have state data in database
-    const { issues } = issuesArticlesFakeData;
-    articles = articles.concat(issuesArticlesFakeData.articles);
+    // const { issues } = issuesArticlesFakeData;
+    // articles = articles.concat(issuesArticlesFakeData.articles);
     // RETURN HERE -- END
     // END -- delete previous section once we have real issues and articles
 
@@ -337,27 +376,18 @@ class App extends Component {
         <Route
           path="/reports/:slug"
           component={props => {
-            const issue = issues.find(
-              issue =>
-                props.match.params.slug.toLowerCase() ===
-                issue.slug.toLowerCase()
-            );
+            // const tag = props.match.params.slug;
             const filteredArticles = articles.filter(
               article =>
-                (article.tags &&
-                  article.tags.includes(props.match.params.slug)) ||
-                (article.tags &&
-                  article.tags.includes(
-                    props.match.params.slug.slice(0, 1).toUpperCase() +
-                      props.match.params.slug.slice(1).toLowerCase()
-                  ))
+                article.tags &&
+                article.tags.filter(tag => tag.slug === props.match.params.slug)
             );
             return (
               <Reports
                 {...props}
-                issue={issue}
+                tag={props.match.params.slug}
                 articles={filteredArticles}
-                issuesMasterList={issueTitles}
+                tagsMasterList={tagsMasterList}
                 statesMasterList={statesMasterList}
               />
             );
@@ -368,11 +398,11 @@ class App extends Component {
           path="/reports"
           component={props => (
             <ErrorBoundary>
-              {issues && statesMasterList && statesMasterList.length ? (
+              {tagsMasterList && statesMasterList && statesMasterList.length ? (
                 <Reports
                   {...props}
                   articles={articles}
-                  issuesMasterList={issueTitles}
+                  tagsMasterList={tagsMasterList}
                   statesMasterList={statesMasterList}
                 />
               ) : (
@@ -395,15 +425,15 @@ class App extends Component {
               : null;
             let relatedArticles = [];
             if (article && article.tags) {
-              const articleTags = article.tags;
+              const articleTags = article.tags.map(tag => tag.slug);
               articles.forEach(possiblyRelatedArticle => {
                 let relationshipDegree = 0;
                 if (possiblyRelatedArticle.tags) {
                   possiblyRelatedArticle.tags.forEach(tag => {
                     if (
-                      articleTags.includes(tag) &&
+                      articleTags.includes(tag.slug) &&
                       article.slug !== possiblyRelatedArticle.slug &&
-                      !statesMasterList.includes(tag)
+                      !statesMasterList.includes(tag.slug)
                     ) {
                       relationshipDegree++;
                     }
@@ -447,7 +477,7 @@ class App extends Component {
           path="/report"
           component={props => (
             <ErrorBoundary>
-              {issues && statesMasterList && statesMasterList.length ? (
+              {tagsMasterList && statesMasterList && statesMasterList.length ? (
                 <Report
                   {...props}
                   article={null}
@@ -542,7 +572,10 @@ class App extends Component {
             );
             const stateArticles = articles.filter(
               article =>
-                article.tags && article.tags.includes(props.match.params.slug)
+                article.tags &&
+                article.tags
+                  .map(tag => tag.slug)
+                  .includes(props.match.params.slug)
             );
 
             return (
