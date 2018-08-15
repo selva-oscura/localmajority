@@ -34,7 +34,7 @@ const Home = props => {
       alt: 'place kitten 600  by 200',
     },
   ];
-
+  console.log('candidates in home', candidates);
   return (
     <article className="Home">
       <Section hasContainer={false}>
@@ -92,31 +92,17 @@ const Home = props => {
             </p>
           </div>
           {candidates && candidates.length ? (
-            candidates.map((candidate, i) => {
-              const headshotUrl =
-                candidate.headshotId && candidate.headshotId.url
-                  ? candidate.headshotId.url
-                  : null;
-              const seatTitle =
-                candidate &&
-                candidate.contestId &&
-                candidate.contestId.seatId &&
-                candidate.contestId.seatId.title
-                  ? candidate.contestId.seatId.title
-                  : null;
-
-              return (
-                <GridXSmallIsOneSmallIsThree key={i}>
-                  <BasicCard
-                    title={candidate.title}
-                    subtitle={seatTitle}
-                    route={`candidates/${candidate.state.slug}`}
-                    slug={candidate.slug}
-                    imageSrc={headshotUrl}
-                  />
-                </GridXSmallIsOneSmallIsThree>
-              );
-            })
+            candidates.map((candidate, i) => (
+              <GridXSmallIsOneSmallIsThree key={i}>
+                <BasicCard
+                  title={candidate.title}
+                  subtitle={candidate.seatShortTitle}
+                  route={`candidates/${candidate.state.slug}`}
+                  slug={candidate.slug}
+                  imageSrc={candidate.imageSm}
+                />
+              </GridXSmallIsOneSmallIsThree>
+            ))
           ) : (
             <h2 className="col-12">Loading</h2>
           )}
