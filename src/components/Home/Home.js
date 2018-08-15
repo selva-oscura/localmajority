@@ -7,7 +7,6 @@ import BasicCard from '../common/Cards/BasicCard';
 import GridXSmallIsOneSmallIsThree from '../common/Grids/GridXSmallIsOneSmallIsThree';
 import TextlessParallax from '../common/Parallax/TextlessParallax';
 import Section from '../common/Section/Section';
-import Slider from '../common/Sliders/Slider';
 import VideoResponsive from '../common/Videos/VideoResponsive';
 import './Home.css';
 
