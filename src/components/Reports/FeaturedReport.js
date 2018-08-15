@@ -7,15 +7,14 @@ import Tags from '../common/Tags/Tags';
 import { prettifyDate } from '../../utils/functions';
 import './FeaturedReport.css';
 
-const FeaturedReport = ({ article }) => {
+const FeaturedReport = ({ article, tagRoute = '' }) => {
   const {
     slug,
-    imageSrc,
+    imageHero,
     imageAlt = '',
     title,
     author,
     updatedAt,
-    tagRoute = '',
     tags = [],
   } = article;
   return (
@@ -24,7 +23,7 @@ const FeaturedReport = ({ article }) => {
         <CardHover>
           <Link to={`/report/${slug}`}>
             <ImageWithBackgroundPlaceholderImage
-              imageSrc={imageSrc}
+              imageSrc={imageHero}
               imageAlt=""
               aspectRatioInPercent="25"
             />
