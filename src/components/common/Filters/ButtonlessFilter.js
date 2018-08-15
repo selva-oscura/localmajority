@@ -1,4 +1,5 @@
 import React from 'react';
+import { slugToTitleCase } from '../../../utils/functions';
 
 const ButtonlessFilter = ({
   filterCategory,
@@ -15,7 +16,7 @@ const ButtonlessFilter = ({
   };
   return (
     <li onClick={handleClick} className={selectedClassName(currentItem)}>
-      {currentItem}
+      {slugToTitleCase(currentItem)}
     </li>
   );
 };
