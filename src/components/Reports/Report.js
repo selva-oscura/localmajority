@@ -6,8 +6,8 @@ import Aux from '../common/Aux';
 import ImageWithBackgroundPlaceholderImage from '../common/ImageWithBackgroundPlaceholderImage';
 import Loading from '../common/Loading';
 import Offline from '../common/Offline';
-import Primer from '../common/Primers/Primer';
 import Section from '../common/Section/Section';
+import Tags from '../common/Tags/Tags';
 import {
   getMostRecentUpdateTimestamp,
   prettifyDateAndTime,
@@ -29,18 +29,30 @@ class Report extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     // only consider updating localStorage if query is resolved and successful
-    if (this.props.ArticleDetailBySlug.Article) {
+    if (this.props.ArticleDetailBySlug.articles) {
       const mostRecentUpdateToArticleDetailBySlug = getMostRecentUpdateTimestamp(
-        this.props.ArticleDetailBySlug.Article
+        this.props.ArticleDetailBySlug.articles[0]
       );
-      // only update localStorage if no articleDetail (freeze-dried record passed to component by App) or if the timestamp for ArticleDetailBySlug (grapql query) includes data newer than timestamp in articleDetail(freeze-dried record)
+      // only update localStorage if no articleDetail (freeze-dried record passed to component by App) or if the timestamp for ArticleDetailBySlug (grapql query) includes data newer than timestamp in articleDetail (freeze-dried record)
       if (
         !this.props.articleDetail ||
         this.props.articleDetail.timestamp <
           mostRecentUpdateToArticleDetailBySlug
       ) {
         let now = new Date().getTime();
-        let details = { ...this.props.ArticleDetailBySlug.Article };
+        let details = this.props.ArticleDetailBySlug.articles.map(article => {
+          const imageSm =
+            article.imageSm && article.imageSm.url ? article.imageSm.url : null;
+          const imageHero =
+            article.imageHero && article.imageHero.url
+              ? article.imageHero.url
+              : null;
+          return {
+            ...article,
+            imageSm,
+            imageHero,
+          };
+        })[0];
         details.timestamp = now;
         this.props.updateStateDetail(
           'articlesDetails',
@@ -53,6 +65,7 @@ class Report extends Component {
 
   render() {
     const isLoading = this.props.ArticleDetailBySlug.loading;
+    // console.log('this.props', this.props);
     if (isLoading) {
       return <Loading />;
     }
@@ -77,7 +90,7 @@ class Report extends Component {
     const article = this.props.articleDetail
       ? this.props.articleDetail
       : this.props.article;
-    const hero = article.heroImg ? article.heroImg : '';
+    const tags = article.tags ? article.tags.map(tag => tag.slug) : [];
     const relatedReports = this.props.relatedArticles;
 
     return (
@@ -91,21 +104,27 @@ class Report extends Component {
           <div className="Report row">
             <article className="col-12">
               <ImageWithBackgroundPlaceholderImage
-                imageSrc={hero}
+                imageSrc={article.imageHero}
                 imageAlt=""
                 aspectRatioInPercent="25"
               />
 
               {isOffline && <Offline timestamp={article.timestamp} />}
               <h2>{article.title}</h2>
+              {article.author && <h3>by {article.author}</h3>}
               <p>Last updated: {prettifyDateAndTime(article.updatedAt)}</p>
-              <p>
+              {/*<p>
                 {`Article tags: `}
-                {article.tags ? article.tags.join(', ') : 'No Tags'}
-              </p>
+                {tags ? tags.join(', ') : 'No Tags'}
+              </p>*/}
+              <Tags tags={article.tags} tagRoute="reports" />
 
-              {article.content ? (
-                <Primer primer={article} />
+              {article.content_html ? (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: article.content_html,
+                  }}
+                />
               ) : (
                 loremIpsum.map((p, i) => formatLoremIpsum(p, i))
               )}
