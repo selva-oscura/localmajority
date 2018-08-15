@@ -8,8 +8,8 @@ const RelatedReports = ({ articles }) => (
     {articles &&
       articles.map(article => {
         let cardTags = article && article.tags ? article.tags : [];
-        let articleThumbnail = article.thumbnail
-          ? article.thumbnail
+        let articleThumbnail = article.imageSm
+          ? article.imageSm
           : 'https://placekitten.com/g/200/150';
         return (
           <GridXSmallIsOneSmallIsThree key={article.slug}>
