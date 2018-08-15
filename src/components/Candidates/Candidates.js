@@ -6,12 +6,12 @@ import ButtonlessFilters from '../common/Filters/ButtonlessFilters';
 import HorizontalCards from '../common/Cards/HorizontalCards';
 import HorizontalCard from '../common/Cards/HorizontalCard';
 import Section from '../common/Section/Section';
+import { slugToTitleCase } from '../../utils/functions';
 
 class Candidates extends Component {
   state = {
     stateSelected: this.props.match.params.state,
   };
-
   updateFilter = (filterCategory, selectedValue) => {
     selectedValue === 'All'
       ? this.props.history.push('/candidates')
@@ -20,19 +20,17 @@ class Candidates extends Component {
 
   componentDidMount() {
     const { statesMasterList } = this.props;
-    let candidateState = this.props.match.params.state
-      .replace('-', ' ')
-      .split(' ')
-      .map(word => word[0].toUpperCase() + word.slice(1))
-      .join(' ');
+    let candidateState = this.props.match.params.state;
     if (
-      !statesMasterList.includes(this.props.match.params.state) &&
-      candidateState
+      !statesMasterList.some(state => state === candidateState) &&
+      candidateState !== undefined
     ) {
       return this.props.history.push('/candidates');
     }
     this.props.match.params.state
-      ? (document.title = `Local Majority | Candidates | ${candidateState}`)
+      ? (document.title = `Local Majority | Candidates | ${slugToTitleCase(
+          candidateState
+        )}`)
       : (document.title = 'Local Majority | Candidates');
   }
 
@@ -102,32 +100,19 @@ class Candidates extends Component {
             <div className="col">
               {candidatesMeetingFilters && candidatesMeetingFilters.length ? (
                 <HorizontalCards>
-                  {candidatesMeetingFilters.map((candidate, i) => {
-                    const headshotUrl =
-                      candidate.headshotId && candidate.headshotId.url
-                        ? candidate.headshotId.url
-                        : null;
-                    const seatTitle =
-                      candidate &&
-                      candidate.contestId &&
-                      candidate.contestId.seatId &&
-                      candidate.contestId.seatId.title
-                        ? candidate.contestId.seatId.title
-                        : null;
-                    return (
-                      <HorizontalCard
-                        key={i}
-                        id={candidate.id}
-                        cardTitle={candidate.title}
-                        cardSubtitle={seatTitle}
-                        cardTextHtml={candidate.summaryText}
-                        category="candidates"
-                        imgSrc={headshotUrl}
-                        slug={`${candidate.state.slug}/${candidate.slug}`}
-                        imgShape="square"
-                      />
-                    );
-                  })}
+                  {candidatesMeetingFilters.map((candidate, i) => (
+                    <HorizontalCard
+                      key={i}
+                      id={candidate.slug}
+                      cardTitle={candidate.title}
+                      cardSubtitle={candidate.seatShortTitle}
+                      cardTextHtml={candidate.summary_html}
+                      category="candidates"
+                      imgSrc={candidate.imageSm}
+                      slug={`${candidate.state.slug}/${candidate.slug}`}
+                      imgShape="square"
+                    />
+                  ))}
                 </HorizontalCards>
               ) : (
                 <h2>No Candidates Meet Your Criteria.</h2>
