@@ -20,7 +20,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# development
+db_needs.txt
 notes.txt
-changes.txt
 localMajority_pre-graphql_cachedData.txt
-/deprecated_components
+/deprecated
+# 2018.*
