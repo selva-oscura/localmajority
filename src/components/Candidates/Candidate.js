@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import { SocialIcon } from 'react-social-icons';
 import graphQLAPI from '../../api/graphQLAPI';
+import { strToSlug } from '../../utils/functions';
 import CandidateDonateButton from './CandidateDonateButton';
 import CandidateWebsiteButton from './CandidateWebsiteButton';
 import CandidateAside from './CandidateAside';
@@ -60,9 +61,10 @@ class Candidate extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     // only consider updating localStorage if query is resolved and successful
-    if (this.props.CandidateDetailBySlug.Candidate) {
+    console.log('this.props from Candidate', this.props);
+    if (this.props.CandidateDetailBySlug.candidates) {
       const mostRecentUpdateToCandidateDetailBySlug = getMostRecentUpdateTimestamp(
-        this.props.CandidateDetailBySlug.Candidate
+        this.props.CandidateDetailBySlug.candidates[0]
       );
       // only update localStorage if no candidateDetail (freeze-dried record passed to component by App) or if the timestamp for CandidateDetailBySlug (grapql query) includes data newer than timestamp in candidateDetail(freeze-dried record)
       if (
@@ -71,8 +73,82 @@ class Candidate extends Component {
           mostRecentUpdateToCandidateDetailBySlug
       ) {
         let now = new Date().getTime();
-        let details = { ...this.props.CandidateDetailBySlug.Candidate };
+        let details = this.props.CandidateDetailBySlug.candidates.map(
+          candidate => {
+            const stateData = { ...candidate.state };
+            const imageSm =
+              candidate.imageSm && candidate.imageSm.url
+                ? candidate.imageSm.url
+                : null;
+            const imageMap =
+              candidate.imageMap && candidate.imageMap.url
+                ? candidate.imageMap.url
+                : null;
+            const imageMapInState =
+              candidate.imageMapInState && candidate.imageMapInState.url
+                ? candidate.imageMapInState.url
+                : null;
+            const seatLongTitle =
+              candidate && candidate.office && candidate.office.title
+                ? candidate.office.title
+                : null;
+            const chamberName =
+              candidate.office &&
+              candidate.office.chamber &&
+              candidate.office.chamber.name
+                ? candidate.office.chamber.name
+                : null;
+            const electionDate =
+              candidate.office &&
+              candidate.office.elections &&
+              candidate.office.elections[0] &&
+              candidate.office.elections[0].electionDate
+                ? candidate.office.elections[0].electionDate
+                : null;
+            const seatShortTitle =
+              candidate.office &&
+              candidate.office.elections &&
+              candidate.office.elections[0] &&
+              candidate.office.elections[0].title
+                ? candidate.office.elections[0].title
+                : null;
+            const party =
+              candidate.party && candidate.party.title
+                ? candidate.party.title
+                : null;
+
+            stateData.slug = strToSlug(stateData.title);
+            return {
+              title: candidate.title,
+              firstName: candidate.firstName,
+              lastName: candidate.lastName,
+              slug: candidate.slug,
+              summary_html: candidate.summary_html,
+              bio_html: candidate.bio_html,
+              homepageUrl: candidate.homepageUrl,
+              donateUrl: candidate.donateUrl,
+              volunteerUrl: candidate.volunteerUrl,
+              campaignEmail: candidate.campaignEmail,
+              lmEndorsed: candidate.lmEndorsed,
+              twitter: candidate.twitter,
+              facebook: candidate.facebook,
+              tags: candidate.tags,
+              state: stateData,
+              imageSm,
+              imageMap,
+              imageMapInState,
+              seatShortTitle,
+              seatLongTitle,
+              chamberName,
+              electionDate,
+              party,
+            };
+            // return { ...candidate, state: stateData };
+          }
+        )[0];
+        // let details = { ...this.props.CandidateDetailBySlug.Candidate };
         details.timestamp = now;
+        console.log('details', details);
         this.props.updateStateDetail(
           'candidatesDetails',
           this.props.match.params.slug,
@@ -88,7 +164,7 @@ class Candidate extends Component {
       : this.props.candidate;
 
     // redirect to /candidates/:state if /candidates/:state/:slug is not a candidate for which we have information
-    // (shouldn't be called if clicking on candidate on page, but if directly typing in url or following faulty link this will redirect to the default page)\
+    // (shouldn't be called if clicking on candidate on page, but if directly typing in url or following faulty link this will redirect to the default page)
     if (!candidate) {
       return this.props.history.push(
         `/candidates/${this.props.match.params.state}`
@@ -113,46 +189,7 @@ class Candidate extends Component {
     const candidate = this.props.candidateDetail
       ? this.props.candidateDetail
       : this.props.candidate;
-
-    const candidateHeadshot =
-      candidate.headshotId && candidate.headshotId.url
-        ? candidate.headshotId.url
-        : null;
-    const stateName =
-      candidate.state && candidate.state.title
-        ? candidate.state.title
-        : 'State Name Missing';
-    const seatTitle =
-      candidate.contestId &&
-      candidate.contestId.seatId &&
-      candidate.contestId.seatId.title
-        ? candidate.contestId.seatId.title
-        : 'No District Data Available';
-    const seatMap =
-      candidate.contestId &&
-      candidate.contestId.seatId &&
-      candidate.contestId.seatId.seatImg &&
-      candidate.contestId.seatId.seatImg.url
-        ? candidate.contestId.seatId.seatImg.url
-        : 'Need image of district';
-    const seatInStateMap =
-      candidate.contestId &&
-      candidate.contestId.seatId &&
-      candidate.contestId.seatId.seatInStateImg &&
-      candidate.contestId.seatId.seatInStateImg.url
-        ? candidate.contestId.seatId.seatInStateImg.url
-        : 'Need image of district in state';
-    const seatPrimer =
-      candidate.contestId &&
-      candidate.contestId.seatId &&
-      candidate.contestId.seatId.primers &&
-      candidate.contestId.seatId.primers.length
-        ? candidate.contestId.seatId.primers[0]
-        : null;
-    const electionDate =
-      candidate.contestId && candidate.contestId.electionDate
-        ? prettifyDate(candidate.contestId.electionDate)
-        : null;
+    console.log('all data from props', this.props);
     console.log('all data from CandidateDetail', candidate);
 
     return (
@@ -167,35 +204,35 @@ class Candidate extends Component {
           <div className="row">
             <div className="col-12 col-sm-8 col-md-4 col-lg-4 col-xl-3">
               <ImageWithBackgroundPlaceholderImage
-                imageSrc={candidateHeadshot}
+                imageSrc={candidate.imageSm}
                 imageAlt={candidate.title}
               />
             </div>
             <div className="hidden-xs-down hidden-xl-up col-sm-4 col-md-2 col-lg-2">
               <ImageWithBackgroundPlaceholderImage
-                imageSrc={seatMap}
+                imageSrc={candidate.imageMap}
                 imageAlt={`${candidate.title}'s district map`}
               />
               <ImageWithBackgroundPlaceholderImage
-                imageSrc={seatInStateMap}
-                imageAlt={`location of ${
-                  candidate.title
-                }'s district within ${stateName}`}
+                imageSrc={candidate.imageMapInState}
+                imageAlt={`location of ${candidate.title}'s district within ${
+                  candidate.state.title
+                }`}
               />
             </div>
 
             <div className="hidden-lg-down col-xl-3">
               <ImageWithBackgroundPlaceholderImage
-                imageSrc={seatMap}
+                imageSrc={candidate.imageMap}
                 imageAlt={`${candidate.title}'s district map`}
               />
             </div>
             <div className="hidden-lg-down col-xl-3">
               <ImageWithBackgroundPlaceholderImage
-                imageSrc={seatInStateMap}
-                imageAlt={`location of ${
-                  candidate.title
-                }'s district within ${stateName}`}
+                imageSrc={candidate.imageMapInState}
+                imageAlt={`location of ${candidate.title}'s district within ${
+                  candidate.state.title
+                }`}
               />
             </div>
 
@@ -203,16 +240,16 @@ class Candidate extends Component {
               <div className="row">
                 <div className="col-6">
                   <ImageWithBackgroundPlaceholderImage
-                    imageSrc={seatMap}
+                    imageSrc={candidate.imageMap}
                     imageAlt={`${candidate.title}'s district map`}
                   />
                 </div>
                 <div className="col-6">
                   <ImageWithBackgroundPlaceholderImage
-                    imageSrc={seatInStateMap}
+                    imageSrc={candidate.imageMapInState}
                     imageAlt={`location of ${
                       candidate.title
-                    }'s district within ${stateName}`}
+                    }'s district within ${candidate.state.title}`}
                   />
                 </div>
               </div>
@@ -220,8 +257,12 @@ class Candidate extends Component {
             <div className="col-12 col-md-6 col-lg-6 col-xl-3 text-right">
               <h2>{candidate.title}</h2>
               <h3>
-                {seatTitle ? seatTitle : 'No District Data Available'}
-                {electionDate ? ` on ${electionDate}` : null}
+                {candidate.seatShortTitle
+                  ? candidate.seatShortTitle
+                  : 'No District Data Available'}
+                {candidate.electionDate
+                  ? ` on ${prettifyDate(candidate.electionDate)}`
+                  : null}
               </h3>
               <div className="social-icons-space">
                 {candidate.facebook && (
@@ -253,6 +294,11 @@ class Candidate extends Component {
                   <CandidateDonateButton candidate={candidate} />
                 </div>
               )}
+              {candidate.volunteerUrl && (
+                <div className="hidden-sm-down">
+                  <CandidateDonateButton candidate={candidate.volunteerUrl} />
+                </div>
+              )}
             </div>
           </div>
         </Section>
@@ -266,125 +312,23 @@ class Candidate extends Component {
             <div className="col-12 col-lg-8 col-xl-9">
               <div className="Main">
                 <h2>{candidate.title}</h2>
-                {candidate.summaryText && (
+                {candidate.summary_html && (
                   <Aux>
                     <h3>Summary</h3>
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: candidate.summaryText,
+                        __html: candidate.summary_html,
                       }}
                     />
                   </Aux>
                 )}
-                {candidate.bioText && (
+                {candidate.bio_html && (
                   <Aux>
                     <h3>About {candidate.firstName}</h3>
                     <div
-                      dangerouslySetInnerHTML={{ __html: candidate.bioText }}
+                      dangerouslySetInnerHTML={{ __html: candidate.bio_html }}
                     />
                   </Aux>
-                )}
-                {candidate.primers && (
-                  <Aux>
-                    {candidate.primers.map((primer, i) => (
-                      <Primer primer={primer} i={i} key={i} />
-                    ))}
-                  </Aux>
-                )}
-                {seatPrimer && (
-                  <div>
-                    {!this.state.showDistrictDetail && (
-                      <h2
-                        className="tertiary-text-color"
-                        onClick={this.showDistrictDetail}
-                      >
-                        &raquo; Learn More About the District
-                      </h2>
-                    )}
-
-                    {this.state.showDistrictDetail && (
-                      <Aux>
-                        <h2
-                          className="tertiary-text-color"
-                          onClick={this.hideDistrictDetail}
-                        >
-                          <span
-                            className={
-                              this.state.hidingDistrictDetail
-                                ? 'rotate90to0'
-                                : 'rotate0to90'
-                            }
-                          >
-                            &raquo;
-                          </span>
-                          &nbsp;About the District
-                        </h2>
-                        <div
-                          className={
-                            this.state.hidingDistrictDetail
-                              ? 'slow-removal'
-                              : 'slow-reveal'
-                          }
-                        >
-                          <Primer primer={seatPrimer} />
-                        </div>
-                      </Aux>
-                    )}
-                  </div>
-                )}
-                {seatPrimer && (
-                  <div>
-                    {!this.state.showOpponentDetail && (
-                      <h2
-                        className="tertiary-text-color"
-                        onClick={this.showOpponentDetail}
-                      >
-                        &raquo; Learn More About why We Must Defeat{' '}
-                        {candidate.firstName}'s Opponent
-                      </h2>
-                    )}
-
-                    {this.state.showOpponentDetail && (
-                      <Aux>
-                        <h2
-                          className="tertiary-text-color"
-                          onClick={this.hideOpponentDetail}
-                        >
-                          <span
-                            className={
-                              this.state.hidingOpponentDetail
-                                ? 'rotate90to0'
-                                : 'rotate0to90'
-                            }
-                          >
-                            &raquo;
-                          </span>
-                          &nbsp;About {candidate.firstName}'s Opponent
-                        </h2>
-                        <div
-                          className={
-                            this.state.hidingOpponentDetail
-                              ? 'slow-removal'
-                              : 'slow-reveal'
-                          }
-                        >
-                          {candidate &&
-                          candidate.opponent &&
-                          candidate.opponent.opponentPrimer ? (
-                            <Primer
-                              primer={candidate.opponent.opponentPrimer}
-                            />
-                          ) : (
-                            <Aux>
-                              <h2>Need data about the opponent HERE</h2>
-                              <p>Oh, data, where art thou?</p>
-                              <p>Go, database, go. </p>
-                            </Aux>
-                          )}
-                        </div>
-                      </Aux>
-                    )}
-                  </div>
                 )}
               </div>
             </div>
@@ -406,3 +350,106 @@ export default compose(
     },
   })
 )(Candidate);
+
+// {candidate.primers && (
+//   <Aux>
+//     {candidate.primers.map((primer, i) => (
+//       <Primer primer={primer} i={i} key={i} />
+//     ))}
+//   </Aux>
+// )}
+// {seatPrimer && (
+//   <div>
+//     {!this.state.showDistrictDetail && (
+//       <h2
+//         className="tertiary-text-color"
+//         onClick={this.showDistrictDetail}
+//       >
+//         &raquo; Learn More About the District
+//       </h2>
+//     )}
+
+//     {this.state.showDistrictDetail && (
+//       <Aux>
+//         <h2
+//           className="tertiary-text-color"
+//           onClick={this.hideDistrictDetail}
+//         >
+//           <span
+//             className={
+//               this.state.hidingDistrictDetail
+//                 ? 'rotate90to0'
+//                 : 'rotate0to90'
+//             }
+//           >
+//             &raquo;
+//           </span>
+//           &nbsp;About the District
+//         </h2>
+//         <div
+//           className={
+//             this.state.hidingDistrictDetail
+//               ? 'slow-removal'
+//               : 'slow-reveal'
+//           }
+//         >
+//           <Primer primer={seatPrimer} />
+//         </div>
+//       </Aux>
+//     )}
+//   </div>
+// )}
+// {seatPrimer && (
+//   <div>
+//     {!this.state.showOpponentDetail && (
+//       <h2
+//         className="tertiary-text-color"
+//         onClick={this.showOpponentDetail}
+//       >
+//         &raquo; Learn More About why We Must Defeat{' '}
+//         {candidate.firstName}'s Opponent
+//       </h2>
+//     )}
+
+//     {this.state.showOpponentDetail && (
+//       <Aux>
+//         <h2
+//           className="tertiary-text-color"
+//           onClick={this.hideOpponentDetail}
+//         >
+//           <span
+//             className={
+//               this.state.hidingOpponentDetail
+//                 ? 'rotate90to0'
+//                 : 'rotate0to90'
+//             }
+//           >
+//             &raquo;
+//           </span>
+//           &nbsp;About {candidate.firstName}'s Opponent
+//         </h2>
+//         <div
+//           className={
+//             this.state.hidingOpponentDetail
+//               ? 'slow-removal'
+//               : 'slow-reveal'
+//           }
+//         >
+//           {candidate &&
+//           candidate.opponent &&
+//           candidate.opponent.opponentPrimer ? (
+//             <Primer
+//               primer={candidate.opponent.opponentPrimer}
+//             />
+//           ) : (
+//             <Aux>
+//               <h2>Need data about the opponent HERE</h2>
+//               <p>Oh, data, where art thou?</p>
+//               <p>Go, database, go. </p>
+//             </Aux>
+//           )}
+//         </div>
+//       </Aux>
+//     )}
+//   </div>
+// )}
