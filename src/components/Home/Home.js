@@ -16,29 +16,15 @@ const Home = props => {
 
   const { articles, candidates, currentStateRaces, pastCandidates } = props;
   const featuredArticles = articles.slice(0, 3);
-  const slides1 = [
-    {
-      src: './images/local_majority_banner.png',
-      alt: 'local majority logo',
-    },
-    {
-      src: './images/va-candidates-faces.png',
-      alt: '1431 by 868',
-    },
-    {
-      src: './images/constitution.jpg',
-      alt: 'constitution',
-    },
-    {
-      src: 'https://placekitten.com/600/200',
-      alt: 'place kitten 600  by 200',
-    },
-  ];
-  console.log('candidates in home', candidates);
+
   return (
     <article className="Home">
       <Section hasContainer={false}>
-        <Slider slides={slides1} />
+        <TextlessParallax
+          imgSrc="/images/constitution.jpg"
+          strength="800"
+          height="400"
+        />
       </Section>
 
       <Section
@@ -175,14 +161,6 @@ const Home = props => {
             </div>
           </div>
         </div>
-      </Section>
-
-      <Section hasContainer={false}>
-        <TextlessParallax
-          imgSrc="/images/constitution.jpg"
-          strength="800"
-          height="400"
-        />
       </Section>
     </article>
   );
