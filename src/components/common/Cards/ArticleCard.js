@@ -21,7 +21,7 @@ const ArticleCard = ({
       <Link to={`/report/${slug}`}>
         <ImageWithBackgroundPlaceholderImage
           imageSrc={imageSrc}
-          imageAlt=""
+          imageAlt={title}
           aspectRatioInPercent="75"
         />
         <div className="contents">
